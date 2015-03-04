@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/upload_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_overlay"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+   <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp" >
+
+      <ImageSwitcher
+           android:id="@+id/upload_imswitch1"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+            >
+       </ImageSwitcher>
+      
+       <CheckBox
+           android:id="@+id/upload_check1"
+           style="@style/photo_checkbox"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="5dp"
+           android:layout_marginTop="5dp" />
+
+    </FrameLayout>
+    
+   <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp" >
+
+      <ImageSwitcher
+           android:id="@+id/upload_imswitch2"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+            >
+      </ImageSwitcher>
+      
+      <CheckBox
+          android:id="@+id/upload_check2"
+          style="@style/photo_checkbox"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="5dp"
+          android:layout_marginTop="5dp" />
+
+   </FrameLayout>
+
+   <Button
+       android:id="@+id/upload_btnSelect"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:text="开始随机选照片" />
+
+</LinearLayout><!-- From: file:/Users/baiya/waibao/kanjian/app/src/main/res/layout/activity_upload.xml -->

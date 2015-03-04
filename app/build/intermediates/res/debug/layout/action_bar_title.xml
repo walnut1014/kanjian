@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"> 
+    <TextView
+            android:id="@android:id/title"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:text="hello"
+            android:textColor="@android:color/holo_red_light"/>
+
+    <Button
+        android:id="@+id/btnActionBack"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="返回" />
+
+</FrameLayout>
+<!-- From: file:/Users/baiya/waibao/kanjian/app/src/main/res/layout/action_bar_title.xml -->
