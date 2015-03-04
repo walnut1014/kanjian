@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="name.walnut.kanjian.app"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="19" />
+    
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <application
+        android:allowBackup="true"
+        android:name="name.walnut.kanjian.app.support.KanJianApplication"
+        android:icon="@drawable/ic_launcher">
+        
+        <!-- 启动加载Activity -->
+        <activity
+            android:name="name.walnut.kanjian.app.ui.LaunchActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <!-- 主界面Activity -->
+        <activity android:name="name.walnut.kanjian.app.ui.MainActivity">
+            <!-- <intent-filter>
+                <action android:name="kanjian.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter> -->
+        </activity>
+        
+        <!-- 注册Activity -->
+        <activity android:name="name.walnut.kanjian.app.ui.register.RegisterActivity" 
+            android:theme="@android:style/Theme.Light">
+            <intent-filter>
+                <action android:name="kanjian.intent.action.REGISTER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <!-- 登录Activity -->
+        <activity android:name="name.walnut.kanjian.app.ui.login.LoginActivity"
+            android:theme="@android:style/Theme.Light">
+            <intent-filter>
+                <action android:name="kanjian.intent.action.LOGIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <!-- 上传照片Activity -->
+        <activity android:name=".ui.main.UploadActivity">
+            <intent-filter>
+                <action android:name="kanjian.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        
+        
+    </application>
+
+</manifest>
+
