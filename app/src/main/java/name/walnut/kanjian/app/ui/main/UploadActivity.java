@@ -54,23 +54,10 @@ public class UploadActivity extends ActionBarActivity
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.upload_btnSelect:
-                btnClick();
-        }
-
     }
 
 
     private void btnClick() {
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize =2;
-        Random random = new Random();
-        List<String> list = PhotoContext.INSTANCE.getPhotoPaths();
-        Bitmap bm = BitmapFactory.decodeFile(list.get(random.nextInt(list.size())), options);
-        ((ImageView)switch1.getCurrentView()).setImageBitmap(bm);
-        bm = BitmapFactory.decodeFile(list.get(random.nextInt(list.size())), options);
-        ((ImageView)switch2.getCurrentView()).setImageBitmap(bm);
     }
 
 
