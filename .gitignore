@@ -1,7 +1,10 @@
 # Package Files #
 *.war
 *.ear
-.project
-.classpath
-project.properties
+*.iml
+*.properties
+.gradle/
+.idea/
+app/build/
+
 
