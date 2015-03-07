@@ -1,3 +1,0 @@
-/Users/baiya/Android/kanjian/app/build/intermediates/classes/debug
-/Users/baiya/Android/kanjian/app/build/intermediates/pre-dexed/debug/Volley-2f58b8b9413c18ea03a5897518ae8c1a9310c84c.jar
-/Users/baiya/Android/kanjian/app/build/intermediates/pre-dexed/debug/commons-io-2.4-59553c778f2e9afac524c1c95699b763d3cbc274.jar
