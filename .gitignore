@@ -3,8 +3,12 @@
 *.ear
 *.iml
 *.properties
+*.gradle
+
+
 .gradle/
 .idea/
 app/build/
+build/
 
 
