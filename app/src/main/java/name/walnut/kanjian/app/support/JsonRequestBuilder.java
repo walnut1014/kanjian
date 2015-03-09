@@ -14,15 +14,15 @@ public class JsonRequestBuilder {
 	
 	
 	public static JsonObjectRequest newJsonRequest(int method, String uri, Map<String,Object> param,
-				Listener<JSONObject> listener) {
+				Listener<JSONObject> listener, Response.ErrorListener errorListener) {
 		
 		String url = getUrl(uri);
 		if(method == Request.Method.GET){
 			url = url + convertParamToUrlSearch(param);
-			return new JsonRequestWraper(method, url, null, listener, new DefaultErrorListener());
+			return new JsonRequestWraper(method, url, null, listener, errorListener);
 		}else {
 			return new JsonRequestWraper(method, url, param == null ? null : new JSONObject(param),
-					listener, new DefaultErrorListener());
+					listener, errorListener);
 		}
 		
 	}
@@ -43,8 +43,8 @@ public class JsonRequestBuilder {
 		return result.toString();
 	}
 	
-	
-	private static class DefaultErrorListener implements Response.ErrorListener {
+
+	public static class DefaultErrorListener implements Response.ErrorListener {
 
 		@Override
 		public void onErrorResponse(VolleyError error) {

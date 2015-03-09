@@ -1,11 +1,14 @@
 package name.walnut.kanjian.app.service.impl;
 
+import com.android.volley.VolleyError;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import name.walnut.kanjian.app.service.BaseService;
 import name.walnut.kanjian.app.service.LoginService;
 import name.walnut.kanjian.app.support.ActionBarActivity;
+import name.walnut.kanjian.app.support.JsonRequestBuilder;
 import name.walnut.kanjian.app.support.KanJianApplication;
 import name.walnut.kanjian.app.ui.login.LoginActivity;
 import name.walnut.kanjian.app.utils.DefalutJSONListener;
@@ -39,6 +42,12 @@ public class LoginServiceImpl extends BaseService implements LoginService {
 
             @Override
             public void beforeFailed() {
+                LoginServiceImpl.this.activity.doneMessage();
+            }
+        }, new JsonRequestBuilder.DefaultErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                super.onErrorResponse(error);
                 LoginServiceImpl.this.activity.doneMessage();
             }
         });

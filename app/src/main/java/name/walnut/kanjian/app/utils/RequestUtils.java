@@ -1,6 +1,7 @@
 package name.walnut.kanjian.app.utils;
 
 import com.android.volley.Request;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -15,10 +16,10 @@ import name.walnut.kanjian.app.support.JsonRequestBuilder;
 import name.walnut.kanjian.app.support.RequestQueueContext;
 
 public class RequestUtils {
-	public static void postJSON(String uri, Map<String, Object> param, DefalutJSONListener listener ){
+	public static void postJSON(String uri, Map<String, Object> param, DefalutJSONListener listener, JsonRequestBuilder.DefaultErrorListener errorListener){
 		
 		JsonObjectRequest jsonRequest = JsonRequestBuilder.newJsonRequest(Request.Method.POST, 
-				uri, param, listener);
+				uri, param, listener, errorListener);
 		
 		RequestQueueContext.INSTANCE.getRequestQueue().add(jsonRequest);
 	}
@@ -28,7 +29,7 @@ public class RequestUtils {
      * @param params
      * @param listener
      */
-    public static void upload(String uri, RequestParams params, final DefalutJSONListener listener ) {
+    public static void upload(String uri, RequestParams params, final DefalutJSONListener listener, final JsonRequestBuilder.DefaultErrorListener errorListener) {
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.post(uri, params, new JsonHttpResponseHandler(){
@@ -38,6 +39,11 @@ public class RequestUtils {
                 listener.onResponse(response);
             }
 
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                errorListener.onErrorResponse(new VolleyError(responseString, throwable));
+            }
         });
     }
 }

@@ -40,7 +40,7 @@ public class RegisterServiceImpl implements RegisterService {
                         // TODO Auto-generated method stub
 
                     }
-                });
+                }, new JsonRequestBuilder.DefaultErrorListener());
 
         requestQueue.add(jsonRequest);
     }
