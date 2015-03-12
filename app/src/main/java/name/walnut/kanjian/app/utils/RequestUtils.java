@@ -55,17 +55,18 @@ public class RequestUtils {
 
     private static String convertGetParam(Map<String, String> param) {
 
-        if(param ==null || param.isEmpty())
+        if (param == null || param.isEmpty())
             return null;
 
         StringBuilder sb = new StringBuilder("?");
-        for(String s : param.keySet()){
+        for (String s : param.keySet()) {
             sb.append(s);
             sb.append("=");
             sb.append(param.get(s));
             sb.append("&");
         }
         return sb.toString();
+    }
 
     public static void upload(String uri, RequestParams params, final DefalutJSONListener listener ) {
 
