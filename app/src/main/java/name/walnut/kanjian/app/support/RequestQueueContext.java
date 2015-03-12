@@ -16,5 +16,15 @@ public enum RequestQueueContext {
 		return requestQueue;
 	}
 
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
 	private RequestQueue requestQueue;
+
+    private String sessionId;
 }
