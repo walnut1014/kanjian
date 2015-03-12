@@ -21,7 +21,7 @@ public class LoginServiceImpl extends BaseService implements LoginService {
     @Override
     public void login(String phonemobile, String password) {
 
-        Map<String, Object> param = new HashMap<>(1);
+        Map<String, Object> param = new HashMap<>(2);
         param.put("mobilephone", phonemobile);
         param.put("password", password);
         RequestUtils.postJSON("passport/login", param, new DefalutJSONListener() {

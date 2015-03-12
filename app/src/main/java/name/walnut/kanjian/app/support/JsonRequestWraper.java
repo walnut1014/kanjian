@@ -34,7 +34,6 @@ public class JsonRequestWraper extends JsonObjectRequest {
 		
 		if(response.headers.containsKey("Set-Cookie")){
 			String cookie = response.headers.get("Set-Cookie");
-            System.out.println(cookie);
             String sessionId = cookie.split(";")[0].split("=")[1];
             RequestQueueContext.INSTANCE.setSessionId(sessionId);
         }
