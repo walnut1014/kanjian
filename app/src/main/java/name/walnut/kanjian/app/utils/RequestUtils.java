@@ -12,11 +12,8 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
-import name.walnut.kanjian.app.support.JsonRequestBuilder;
-import name.walnut.kanjian.app.support.RequestQueueContext;
-
-import com.android.volley.Request;
-import com.android.volley.toolbox.JsonObjectRequest;
+import name.walnut.kanjian.app.support.rest.JsonRequestBuilder;
+import name.walnut.kanjian.app.support.rest.RequestQueueContext;
 
 /**
  * 发送http请求工具类

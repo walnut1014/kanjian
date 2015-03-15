@@ -42,6 +42,7 @@ public abstract class ActionBarActivity extends Activity {
         backButton = (Button) actionBar.getCustomView().findViewById(
                 R.id.btnActionBack);
 
+
         backButton.setOnClickListener(new OnClickListener() {
 
             @Override

@@ -19,9 +19,9 @@ public abstract class DefalutJSONListener implements Listener<JSONObject> {
 
         try {
             if(obj.getBoolean("success")){
-                Object data = null;
+                JSONObject data = null;
                 if(obj.has("data")){
-                    data = obj.get("data");
+                    data = obj.getJSONObject("data");
                 }
                 onSuccess(data);
             }else{
@@ -34,7 +34,7 @@ public abstract class DefalutJSONListener implements Listener<JSONObject> {
 
     }
 
-    public abstract void onSuccess(Object data);
+    public abstract void onSuccess(JSONObject data);
 
     public void onFailed(String errorMsg) {
         Toast toast = Toast.makeText(KanJianApplication.INTANCE,

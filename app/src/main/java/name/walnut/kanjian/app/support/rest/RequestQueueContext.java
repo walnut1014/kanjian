@@ -1,4 +1,4 @@
-package name.walnut.kanjian.app.support;
+package name.walnut.kanjian.app.support.rest;
 
 import android.content.Context;
 

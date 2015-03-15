@@ -1,4 +1,4 @@
-package name.walnut.kanjian.app.support;
+package name.walnut.kanjian.app.support.rest;
 
 import java.util.Map;
 
@@ -15,7 +15,8 @@ public class JsonRequestBuilder {
 	
 	public static JsonObjectRequest newJsonRequest(int method, String uri, Map<String,?> param,
 				Listener<JSONObject> listener, Response.ErrorListener errorListener) {
-		
+
+
 		String url = getUrl(uri);
 		if(method == Request.Method.GET){
 			url = url + convertParamToUrlSearch(param);
@@ -54,4 +55,5 @@ public class JsonRequestBuilder {
 	
 	
 	private final static String CONTEXT_PATH = "http://120.25.201.172:8080";
+    //private final static String CONTEXT_PATH = "http://192.168.1.104:8080";
 }

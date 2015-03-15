@@ -1,4 +1,4 @@
-package name.walnut.kanjian.app.support;
+package name.walnut.kanjian.app.support.rest;
 
 import org.json.JSONObject;
 
@@ -12,6 +12,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * volley框架JsonObjectRequest类的包装类，实现对javasession的支持
+ * @author walnut
+ */
 public class JsonRequestWraper extends JsonObjectRequest {
 
 	

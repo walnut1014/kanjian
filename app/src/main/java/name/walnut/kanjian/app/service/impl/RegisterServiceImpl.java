@@ -5,8 +5,8 @@ import java.util.Map;
 
 import name.walnut.kanjian.app.service.RegisterService;
 import name.walnut.kanjian.app.service.ServiceException;
-import name.walnut.kanjian.app.support.JsonRequestBuilder;
-import name.walnut.kanjian.app.support.RequestQueueContext;
+import name.walnut.kanjian.app.support.rest.JsonRequestBuilder;
+import name.walnut.kanjian.app.support.rest.RequestQueueContext;
 
 import org.json.JSONObject;
 

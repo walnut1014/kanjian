@@ -3,6 +3,8 @@ package name.walnut.kanjian.app.support;
 import java.io.File;
 
 import name.walnut.kanjian.app.entity.PhotoContext;
+import name.walnut.kanjian.app.support.rest.RequestQueueContext;
+
 import android.app.Application;
 import android.os.Environment;
 

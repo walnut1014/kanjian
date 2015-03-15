@@ -1,10 +1,12 @@
 package name.walnut.kanjian.app.ui.login;
 
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.resource.impl.Resource;
+import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.service.LoginService;
-import name.walnut.kanjian.app.service.impl.LoginServiceImpl;
 import name.walnut.kanjian.app.support.ActionBarFragment;
-import name.walnut.kanjian.app.support.KanJianApplication;
+import name.walnut.kanjian.app.ui.login.action.LoginAction;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +17,8 @@ import android.widget.TextView;
 
 public class LoginFragment extends ActionBarFragment implements OnClickListener {
 
-	@Override
+
+    @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
@@ -26,9 +29,9 @@ public class LoginFragment extends ActionBarFragment implements OnClickListener 
 		txtPassword = (TextView) view.findViewById(R.id.login_txtPassword);
 		
 		button.setOnClickListener(this);
-		
-		loginService = new LoginServiceImpl(this.getActionBarActivity());
-		
+
+        System.out.println(loginResource);
+        //loginResource.addParam("mobilephone", "123123213123").send();
 		return view;
 	}
 
@@ -42,15 +45,20 @@ public class LoginFragment extends ActionBarFragment implements OnClickListener 
 		
 		switch(v.getId()){
 		case R.id.btnFragLogin:
-			loginService.login(txtMobilephone.getText().toString(), 
-								txtPassword.getText().toString());
+			/*loginService.login(txtMobilephone.getText().toString(),
+								txtPassword.getText().toString());*/
+
+            //发送登陆请求
+            loginResource.addParam("aa",1).send();
 		}
 	}
-	
+
 	private LoginService loginService;
 	
 	private TextView txtMobilephone;
 	private TextView txtPassword;
-	
-	
+
+    @ResourceWeave(actionClass=LoginAction.class)
+    public Resource loginResource;
+
 }
