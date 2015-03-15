@@ -30,7 +30,6 @@ public class LoginFragment extends ActionBarFragment implements OnClickListener 
 		
 		button.setOnClickListener(this);
 
-        System.out.println(loginResource);
         //loginResource.addParam("mobilephone", "123123213123").send();
 		return view;
 	}

@@ -5,7 +5,9 @@ package name.walnut.kanjian.app.resource;
  */
 public enum ResourceRegister {
 
-    loginResource("passport/login", RequestMethod.POST);
+    loginResource("passport/login", RequestMethod.POST), //登陆Resource
+    registerResource("passport/register", RequestMethod.POST) //注册Resource
+    ;
 
     ResourceRegister(String url, RequestMethod method) {
         this.url = url;
