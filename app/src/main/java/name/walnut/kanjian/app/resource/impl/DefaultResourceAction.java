@@ -3,10 +3,6 @@ package name.walnut.kanjian.app.resource.impl;
 import android.app.Activity;
 import android.app.Fragment;
 
-import com.android.volley.VolleyError;
-
-import org.json.JSONObject;
-
 import name.walnut.kanjian.app.resource.ResourceAction;
 
 /**
@@ -26,5 +22,16 @@ public abstract class DefaultResourceAction implements ResourceAction {
         return fragment.getActivity();
     }
 
+    @Override
+    public void setResource(Resource resource) {
+        this.resource = resource;
+    }
+
+    @Override
+    public Resource getResource() {
+        return resource;
+    }
+
+    private Resource resource;
     private Fragment fragment;
 }

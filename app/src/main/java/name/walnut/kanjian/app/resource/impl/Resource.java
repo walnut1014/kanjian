@@ -34,6 +34,7 @@ public final class Resource{
 
     public void setResourceAction(ResourceAction resourceAction) {
         this.resourceAction = resourceAction;
+        this.resourceAction.setResource(this);
     }
 
     public void send(){
