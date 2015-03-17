@@ -4,11 +4,11 @@ import android.test.AndroidTestCase;
 
 import org.json.JSONObject;
 
-import name.walnut.kanjian.app.TestResourceAction;
+import name.walnut.kanjian.app.test.TestResourceAction;
 import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.resource.impl.ResourceFactory;
 
-public class ResourceTest extends AndroidTestCase{
+public class LoginResourceTest extends AndroidTestCase{
 
     @Override
     protected void setUp() throws Exception {
@@ -18,18 +18,29 @@ public class ResourceTest extends AndroidTestCase{
         loginResource = ResourceFactory.INSTANCE.getResource(ResourceRegister.loginResource);
     }
 
-    public void testLoginResource() throws InterruptedException {
-        
+    public void testRegisterResource() {
         loginResource.setResourceAction(new TestResourceAction(){
             @Override
             public void onResponse(JSONObject object) {
-                super.onResponse(object);
+
+            }
+        });
+    }
+
+    public void testLoginResource() {
+
+        loginResource.setResourceAction(new TestResourceAction(){
+            @Override
+            public void onResponse(JSONObject object) {
+
             }
         });
         loginResource.addParam("aa", "ff").send();
     }
 
 
+
     private Resource loginResource;
+
 
 }

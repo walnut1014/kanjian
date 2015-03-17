@@ -4,6 +4,7 @@ import name.walnut.kanjian.app.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.GestureDetector;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -21,6 +22,17 @@ public class LaunchActivity extends Activity implements OnClickListener {
 		
 		registerButton.setOnClickListener(this);
 		loginButton.setOnClickListener(this);
+
+        findViewById(R.id.textView1).setLongClickable(true);
+        findViewById(R.id.textView1).setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Intent intent = new Intent("test_activity");
+                LaunchActivity.this.startActivity(intent);
+                return true;
+            }
+        });
+
 	}
 	
 

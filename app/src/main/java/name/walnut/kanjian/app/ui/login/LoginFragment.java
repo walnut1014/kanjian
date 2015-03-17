@@ -48,7 +48,8 @@ public class LoginFragment extends ActionBarFragment implements OnClickListener 
 								txtPassword.getText().toString());*/
 
             //发送登陆请求
-            loginResource.addParam("aa",1).send();
+            loginResource.addParam("mobilephone","13000000001")
+                           .addParam("password", "sdfsdf").send();
 		}
 	}
 
