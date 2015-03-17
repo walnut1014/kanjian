@@ -15,7 +15,9 @@ public class LoginAction extends DefaultResourceAction {
     public void onResponse(JSONObject object) {
 
         System.out.println(object);
-        this.getActivity();
+        System.out.println(this.getActivity()+ "sdfsd");
+
+        System.out.println("sdfsdf");
     }
 
     @Override

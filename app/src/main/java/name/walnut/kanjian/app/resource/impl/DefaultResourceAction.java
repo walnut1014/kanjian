@@ -14,7 +14,7 @@ public abstract class DefaultResourceAction implements ResourceAction {
         return fragment;
     }
 
-    protected void setFragment(Fragment fragment) {
+    public void setFragment(Fragment fragment) {
         this.fragment = fragment;
     }
 

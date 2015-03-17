@@ -6,6 +6,7 @@ import android.util.Log;
 
 import java.lang.reflect.Field;
 
+import name.walnut.kanjian.app.resource.impl.DefaultResourceAction;
 import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.resource.impl.ResourceActionFactory;
 import name.walnut.kanjian.app.resource.impl.ResourceFactory;
@@ -27,8 +28,10 @@ public abstract class BaseFragment extends Fragment {
                 ResourceWeave resourceWeave = field.getAnnotation(ResourceWeave.class);
                 if(resourceWeave == null)
                     throw new RuntimeException("没有找到对应的ResourceWeave");
-                resource.setResourceAction(ResourceActionFactory.INSTANCE
-                                                                 .getResourceAction(resourceWeave.actionClass()));
+                DefaultResourceAction resourceAction = (DefaultResourceAction) ResourceActionFactory
+                                                                                .INSTANCE.getResourceAction(resourceWeave.actionClass());
+                resourceAction.setFragment(this);
+                resource.setResourceAction(resourceAction);
                 try {
                     field.set(this, resource);
                 } catch (IllegalAccessException e) {
