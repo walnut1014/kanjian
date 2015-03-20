@@ -1,5 +1,8 @@
 package name.walnut.kanjian.app.ui.login;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.resource.impl.ResourceWeave;
@@ -15,50 +18,43 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class LoginFragment extends ActionBarFragment implements OnClickListener {
+import java.nio.Buffer;
 
+public class LoginFragment extends ActionBarFragment {
+
+    @InjectView(R.id.btnFragLogin) Button fragBtn;
+    @InjectView(R.id.login_txtMobilephone) TextView txtMobilephone;
+    @InjectView(R.id.login_txtPassword) TextView txtPassword;
+
+    @ResourceWeave(actionClass=LoginAction.class)
+    public Resource loginResource;
 
     @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		
-		View view = inflater.inflate(R.layout.fragment_login, container, false);
-		
-		Button button = (Button)view.findViewById(R.id.btnFragLogin);
-		txtMobilephone = (TextView) view.findViewById(R.id.login_txtMobilephone);
-		txtPassword = (TextView) view.findViewById(R.id.login_txtPassword);
-		
-		button.setOnClickListener(this);
 
-        //loginResource.addParam("mobilephone", "123123213123").send();
+		View view = inflater.inflate(R.layout.fragment_login, container, false);
+
+        ButterKnife.inject(this, view);
 		return view;
 	}
 
-	@Override
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
+    }
+
+    @Override
 	public String getTitle() {
 		return getResources().getString(R.string.text_login);
 	}
 
-	@Override
-	public void onClick(View v) {
-		
-		switch(v.getId()){
-		case R.id.btnFragLogin:
-			/*loginService.login(txtMobilephone.getText().toString(),
-								txtPassword.getText().toString());*/
-
-            //发送登陆请求
-            loginResource.addParam("mobilephone","13000000001")
-                           .addParam("password", "sdfsdf").send();
-		}
-	}
-
-	private LoginService loginService;
-	
-	private TextView txtMobilephone;
-	private TextView txtPassword;
-
-    @ResourceWeave(actionClass=LoginAction.class)
-    public Resource loginResource;
+    @OnClick(R.id.btnFragLogin)
+    void login() {
+        //发送登陆请求
+        loginResource.addParam("mobilephone","13000000001")
+                .addParam("password", "sdfsdf").send();
+    }
 
 }
