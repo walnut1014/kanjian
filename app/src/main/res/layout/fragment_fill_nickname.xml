@@ -1,35 +1,77 @@
 
 <!-- 填写昵称Fragment -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/black_overlay" >
+    android:paddingTop="25dp"
+    android:background="@color/activity_background">
 
 	<TextView
+        android:textSize="18sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="请设定头像、昵称、方便朋友认出你" />
+        android:text="@string/fill_nickname_tip" />
 
-	
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="match_parent"
+    <ImageView
+        android:clickable="true"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/fill_nickname_avatar"
+        android:src="@drawable/default_head"
+        android:layout_marginTop="26dp"
+        android:layout_width="138dp"
+        android:layout_height="138dp" />
+
+    <LinearLayout
+        android:layout_marginTop="22dp"
+        android:background="@color/background_edit"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text" >
+        android:layout_gravity="top|center" >
 
-        <requestFocus />
-    </EditText>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/fill_nickname_edit_title"
+            android:textSize="20sp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="10dp"/>
 
+        <View
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="14dp"
+            android:background="@color/text_divide"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"/>
+
+        <name.walnut.kanjian.app.views.ClearEditText
+            android:id="@+id/fill_nickname_edit"
+            app:hint="@string/fill_nickname_edit_hint"
+            android:layout_width="wrap_content"
+            android:paddingLeft="14dp"
+            android:paddingRight="@dimen/activity_setting_horizontal_margin"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_weight="1"
+            android:inputType="text" >
+            <requestFocus />
+        </name.walnut.kanjian.app.views.ClearEditText>
+
+    </LinearLayout>
 
     <Button
-        android:id="@+id/next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="下一步"
-        android:layout_gravity="center_horizontal" />
+        android:id="@+id/fill_nickname_submit"
+        android:layout_marginTop="20dp"
+        style="@style/IButton.purple"
+        android:layout_marginLeft="@dimen/activity_setting_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_setting_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:text="@string/fill_nickname_submit"
+         />
     
 
 </LinearLayout>

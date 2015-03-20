@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -39,7 +40,7 @@ public abstract class ActionBarActivity extends Activity {
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         actionBar.setDisplayShowCustomEnabled(true);
 
-        backButton = (Button) actionBar.getCustomView().findViewById(
+        backButton = (ImageButton) actionBar.getCustomView().findViewById(
                 R.id.btnActionBack);
 
 
@@ -65,7 +66,7 @@ public abstract class ActionBarActivity extends Activity {
     /**
      * 切换Fragment
      *
-     * @param fragmentClass
+     * @param actionBarFragment
      *            fragment的类型
      */
     protected void switchFragment(ActionBarFragment actionBarFragment) {
@@ -95,7 +96,7 @@ public abstract class ActionBarActivity extends Activity {
 
     private int containerViewId;
     private ActionBar actionBar;
-    private Button backButton;
+    private ImageButton backButton;
 
     /** 提示框*/
     private PopupWindow pw;

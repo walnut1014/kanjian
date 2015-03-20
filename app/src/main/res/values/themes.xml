@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="IButton" parent="android:TextAppearance.Widget.Button">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="IButton.purple" >
+        <item name="android:background">@drawable/bg_button_purple</item>
+        <item name="android:textColor">@color/text_white</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="IAlertDialog" parent="android:Theme.Holo.Dialog">
+    </style>
+
+</resources>

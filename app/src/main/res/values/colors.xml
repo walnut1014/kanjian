@@ -2,4 +2,27 @@
 
     <color name="black_overlay">#66000000</color>
 
+    <color name="white">#ffffff</color>
+    <color name="black">#040404</color>
+    <color name="purple">#694dd0</color>
+    <color name="purple_dark">#843fd7</color>
+    <color name="gray">#a5a5a5</color>
+    <color name="creamy_white">#f3f0eb</color>
+
+
+    <color name="actionbar_title_color">@color/white</color>
+    <color name="text_black">@color/black</color>
+    <color name="text_white">@color/white</color>
+    <color name="text_purple">@color/purple</color>
+    <color name="text_gray">@color/gray</color>
+    <color name="activity_background">@color/creamy_white</color>
+
+    <color name="button_purple_nor">@color/purple</color>
+    <color name="button_purple_press">@color/purple_dark</color>
+
+    <color name="text_divide">#c3c3c3</color>
+
+    <color name="background_edit">@color/white</color>
+    
+
 </resources>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/activity_background"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/activity_setting_margin_top"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/verifycode_tip"
+        android:layout_marginLeft="@dimen/activity_setting_horizontal_margin"
+        android:textSize="18sp"
+        android:textColor="@color/text_gray"
+        android:gravity="center_horizontal"
+        android:text="@string/verifycode_tip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_marginTop="15dp"
+        android:id="@+id/verifycode_mobilephone"
+        android:text="+86 1345677890"
+        android:gravity="center_horizontal"
+        android:textSize="18sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <name.walnut.kanjian.app.views.ClearEditText
+        android:id="@+id/verifycode_edit"
+        android:layout_marginTop="25dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:clickable="true"
+        android:background="@color/background_edit"
+        app:hint="@string/verifycode_edit_hint"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edittext_height">
+        <requestFocus />
+        </name.walnut.kanjian.app.views.ClearEditText>
+
+    <TextView
+        android:gravity="center_horizontal"
+        android:id="@+id/verifycode_countdown"
+        android:textSize="18sp"
+        android:textColor="@color/text_gray"
+        android:text="@string/verifycode_countdown"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/verifycode_submit"
+        android:text="@string/verifycode_submit"
+        style="@style/IButton.purple"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="@dimen/activity_setting_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_setting_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height" />
+
+</LinearLayout>

@@ -1,29 +1,36 @@
 package name.walnut.kanjian.app.ui.login.action;
 
+import android.content.Intent;
+
 import com.android.volley.VolleyError;
 
 import org.json.JSONObject;
 
 import name.walnut.kanjian.app.resource.impl.DefaultResourceAction;
+import name.walnut.kanjian.app.support.BaseResourceAction;
+import name.walnut.kanjian.app.ui.Constants;
+import name.walnut.kanjian.app.utils.Logger;
 
-/**
- * Created by user on 2015/3/15.
- */
-public class LoginAction extends DefaultResourceAction {
+
+public class LoginAction extends BaseResourceAction {
 
     @Override
-    public void onResponse(JSONObject object) {
+    public void onSuccess(String data) {
+        getActivity().finish();
+        Intent intent = new Intent(Constants.Action.MAIN_ACTION);
+        getFragment().startActivity(intent);
+    }
 
-        System.out.println(object);
-        System.out.println(this.getActivity()+ "sdfsd");
+    @Override
+    public void onFailed(String errorMsg) {
+        Logger.d(errorMsg);
+        // 账号未注册
 
-        System.out.println("sdfsdf");
+        // 密码不正确
     }
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
-        System.out.println(volleyError);
-        this.getFragment();
     }
 
 }

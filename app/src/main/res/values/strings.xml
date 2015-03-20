@@ -7,8 +7,42 @@
     <string name="main_manage_date">时间</string>
     <string name="main_friends">好友</string>
     
-    <string name="text_login">登陆</string>
+    <string name="text_login">登录</string>
     <string name="text_register">注册</string>
+    <string name="text_launch_clause"><![CDATA[<font color="#ffffff">使用Whocare，就表示您同意Whocare的<br /></font><font color="#9974f8"><u>使用条款</u></font><font color="#ffffff">和</font><font color="#9974f8"><u>隐私策略</u></font>]]></string>
+    <string name="launch_account_tip">已有Whocare账号了？</string>
+    <string name="text_forgot_pasword">找回密码</string>
+    <string name="login_mobilephone_hint">请输入手机号</string>
+    <string name="login_password_hint">请输入密码</string>
+    <string name="text_to_register">我要注册</string>
+    <string name="title_forget_password">找回密码</string>
+    <string name="register_mobilephone_hint">请填写您的手机号码</string>
+    <string name="verifycode_edit_hint">请输入验证码</string>
+    <string name="verifycode_submit">提交</string>
+    <string name="verifycode_tip">我们已发送<![CDATA[<font color="#6a4bd8">验证码</font>]]>短信到这个手机号码</string>
+    <string name="title_verifycode">输入验证码</string>
+    <string name="title_fill_password">设置密码</string>
+    <string name="fill_password_tip">密码为6-20位数字或英文字母</string>
+    <string name="fill_password_submit">提交</string>
+    <string name="fill_password_hint">请设置密码</string>
+    <string name="title_fill_nickname">填写昵称</string>
+    <string name="fill_nickname_tip">请设定头像、昵称、方便朋友认出你</string>
+    <string name="fill_nickname_edit_hint">请输入昵称</string>
+    <string name="fill_nickname_edit_title">昵称</string>
+    <string name="fill_nickname_submit">下一步</string>
+    <string name="verifycode_countdown"><![CDATA[<font color="#6a4bd8">%d</font>]]> 秒后，重新获取验证码</string>
+    <string name="verifycode_resend">获取验证码</string>
+    <string name="toast_login_empty_phone_and_password">请输入账号和密码</string>
+    <string name="toast_empty_phone">请输入账号</string>
+    <string name="toast_login_error_format_phone">手机号码格式错误</string>
+    <string name="toast_error_format_password">密码为6－20为数字或英文字母</string>
+    <string name="toast_register_empty_phone">请输入手机号码</string>
+    <string name="toast_register_error_format_phone">手机号码格式错误</string>
+    <string name="toast_registered">您的手机号码%s已注册，请直接登录</string>
+    <string name="toast_verify_empty">请输入验证码</string>
+    <string name="toast_verify_error">验证码错误</string>
+    <string name="toast_empty_password">请输入密码</string>
+    <string name="toast_empty_nickname">请填写昵称</string>
 
 
 </resources>

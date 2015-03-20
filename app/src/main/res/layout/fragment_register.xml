@@ -1,79 +1,59 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/black_overlay" >
+    android:paddingTop="@dimen/activity_setting_margin_top"
+    android:background="@color/activity_background">
 
     <LinearLayout
+        android:background="@color/background_edit"
+        android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="top|center"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp" >
-
+        android:layout_gravity="top|center" >
 
        <TextView
-        android:id="@+id/textNation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+86"
-        android:textSize="20.0sp"
-        android:layout_marginRight="20dp" />
+           android:id="@+id/textNation"
+           android:layout_width="wrap_content"
+           android:layout_height="match_parent"
+           android:gravity="center"
+           android:text="+86"
+           android:textSize="20sp"
+           android:layout_marginRight="20dp"
+           android:layout_marginLeft="10dp"/>
 
+        <View
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="14dp"
+            android:background="@color/text_divide"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"/>
         
-        <EditText
-            android:id="@+id/register_txtMobilephone"
+        <name.walnut.kanjian.app.views.ClearEditText
+            android:id="@+id/register_mobilephone"
+            app:hint="@string/register_mobilephone_hint"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:paddingLeft="14dp"
+            android:paddingRight="@dimen/activity_setting_horizontal_margin"
+            android:layout_height="@dimen/edittext_height"
             android:layout_weight="1"
-            android:maxLength="11"
-            android:inputType="number" >
+            android:inputType="phone" >
             <requestFocus />
-        </EditText>
-
-    </LinearLayout>
-    
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|center"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp" >
-
-
-       <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="密码："
-        android:textSize="20.0sp"
-        android:layout_marginRight="20dp" />
-
-        
-        <EditText
-            android:id="@+id/register_txtPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:maxLength="20"
-            android:inputType="textPassword" >
-            <requestFocus />
-        </EditText>
+        </name.walnut.kanjian.app.views.ClearEditText>
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnFragRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/activity_setting_horizontal_margin"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="@dimen/activity_setting_horizontal_margin"
+        style="@style/IButton.purple"
+        android:id="@+id/register"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
         android:layout_gravity="center_horizontal"
         android:text="@string/text_register"
          />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="TextView" />
 
 </LinearLayout>

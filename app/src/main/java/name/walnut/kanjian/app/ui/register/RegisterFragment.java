@@ -1,92 +1,75 @@
 package name.walnut.kanjian.app.ui.register;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
-import name.walnut.kanjian.app.service.RegisterService;
-import name.walnut.kanjian.app.service.ServiceException;
-import name.walnut.kanjian.app.service.impl.RegisterServiceImpl;
+import name.walnut.kanjian.app.resource.impl.Resource;
+import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
+import name.walnut.kanjian.app.ui.register.action.RegisterSendAction;
+import name.walnut.kanjian.app.ui.util.RegexUtils;
+import name.walnut.kanjian.app.views.ClearEditText;
+
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.Toast;
 
-public class RegisterFragment extends ActionBarFragment implements OnClickListener {
+public class RegisterFragment extends ActionBarFragment {
+
+    @InjectView(R.id.register_mobilephone)
+    ClearEditText mobilephoneTv;
+    @InjectView(R.id.register)
+    Button registerBtn;
+
+    @ResourceWeave(actionClass=RegisterSendAction.class)
+    public Resource registerSendResource;  //注册发送手机验证码
+
+    public String mobilephone;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
 		View view = inflater.inflate(R.layout.fragment_register, container, false);
-		registerButton = (Button)view.findViewById(R.id.btnFragRegister);
-		mobilephoneText = (TextView) view.findViewById(R.id.register_txtMobilephone);
-		
-		registerButton.setOnClickListener(this);
-		
-		registerButton.setClickable(false);
-		
-		mobilephoneText.addTextChangedListener(new TextWatcher() {
-			
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				if(count > 0)
-					registerButton.setClickable(true);
-				else
-					registerButton.setClickable(false);
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void afterTextChanged(Editable s) {
-				
-			}
-		});
-		
+        ButterKnife.inject(this, view);
 		return view;
 	}
-	
-	@Override
-	public void onClick(View v) {
-		switch(v.getId()){
-		case R.id.btnFragRegister:
-			
-			String mobilephone = mobilephoneText.getText().toString();
-			try {
-				registerService.sendVeriCode(mobilephone);
-			} catch (ServiceException e) {
-				this.getActionBarActivity().showMessage(e.getMessage());
-			}
-			switchFragment(new VerifiCodeFragment(mobilephone));
-		break;
-		}
-	}
-	
-	@Override
-	public void onResume() {
-		super.onResume();
-		mobilephoneText.setText(null);
-	}
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
+    }
 
-	@Override
+    @Override
 	public String getTitle() {
 		return getResources().getString(R.string.text_register);
 	}
-	
-	private Button registerButton;
-	
-	private TextView mobilephoneText;
-	
-	private RegisterService registerService = new RegisterServiceImpl();
-	
+
+    @OnClick(R.id.register)
+    void register() {
+        mobilephone = mobilephoneTv.getEditText().getText().toString();
+
+        if (TextUtils.isEmpty(mobilephone)) {
+            Toast.makeText(getActivity(), R.string.toast_register_empty_phone, Toast.LENGTH_SHORT).show();
+
+        } else if (!isMobilePhoneAvailable(mobilephone)){
+            Toast.makeText(getActivity(), R.string.toast_register_error_format_phone, Toast.LENGTH_SHORT).show();
+
+        } else {
+            registerSendResource.addParam("mobilephone", mobilephone)
+                    .send();
+
+        }
+    }
+
+    boolean isMobilePhoneAvailable(String mobilephone) {
+        return RegexUtils.isMobilePhone(mobilephone);
+    }
+
 }

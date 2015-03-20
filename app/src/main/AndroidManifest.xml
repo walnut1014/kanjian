@@ -11,20 +11,21 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    <android:uses-permission
+    <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".support.KanJianApplication"
         android:allowBackup="true"
+        android:theme="@style/AppBaseTheme"
         android:icon="@drawable/ic_launcher" >
 
         <!-- 启动加载Activity -->
         <activity
             android:name=".ui.LaunchActivity"
-            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" >
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,8 +46,7 @@
 
         <!-- 注册Activity -->
         <activity
-            android:name=".ui.register.RegisterActivity"
-            android:theme="@android:style/Theme.Light" >
+            android:name=".ui.register.RegisterActivity">
             <intent-filter>
                 <action android:name="kanjian.intent.action.REGISTER" />
 
@@ -56,10 +56,19 @@
 
         <!-- 登录Activity -->
         <activity
-            android:name=".ui.login.LoginActivity"
-            android:theme="@android:style/Theme.Light" >
+            android:name=".ui.login.LoginActivity">
             <intent-filter>
                 <action android:name="kanjian.intent.action.LOGIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- 找回密码activity -->
+        <activity
+            android:name=".ui.password.ForgotPasswordActivity">
+            <intent-filter>
+                <action android:name="kanjian.intent.action.FORGET_PASSWORD" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

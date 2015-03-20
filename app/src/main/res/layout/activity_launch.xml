@@ -1,41 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/black_overlay" >
+    android:gravity="center_horizontal|bottom"
+    android:background="@drawable/bg_start" >
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_marginRight="74dp"
+        android:layout_marginLeft="74dp"
+        style="@style/IButton"
+        android:background="@drawable/bg_launch_register"
+        android:layout_marginBottom="20dp"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/button_height"
+        android:textColor="@color/text_purple"
+        android:text="@string/text_register" />
 
     <TextView
-        android:id="@+id/textView1"
-        style="@style/launch_text"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/white"
+        android:text="@string/launch_account_tip"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="60dp"
-        android:text="看见" />
+        android:layout_height="wrap_content" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:layout_marginBottom="100dp"
-        android:orientation="vertical" >
+    <Button
+        android:id="@+id/btnLogin"
+        style="@style/IButton"
+        android:layout_marginRight="74dp"
+        android:layout_marginLeft="74dp"
+        android:layout_marginBottom="12dp"
+        android:textColor="@color/text_white"
+        android:background="@drawable/bg_launch_login"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/button_height"
+        android:text="@string/text_login" />
 
-        <Button
-	        android:id="@+id/btnRegister"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:text="@string/text_register" />
-        
-        <Button
-	        android:id="@+id/btnLogin"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:text="@string/text_login" />
-        
-        
-    </LinearLayout>
-
-   
-
-</FrameLayout>
+    <TextView
+        android:id="@+id/launch_clause"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="65dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
