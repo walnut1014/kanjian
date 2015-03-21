@@ -14,12 +14,14 @@ public class KanJianApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		RequestQueueContext.INSTANCE.initRequestQueue(this);
-		
+
 		INTANCE = this;
 		
 		File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
 		
 		PhotoContext.INSTANCE.init(file.getPath());
+
+        BusContext.INSTANCE.init();
 	}
 	
 	public static Application INTANCE;

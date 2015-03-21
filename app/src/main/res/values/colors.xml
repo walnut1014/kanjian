@@ -9,7 +9,6 @@
     <color name="gray">#a5a5a5</color>
     <color name="creamy_white">#f3f0eb</color>
 
-
     <color name="actionbar_title_color">@color/white</color>
     <color name="text_black">@color/black</color>
     <color name="text_white">@color/white</color>
@@ -19,6 +18,9 @@
 
     <color name="button_purple_nor">@color/purple</color>
     <color name="button_purple_press">@color/purple_dark</color>
+
+    <color name="button_white_press">#9b73ea</color>
+    <color name="button_white_nor">@color/white</color>
 
     <color name="text_divide">#c3c3c3</color>
 

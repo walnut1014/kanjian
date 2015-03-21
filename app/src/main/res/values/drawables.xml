@@ -11,4 +11,7 @@
     <item type="drawable" name="namcard_picker_bkg_normal">#ff272727</item>
     <item type="drawable" name="namcard_picker_bkg_hover">#ff333333</item>
 
+    <item name="bg_popup_button_nor" type="drawable">@color/button_white_nor</item>
+    <item name="bg_popup_button_press" type="drawable">@color/button_white_press</item>
+
 </resources>

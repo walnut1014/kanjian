@@ -69,7 +69,7 @@ public abstract class ActionBarActivity extends Activity {
      * @param actionBarFragment
      *            fragment的类型
      */
-    protected void switchFragment(ActionBarFragment actionBarFragment) {
+    public void switchFragment(ActionBarFragment actionBarFragment) {
 
         getFragmentManager().beginTransaction()
                 .replace(containerViewId, actionBarFragment)

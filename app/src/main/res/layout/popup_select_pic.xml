@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popup_layout"
+    android:orientation="vertical"
+    android:background="@color/gray"
+    android:layout_gravity="bottom"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:background="@color/gray"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <Button
+        android:id="@+id/popup_take_photo"
+        style="@style/IButton.popup"
+        android:text="@string/select_pic_take_photo"
+        android:layout_width="match_parent"
+        android:layout_height="56dp" />
+    <View
+        android:background="@color/gray"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <Button
+        android:id="@+id/popup_local_photo"
+        style="@style/IButton.popup"
+        android:text="@string/select_pic_local"
+        android:layout_width="match_parent"
+        android:layout_height="56dp" />
+    <View
+        android:background="@color/gray"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <View
+        android:layout_marginTop="5dp"
+        android:background="@color/gray"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <Button
+        style="@style/IButton.popup"
+        android:id="@+id/popup_cancel"
+        android:text="@string/select_pic_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="56dp" />
+    <View
+        android:background="@color/gray"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+</LinearLayout>

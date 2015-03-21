@@ -43,6 +43,9 @@
     <string name="toast_verify_error">验证码错误</string>
     <string name="toast_empty_password">请输入密码</string>
     <string name="toast_empty_nickname">请填写昵称</string>
+    <string name="select_pic_take_photo">拍照</string>
+    <string name="select_pic_local">从手机相册选择</string>
+    <string name="select_pic_cancel">取消</string>
 
 
 </resources>
