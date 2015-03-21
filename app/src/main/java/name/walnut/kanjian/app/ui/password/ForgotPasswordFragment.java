@@ -1,29 +1,78 @@
 package name.walnut.kanjian.app.ui.password;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.resource.impl.Resource;
+import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
-import name.walnut.kanjian.app.support.BaseFragment;
+import name.walnut.kanjian.app.ui.password.action.ForgetPasswordSendAction;
+import name.walnut.kanjian.app.ui.util.RegexUtils;
+import name.walnut.kanjian.app.views.ClearEditText;
 
+/**
+ * 忘记密码输入手机号
+ */
 public class ForgotPasswordFragment extends ActionBarFragment{
 
+    @InjectView(R.id.forget_password_mobilephone)
+    ClearEditText mobilephoneTv;
+    @InjectView(R.id.forget_password_submit)
+    Button submitBtn;
+
+    @ResourceWeave(actionClass=ForgetPasswordSendAction.class)
+    public Resource forgetPasswordSendResource;  //注册发送手机验证码
+
+    public String mobilephone;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_forget_password, container, false);
-
         ButterKnife.inject(this, view);
         return view;
     }
 
     @Override
-    public String getTitle() {
-        return getString(R.string.title_forget_password);
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
     }
+
+    @Override
+    public String getTitle() {
+        return getResources().getString(R.string.title_forget_password);
+    }
+
+    @OnClick(R.id.forget_password_submit)
+    void forgetPasswordSubmit() {
+        mobilephone = mobilephoneTv.getEditText().getText().toString();
+
+        if (TextUtils.isEmpty(mobilephone)) {
+            Toast.makeText(getActivity(), R.string.toast_register_empty_phone, Toast.LENGTH_SHORT).show();
+
+        } else if (!isMobilePhoneAvailable(mobilephone)){
+            Toast.makeText(getActivity(), R.string.toast_register_error_format_phone, Toast.LENGTH_SHORT).show();
+
+        } else {
+            forgetPasswordSendResource.addParam("mobilephone", mobilephone)
+                    .send();
+
+        }
+    }
+
+    boolean isMobilePhoneAvailable(String mobilephone) {
+        return RegexUtils.isMobilePhone(mobilephone);
+    }
+
 }

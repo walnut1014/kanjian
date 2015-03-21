@@ -1,15 +1,4 @@
-package name.walnut.kanjian.app.ui.register;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.OnClick;
-import name.walnut.kanjian.app.R;
-import name.walnut.kanjian.app.resource.impl.Resource;
-import name.walnut.kanjian.app.resource.impl.ResourceWeave;
-import name.walnut.kanjian.app.support.ActionBarFragment;
-import name.walnut.kanjian.app.ui.register.action.ResendVerifyCodeAction;
-import name.walnut.kanjian.app.ui.register.action.VerifyCodeAction;
-import name.walnut.kanjian.app.views.ClearEditText;
+package name.walnut.kanjian.app.ui.password;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -22,6 +11,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
+import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.resource.impl.Resource;
+import name.walnut.kanjian.app.resource.impl.ResourceWeave;
+import name.walnut.kanjian.app.support.ActionBarFragment;
+import name.walnut.kanjian.app.ui.password.action.ForgetVerifyCodeAction;
+import name.walnut.kanjian.app.ui.password.action.ResendVerifyCodeAction;
+import name.walnut.kanjian.app.views.ClearEditText;
 
 /**
  * 手机验证码Fragment
@@ -49,8 +49,8 @@ public class VerifyCodeFragment extends ActionBarFragment {
 
     CountDownTimer countDownTimer;  // 倒计时
 
-    @ResourceWeave(actionClass = VerifyCodeAction.class)
-    public Resource registerVerifyResource;
+    @ResourceWeave(actionClass = ForgetVerifyCodeAction.class)
+    public Resource forgetPasswordVerifyResource;
     @ResourceWeave(actionClass = ResendVerifyCodeAction.class)
     public Resource forgetPasswordResendResource;
 
@@ -77,7 +77,7 @@ public class VerifyCodeFragment extends ActionBarFragment {
         countDownTimer = new CountDownTimer(COUNTDOWN_MILL, COUNTDOWN_INTERVAL) {
             @Override
             public void onTick(long millisUntilFinished) {
-                if (countdownTv != null) {
+                if (countdownTv != null && !VerifyCodeFragment.this.isDetached()) {
                     countdownTv.setText(
                             Html.fromHtml(
                                     getString(R.string.verifycode_countdown, millisUntilFinished / 1000)));
@@ -108,17 +108,12 @@ public class VerifyCodeFragment extends ActionBarFragment {
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-        if (countDownTimer != null) {
-            countDownTimer.cancel();
-        }
-    }
-
-    @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+        }
     }
 
     @Override
@@ -134,7 +129,7 @@ public class VerifyCodeFragment extends ActionBarFragment {
 
         } else {
             // 提交验证码验证
-            registerVerifyResource.addParam("code", verifyCode)
+            forgetPasswordVerifyResource.addParam("code", verifyCode)
                     .send();
 
         }

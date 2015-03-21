@@ -32,6 +32,8 @@ public class LoginFragment extends ActionBarFragment implements Constants.Action
     ClearEditText passwordTv;
     @InjectView(R.id.register_tv)
     TextView registerTv;
+    @InjectView(R.id.login_forget_password)
+    TextView forgetPasswordTv;
 
     @ResourceWeave(actionClass=LoginAction.class)
     public Resource loginResource;
@@ -101,6 +103,13 @@ public class LoginFragment extends ActionBarFragment implements Constants.Action
     void startRegister() {
         getActivity().finish();
         Intent intent = new Intent(REGISTER_ACTION);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.login_forget_password)
+    void forgetPassword() {
+        getActivity().finish();
+        Intent intent = new Intent(FORGET_PASSWORD_ACTION);
         startActivity(intent);
     }
 

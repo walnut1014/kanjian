@@ -9,6 +9,8 @@ public class Constants {
 
         final static String MAIN_ACTION = "kanjian.intent.action.MAIN";
 
+        final static String FORGET_PASSWORD_ACTION = "kanjian.intent.action.FORGET_PASSWORD";
+
     }
 
     public static interface Materials {
