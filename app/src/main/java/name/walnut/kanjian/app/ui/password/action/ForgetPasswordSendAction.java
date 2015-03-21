@@ -7,6 +7,9 @@ import name.walnut.kanjian.app.ui.password.VerifyCodeFragment;
 import name.walnut.kanjian.app.ui.password.ForgotPasswordFragment;
 import name.walnut.kanjian.app.utils.Logger;
 
+/**
+ * 忘记密码 发送验证码
+ */
 public class ForgetPasswordSendAction extends BaseResourceAction {
     @Override
     public void onSuccess(String data) {

@@ -93,7 +93,7 @@ public class VerifyCodeFragment extends ActionBarFragment {
     }
 
     // 开始计时
-    private void startCountdown() {
+    public void startCountdown() {
         countdownTv.setClickable(false);
         countdownTv.setTextColor(getResources().getColor(R.color.text_gray));
         countdownTv.setText(Html.fromHtml(getString(R.string.verifycode_countdown, COUNTDOWN_MILL)));
@@ -101,7 +101,7 @@ public class VerifyCodeFragment extends ActionBarFragment {
     }
 
     // 停止计时
-    private void stopCountdown() {
+    public void stopCountdown() {
         countdownTv.setText(getString(R.string.verifycode_resend));
         countdownTv.setTextColor(getResources().getColor(R.color.text_purple));
         countdownTv.setClickable(true);
@@ -130,6 +130,7 @@ public class VerifyCodeFragment extends ActionBarFragment {
         } else {
             // 提交验证码验证
             forgetPasswordVerifyResource.addParam("code", verifyCode)
+                    .addParam("mobilephone", mobilephone)
                     .send();
 
         }

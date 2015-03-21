@@ -11,6 +11,9 @@ import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.ui.register.RegisterFragment;
 import name.walnut.kanjian.app.ui.register.VerifyCodeFragment;
 
+/**
+ * 注册 输入手机号码获取验证码
+ */
 public class RegisterSendAction extends BaseResourceAction{
 
     @Override

@@ -9,6 +9,9 @@ import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.ui.password.FillPasswordFragment;
 import name.walnut.kanjian.app.ui.password.VerifyCodeFragment;
 
+/**
+ * 忘记密码 验证验证码
+ */
 public class ForgetVerifyCodeAction extends BaseResourceAction {
     @Override
     public void onSuccess(String data) {

@@ -12,8 +12,11 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.resource.impl.Resource;
+import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.ui.Constants;
+import name.walnut.kanjian.app.ui.password.action.ForgetPasswordResetAction;
 import name.walnut.kanjian.app.ui.util.RegexUtils;
 import name.walnut.kanjian.app.views.ClearEditText;
 
@@ -26,6 +29,9 @@ public class FillPasswordFragment extends ActionBarFragment{
     ClearEditText passwordEdit;
     @InjectView(R.id.fill_password_submit)
     Button submitBtn;
+
+    @ResourceWeave(actionClass = ForgetPasswordResetAction.class)
+    public Resource forgetPasswordResetResource;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,7 +64,9 @@ public class FillPasswordFragment extends ActionBarFragment{
         } else {
             // TODO
             Toast.makeText(getActivity(), "完成", Toast.LENGTH_LONG).show();
-
+            forgetPasswordResetResource.addParam("password", password)
+                    .addParam("code", "code")
+                    .send();
         }
     }
 

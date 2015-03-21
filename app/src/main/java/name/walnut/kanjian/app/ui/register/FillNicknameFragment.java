@@ -79,6 +79,7 @@ public class FillNicknameFragment extends ActionBarFragment {
             Toast.makeText(getActivity(), R.string.toast_empty_nickname, Toast.LENGTH_SHORT).show();
 
         } else {
+            // TODO
             registerResource.send();
 
         }
@@ -88,7 +89,7 @@ public class FillNicknameFragment extends ActionBarFragment {
     @OnClick(R.id.fill_nickname_avatar)
     void showSelectPopup() {
         // 显示选择框
-        SelectPicDialog dialog = new SelectPicDialog();
+        SelectPicDialogFragment dialog = new SelectPicDialogFragment();
         dialog.show(getFragmentManager(), "dialog");
     }
 

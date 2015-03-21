@@ -19,6 +19,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+/**
+ * 注册输入手机号码fragment
+ */
 public class RegisterFragment extends ActionBarFragment {
 
     @InjectView(R.id.register_mobilephone)

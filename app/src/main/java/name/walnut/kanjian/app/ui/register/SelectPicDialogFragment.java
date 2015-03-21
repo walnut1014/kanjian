@@ -21,7 +21,7 @@ import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.BusContext;
 import name.walnut.kanjian.app.utils.Logger;
 
-public class SelectPicDialog extends DialogFragment {
+public class SelectPicDialogFragment extends DialogFragment {
 
     private static final int SELECT_PIC_KITKAT = 1;
     private static final int SELECT_PIC = 2;

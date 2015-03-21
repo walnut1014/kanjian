@@ -9,6 +9,9 @@ import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.ui.register.FillPasswordFragment;
 import name.walnut.kanjian.app.ui.register.VerifyCodeFragment;
 
+/**
+ * 注册 校验验证码
+ */
 public class VerifyCodeAction extends BaseResourceAction {
     @Override
     public void onSuccess(String data) {
