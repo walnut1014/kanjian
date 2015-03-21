@@ -95,6 +95,7 @@ public class VerifyCodeFragment extends ActionBarFragment {
     // 开始计时
     private void startCountdown() {
         countdownTv.setClickable(false);
+        countdownTv.setTextColor(getResources().getColor(R.color.text_gray));
         countdownTv.setText(Html.fromHtml(getString(R.string.verifycode_countdown, COUNTDOWN_MILL)));
         countDownTimer.start();
     }
@@ -102,6 +103,7 @@ public class VerifyCodeFragment extends ActionBarFragment {
     // 停止计时
     private void stopCountdown() {
         countdownTv.setText(getString(R.string.verifycode_resend));
+        countdownTv.setTextColor(getResources().getColor(R.color.text_purple));
         countdownTv.setClickable(true);
     }
 
