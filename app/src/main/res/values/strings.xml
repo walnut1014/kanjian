@@ -9,9 +9,7 @@
     <string name="text_login">登录</string>
     <string name="text_register">注册</string>
     <!-- <string name="text_launch_clause">使用Whocare，就表示您同意Whocare的<![CDATA[<br /><font color="#9974f8"><u>使用条款</u></font><font color="#ffffff">和</font><font color="#9974f8"><u>隐私策略</u></font>]]></string> -->
-    <string name="text_launch_clause">使用Whocare，就表示您同意Whocare的\n<a href="12">使用条款</a>和<a href="12">隐私策略</a></string>
-    <string name="text_launch_clause_use">使用条款</string>
-    <string name="text_launch_clause_privacy">隐私策略</string>
+    <string name="text_launch_clause">使用Whocare，就表示您同意Whocare的\n<a href="clause_use">使用条款</a>和<a href="privacy">隐私策略</a></string>
     <string name="launch_account_tip">已有Whocare账号了？</string>
     <string name="text_forgot_pasword">找回密码</string>
     <string name="login_mobilephone_hint">请输入手机号</string>

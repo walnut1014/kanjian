@@ -38,20 +38,24 @@ public class LaunchActivity extends Activity implements Constants.Action{
 
         clauseTv.setMovementMethod(LinkMovementMethod.getInstance());
         CharSequence clauseStr = clauseTv.getText();
-//        clauseTv.setText(clauseStr);
 
         int end = clauseStr.length();
         Spannable spannable = (Spannable) clauseTv.getText();
         URLSpan[] urls = spannable.getSpans(0, end, URLSpan.class);
         SpannableStringBuilder builder = new SpannableStringBuilder(clauseStr);
         builder.clearSpans();
-        for (URLSpan url : urls) {
+        for (final URLSpan url : urls) {
             builder.setSpan(new ClickableSpan() {
                 @Override
                 public void onClick(View widget) {
-                    Intent intent = new Intent(CLAUSE_ACTION);
-                    startActivity(intent);
-//                    Toast.makeText(LaunchActivity.this, "点击链接", Toast.LENGTH_SHORT).show();
+                    String urlStr = url.getURL();
+                    if ("clause_use".equals(urlStr)) {
+                        Intent intent = new Intent(CLAUSE_ACTION);
+                        startActivity(intent);
+                    } else if ("privacy".equals(urlStr)) {
+                        Intent intent = new Intent(PRIVACY_ACTION);
+                        startActivity(intent);
+                    }
                 }
             }, spannable.getSpanStart(url), spannable.getSpanEnd(url), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
