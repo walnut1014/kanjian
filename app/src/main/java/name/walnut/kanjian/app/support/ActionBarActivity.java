@@ -42,10 +42,18 @@ public abstract class ActionBarActivity extends Activity {
 
         backButton = (ImageButton) actionBar.getCustomView().findViewById(
                 R.id.btnActionBack);
+        backTextBtn = (TextView) actionBar.getCustomView().findViewById(
+                R.id.action_back_text);
 
 
         backButton.setOnClickListener(new OnClickListener() {
 
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        backTextBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
@@ -95,8 +103,9 @@ public abstract class ActionBarActivity extends Activity {
     }
 
     private int containerViewId;
-    private ActionBar actionBar;
-    private ImageButton backButton;
+    protected ActionBar actionBar;
+    protected ImageButton backButton;
+    protected TextView backTextBtn;
 
     /** 提示框*/
     private PopupWindow pw;

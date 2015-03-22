@@ -10,7 +10,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
@@ -19,8 +18,8 @@
     <application
         android:name=".support.KanJianApplication"
         android:allowBackup="true"
-        android:theme="@style/AppBaseTheme"
-        android:icon="@drawable/ic_launcher" >
+        android:icon="@drawable/ic_launcher"
+        android:theme="@style/AppBaseTheme" >
 
         <!-- 启动加载Activity -->
         <activity
@@ -45,8 +44,7 @@
         </activity>
 
         <!-- 注册Activity -->
-        <activity
-            android:name=".ui.register.RegisterActivity">
+        <activity android:name=".ui.register.RegisterActivity" >
             <intent-filter>
                 <action android:name="kanjian.intent.action.REGISTER" />
 
@@ -55,8 +53,7 @@
         </activity>
 
         <!-- 登录Activity -->
-        <activity
-            android:name=".ui.login.LoginActivity">
+        <activity android:name=".ui.login.LoginActivity" >
             <intent-filter>
                 <action android:name="kanjian.intent.action.LOGIN" />
 
@@ -65,8 +62,7 @@
         </activity>
 
         <!-- 找回密码activity -->
-        <activity
-            android:name=".ui.password.ForgotPasswordActivity">
+        <activity android:name=".ui.password.ForgotPasswordActivity" >
             <intent-filter>
                 <action android:name="kanjian.intent.action.FORGET_PASSWORD" />
 
@@ -83,11 +79,19 @@
             </intent-filter>
         </activity>
 
-        <!-- 测试Activity-->
-        <activity
-            android:name=".test.TestActivity" >
+        <!-- 测试Activity -->
+        <activity android:name=".test.TestActivity" >
             <intent-filter>
                 <action android:name="test_activity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.ClauseActivity"
+            android:label="@string/title_activity_clause" >
+            <intent-filter>
+                <action android:name="kanjian.intent.action.CLAUSE" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

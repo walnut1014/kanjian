@@ -39,6 +39,11 @@
 
     <TextView
         android:id="@+id/launch_clause"
+        android:textColor="@color/text_white"
+        android:text="@string/text_launch_clause"
+        android:textColorLink="#9974f8"
+        android:shadowColor="@android:color/transparent"
+        android:textColorHighlight="@android:color/transparent"
         android:gravity="center_horizontal"
         android:layout_marginBottom="65dp"
         android:layout_width="match_parent"

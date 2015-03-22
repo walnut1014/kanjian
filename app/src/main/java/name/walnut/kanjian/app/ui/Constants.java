@@ -11,6 +11,9 @@ public class Constants {
 
         final static String FORGET_PASSWORD_ACTION = "kanjian.intent.action.FORGET_PASSWORD";
 
+        final static String CLAUSE_ACTION = "kanjian.intent.action.CLAUSE"; //服务条款
+
+        final static String PRIVACY_ACTION = "kanjian.intent.action.PRIVACY"; //隐私策略
     }
 
     public static interface Materials {
