@@ -149,6 +149,7 @@ public class VerifyCodeFragment extends ActionBarFragment {
         // 重新获取验证码
 //        forgetPasswordResendResource.addParam("mobilephone", mobilephone).send();
         SMSController.getChinaVerificationCode(mobilephone.toString());
+        startCountdown();
     }
 
 }
