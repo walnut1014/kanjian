@@ -7,6 +7,7 @@ import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
+import name.walnut.kanjian.app.support.SMSController;
 import name.walnut.kanjian.app.ui.register.action.ResendVerifyCodeAction;
 import name.walnut.kanjian.app.ui.register.action.VerifyCodeAction;
 import name.walnut.kanjian.app.views.ClearEditText;
@@ -51,6 +52,8 @@ public class VerifyCodeFragment extends ActionBarFragment {
 
     @ResourceWeave(actionClass = VerifyCodeAction.class)
     public Resource registerVerifyResource;
+
+    @Deprecated
     @ResourceWeave(actionClass = ResendVerifyCodeAction.class)
     public Resource forgetPasswordResendResource;
 
@@ -67,6 +70,7 @@ public class VerifyCodeFragment extends ActionBarFragment {
 
         verifycodeTipTv.setText(Html.fromHtml(getString(R.string.verifycode_tip)));
         countdownTv.setClickable(false);
+        mobilephoneTv.setText("+86  " + mobilephone);
         return view;
     }
 
@@ -143,7 +147,9 @@ public class VerifyCodeFragment extends ActionBarFragment {
     @OnClick(R.id.verifycode_countdown)
     void resendVerifyCode() {
         // 重新获取验证码
-        forgetPasswordResendResource.addParam("mobilephone", mobilephone).send();
+//        forgetPasswordResendResource.addParam("mobilephone", mobilephone).send();
+        SMSController.getChinaVerificationCode(mobilephone.toString());
+        startCountdown();
     }
 
 }
