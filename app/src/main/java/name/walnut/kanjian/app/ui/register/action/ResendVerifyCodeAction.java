@@ -8,6 +8,7 @@ import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.ui.register.VerifyCodeFragment;
 
 /**
+ * @deprecated
  * 注册 重新发送验证码
  */
 public class ResendVerifyCodeAction extends BaseResourceAction{

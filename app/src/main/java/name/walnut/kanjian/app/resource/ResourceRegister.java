@@ -9,6 +9,7 @@ public enum ResourceRegister {
     registerVerifyResource("passport/register/validateCode", RequestMethod.POST), // 注册提交验证码
 
     forgetPasswordSendResource("passport/forgotPassword/sendCode", RequestMethod.POST), //找回密码发送手机号验证码
+    @Deprecated
     forgetPasswordResendResource("passport/forgotPassword/sendCode", RequestMethod.POST), //找回密码重新发送手机号验证码
 
     forgetPasswordVerifyResource("passport/forgotPassword", RequestMethod.POST), //找回密码提交验证码

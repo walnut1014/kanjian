@@ -15,6 +15,7 @@ import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
+import name.walnut.kanjian.app.support.SMSController;
 import name.walnut.kanjian.app.ui.password.action.ForgetPasswordSendAction;
 import name.walnut.kanjian.app.ui.util.RegexUtils;
 import name.walnut.kanjian.app.views.ClearEditText;
@@ -56,6 +57,7 @@ public class ForgotPasswordFragment extends ActionBarFragment{
 
     @OnClick(R.id.forget_password_submit)
     void forgetPasswordSubmit() {
+        // 提交手机号
         mobilephone = mobilephoneTv.getEditText().getText().toString();
 
         if (TextUtils.isEmpty(mobilephone)) {
@@ -65,8 +67,12 @@ public class ForgotPasswordFragment extends ActionBarFragment{
             Toast.makeText(getActivity(), R.string.toast_register_error_format_phone, Toast.LENGTH_SHORT).show();
 
         } else {
-            forgetPasswordSendResource.addParam("mobilephone", mobilephone)
-                    .send();
+            // 发送验证码，跳转页面
+            switchFragment(new VerifyCodeFragment(mobilephone));
+            SMSController.getChinaVerificationCode(mobilephone);
+
+//            forgetPasswordSendResource.addParam("mobilephone", mobilephone)
+//                    .send();
 
         }
     }
