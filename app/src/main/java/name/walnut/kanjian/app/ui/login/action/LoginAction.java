@@ -23,6 +23,10 @@ public class LoginAction extends BaseResourceAction {
 
     @Override
     public void onFailed(String errorMsg) {
+
+        //TODO
+        //{"message":"您的手机号13622309539还未注册","data":-1,"success":false}
+        //{"message":"登陆密码错误","data":-2,"success":false}
         Logger.d(errorMsg);
         // 账号未注册
 
