@@ -138,9 +138,13 @@ public class VerifyCodeFragment extends ActionBarFragment {
             Toast.makeText(getActivity(), R.string.toast_verify_empty, Toast.LENGTH_SHORT).show();
 
         } else {
+
+            //TODO 需要修改传参
             // 提交验证码验证
             registerVerifyResource.addParam("code", verifyCode)
-                    .send();
+                                     .addParam("phone", "13622309539")
+                                     .addParam("zone", "86")
+                                     .send();
 
         }
     }

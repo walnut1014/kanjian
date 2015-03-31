@@ -30,8 +30,8 @@ public class TestActivity extends Activity {
 
         final TextView textView = (TextView)this.findViewById(R.id.test_result);
 
-
-        Resource  resource = ResourceFactory.INSTANCE.getResource(ResourceRegister.registerSendResource);
+/*
+        Resource  resource = ResourceFactory.INSTANCE.getResource(ResourceRegister);
 
         resource.setResourceAction(new TestResourceAction() {
             @Override
@@ -50,6 +50,6 @@ public class TestActivity extends Activity {
             }
         });
         resource.addParam("nickName", "123456")
-                .addParam("password", "sdfsdf").send();
+                .addParam("password", "sdfsdf").send();*/
     }
 }

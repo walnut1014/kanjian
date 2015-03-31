@@ -36,11 +36,15 @@ public class RegisterFragment extends ActionBarFragment implements Constants.Act
     TextView loginTv;
 
     @ResourceWeave(actionClass=RegisterSendAction.class)
-    public Resource registerSendResource;  //注册发送手机验证码
+    public Resource phoneExistResource;  //注册发送手机验证码
 
-    public String mobilephone;
+    private String mobilephone;
 
-	@Override
+    public String getMobilephone() {
+        return mobilephone;
+    }
+
+    @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
@@ -71,8 +75,7 @@ public class RegisterFragment extends ActionBarFragment implements Constants.Act
             Toast.makeText(getActivity(), R.string.toast_register_error_format_phone, Toast.LENGTH_SHORT).show();
 
         } else {
-            // TODO 验证是否注册过
-            registerSendResource.addParam("mobilephone", mobilephone)
+            phoneExistResource.addParam("mobilephone", mobilephone)
                     .send();
 
         }

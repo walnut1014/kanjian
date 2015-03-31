@@ -22,8 +22,8 @@ public class RegisterSendAction extends BaseResourceAction{
     public void onSuccess(String data) {
         // 未注册过，发送短信验证码，跳转
         RegisterFragment fragment = (RegisterFragment) getFragment();
-        fragment.switchFragment(new VerifyCodeFragment(fragment.mobilephone));
-        SMSController.getChinaVerificationCode(fragment.mobilephone);
+        fragment.switchFragment(new VerifyCodeFragment(fragment.getMobilephone()));
+        SMSController.getChinaVerificationCode(fragment.getMobilephone());
     }
 
     @Override
@@ -31,7 +31,7 @@ public class RegisterSendAction extends BaseResourceAction{
         RegisterFragment fragment = (RegisterFragment) getFragment();
         Toast.makeText(
                 getActivity(),
-                getActivity().getString(R.string.toast_registered, fragment.mobilephone),
+                getActivity().getString(R.string.toast_registered, fragment.getMobilephone()),
                 Toast.LENGTH_SHORT).show();
     }
 
