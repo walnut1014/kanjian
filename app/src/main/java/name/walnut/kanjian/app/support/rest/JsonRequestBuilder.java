@@ -38,8 +38,8 @@ public class JsonRequestBuilder {
 		StringBuilder result = new StringBuilder("?");
 		for(String s : param.keySet()){
 			result.append(s);
-			result.append("&");
-			result.append(param.get(s).toString());
+			result.append("=");
+			result.append(param.get(s).toString()+"&");
 		}
 		return result.toString();
 	}
@@ -54,6 +54,6 @@ public class JsonRequestBuilder {
 	}
 	
 	
-	//private final static String CONTEXT_PATH = "http://120.25.201.172:8080";
-      private final static String CONTEXT_PATH = "http://192.168.1.104:8080";
+	private final static String CONTEXT_PATH = "http://120.25.201.172:8080";
+      //private final static String CONTEXT_PATH = "http://192.168.1.104:8080";
 }

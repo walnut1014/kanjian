@@ -36,7 +36,7 @@ public class RegisterFragment extends ActionBarFragment implements Constants.Act
     TextView loginTv;
 
     @ResourceWeave(actionClass=RegisterSendAction.class)
-    public Resource phoneExistResource;  //注册发送手机验证码
+    public Resource registerSendResource;  //注册发送手机验证码
 
     private String mobilephone;
 
@@ -75,7 +75,7 @@ public class RegisterFragment extends ActionBarFragment implements Constants.Act
             Toast.makeText(getActivity(), R.string.toast_register_error_format_phone, Toast.LENGTH_SHORT).show();
 
         } else {
-            phoneExistResource.addParam("mobilephone", mobilephone)
+            registerSendResource.addParam("mobilephone", mobilephone)
                     .send();
 
         }
