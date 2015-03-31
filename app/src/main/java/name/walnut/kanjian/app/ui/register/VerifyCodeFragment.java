@@ -114,15 +114,16 @@ public class VerifyCodeFragment extends ActionBarFragment {
     @Override
     public void onStop() {
         super.onStop();
-        if (countDownTimer != null) {
-            countDownTimer.cancel();
-        }
+
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+        }
     }
 
     @Override
