@@ -43,6 +43,14 @@ public class FillNicknameFragment extends ActionBarFragment {
     @ResourceWeave(actionClass = RegisterAction.class)
     public Resource registerResource;
 
+    private String token;
+    private String password;
+
+    public FillNicknameFragment(String token, String password) {
+        this.token = token;
+        this.password = password;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -79,8 +87,11 @@ public class FillNicknameFragment extends ActionBarFragment {
             Toast.makeText(getActivity(), R.string.toast_empty_nickname, Toast.LENGTH_SHORT).show();
 
         } else {
-            // TODO
-            registerResource.send();
+            // TODO 上传图片
+            registerResource.addParam("token", token)
+                    .addParam("nickName", nickname)
+                    .addParam("password", password)
+                    .send();
 
         }
     }

@@ -139,10 +139,9 @@ public class VerifyCodeFragment extends ActionBarFragment {
 
         } else {
 
-            //TODO 需要修改传参
             // 提交验证码验证
             registerVerifyResource.addParam("code", verifyCode)
-                                     .addParam("phone", "13622309539")
+                                     .addParam("phone", mobilephone)
                                      .addParam("zone", "86")
                                      .send();
 

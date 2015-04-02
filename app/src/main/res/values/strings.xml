@@ -53,5 +53,6 @@
     <string name="action_settings">Settings</string>
     <string name="text_to_login">我要登录</string>
     <string name="action_submit">完成</string>
+    <string name="toast_register_succeed">注册成功</string>
 
 </resources>
