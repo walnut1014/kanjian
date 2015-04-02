@@ -49,7 +49,7 @@ public class VerifyCodeFragment extends ActionBarFragment {
     @InjectView(R.id.verifycode_mobilephone)
     TextView mobilephoneTv;
 
-    CountDownTimer countDownTimer;  // 倒计时
+    private CountDownTimer countDownTimer;  // 倒计时
 
     @ResourceWeave(actionClass = ForgetVerifyCodeAction.class)
     public Resource forgetPasswordVerifyResource;

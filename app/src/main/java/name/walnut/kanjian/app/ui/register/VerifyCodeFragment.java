@@ -48,7 +48,7 @@ public class VerifyCodeFragment extends ActionBarFragment {
     @InjectView(R.id.verifycode_mobilephone)
     TextView mobilephoneTv;
 
-    CountDownTimer countDownTimer;  // 倒计时
+    private CountDownTimer countDownTimer;  // 倒计时
 
     @ResourceWeave(actionClass = VerifyCodeAction.class)
     public Resource registerVerifyResource;

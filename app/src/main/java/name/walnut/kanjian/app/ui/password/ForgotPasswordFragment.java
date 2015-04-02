@@ -67,6 +67,7 @@ public class ForgotPasswordFragment extends ActionBarFragment{
             Toast.makeText(getActivity(), R.string.toast_register_error_format_phone, Toast.LENGTH_SHORT).show();
 
         } else {
+            // TODO 验证手机号码是否注册
             // 发送验证码，跳转页面
             switchFragment(new VerifyCodeFragment(mobilephone));
             SMSController.getChinaVerificationCode(mobilephone);
