@@ -14,7 +14,7 @@ import name.walnut.kanjian.app.ui.Constants;
  */
 public class RegisterAction extends BaseResourceAction {
     @Override
-    public void onSuccess(String data) {
+    public void onSuccess(Response response) {
         // 注册成功，弹出提示，跳转到主页面
         Toast.makeText(getActivity(), R.string.toast_register_succeed, Toast.LENGTH_LONG).show();
         getActivity().finish();
@@ -24,8 +24,8 @@ public class RegisterAction extends BaseResourceAction {
     }
 
     @Override
-    public void onFailed(String errorMsg) {
-        Toast.makeText(getActivity(), errorMsg, Toast.LENGTH_LONG).show();
+    public void onFailed(Response response) {
+        Toast.makeText(getActivity(), response.getMessage(), Toast.LENGTH_LONG).show();
     }
 
     @Override

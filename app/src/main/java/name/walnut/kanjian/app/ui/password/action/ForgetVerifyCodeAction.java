@@ -14,13 +14,13 @@ import name.walnut.kanjian.app.ui.password.VerifyCodeFragment;
  */
 public class ForgetVerifyCodeAction extends BaseResourceAction {
     @Override
-    public void onSuccess(String data) {
+    public void onSuccess(Response response) {
         VerifyCodeFragment fragment = (VerifyCodeFragment) getFragment();
         fragment.switchFragment(new FillPasswordFragment());
     }
 
     @Override
-    public void onFailed(String errorMsg) {
+    public void onFailed(Response response) {
         Toast.makeText(getActivity(), R.string.toast_verify_error, Toast.LENGTH_SHORT).show();
     }
 

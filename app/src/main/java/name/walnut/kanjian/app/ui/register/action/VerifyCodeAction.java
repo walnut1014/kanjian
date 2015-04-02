@@ -14,15 +14,15 @@ import name.walnut.kanjian.app.ui.register.VerifyCodeFragment;
  */
 public class VerifyCodeAction extends BaseResourceAction {
     @Override
-    public void onSuccess(String data) {
+    public void onSuccess(Response response) {
         //TODO 短信验证成功回获得一个token。
-        System.out.println(data);
+        System.out.println(response.getData());
         VerifyCodeFragment fragment = (VerifyCodeFragment) getFragment();
-        fragment.switchFragment(new FillPasswordFragment(data));
+        fragment.switchFragment(new FillPasswordFragment(response.getData()));
     }
 
     @Override
-    public void onFailed(String errorMsg) {
+    public void onFailed(Response response) {
         Toast.makeText(getActivity(), R.string.toast_verify_error, Toast.LENGTH_SHORT).show();
     }
 

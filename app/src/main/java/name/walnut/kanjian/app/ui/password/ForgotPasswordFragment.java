@@ -33,7 +33,7 @@ public class ForgotPasswordFragment extends ActionBarFragment{
     @ResourceWeave(actionClass=ForgetPasswordSendAction.class)
     public Resource forgetPasswordSendResource;  //注册发送手机验证码
 
-    public String mobilephone;
+    private String mobilephone;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,8 +77,11 @@ public class ForgotPasswordFragment extends ActionBarFragment{
         }
     }
 
-    boolean isMobilePhoneAvailable(String mobilephone) {
+    private boolean isMobilePhoneAvailable(String mobilephone) {
         return RegexUtils.isMobilePhone(mobilephone);
     }
 
+    public String getMobilephone() {
+        return mobilephone;
+    }
 }

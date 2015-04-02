@@ -13,14 +13,14 @@ import name.walnut.kanjian.app.ui.register.VerifyCodeFragment;
  */
 public class ResendVerifyCodeAction extends BaseResourceAction{
     @Override
-    public void onSuccess(String data) {
+    public void onSuccess(Response response) {
         VerifyCodeFragment fragment = (VerifyCodeFragment) getFragment();
         fragment.startCountdown();
     }
 
     @Override
-    public void onFailed(String errorMsg) {
-        Toast.makeText(getActivity(), errorMsg, Toast.LENGTH_SHORT).show();
+    public void onFailed(Response response) {
+        Toast.makeText(getActivity(), response.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

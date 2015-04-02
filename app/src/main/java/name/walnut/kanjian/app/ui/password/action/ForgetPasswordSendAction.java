@@ -12,17 +12,17 @@ import name.walnut.kanjian.app.utils.Logger;
  */
 public class ForgetPasswordSendAction extends BaseResourceAction {
     @Override
-    public void onSuccess(String data) {
+    public void onSuccess(Response response) {
         // TODO bug, 跳转到验证码界面返回后，无法再次跳转，确认不执行此处
         Logger.e("ForgetPasswordSendAction");
-        Logger.d(data);
+        Logger.d(response.getData());
         ForgotPasswordFragment fragment = (ForgotPasswordFragment) getFragment();
 //        fragment.switchFragment(new FillPasswordFragment());
-        fragment.switchFragment(new VerifyCodeFragment(fragment.mobilephone));
+        fragment.switchFragment(new VerifyCodeFragment(fragment.getMobilephone()));
     }
 
     @Override
-    public void onFailed(String errorMsg) {
+    public void onFailed(Response response) {
         onSuccess(null);
     }
 

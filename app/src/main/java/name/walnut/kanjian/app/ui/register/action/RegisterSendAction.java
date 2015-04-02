@@ -16,7 +16,7 @@ import name.walnut.kanjian.app.ui.register.VerifyCodeFragment;
 public class RegisterSendAction extends BaseResourceAction{
 
     @Override
-    public void onSuccess(String data) {
+    public void onSuccess(Response response) {
         // 未注册过，发送短信验证码，跳转
         RegisterFragment fragment = (RegisterFragment) getFragment();
         fragment.switchFragment(new VerifyCodeFragment(fragment.getMobilephone()));
@@ -24,7 +24,7 @@ public class RegisterSendAction extends BaseResourceAction{
     }
 
     @Override
-    public void onFailed(String errorMsg) {
+    public void onFailed(Response response) {
         RegisterFragment fragment = (RegisterFragment) getFragment();
         Toast.makeText(
                 getActivity(),

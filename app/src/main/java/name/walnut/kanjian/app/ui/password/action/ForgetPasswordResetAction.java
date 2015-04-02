@@ -9,12 +9,12 @@ import name.walnut.kanjian.app.support.BaseResourceAction;
  */
 public class ForgetPasswordResetAction extends BaseResourceAction {
     @Override
-    public void onSuccess(String data) {
+    public void onSuccess(Response response) {
 
     }
 
     @Override
-    public void onFailed(String errorMsg) {
+    public void onFailed(Response response) {
 
     }
 
