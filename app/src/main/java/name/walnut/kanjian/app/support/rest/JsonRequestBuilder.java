@@ -13,11 +13,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 public class JsonRequestBuilder {
 	
 	
-	public static JsonObjectRequest newJsonRequest(int method, String uri, Map<String,?> param,
+	public static JsonObjectRequest newJsonRequest(int method, String url, Map<String,?> param,
 				Listener<JSONObject> listener, Response.ErrorListener errorListener) {
 
 
-		String url = getUrl(uri);
 		if(method == Request.Method.GET){
 			url = url + convertParamToUrlSearch(param);
 			return new JsonRequestWraper(method, url, null, listener, errorListener);
@@ -27,13 +26,7 @@ public class JsonRequestBuilder {
 		}
 		
 	}
-	
-	private static String getUrl(String uri) {
-		if(!uri.startsWith("/"))
-			uri = "/" + uri;
-		return CONTEXT_PATH + uri;
-	}
-	
+
 	private static String convertParamToUrlSearch(Map<String, ?> param) {
 		StringBuilder result = new StringBuilder("?");
 		for(String s : param.keySet()){
@@ -52,8 +45,5 @@ public class JsonRequestBuilder {
 			System.out.println(error);
 		}
 	}
-	
-	
-	private final static String CONTEXT_PATH = "http://120.25.201.172:8080";
-      //private final static String CONTEXT_PATH = "http://192.168.1.104:8080";
+
 }
