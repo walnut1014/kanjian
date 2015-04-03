@@ -15,7 +15,6 @@ import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
-import name.walnut.kanjian.app.support.SMSController;
 import name.walnut.kanjian.app.ui.password.action.ForgetPasswordSendAction;
 import name.walnut.kanjian.app.ui.util.RegexUtils;
 import name.walnut.kanjian.app.views.ClearEditText;
@@ -68,12 +67,9 @@ public class ForgotPasswordFragment extends ActionBarFragment{
 
         } else {
             // TODO 验证手机号码是否注册
-            // 发送验证码，跳转页面
-            switchFragment(new VerifyCodeFragment(mobilephone));
-            SMSController.getChinaVerificationCode(mobilephone);
 
-//            forgetPasswordSendResource.addParam("mobilephone", mobilephone)
-//                    .send();
+            forgetPasswordSendResource.addParam("mobilephone", mobilephone)
+                    .send();
 
         }
     }

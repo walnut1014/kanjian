@@ -10,6 +10,12 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="IButton.white" >
+        <item name="android:background">@drawable/bg_button_white</item>
+        <item name="android:textColor">@color/text_purple</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
     <style name="IButton.popup" >
         <item name="android:background">@drawable/bg_popup_button</item>
         <item name="android:textColor">@color/text_black</item>
@@ -17,6 +23,10 @@
     </style>
 
     <style name="IAlertDialog" parent="android:Theme.Holo.Dialog">
+    </style>
+
+
+    <style name="LoginDialog" parent="android:Theme.Holo.Dialog.NoActionBar">
     </style>
 
 </resources>

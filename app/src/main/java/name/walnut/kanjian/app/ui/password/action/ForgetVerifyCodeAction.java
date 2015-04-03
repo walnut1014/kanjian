@@ -4,7 +4,6 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 
-import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.ui.password.FillPasswordFragment;
 import name.walnut.kanjian.app.ui.password.VerifyCodeFragment;
@@ -21,7 +20,7 @@ public class ForgetVerifyCodeAction extends BaseResourceAction {
 
     @Override
     public void onFailed(Response response) {
-        Toast.makeText(getActivity(), R.string.toast_verify_error, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), response.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

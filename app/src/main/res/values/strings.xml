@@ -54,5 +54,7 @@
     <string name="text_to_login">我要登录</string>
     <string name="action_submit">完成</string>
     <string name="toast_register_succeed">注册成功</string>
+    <string name="dialog_login_alert_cancel">取消</string>
+    <string name="dialog_login_alert_continue">马上注册</string>
 
 </resources>

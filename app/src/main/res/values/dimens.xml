@@ -30,5 +30,6 @@
     <dimen name="no_result_padding_length">50.0dip</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="dialog_login_alert_padding">8dp</dimen>
 
 </resources>

@@ -5,12 +5,9 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 
-import org.json.JSONObject;
-
-import name.walnut.kanjian.app.R;
-import name.walnut.kanjian.app.resource.impl.DefaultResourceAction;
 import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.ui.Constants;
+import name.walnut.kanjian.app.ui.login.LoginAlertDialogFragment;
 import name.walnut.kanjian.app.utils.Logger;
 
 
@@ -26,14 +23,13 @@ public class LoginAction extends BaseResourceAction {
     @Override
     public void onFailed(Response response) {
 
-        //TODO
         //{"message":"您的手机号13622309539还未注册","data":-1,"success":false}
         //{"message":"登陆密码错误","data":-2,"success":false}
         Logger.d(response.getMessage());
         // 账号未注册
         switch (response.getData()) {
             case MESSAGE_CODE_UNREGISTER:
-                Toast.makeText(getActivity(), response.getMessage(), Toast.LENGTH_LONG).show();
+                LoginAlertDialogFragment.showDialog(getFragment().getFragmentManager(), response.getMessage());
                 break;
             case MESSAGE_CODE_UNMATCH:
                 // 密码不正确
