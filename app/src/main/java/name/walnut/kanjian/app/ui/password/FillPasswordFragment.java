@@ -25,6 +25,9 @@ import name.walnut.kanjian.app.views.ClearEditText;
  */
 public class FillPasswordFragment extends ActionBarFragment{
 
+    private String mobilephone;
+    private String verifyCode;
+
     @InjectView(R.id.fill_password_edit)
     ClearEditText passwordEdit;
     @InjectView(R.id.fill_password_submit)
@@ -32,6 +35,11 @@ public class FillPasswordFragment extends ActionBarFragment{
 
     @ResourceWeave(actionClass = ForgetPasswordResetAction.class)
     public Resource forgetPasswordResetResource;
+
+    public FillPasswordFragment(String mobilephone, String verifyCode) {
+        this.mobilephone = mobilephone;
+        this.verifyCode = verifyCode;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,8 +70,7 @@ public class FillPasswordFragment extends ActionBarFragment{
             Toast.makeText(getActivity(), R.string.toast_error_format_password, Toast.LENGTH_SHORT).show();
 
         } else {
-            // TODO
-            Toast.makeText(getActivity(), "完成", Toast.LENGTH_LONG).show();
+            // TODO 重设密码请求
             forgetPasswordResetResource.addParam("password", password)
                     .addParam("code", "code")
                     .send();

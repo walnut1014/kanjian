@@ -37,6 +37,7 @@ public class VerifyCodeFragment extends ActionBarFragment {
     static final int COUNTDOWN_INTERVAL = 1 * 1000;  // 1秒时间间隔
 
     private CharSequence mobilephone;
+    private String verifyCode;
 
     @InjectView(R.id.verifycode_countdown)
     TextView countdownTv;
@@ -132,6 +133,7 @@ public class VerifyCodeFragment extends ActionBarFragment {
             Toast.makeText(getActivity(), R.string.toast_verify_empty, Toast.LENGTH_SHORT).show();
 
         } else {
+            this.verifyCode = verifyCode;
             // 提交验证码验证
             forgetPasswordVerifyResource.addParam("code", verifyCode)
                     .addParam("mobilephone", mobilephone)
@@ -143,8 +145,15 @@ public class VerifyCodeFragment extends ActionBarFragment {
     void resendVerifyCode() {
         // 重新获取验证码
         SMSController.getChinaVerificationCode(mobilephone.toString());
-//        forgetPasswordResendResource.addParam("mobilephone", mobilephone).send();
         startCountdown();
     }
 
+
+    public CharSequence getMobilephone() {
+        return mobilephone;
+    }
+
+    public String getVerifyCode() {
+        return verifyCode;
+    }
 }
