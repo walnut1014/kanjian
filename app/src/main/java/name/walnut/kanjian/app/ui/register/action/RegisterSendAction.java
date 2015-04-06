@@ -37,6 +37,7 @@ public class RegisterSendAction extends BaseResourceAction{
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
-
+        //TODO 如果出现服务器端的异常会进入这个方法
+        System.out.println(volleyError);
     }
 }
