@@ -27,6 +27,12 @@ public class FillPasswordFragment extends ActionBarFragment{
     @InjectView(R.id.fill_password_submit)
     Button submitBtn;
 
+    private String token;
+
+    public FillPasswordFragment(String token) {
+        this.token = token;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fill_password, container, false);
@@ -57,7 +63,7 @@ public class FillPasswordFragment extends ActionBarFragment{
 
         } else {
             // 跳转到完善资料界面
-            switchFragment(new FillNicknameFragment());
+            switchFragment(new FillNicknameFragment(token, password));
 
         }
     }

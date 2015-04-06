@@ -3,9 +3,13 @@ package name.walnut.kanjian.app.ui.register;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -23,8 +27,17 @@ import name.walnut.kanjian.app.utils.Logger;
 
 public class SelectPicDialogFragment extends DialogFragment {
 
-    private static final int SELECT_PIC_KITKAT = 1;
-    private static final int SELECT_PIC = 2;
+    private static final int SELECT_PIC_KITKAT = 1; // Android4.4 从图库选择图片
+    private static final int SELECT_PIC = 2;    // Android 从图库选择图片
+    private static final int TAKE_PHOTO = 3;    // 拍照
+    private static final int CROP_PHOTO = 4;    // 截图
+
+    private static final String IMAGE_FILE_LOCATION = "file:///sdcard/temp.jpg";    // 临时图片路径
+    private static final int IMAGE_SIDE = 276;  // 头像边长
+
+    private Uri imageUri;   //选中的图片地址
+
+    private SelectPicListener listener;
 
     @InjectView(R.id.popup_cancel)
     Button cancleBtn;
@@ -32,6 +45,20 @@ public class SelectPicDialogFragment extends DialogFragment {
     Button localBtn;
     @InjectView(R.id.popup_take_photo)
     Button takePhotoBtn;
+
+    public static SelectPicDialogFragment showDialog(FragmentManager fragmentManager, SelectPicListener listener) {
+        // 显示选择框
+        SelectPicDialogFragment dialog = new SelectPicDialogFragment();
+        dialog.show(fragmentManager, "dialog");
+        dialog.listener = listener;
+        return dialog;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        imageUri = Uri.parse(IMAGE_FILE_LOCATION);
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -70,7 +97,7 @@ public class SelectPicDialogFragment extends DialogFragment {
     void localPhoto() {
         Intent intent=new Intent(Intent.ACTION_GET_CONTENT);//ACTION_OPEN_DOCUMENT
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("image/jpeg");
+        intent.setType("image/*");
         if(android.os.Build.VERSION.SDK_INT>=android.os.Build.VERSION_CODES.KITKAT){
             startActivityForResult(intent, SELECT_PIC_KITKAT);
         }else{
@@ -82,19 +109,30 @@ public class SelectPicDialogFragment extends DialogFragment {
     void takePhoto() {
         Intent intent = new Intent();
         // 指定开启系统相机的Action
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
         intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.addCategory(Intent.CATEGORY_DEFAULT);
-//        // 根据文件地址创建文件
-//        File file = new File(FILE_PATH);
-//        if (file.exists()) {
-//            file.delete();
-//        }
-//        // 把文件地址转换成Uri格式
-//        Uri uri = Uri.fromFile(file);
-//        // 设置系统相机拍摄照片完成后图片文件的存放地址
-//        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-        startActivityForResult(intent, 3);
+
+        startActivityForResult(intent, TAKE_PHOTO);
     }
+
+    // 调用系统裁减图片
+    private void cropImageUri(Uri data, Uri uri, int outputX, int outputY, int requestCode){
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(data, "image/*");
+        intent.putExtra("crop", "true");
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        intent.putExtra("outputX", outputX);
+        intent.putExtra("outputY", outputY);
+        intent.putExtra("scale", true);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+        intent.putExtra("return-data", false);
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+        intent.putExtra("noFaceDetection", true); // no face detection
+        startActivityForResult(intent, requestCode);
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -102,19 +140,32 @@ public class SelectPicDialogFragment extends DialogFragment {
         Logger.d(requestCode+"");
         Logger.d(data+"");
 
-        if (resultCode == Activity.RESULT_OK && data != null) {
-            if (requestCode == 3) {
-                BusContext.INSTANCE.getBus().post(data.getExtras());
-            } else {
-                BusContext.INSTANCE.getBus().post(data.getData());
-            }
-//            String imgPath = UriUtils.getPath(getActivity(), data.getData());
-//            Logger.d(imgPath);
-        }
-
         if (resultCode == Activity.RESULT_OK) {
-            dismissDialog();
-
+            switch (requestCode) {
+                case TAKE_PHOTO:
+                    cropImageUri(imageUri, imageUri, IMAGE_SIDE, IMAGE_SIDE, CROP_PHOTO);
+                    break;
+                case SELECT_PIC:
+                case SELECT_PIC_KITKAT:
+                    cropImageUri(data.getData(),imageUri, IMAGE_SIDE, IMAGE_SIDE, CROP_PHOTO);
+                    break;
+                case CROP_PHOTO:
+                    selectPhoto(imageUri);
+                    dismissDialog();
+                    break;
+            }
         }
+    }
+
+    public void selectPhoto(Uri uri) {
+        Logger.e(uri.toString());
+        if (listener != null) {
+            listener.onSelect(uri);
+        }
+    }
+
+
+    public interface SelectPicListener {
+        public void onSelect(Uri uri) ;
     }
 }

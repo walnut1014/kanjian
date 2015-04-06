@@ -5,21 +5,18 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 
 import name.walnut.kanjian.app.R;
-import name.walnut.kanjian.app.support.ActionBarActivity;
-import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.support.SMSController;
 import name.walnut.kanjian.app.ui.register.RegisterFragment;
 import name.walnut.kanjian.app.ui.register.VerifyCodeFragment;
 
 /**
- * TODO 校验是否注册过
- * 注册 输入手机号码获取验证码
+ * 注册 校验是否注册过
  */
 public class RegisterSendAction extends BaseResourceAction{
 
     @Override
-    public void onSuccess(String data) {
+    public void onSuccess(Response response) {
         // 未注册过，发送短信验证码，跳转
         RegisterFragment fragment = (RegisterFragment) getFragment();
         fragment.switchFragment(new VerifyCodeFragment(fragment.getMobilephone()));
@@ -27,7 +24,7 @@ public class RegisterSendAction extends BaseResourceAction{
     }
 
     @Override
-    public void onFailed(String errorMsg) {
+    public void onFailed(Response response) {
         RegisterFragment fragment = (RegisterFragment) getFragment();
         Toast.makeText(
                 getActivity(),

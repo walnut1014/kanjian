@@ -15,7 +15,6 @@ import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
-import name.walnut.kanjian.app.support.SMSController;
 import name.walnut.kanjian.app.ui.password.action.ForgetPasswordSendAction;
 import name.walnut.kanjian.app.ui.util.RegexUtils;
 import name.walnut.kanjian.app.views.ClearEditText;
@@ -33,7 +32,7 @@ public class ForgotPasswordFragment extends ActionBarFragment{
     @ResourceWeave(actionClass=ForgetPasswordSendAction.class)
     public Resource forgetPasswordSendResource;  //注册发送手机验证码
 
-    public String mobilephone;
+    private String mobilephone;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,18 +66,19 @@ public class ForgotPasswordFragment extends ActionBarFragment{
             Toast.makeText(getActivity(), R.string.toast_register_error_format_phone, Toast.LENGTH_SHORT).show();
 
         } else {
-            // 发送验证码，跳转页面
-            switchFragment(new VerifyCodeFragment(mobilephone));
-            SMSController.getChinaVerificationCode(mobilephone);
+            // TODO 验证手机号码是否注册
 
-//            forgetPasswordSendResource.addParam("mobilephone", mobilephone)
-//                    .send();
+            forgetPasswordSendResource.addParam("mobilephone", mobilephone)
+                    .send();
 
         }
     }
 
-    boolean isMobilePhoneAvailable(String mobilephone) {
+    private boolean isMobilePhoneAvailable(String mobilephone) {
         return RegexUtils.isMobilePhone(mobilephone);
     }
 
+    public String getMobilephone() {
+        return mobilephone;
+    }
 }

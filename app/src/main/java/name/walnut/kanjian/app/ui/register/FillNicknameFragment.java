@@ -1,5 +1,8 @@
 package name.walnut.kanjian.app.ui.register;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -13,6 +16,8 @@ import android.widget.Toast;
 
 import com.squareup.otto.Subscribe;
 
+import java.io.File;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -24,6 +29,7 @@ import name.walnut.kanjian.app.support.BusContext;
 import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.register.action.RegisterAction;
 import name.walnut.kanjian.app.utils.Logger;
+import name.walnut.kanjian.app.utils.UriUtils;
 import name.walnut.kanjian.app.views.ClearEditText;
 
 /**
@@ -42,6 +48,16 @@ public class FillNicknameFragment extends ActionBarFragment {
 
     @ResourceWeave(actionClass = RegisterAction.class)
     public Resource registerResource;
+
+    private Uri avatarUri;
+
+    private String token;
+    private String password;
+
+    public FillNicknameFragment(String token, String password) {
+        this.token = token;
+        this.password = password;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,8 +95,14 @@ public class FillNicknameFragment extends ActionBarFragment {
             Toast.makeText(getActivity(), R.string.toast_empty_nickname, Toast.LENGTH_SHORT).show();
 
         } else {
-            // TODO
-            registerResource.send();
+            // TODO 上传图片
+            String photoPath = UriUtils.getPath(getActivity(), avatarUri);
+            File photo = new File(photoPath);
+            registerResource.addParam("token", token)
+                    .addParam("nickName", nickname)
+                    .addParam("password", password)
+                    .addParam("photo", photo)
+                    .send();
 
         }
     }
@@ -89,22 +111,15 @@ public class FillNicknameFragment extends ActionBarFragment {
     @OnClick(R.id.fill_nickname_avatar)
     void showSelectPopup() {
         // 显示选择框
-        SelectPicDialogFragment dialog = new SelectPicDialogFragment();
-        dialog.show(getFragmentManager(), "dialog");
-    }
-
-    @Subscribe
-    public void getImgPath(Uri uri) {
-        // 图库选择
-        Logger.d(uri+"");
-        avatarImg.setImageURI(uri);
-    }
-
-    @Subscribe
-    public void getImgPath(Bundle bundle) {
-        // 拍照获取
-        Logger.d(bundle+"");
-        avatarImg.setImageBitmap((android.graphics.Bitmap) bundle.get("data"));
+        SelectPicDialogFragment.showDialog(getFragmentManager(), new SelectPicDialogFragment.SelectPicListener() {
+            @Override
+            public void onSelect(Uri uri) {
+                avatarUri = uri;
+                String imgPath = UriUtils.getPath(getActivity(), uri);
+                Bitmap bitmap = BitmapFactory.decodeFile(imgPath);
+                avatarImg.setImageBitmap(bitmap);
+            }
+        });
     }
 
 }
