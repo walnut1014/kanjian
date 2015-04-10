@@ -96,13 +96,15 @@ public class FillNicknameFragment extends ActionBarFragment {
 
         } else {
             // TODO 上传图片
-            String photoPath = UriUtils.getPath(getActivity(), avatarUri);
-            File photo = new File(photoPath);
             registerResource.addParam("token", token)
                     .addParam("nickName", nickname)
-                    .addParam("password", password)
-                    .addParam("photo", photo)
-                    .send();
+                    .addParam("password", password);
+            if (avatarUri != null) {
+                String photoPath = UriUtils.getPath(getActivity(), avatarUri);
+                File photo = new File(photoPath);
+                registerResource.addParam("photo", photo);
+            }
+            registerResource.send();
 
         }
     }

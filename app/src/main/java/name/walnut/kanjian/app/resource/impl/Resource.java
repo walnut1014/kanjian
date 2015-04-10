@@ -6,9 +6,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
+import com.loopj.android.http.JsonStreamerEntity;
 import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
+import org.apache.http.entity.StringEntity;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -22,6 +24,7 @@ import name.walnut.kanjian.app.resource.ResourceAction;
 import name.walnut.kanjian.app.resource.ResourceRegister;
 import name.walnut.kanjian.app.support.rest.JsonRequestBuilder;
 import name.walnut.kanjian.app.support.rest.RequestQueueContext;
+import name.walnut.kanjian.app.utils.Logger;
 
 /**
  * 网络请求类
@@ -91,6 +94,8 @@ public final class Resource{
             }
             AsyncHttpClient client = new AsyncHttpClient();
             String _url = getUrl(url);
+            params.setUseJsonStreamer(true);
+            client.addHeader("Cookie", "JSESSIONID="+ RequestQueueContext.INSTANCE.getSessionId() + ";");
             client.post(_url, params, new BaseJsonHttpResponseHandler<JSONObject>() {
 
                 @Override
@@ -107,6 +112,7 @@ public final class Resource{
 
                 @Override
                 protected JSONObject parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                    Logger.d(rawJsonData);
                     return new JSONObject(rawJsonData);
                 }
             });
@@ -130,6 +136,6 @@ public final class Resource{
     private String url;
     private RequestMethod method;
 
-    //private final static String CONTEXT_PATH = "http://120.25.201.172:8080";
-    private final static String CONTEXT_PATH = "http://192.168.1.104:8080";
+    private final static String CONTEXT_PATH = "http://120.25.201.172:8080";
+//    private final static String CONTEXT_PATH = "http://192.168.1.104:8080";
 }
