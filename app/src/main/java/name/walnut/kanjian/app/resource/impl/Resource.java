@@ -9,6 +9,7 @@ import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
+import org.apache.http.client.CookieStore;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -91,6 +92,7 @@ public final class Resource{
             }
             AsyncHttpClient client = new AsyncHttpClient();
             String _url = getUrl(url);
+            client.addHeader("Cookie", "JSESSIONID="+ RequestQueueContext.INSTANCE.getSessionId() + ";");
             client.post(_url, params, new BaseJsonHttpResponseHandler<JSONObject>() {
 
                 @Override
