@@ -6,14 +6,12 @@ public enum ResourceRegister {
 
     registerResource("passport/register", RequestMethod.UPLOAD), //完善资料完成注册 Resource
     registerSendResource("passport/register/sendCode", RequestMethod.GET), //发送注册手机验证码
-    registerVerifyResource("passport/register/validateCode", RequestMethod.POST), // 注册提交验证码
 
     forgetPasswordSendResource("passport/forgotPassword/sendCode", RequestMethod.POST), //找回密码发送手机号验证码
-    @Deprecated
-    forgetPasswordResendResource("passport/forgotPassword/sendCode", RequestMethod.POST), //找回密码重新发送手机号验证码
 
-    forgetPasswordVerifyResource("passport/forgotPassword", RequestMethod.POST), //找回密码提交验证码
     forgetPasswordResetResource("passport/setPassword", RequestMethod.POST), //重设密码
+
+    smsValidateResource("passport/smsvalidate", RequestMethod.POST), //验证验证码
     ;
 
     ResourceRegister(String url, RequestMethod method) {

@@ -15,7 +15,7 @@ public class ForgetVerifyCodeAction extends BaseResourceAction {
     @Override
     public void onSuccess(Response response) {
         VerifyCodeFragment fragment = (VerifyCodeFragment) getFragment();
-        fragment.switchFragment(new FillPasswordFragment(fragment.getMobilephone().toString(), fragment.getVerifyCode()));
+        fragment.switchFragment(new FillPasswordFragment(response.getData()));
     }
 
     @Override

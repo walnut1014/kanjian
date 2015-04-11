@@ -34,6 +34,7 @@ public class ForgotPasswordFragment extends ActionBarFragment{
 
     private String mobilephone;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

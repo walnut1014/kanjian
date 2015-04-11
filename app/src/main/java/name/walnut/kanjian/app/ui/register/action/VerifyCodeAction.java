@@ -15,8 +15,7 @@ import name.walnut.kanjian.app.ui.register.VerifyCodeFragment;
 public class VerifyCodeAction extends BaseResourceAction {
     @Override
     public void onSuccess(Response response) {
-        //TODO 短信验证成功回获得一个token。
-        System.out.println(response.getData());
+
         VerifyCodeFragment fragment = (VerifyCodeFragment) getFragment();
         fragment.switchFragment(new FillPasswordFragment(response.getData()));
     }

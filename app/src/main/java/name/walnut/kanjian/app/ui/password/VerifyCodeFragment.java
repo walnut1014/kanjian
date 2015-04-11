@@ -53,10 +53,7 @@ public class VerifyCodeFragment extends ActionBarFragment {
     private CountDownTimer countDownTimer;  // 倒计时
 
     @ResourceWeave(actionClass = ForgetVerifyCodeAction.class)
-    public Resource forgetPasswordVerifyResource;
-    @Deprecated
-    @ResourceWeave(actionClass = ResendVerifyCodeAction.class)
-    public Resource forgetPasswordResendResource;
+    public Resource smsValidateResource;
 
     public VerifyCodeFragment(CharSequence mobilephone) {
         this.mobilephone = mobilephone;
@@ -135,8 +132,10 @@ public class VerifyCodeFragment extends ActionBarFragment {
         } else {
             this.verifyCode = verifyCode;
             // 提交验证码验证
-            forgetPasswordVerifyResource.addParam("code", verifyCode)
-                    .addParam("mobilephone", mobilephone)
+            // 提交验证码验证
+            smsValidateResource.addParam("code", verifyCode)
+                    .addParam("phone", mobilephone)
+                    .addParam("zone", "86")
                     .send();
         }
     }

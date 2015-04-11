@@ -43,8 +43,7 @@ public class UploadActivity extends ActionBarActivity
         switch1.setImageResource(R.drawable.default_img);
         switch2.setImageResource(R.drawable.default_img);
 
-        btnSelect = (Button) findViewById(R.id.upload_btnSelect);
-        btnSelect.setOnClickListener(this);
+       // btnSelect.setOnClickListener(this);
     }
 
     @Override

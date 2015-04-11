@@ -51,7 +51,7 @@ public class VerifyCodeFragment extends ActionBarFragment {
     private CountDownTimer countDownTimer;  // 倒计时
 
     @ResourceWeave(actionClass = VerifyCodeAction.class)
-    public Resource registerVerifyResource;
+    public Resource smsValidateResource;
 
     @Deprecated
     @ResourceWeave(actionClass = ResendVerifyCodeAction.class)
@@ -140,7 +140,7 @@ public class VerifyCodeFragment extends ActionBarFragment {
         } else {
 
             // 提交验证码验证
-            registerVerifyResource.addParam("code", verifyCode)
+            smsValidateResource.addParam("code", verifyCode)
                                      .addParam("phone", mobilephone)
                                      .addParam("zone", "86")
                                      .send();
