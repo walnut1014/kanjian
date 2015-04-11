@@ -94,7 +94,6 @@ public final class Resource{
             }
             AsyncHttpClient client = new AsyncHttpClient();
             String _url = getUrl(url);
-            params.setUseJsonStreamer(true);
 
             client.addHeader("Cookie", "JSESSIONID="+ RequestQueueContext.INSTANCE.getSessionId() + ";");
             client.post(_url, params, new BaseJsonHttpResponseHandler<JSONObject>() {
@@ -138,5 +137,5 @@ public final class Resource{
     private RequestMethod method;
 
     private final static String CONTEXT_PATH = "http://120.25.201.172:8080";
-//    private final static String CONTEXT_PATH = "http://192.168.1.104:8080";
+    //private final static String CONTEXT_PATH = "http://192.168.1.104:8080";
 }

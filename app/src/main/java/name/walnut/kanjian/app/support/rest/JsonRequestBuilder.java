@@ -46,7 +46,4 @@ public class JsonRequestBuilder {
 		}
 	}
 
-	//private final static String CONTEXT_PATH = "http://120.25.201.172:8080";
-     private final static String CONTEXT_PATH = "http://192.168.1.36:8080";
-
 }
