@@ -67,6 +67,7 @@ public class ForgotPasswordFragment extends ActionBarFragment{
             Toast.makeText(getActivity(), R.string.toast_register_error_format_phone, Toast.LENGTH_SHORT).show();
 
         } else {
+            showMessage(R.string.dialog_message_forgot_password);
             // TODO 验证手机号码是否注册
 
             forgetPasswordSendResource.addParam("mobilephone", mobilephone)

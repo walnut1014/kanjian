@@ -5,9 +5,11 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 
+import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.login.LoginAlertDialogFragment;
+import name.walnut.kanjian.app.ui.login.LoginFragment;
 import name.walnut.kanjian.app.utils.Logger;
 
 
@@ -15,6 +17,8 @@ public class LoginAction extends BaseResourceAction {
 
     @Override
     public void onSuccess(Response response) {
+        dismissMessage();
+
         getActivity().finish();
         Intent intent = new Intent(Constants.Action.MAIN_ACTION);
         getFragment().startActivity(intent);
@@ -22,6 +26,7 @@ public class LoginAction extends BaseResourceAction {
 
     @Override
     public void onFailed(Response response) {
+        dismissMessage();
 
         //{"message":"您的手机号13622309539还未注册","data":-1,"success":false}
         //{"message":"登陆密码错误","data":-2,"success":false}
@@ -43,9 +48,14 @@ public class LoginAction extends BaseResourceAction {
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
-
+        dismissMessage();
+        Toast.makeText(getActivity(), R.string.toast_error_network, Toast.LENGTH_LONG).show();
     }
 
+    private void dismissMessage() {
+        LoginFragment fragment = (LoginFragment) getFragment();
+        fragment.dismissMessage();
+    }
 
     public static final String MESSAGE_CODE_UNREGISTER = "-1";
     public static final String MESSAGE_CODE_UNMATCH = "-2";

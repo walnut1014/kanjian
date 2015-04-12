@@ -2,21 +2,33 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="83dp"
+    android:paddingRight="83dp"
     android:background="#b0000000"
     android:alpha="0.7">
 
-    <FrameLayout
-        android:layout_width="157dp"
-        android:layout_height="65dp"
-        android:layout_gravity="center"
-        android:background="@drawable/downbutton_corne" >
-        
-       <TextView
-        android:id="@+id/popup_text"
-        android:layout_width="wrap_content"
+    <LinearLayout android:id="@+id/body"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-         />
-    </FrameLayout>
+        android:background="@drawable/downbutton_corne"
+        android:baselineAligned="false"
+        android:padding="16dp">
+
+        <ProgressBar android:id="@android:id/progress"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:max="10000"
+            android:layout_marginRight="16dp" />
+
+        <TextView android:id="@+id/message"
+            android:textColor="@color/text_white"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
 
 </FrameLayout>

@@ -56,5 +56,12 @@
     <string name="toast_register_succeed">注册成功</string>
     <string name="dialog_login_alert_cancel">取消</string>
     <string name="dialog_login_alert_continue">马上注册</string>
+    <string name="toast_error_network">网络异常</string>
+    <string name="dialog_message_login">正在登录...</string>
+    <string name="dialog_message_forgot_password">正在发送验证码</string>
+    <string name="dialog_message_verifycode">正在校验验证码</string>
+    <string name="dialog_message_reset_password">正在重设密码</string>
+    <string name="dialog_message_fill_nickname">正在完善个人资料</string>
+    <string name="dialog_message_register">正在注册</string>
 
 </resources>

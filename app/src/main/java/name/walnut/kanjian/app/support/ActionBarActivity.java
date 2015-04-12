@@ -1,6 +1,5 @@
 package name.walnut.kanjian.app.support;
 
-import name.walnut.kanjian.app.R;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,10 +9,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
+import name.walnut.kanjian.app.R;
+
 
 public abstract class ActionBarActivity extends Activity {
 
@@ -88,18 +89,21 @@ public abstract class ActionBarActivity extends Activity {
         this.currentFragment = currentFragment;
     }
 
-    public void showMessage(String text) {
+    public void showMessage(String message) {
         LayoutInflater inflater = getLayoutInflater();
         final View vPopupWindow=inflater.inflate(R.layout.popup_message, null, false);
         pw= new PopupWindow(vPopupWindow, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT,true);
 
-        ((TextView) vPopupWindow.findViewById(R.id.popup_text)).setText(text);
+        ((TextView) vPopupWindow.findViewById(R.id.message)).setText(message);
         pw.showAtLocation(findViewById(containerViewId), Gravity.CENTER, 0, 0);
 
     }
 
-    public void doneMessage() {
-        pw.dismiss();
+    public void dismissMessage() {
+        if (pw != null && pw.isShowing()) {
+            pw.dismiss();
+        }
+        pw = null;
     }
 
     private int containerViewId;
@@ -109,7 +113,6 @@ public abstract class ActionBarActivity extends Activity {
 
     /** 提示框*/
     private PopupWindow pw;
-
 
     private ActionBarFragment currentFragment;
 }

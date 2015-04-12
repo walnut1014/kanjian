@@ -7,7 +7,6 @@ import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
-import name.walnut.kanjian.app.support.SMSController;
 import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.register.action.RegisterSendAction;
 import name.walnut.kanjian.app.ui.util.RegexUtils;
@@ -75,6 +74,8 @@ public class RegisterFragment extends ActionBarFragment implements Constants.Act
             Toast.makeText(getActivity(), R.string.toast_register_error_format_phone, Toast.LENGTH_SHORT).show();
 
         } else {
+            showMessage(R.string.dialog_message_register);
+
             registerSendResource.addParam("mobilephone", mobilephone)
                     .send();
 

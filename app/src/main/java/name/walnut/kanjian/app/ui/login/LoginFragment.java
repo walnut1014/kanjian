@@ -79,6 +79,7 @@ public class LoginFragment extends ActionBarFragment implements Constants.Action
             Toast.makeText(getActivity(), R.string.toast_error_format_password, Toast.LENGTH_SHORT).show();
 
         } else {
+            showMessage(R.string.dialog_message_login);
             //发送登陆请求
             loginResource.addParam("mobilephone", phone)
                     .addParam("password", password)
