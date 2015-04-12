@@ -7,7 +7,9 @@ import com.android.volley.VolleyError;
 
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.BaseResourceAction;
+import name.walnut.kanjian.app.support.KanJianApplication;
 import name.walnut.kanjian.app.ui.Constants;
+import name.walnut.kanjian.app.ui.register.RegisterFragment;
 
 /**
  * 注册 输入个人信息完成注册
@@ -15,6 +17,8 @@ import name.walnut.kanjian.app.ui.Constants;
 public class RegisterAction extends BaseResourceAction {
     @Override
     public void onSuccess(Response response) {
+        dismissMessage();
+
         // 注册成功，弹出提示，跳转到主页面
         Toast.makeText(getActivity(), R.string.toast_register_succeed, Toast.LENGTH_LONG).show();
         getActivity().finish();
@@ -26,10 +30,17 @@ public class RegisterAction extends BaseResourceAction {
     @Override
     public void onFailed(Response response) {
         Toast.makeText(getActivity(), response.getMessage(), Toast.LENGTH_LONG).show();
+        dismissMessage();
     }
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
+        Toast.makeText(KanJianApplication.INTANCE, R.string.toast_error_network, Toast.LENGTH_LONG).show();
+        dismissMessage();
+    }
 
+    private void dismissMessage() {
+        RegisterFragment fragment = (RegisterFragment) getFragment();
+        fragment.dismissMessage();
     }
 }

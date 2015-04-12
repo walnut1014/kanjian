@@ -95,6 +95,7 @@ public class FillNicknameFragment extends ActionBarFragment {
             Toast.makeText(getActivity(), R.string.toast_empty_nickname, Toast.LENGTH_SHORT).show();
 
         } else {
+            showMessage(R.string.dialog_message_fill_nickname);
             // TODO 上传图片
             registerResource.addParam("token", token)
                     .addParam("nickName", nickname)

@@ -1,11 +1,7 @@
 package name.walnut.kanjian.app.support;
 
 import android.app.ActionBar;
-import android.app.Fragment;
 import android.widget.TextView;
-
-import java.util.Observable;
-import java.util.Observer;
 
 public abstract class ActionBarFragment extends BaseFragment{
 
@@ -32,8 +28,19 @@ public abstract class ActionBarFragment extends BaseFragment{
 	public ActionBarActivity getActionBarActivity() {
 		return (ActionBarActivity)this.getActivity();
 	}
-	
-	
+
+    public void showMessage(int resId) {
+        showMessage(getString(resId));
+    }
+
+    public void showMessage(String message) {
+        getActionBarActivity().showMessage(message);
+    }
+
+    public void dismissMessage() {
+        getActionBarActivity().dismissMessage();
+    }
+
 	public abstract String getTitle();
 
 }

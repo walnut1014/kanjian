@@ -69,7 +69,8 @@ public class FillPasswordFragment extends ActionBarFragment{
             Toast.makeText(getActivity(), R.string.toast_error_format_password, Toast.LENGTH_SHORT).show();
 
         } else {
-            // TODO 重设密码请求
+            showMessage(R.string.dialog_message_reset_password);
+
             forgetPasswordResetResource.addParam("password", password)
                     .addParam("token", token)
                     .send();

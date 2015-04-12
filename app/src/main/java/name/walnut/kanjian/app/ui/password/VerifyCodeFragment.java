@@ -21,8 +21,6 @@ import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.SMSController;
 import name.walnut.kanjian.app.ui.password.action.ForgetVerifyCodeAction;
-import name.walnut.kanjian.app.ui.password.action.ResendVerifyCodeAction;
-import name.walnut.kanjian.app.utils.Logger;
 import name.walnut.kanjian.app.views.ClearEditText;
 
 /**
@@ -131,7 +129,7 @@ public class VerifyCodeFragment extends ActionBarFragment {
 
         } else {
             this.verifyCode = verifyCode;
-            // 提交验证码验证
+            showMessage(R.string.dialog_message_verifycode);
             // 提交验证码验证
             smsValidateResource.addParam("code", verifyCode)
                     .addParam("phone", mobilephone)

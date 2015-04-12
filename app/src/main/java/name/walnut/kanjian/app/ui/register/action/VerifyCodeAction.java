@@ -5,7 +5,9 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.BaseResourceAction;
+import name.walnut.kanjian.app.support.KanJianApplication;
 import name.walnut.kanjian.app.ui.register.FillPasswordFragment;
 import name.walnut.kanjian.app.ui.register.VerifyCodeFragment;
 
@@ -15,6 +17,7 @@ import name.walnut.kanjian.app.ui.register.VerifyCodeFragment;
 public class VerifyCodeAction extends BaseResourceAction {
     @Override
     public void onSuccess(Response response) {
+        dismissMessage();
 
         VerifyCodeFragment fragment = (VerifyCodeFragment) getFragment();
         fragment.switchFragment(new FillPasswordFragment(response.getData()));
@@ -22,10 +25,18 @@ public class VerifyCodeAction extends BaseResourceAction {
 
     @Override
     public void onFailed(Response response) {
+        dismissMessage();
         Toast.makeText(getActivity(), R.string.toast_verify_error, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
+        dismissMessage();
+        Toast.makeText(KanJianApplication.INTANCE, R.string.toast_error_network, Toast.LENGTH_LONG).show();
+    }
+
+    private void dismissMessage() {
+        ActionBarFragment fragment = (ActionBarFragment) getFragment();
+        fragment.dismissMessage();
     }
 }
