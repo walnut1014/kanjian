@@ -53,10 +53,6 @@ public class VerifyCodeFragment extends ActionBarFragment {
     @ResourceWeave(actionClass = VerifyCodeAction.class)
     public Resource smsValidateResource;
 
-    @Deprecated
-    @ResourceWeave(actionClass = ResendVerifyCodeAction.class)
-    public Resource forgetPasswordResendResource;
-
     public VerifyCodeFragment(CharSequence mobilephone) {
         this.mobilephone = mobilephone;
     }
