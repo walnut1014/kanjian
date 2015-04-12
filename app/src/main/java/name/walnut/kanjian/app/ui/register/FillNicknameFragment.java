@@ -49,7 +49,7 @@ public class FillNicknameFragment extends ActionBarFragment {
     @ResourceWeave(actionClass = RegisterAction.class)
     public Resource registerResource;
 
-    private Uri avatarUri;
+    private Uri avatarUri; //选中图片路径
 
     private String token;
     private String password;

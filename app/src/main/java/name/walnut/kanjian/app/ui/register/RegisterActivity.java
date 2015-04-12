@@ -16,7 +16,8 @@ public class RegisterActivity extends ActionBarActivity {
 		this.setContentView(R.layout.activity_register);
 
         switchFragment(new RegisterFragment());
-		//switchFragment(new FillNicknameFragment("sdfsd", "sdsdf"));
 	}
+
+
 
 }

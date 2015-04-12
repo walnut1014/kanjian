@@ -42,6 +42,10 @@ public final class Resource{
         return this;
     }
 
+    public void clear() {
+        paramMap.clear();
+    }
+
     public void setResourceAction(ResourceAction resourceAction) {
         this.resourceAction = resourceAction;
         this.resourceAction.setResource(this);
@@ -49,10 +53,10 @@ public final class Resource{
 
     public void send(){
 
-        if(method != RequestMethod.UPLOAD)
-            sendJSON();
-        else
-            upload();
+        if(method != RequestMethod.UPLOAD) sendJSON();
+        else upload();
+
+        clear();
     }
 
     private void sendJSON() {
