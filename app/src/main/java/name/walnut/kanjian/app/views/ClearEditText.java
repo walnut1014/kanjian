@@ -139,4 +139,9 @@ public class ClearEditText extends FrameLayout {
     public EditText getEditText() {
         return mEditText;
     }
+
+    public void setEditText(String text) {
+        mEditText.setText(text);
+    }
+
 }

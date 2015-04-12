@@ -8,7 +8,6 @@ import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.support.KanJianApplication;
-import name.walnut.kanjian.app.support.SMSController;
 import name.walnut.kanjian.app.ui.register.RegisterFragment;
 import name.walnut.kanjian.app.ui.register.VerifyCodeFragment;
 
@@ -22,8 +21,7 @@ public class RegisterSendAction extends BaseResourceAction{
         dismissMessage();
         // 未注册过，发送短信验证码，跳转
         RegisterFragment fragment = (RegisterFragment) getFragment();
-        fragment.switchFragment(new VerifyCodeFragment(fragment.getMobilephone()));
-        SMSController.getChinaVerificationCode(fragment.getMobilephone());
+        fragment.switchFragment(VerifyCodeFragment.newInstance(fragment.getMobilephone()));
     }
 
     @Override

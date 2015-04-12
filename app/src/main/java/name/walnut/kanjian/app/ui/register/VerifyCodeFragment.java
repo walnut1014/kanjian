@@ -12,6 +12,7 @@ import name.walnut.kanjian.app.ui.register.action.VerifyCodeAction;
 import name.walnut.kanjian.app.views.ClearEditText;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Html;
@@ -52,8 +53,20 @@ public class VerifyCodeFragment extends ActionBarFragment {
     @ResourceWeave(actionClass = VerifyCodeAction.class)
     public Resource smsValidateResource;
 
-    public VerifyCodeFragment(CharSequence mobilephone) {
-        this.mobilephone = mobilephone;
+    public VerifyCodeFragment() {}
+
+    public static VerifyCodeFragment newInstance(CharSequence mobilephone) {
+        VerifyCodeFragment fragment = new VerifyCodeFragment();
+        Bundle bundle = new Bundle();
+        bundle.putCharSequence("mobilephone", mobilephone);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mobilephone = getArguments().getCharSequence("mobilephone");
     }
 
     @Override
@@ -72,6 +85,8 @@ public class VerifyCodeFragment extends ActionBarFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        SMSController.getChinaVerificationCode(mobilephone.toString());
 
         countDownTimer = new CountDownTimer(COUNTDOWN_MILL, COUNTDOWN_INTERVAL) {
             @Override
@@ -104,12 +119,6 @@ public class VerifyCodeFragment extends ActionBarFragment {
         countdownTv.setText(getString(R.string.verifycode_resend));
         countdownTv.setTextColor(getResources().getColor(R.color.text_purple));
         countdownTv.setClickable(true);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
     }
 
     @Override

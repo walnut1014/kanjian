@@ -6,10 +6,10 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.login.LoginAlertDialogFragment;
-import name.walnut.kanjian.app.ui.login.LoginFragment;
 import name.walnut.kanjian.app.utils.Logger;
 
 
@@ -53,7 +53,7 @@ public class LoginAction extends BaseResourceAction {
     }
 
     private void dismissMessage() {
-        LoginFragment fragment = (LoginFragment) getFragment();
+        ActionBarFragment fragment = (ActionBarFragment) getFragment();
         fragment.dismissMessage();
     }
 

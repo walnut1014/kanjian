@@ -21,7 +21,6 @@ public class ForgetPasswordSendAction extends BaseResourceAction {
         // 发送验证码，跳转页面
         ForgotPasswordFragment fragment = (ForgotPasswordFragment) getFragment();
         fragment.switchFragment(new VerifyCodeFragment(fragment.getMobilephone()));
-        SMSController.getChinaVerificationCode(fragment.getMobilephone());
     }
 
     @Override

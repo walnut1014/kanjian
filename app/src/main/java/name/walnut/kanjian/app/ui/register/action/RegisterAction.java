@@ -6,10 +6,10 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.support.KanJianApplication;
 import name.walnut.kanjian.app.ui.Constants;
-import name.walnut.kanjian.app.ui.register.RegisterFragment;
 
 /**
  * 注册 输入个人信息完成注册
@@ -40,7 +40,7 @@ public class RegisterAction extends BaseResourceAction {
     }
 
     private void dismissMessage() {
-        RegisterFragment fragment = (RegisterFragment) getFragment();
+        ActionBarFragment fragment = (ActionBarFragment) getFragment();
         fragment.dismissMessage();
     }
 }
