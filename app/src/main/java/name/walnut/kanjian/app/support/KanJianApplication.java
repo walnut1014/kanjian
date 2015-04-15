@@ -1,13 +1,13 @@
 package name.walnut.kanjian.app.support;
 
-import java.io.File;
-
-import cn.smssdk.SMSSDK;
-import name.walnut.kanjian.app.entity.PhotoContext;
-import name.walnut.kanjian.app.support.rest.RequestQueueContext;
-
 import android.app.Application;
 import android.os.Environment;
+
+import java.io.File;
+
+import name.walnut.kanjian.app.entity.PhotoContext;
+import name.walnut.kanjian.app.push.PushReceiver;
+import name.walnut.kanjian.app.support.rest.RequestQueueContext;
 
 public class KanJianApplication extends Application {
 
@@ -22,10 +22,11 @@ public class KanJianApplication extends Application {
 		
 		PhotoContext.INSTANCE.init(file.getPath());
 
-        BusContext.INSTANCE.init();
-
         // 短信验证 SDK
         SMSController.init(this);
+
+        // 消息推送
+        PushReceiver.INSTANCE.init(this);
 
     }
 	
