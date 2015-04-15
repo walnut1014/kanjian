@@ -10,7 +10,6 @@ import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.support.KanJianApplication;
 import name.walnut.kanjian.app.ui.Constants;
-import name.walnut.kanjian.app.ui.register.RegisterFragment;
 
 /**
  * 注册 输入个人信息完成注册

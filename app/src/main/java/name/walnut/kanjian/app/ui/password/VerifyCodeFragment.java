@@ -74,6 +74,9 @@ public class VerifyCodeFragment extends ActionBarFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        SMSController.getChinaVerificationCode(mobilephone.toString());
+
+        verifycodeEdit.setEditText("");
         countDownTimer = new CountDownTimer(COUNTDOWN_MILL, COUNTDOWN_INTERVAL) {
             @Override
             public void onTick(long millisUntilFinished) {
