@@ -2,7 +2,6 @@ package name.walnut.kanjian.app.ui.register;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -14,8 +13,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.squareup.otto.Subscribe;
-
 import java.io.File;
 
 import butterknife.ButterKnife;
@@ -25,10 +22,8 @@ import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
-import name.walnut.kanjian.app.support.BusContext;
 import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.register.action.RegisterAction;
-import name.walnut.kanjian.app.utils.Logger;
 import name.walnut.kanjian.app.utils.UriUtils;
 import name.walnut.kanjian.app.views.ClearEditText;
 
@@ -70,8 +65,6 @@ public class FillNicknameFragment extends ActionBarFragment {
                 new InputFilter.LengthFilter(Constants.Materials.NICKNAME_MAX_LENGTH)
         });
 
-        BusContext.INSTANCE.getBus().register(this);
-
         return view;
     }
 
@@ -79,7 +72,6 @@ public class FillNicknameFragment extends ActionBarFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
-        BusContext.INSTANCE.getBus().unregister(this);
     }
 
     @Override

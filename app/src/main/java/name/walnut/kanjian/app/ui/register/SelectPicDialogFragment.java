@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -22,7 +21,6 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
-import name.walnut.kanjian.app.support.BusContext;
 import name.walnut.kanjian.app.utils.Logger;
 
 public class SelectPicDialogFragment extends DialogFragment {

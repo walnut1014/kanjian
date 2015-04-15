@@ -1,12 +1,9 @@
 package name.walnut.kanjian.app.ui;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
 import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
@@ -15,12 +12,12 @@ import android.text.style.URLSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.push.PushReceiver;
 
 public class LaunchActivity extends Activity implements Constants.Action{
 
@@ -32,6 +29,14 @@ public class LaunchActivity extends Activity implements Constants.Action{
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
+
+        /**
+         * TODO
+         * 开启客户端推送服务，不要在Application onCreate() 中调用 mPushAgent.enable();
+         * 由于SDK 设计的逻辑， 这会造成循环。
+         */
+        PushReceiver.INSTANCE.getPushAgent().enable();
+
 		this.setContentView(R.layout.activity_launch);
 
         ButterKnife.inject(this);
