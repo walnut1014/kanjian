@@ -22,4 +22,5 @@ dependencies {
     compile 'com.jakewharton:butterknife:5.1.1'
     compile 'com.android.support:support-v4:21.0.3'
     compile 'de.greenrobot:eventbus:2.4.0'
+    compile 'com.android.support:support-v13:21.0.3'
 }
