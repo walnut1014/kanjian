@@ -9,6 +9,7 @@ import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.ui.password.FillPasswordFragment;
 import name.walnut.kanjian.app.ui.password.VerifyCodeFragment;
+import name.walnut.kanjian.app.ui.util.ToastUtils;
 
 /**
  * 忘记密码 验证验证码
@@ -24,13 +25,13 @@ public class ForgetVerifyCodeAction extends BaseResourceAction {
     @Override
     public void onFailed(Response response) {
         dismissMessage();
-        Toast.makeText(getActivity(), response.getMessage(), Toast.LENGTH_SHORT).show();
+        ToastUtils.toast(response.getMessage());
     }
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
         dismissMessage();
-        Toast.makeText(getActivity(), R.string.toast_error_network, Toast.LENGTH_LONG).show();
+        ToastUtils.toast(R.string.toast_error_network);
     }
 
 

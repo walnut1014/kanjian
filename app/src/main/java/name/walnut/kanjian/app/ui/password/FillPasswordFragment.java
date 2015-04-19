@@ -18,6 +18,7 @@ import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.password.action.ForgetPasswordResetAction;
 import name.walnut.kanjian.app.ui.util.RegexUtils;
+import name.walnut.kanjian.app.ui.util.ToastUtils;
 import name.walnut.kanjian.app.views.ClearEditText;
 
 /**
@@ -63,10 +64,10 @@ public class FillPasswordFragment extends ActionBarFragment{
     void submit() {
         String password = passwordEdit.getEditText().getText().toString();
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(getActivity(), R.string.toast_empty_password, Toast.LENGTH_SHORT).show();
+            ToastUtils.toast(R.string.toast_empty_password, Toast.LENGTH_SHORT);
 
         } else if (!isPasswordAvailable(password)) {
-            Toast.makeText(getActivity(), R.string.toast_error_format_password, Toast.LENGTH_SHORT).show();
+            ToastUtils.toast(R.string.toast_error_format_password, Toast.LENGTH_SHORT);
 
         } else {
             showMessage(R.string.dialog_message_reset_password);

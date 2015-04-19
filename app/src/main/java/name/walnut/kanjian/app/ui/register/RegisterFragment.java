@@ -10,6 +10,7 @@ import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.register.action.RegisterSendAction;
 import name.walnut.kanjian.app.ui.util.RegexUtils;
+import name.walnut.kanjian.app.ui.util.ToastUtils;
 import name.walnut.kanjian.app.views.ClearEditText;
 
 import android.content.Intent;
@@ -68,10 +69,10 @@ public class RegisterFragment extends ActionBarFragment implements Constants.Act
         mobilephone = mobilephoneTv.getEditText().getText().toString();
 
         if (TextUtils.isEmpty(mobilephone)) {
-            Toast.makeText(getActivity(), R.string.toast_register_empty_phone, Toast.LENGTH_SHORT).show();
+            ToastUtils.toast(R.string.toast_register_empty_phone, Toast.LENGTH_SHORT);
 
         } else if (!isMobilePhoneAvailable(mobilephone)){
-            Toast.makeText(getActivity(), R.string.toast_register_error_format_phone, Toast.LENGTH_SHORT).show();
+            ToastUtils.toast(R.string.toast_register_error_format_phone, Toast.LENGTH_SHORT);
 
         } else {
             showMessage(R.string.dialog_message_register);

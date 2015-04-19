@@ -15,6 +15,7 @@ import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.util.RegexUtils;
+import name.walnut.kanjian.app.ui.util.ToastUtils;
 import name.walnut.kanjian.app.views.ClearEditText;
 
 /**
@@ -56,10 +57,10 @@ public class FillPasswordFragment extends ActionBarFragment{
     void submit() {
         String password = passwordEdit.getEditText().getText().toString();
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(getActivity(), R.string.toast_empty_password, Toast.LENGTH_SHORT).show();
+            ToastUtils.toast(R.string.toast_empty_password);
 
         } else if (!isPasswordAvailable(password)) {
-            Toast.makeText(getActivity(), R.string.toast_error_format_password, Toast.LENGTH_SHORT).show();
+            ToastUtils.toast(R.string.toast_error_format_password);
 
         } else {
             // 跳转到完善资料界面

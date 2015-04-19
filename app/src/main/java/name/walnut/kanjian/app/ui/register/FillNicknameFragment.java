@@ -24,6 +24,7 @@ import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.register.action.RegisterAction;
+import name.walnut.kanjian.app.ui.util.ToastUtils;
 import name.walnut.kanjian.app.utils.UriUtils;
 import name.walnut.kanjian.app.views.ClearEditText;
 
@@ -84,7 +85,7 @@ public class FillNicknameFragment extends ActionBarFragment {
         String nickname = nicknameEdit.getEditText().getText().toString();
 
         if (TextUtils.isEmpty(nickname)) {
-            Toast.makeText(getActivity(), R.string.toast_empty_nickname, Toast.LENGTH_SHORT).show();
+            ToastUtils.toast(R.string.toast_empty_nickname);
 
         } else {
             showMessage(R.string.dialog_message_fill_nickname);

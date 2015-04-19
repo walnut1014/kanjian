@@ -10,6 +10,7 @@ import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.support.SMSController;
 import name.walnut.kanjian.app.ui.password.VerifyCodeFragment;
 import name.walnut.kanjian.app.ui.password.ForgotPasswordFragment;
+import name.walnut.kanjian.app.ui.util.ToastUtils;
 
 /**
  * 忘记密码 发送验证码
@@ -26,13 +27,13 @@ public class ForgetPasswordSendAction extends BaseResourceAction {
     @Override
     public void onFailed(Response response) {
         dismissMessage();
-        Toast.makeText(getActivity(), response.getMessage(), Toast.LENGTH_LONG).show();
+        ToastUtils.toast(response.getMessage());
     }
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
         dismissMessage();
-        Toast.makeText(getActivity(), R.string.toast_error_network, Toast.LENGTH_LONG).show();
+        ToastUtils.toast(R.string.toast_error_network);
     }
 
     private void dismissMessage() {

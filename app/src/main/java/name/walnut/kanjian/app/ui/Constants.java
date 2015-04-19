@@ -14,6 +14,13 @@ public class Constants {
         final static String CLAUSE_ACTION = "kanjian.intent.action.CLAUSE"; //服务条款
 
         final static String PRIVACY_ACTION = "kanjian.intent.action.PRIVACY"; //隐私策略
+
+        /* 我的账号相关界面 action */
+        final static String FRIEND_REQUEST_ACTION = "kanjian.intent.action.FRIEND_REQUEST"; // 好友请求
+
+        final static String FRIENDS_ACTION = "kanjian.intent.action.FRIENDS"; // 我的好友
+
+        final static String ADD_FRIENDS_ACTION = "kanjian.intent.action.ADD_FRIENDS"; // 添加好友
     }
 
     public static interface Materials {

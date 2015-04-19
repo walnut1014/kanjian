@@ -10,6 +10,7 @@ import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.support.KanJianApplication;
 import name.walnut.kanjian.app.ui.register.FillPasswordFragment;
 import name.walnut.kanjian.app.ui.register.VerifyCodeFragment;
+import name.walnut.kanjian.app.ui.util.ToastUtils;
 
 /**
  * 注册 校验验证码
@@ -26,13 +27,13 @@ public class VerifyCodeAction extends BaseResourceAction {
     @Override
     public void onFailed(Response response) {
         dismissMessage();
-        Toast.makeText(getActivity(), R.string.toast_verify_error, Toast.LENGTH_SHORT).show();
+        ToastUtils.toast(R.string.toast_verify_error);
     }
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
         dismissMessage();
-        Toast.makeText(KanJianApplication.INTANCE, R.string.toast_error_network, Toast.LENGTH_LONG).show();
+        ToastUtils.toast(R.string.toast_error_network);
     }
 
     private void dismissMessage() {

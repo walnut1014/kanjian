@@ -21,6 +21,7 @@ import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.SMSController;
 import name.walnut.kanjian.app.ui.password.action.ForgetVerifyCodeAction;
+import name.walnut.kanjian.app.ui.util.ToastUtils;
 import name.walnut.kanjian.app.views.ClearEditText;
 
 /**
@@ -128,7 +129,7 @@ public class VerifyCodeFragment extends ActionBarFragment {
     void verifyCode() {
         String verifyCode = verifycodeEdit.getEditText().getText().toString();
         if (TextUtils.isEmpty(verifyCode)) {
-            Toast.makeText(getActivity(), R.string.toast_verify_empty, Toast.LENGTH_SHORT).show();
+            ToastUtils.toast(R.string.toast_verify_empty, Toast.LENGTH_SHORT);
 
         } else {
             this.verifyCode = verifyCode;

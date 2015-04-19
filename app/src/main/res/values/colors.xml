@@ -31,6 +31,8 @@
     <color name="background_dot">#7251d6</color>
 
     <color name="background_divide">#dddedf</color>
+
+    <color name="text_hint">#dddedf</color>
     
 
 </resources>

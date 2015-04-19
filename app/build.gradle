@@ -23,4 +23,5 @@ dependencies {
     compile 'com.android.support:support-v4:21.0.3'
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.android.support:support-v13:21.0.3'
+    compile 'com.malinskiy:superrecyclerview:1.1.0'
 }

@@ -17,6 +17,7 @@ import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.ui.password.action.ForgetPasswordSendAction;
 import name.walnut.kanjian.app.ui.util.RegexUtils;
+import name.walnut.kanjian.app.ui.util.ToastUtils;
 import name.walnut.kanjian.app.views.ClearEditText;
 
 /**
@@ -61,10 +62,10 @@ public class ForgotPasswordFragment extends ActionBarFragment{
         mobilephone = mobilephoneTv.getEditText().getText().toString();
 
         if (TextUtils.isEmpty(mobilephone)) {
-            Toast.makeText(getActivity(), R.string.toast_register_empty_phone, Toast.LENGTH_SHORT).show();
+            ToastUtils.toast(R.string.toast_register_empty_phone, Toast.LENGTH_SHORT);
 
         } else if (!isMobilePhoneAvailable(mobilephone)){
-            Toast.makeText(getActivity(), R.string.toast_register_error_format_phone, Toast.LENGTH_SHORT).show();
+            ToastUtils.toast(R.string.toast_register_error_format_phone, Toast.LENGTH_SHORT);
 
         } else {
             showMessage(R.string.dialog_message_forgot_password);

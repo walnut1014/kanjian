@@ -68,5 +68,12 @@
     <string name="my_title_add_friend">添加好友</string>
     <string name="my_title_friends">我的好友</string>
     <string name="my_title_friend_request">好友请求</string>
+    <string name="friend_request_empty">暂无好友请求哦，\n要不主动点，去加几个好友？</string>
+    <string name="action_add_friend">我要加好友</string>
+    <string name="title_activity_friend_request">好友请求</string>
+    <string name="title_activity_friends">我的好友</string>
+    <string name="title_activity_new_friend">添加好友</string>
+    <string name="friend_search_hint">请输入好友手机号码</string>
+    <string name="title_new_friend_mail">通讯录朋友</string>
 
 </resources>

@@ -10,6 +10,7 @@ import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.support.KanJianApplication;
 import name.walnut.kanjian.app.ui.register.RegisterFragment;
 import name.walnut.kanjian.app.ui.register.VerifyCodeFragment;
+import name.walnut.kanjian.app.ui.util.ToastUtils;
 
 /**
  * 注册 校验是否注册过
@@ -28,17 +29,13 @@ public class RegisterSendAction extends BaseResourceAction{
     public void onFailed(Response response) {
         dismissMessage();
         RegisterFragment fragment = (RegisterFragment) getFragment();
-        Toast.makeText(
-                getActivity(),
-                getActivity().getString(R.string.toast_registered, fragment.getMobilephone()),
-                Toast.LENGTH_SHORT).show();
+        ToastUtils.toast(getActivity().getString(R.string.toast_registered, fragment.getMobilephone()));
     }
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
         dismissMessage();
-
-        Toast.makeText(KanJianApplication.INTANCE, R.string.toast_error_network, Toast.LENGTH_LONG).show();
+        ToastUtils.toast(R.string.toast_error_network);
     }
 
     private void dismissMessage() {

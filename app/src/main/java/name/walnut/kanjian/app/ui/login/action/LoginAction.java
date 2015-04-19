@@ -10,6 +10,7 @@ import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.login.LoginAlertDialogFragment;
+import name.walnut.kanjian.app.ui.util.ToastUtils;
 import name.walnut.kanjian.app.utils.Logger;
 
 
@@ -38,10 +39,10 @@ public class LoginAction extends BaseResourceAction {
                 break;
             case MESSAGE_CODE_UNMATCH:
                 // 密码不正确
-                Toast.makeText(getActivity(), response.getMessage(), Toast.LENGTH_LONG).show();
+                ToastUtils.toast(response.getMessage());
                 break;
             default:
-                Toast.makeText(getActivity(), response.getMessage(), Toast.LENGTH_LONG).show();
+                ToastUtils.toast(response.getMessage());
                 break;
         }
     }
@@ -49,7 +50,7 @@ public class LoginAction extends BaseResourceAction {
     @Override
     public void onErrorResponse(VolleyError volleyError) {
         dismissMessage();
-        Toast.makeText(getActivity(), R.string.toast_error_network, Toast.LENGTH_LONG).show();
+        ToastUtils.toast(R.string.toast_error_network);
     }
 
     private void dismissMessage() {

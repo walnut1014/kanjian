@@ -25,7 +25,7 @@ public class ClauseActivity extends ActionBarActivity implements Constants.Actio
             switchFragment(new ClauseFragment());
         }
 
-        backTextBtn.setVisibility(View.VISIBLE);
+        menuTextButton.setVisibility(View.VISIBLE);
         backButton.setVisibility(View.GONE);
     }
 
