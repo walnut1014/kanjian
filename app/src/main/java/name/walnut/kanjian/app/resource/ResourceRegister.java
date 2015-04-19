@@ -20,7 +20,16 @@ public enum ResourceRegister {
      */
     relationCountResource("relation/count", RequestMethod.GET),
 
-    
+    /**
+     * 获得所有添加好友请求,包括已同意，未同意和待验证
+     * 返回 ｛
+     *          realtions:[{
+     *              mobilephone:'1300000000',
+     *              status:0,1,2 //(0发送请求待验证，1接受他人请求，2已建立好友关系)
+     *          }]
+     *       ｝
+     */
+    relationListResource("relation/list", RequestMethod.GET),
 
     /**
      * 邀请好友
@@ -29,7 +38,18 @@ public enum ResourceRegister {
      *          success:true
      *      }
      */
-    invitFriendResource("relation/invit", RequestMethod.POST)
+    invitFriendResource("relation/invit", RequestMethod.POST),
+
+    /**
+     * 获得所有的好友
+     * 返回 {
+     *    friends[{
+     *              mobilephone:'1300000000',
+     *              photoCoount: 5 //照片数
+     *          }]
+     * }
+     */
+    friendsResource("relation/friends", RequestMethod.GET)
     ;
 
     ResourceRegister(String url, RequestMethod method) {
