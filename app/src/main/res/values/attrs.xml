@@ -15,4 +15,12 @@
         <attr name="hint" format="string|reference"/>
     </declare-styleable>
 
+    <declare-styleable name="SettingItemView">
+        <attr name="icon" format="reference"/>
+        <!--标题内容-->
+        <attr name="title" format="string"/>
+        <!--是否显示小红点-->
+        <attr name="showDot" format="boolean"/>
+        <attr name="extraContent" format="string"/>
+    </declare-styleable>
 </resources>

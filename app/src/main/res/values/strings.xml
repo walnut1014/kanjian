@@ -64,5 +64,9 @@
     <string name="dialog_message_fill_nickname">正在完善个人资料</string>
     <string name="dialog_message_register">正在注册</string>
     <string name="title_fragment_my">我的账号</string>
+    <string name="my_title_setting">设置</string>
+    <string name="my_title_add_friend">添加好友</string>
+    <string name="my_title_friends">我的好友</string>
+    <string name="my_title_friend_request">好友请求</string>
 
 </resources>

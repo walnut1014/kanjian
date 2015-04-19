@@ -20,11 +20,17 @@
     <color name="button_purple_press">@color/purple_dark</color>
 
     <color name="button_white_press">#9b73ea</color>
+    <color name="button_white_press_light">#DFDAFB</color>
     <color name="button_white_nor">@color/white</color>
 
     <color name="text_divide">#c3c3c3</color>
 
     <color name="background_edit">@color/white</color>
+
+    <!--小红点颜色-->
+    <color name="background_dot">#7251d6</color>
+
+    <color name="background_divide">#dddedf</color>
     
 
 </resources>
