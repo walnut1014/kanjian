@@ -75,5 +75,6 @@
     <string name="title_activity_new_friend">添加好友</string>
     <string name="friend_search_hint">请输入好友手机号码</string>
     <string name="title_new_friend_mail">通讯录朋友</string>
+    <string name="menu_add_friend">加好友</string>
 
 </resources>

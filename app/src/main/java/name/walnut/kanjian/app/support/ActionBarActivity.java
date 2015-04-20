@@ -1,15 +1,12 @@
 package name.walnut.kanjian.app.support;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
-import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -24,42 +21,8 @@ public abstract class ActionBarActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_ACTION_BAR);
-        actionBar = getActionBar();
-
-        ActionBar.LayoutParams lp = new ActionBar.LayoutParams(
-                ActionBar.LayoutParams.MATCH_PARENT,
-                ActionBar.LayoutParams.MATCH_PARENT, Gravity.CENTER);
-
-        View viewTitleBar = getLayoutInflater().inflate(
-                R.layout.action_bar_title, null);
-        actionBar.setCustomView(viewTitleBar, lp);
-        actionBar.setDisplayShowHomeEnabled(false);
-        actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        actionBar.setDisplayShowCustomEnabled(true);
-
-        backButton = (ImageButton) actionBar.getCustomView().findViewById(
-                R.id.btnActionBack);
-        menuTextButton = (TextView) actionBar.getCustomView().findViewById(
-                R.id.action_back_text);
-
-
-        backButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-        menuTextButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
     }
 
     @Override
@@ -107,9 +70,6 @@ public abstract class ActionBarActivity extends Activity {
     }
 
     private int containerViewId;
-    protected ActionBar actionBar;
-    protected ImageButton backButton;
-    protected TextView menuTextButton;  // actionbar右上文字按钮
 
     /** 提示框*/
     private PopupWindow pw;

@@ -1,29 +1,24 @@
 package name.walnut.kanjian.app.support;
 
-import android.app.ActionBar;
 import android.view.View;
-import android.widget.TextView;
-
-import name.walnut.kanjian.app.R;
 
 public abstract class ActionBarFragment extends BaseFragment{
 
-	@Override
+    protected ActionBarBuilder builder;
+
+    @Override
 	public void onResume() {
 		super.onResume();
-		ActionBar actionBar = this.getActivity().getActionBar();
 
-		TextView textView = (TextView) actionBar.getCustomView().findViewById(android.R.id.title);
-		textView.setText(getTitle());
+        builder = new ActionBarBuilder(getActionBarActivity())
+                .setTitle(getTitle())
+                .showBack(showBack())
+                .setBackStyle(getActionBarBackStyle())
+                .setBackClickListener(getActionBarBackClickListener())
+                .setMenuView(getActionBarMenuView())
+                .build();
 
-        if (showBack()) {
-            actionBar.getCustomView().findViewById(
-                    R.id.btnActionBack).setVisibility(View.VISIBLE);
-        } else {
-            actionBar.getCustomView().findViewById(
-                    R.id.btnActionBack).setVisibility(View.GONE);
-        }
-		
+
 		ActionBarActivity activity = this.getActionBarActivity();
 		activity.setCurrentFragment(this);
 	}
@@ -60,6 +55,39 @@ public abstract class ActionBarFragment extends BaseFragment{
         return true;
     }
 
-	public abstract String getTitle();
+    /**
+     * 顶部标题
+     * @return
+     */
+	protected abstract String getTitle();
+
+    /**
+     * 返回按钮样式
+     * @return
+     */
+    protected ActionBarBuilder.BackStyle getActionBarBackStyle() {
+        return ActionBarBuilder.BackStyle.ARROW;
+    }
+
+    /**
+     * 右上menu
+     * @return
+     */
+    protected View getActionBarMenuView() {
+        return null;
+    }
+
+    /**
+     * 返回按钮监听器
+     * @return
+     */
+    protected View.OnClickListener getActionBarBackClickListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActionBarActivity().onBackPressed();
+            }
+        };
+    }
 
 }

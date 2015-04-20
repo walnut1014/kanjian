@@ -29,4 +29,20 @@
     <style name="LoginDialog" parent="android:Theme.Holo.Dialog.NoActionBar">
     </style>
 
+    <style name="IActionBar">
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="IActionBar.Title">
+        <item name="android:textColor">@color/text_white</item>
+        <item name="android:textSize">@dimen/actionbar_title_font_size</item>
+    </style>
+
+    <style name="IActionBar.ImageButton">
+        <item name="android:minWidth">48dp</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
 </resources>

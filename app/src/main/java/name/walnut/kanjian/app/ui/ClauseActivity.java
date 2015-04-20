@@ -1,10 +1,10 @@
 package name.walnut.kanjian.app.ui;
 
 import android.os.Bundle;
-import android.view.View;
 
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.ActionBarActivity;
+import name.walnut.kanjian.app.support.ActionBarBuilder;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 
 public class ClauseActivity extends ActionBarActivity implements Constants.Action{
@@ -25,8 +25,6 @@ public class ClauseActivity extends ActionBarActivity implements Constants.Actio
             switchFragment(new ClauseFragment());
         }
 
-        menuTextButton.setVisibility(View.VISIBLE);
-        backButton.setVisibility(View.GONE);
     }
 
     public static class ClauseFragment extends ActionBarFragment {
@@ -35,6 +33,11 @@ public class ClauseActivity extends ActionBarActivity implements Constants.Actio
         public String getTitle() {
             return getString(R.string.title_activity_clause);
         }
+
+        @Override
+        protected ActionBarBuilder.BackStyle getActionBarBackStyle() {
+            return ActionBarBuilder.BackStyle.TEXT;
+        }
     }
 
     public static class PrivacyFragment extends ActionBarFragment {
@@ -42,6 +45,11 @@ public class ClauseActivity extends ActionBarActivity implements Constants.Actio
         @Override
         public String getTitle() {
             return getString(R.string.title_activity_privacy);
+        }
+
+        @Override
+        protected ActionBarBuilder.BackStyle getActionBarBackStyle() {
+            return ActionBarBuilder.BackStyle.TEXT;
         }
     }
 }

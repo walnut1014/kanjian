@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
 
@@ -59,6 +60,14 @@ public class FriendRequestFragment extends ActionBarFragment {
     @Override
     public String getTitle() {
         return getString(R.string.title_activity_friend_request);
+    }
+
+    @Override
+    protected View getActionBarMenuView() {
+        TextView textView = (TextView) LayoutInflater.from(getActionBarActivity())
+                .inflate(R.layout.action_bar_menu_text, null);
+        textView.setText(getString(R.string.menu_add_friend));
+        return textView;
     }
 
     // 获取好友请求
