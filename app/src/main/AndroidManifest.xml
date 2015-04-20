@@ -42,10 +42,10 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
 
-             <intent-filter>
-                 <action android:name="android.intent.action.MAIN" />
-                 <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+             <!--<intent-filter>-->
+                 <!--<action android:name="android.intent.action.MAIN" />-->
+                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
+             <!--</intent-filter>-->
         </activity>
 
         <!-- 主界面Activity -->
@@ -57,11 +57,11 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <!-- 注册Activity -->
@@ -224,6 +224,7 @@
         <!-- 好友请求activity -->
         <activity
             android:name=".ui.my.relation.request.FriendRequestActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_friend_request" >
             <intent-filter>
                 <action android:name="kanjian.intent.action.FRIEND_REQUEST" />
@@ -234,6 +235,7 @@
         <!-- 我的好友activity -->
         <activity
             android:name=".ui.my.relation.friends.FriendsActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_friends" >
             <intent-filter>
                 <action android:name="kanjian.intent.action.FRIENDS" />
@@ -244,6 +246,7 @@
         <!--添加好友activity-->
         <activity
             android:name=".ui.my.relation.newfriends.NewFriendActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_new_friend" >
             <intent-filter>
                 <action android:name="kanjian.intent.action.ADD_FRIENDS"/>

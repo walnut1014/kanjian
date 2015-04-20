@@ -1,5 +1,6 @@
 package name.walnut.kanjian.app.ui.my.relation.request;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +19,7 @@ import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
+import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.my.relation.request.action.RelationListAction;
 
 /**
@@ -31,7 +33,7 @@ public class FriendRequestFragment extends ActionBarFragment {
     @ResourceWeave(actionClass = RelationListAction.class)
     public Resource relationListResource;
 
-    FriendRequestAdapter adapter;
+    private FriendRequestAdapter adapter;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -67,6 +69,14 @@ public class FriendRequestFragment extends ActionBarFragment {
         TextView textView = (TextView) LayoutInflater.from(getActionBarActivity())
                 .inflate(R.layout.action_bar_menu_text, null);
         textView.setText(getString(R.string.menu_add_friend));
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+                Intent intent = new Intent(Constants.Action.ADD_FRIENDS_ACTION);
+                startActivity(intent);
+            }
+        });
         return textView;
     }
 
