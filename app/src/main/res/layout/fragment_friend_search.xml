@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#99000000"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:background="#f2f3f4"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <ImageButton
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginRight="7dp"
+            android:src="@drawable/arrow_gray"
+            android:id="@+id/search_back"
+            android:background="@android:color/transparent"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            />
+        <EditText
+            android:id="@+id/search_edit"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:paddingLeft="12dp"
+            android:drawablePadding="6dp"
+            android:paddingRight="12dp"
+            android:hint="@string/friend_search_hint"
+            android:textColorHint="#dedfe0"
+            android:background="@drawable/bg_search"
+            android:drawableLeft="@drawable/icon_search"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <Button
+            android:id="@+id/search_cancel"
+            android:background="@android:color/transparent"
+            android:text="@string/friend_search_cancel"
+            android:textColor="@color/text_purple"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/search_text"
+        android:visibility="gone"
+        android:paddingLeft="8dp"
+        android:paddingTop="13dp"
+        android:paddingBottom="15dp"
+        android:drawableLeft="@drawable/icon_search_gray"
+        android:textSize="18sp"
+        android:drawablePadding="24dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/text_black"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

@@ -29,6 +29,11 @@
     <style name="LoginDialog" parent="android:Theme.Holo.Dialog.NoActionBar">
     </style>
 
+    <style name="SearchDialog" parent="android:Theme.Holo.Dialog.NoActionBar">
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
     <style name="IActionBar">
         <item name="android:paddingLeft">10dp</item>
         <item name="android:paddingRight">10dp</item>

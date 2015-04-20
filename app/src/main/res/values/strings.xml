@@ -79,5 +79,7 @@
     <string name="request_accept">接受</string>
     <string name="friend_action_add_friend">添加好友</string>
     <string name="friends_empty">暂无好友哦，\n要不主动点，去加几个好友？</string>
+    <string name="friend_search_cancel">取消</string>
+    <string name="title_fragment_search_result">搜索结果</string>
 
 </resources>
