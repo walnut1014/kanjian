@@ -16,15 +16,18 @@ public class FetchFriendsAction extends BaseResourceAction {
     @Override
     public void onSuccess(Response response) {
         Logger.e(response.getData());
+        onRequestResult(null);
     }
 
     @Override
     public void onFailed(Response response) {
+        onRequestResult(null);
         ToastUtils.toast(response.getMessage());
     }
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
+        onRequestResult(null);
         ToastUtils.toast(R.string.toast_error_network);
     }
 

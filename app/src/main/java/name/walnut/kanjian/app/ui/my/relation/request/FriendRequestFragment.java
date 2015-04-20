@@ -15,6 +15,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.resource.impl.ResourceWeave;
@@ -49,7 +50,7 @@ public class FriendRequestFragment extends ActionBarFragment {
         ButterKnife.inject(this, view);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setLoadingMore(false);
+        recyclerView.getRecyclerView().setHasFixedSize(true);
         return view;
     }
 
@@ -72,12 +73,17 @@ public class FriendRequestFragment extends ActionBarFragment {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().finish();
-                Intent intent = new Intent(Constants.Action.ADD_FRIENDS_ACTION);
-                startActivity(intent);
+                startAddFriendActivity();
             }
         });
         return textView;
+    }
+
+    @OnClick(R.id.add_friend_button)
+    public void startAddFriendActivity() {
+        getActivity().finish();
+        Intent intent = new Intent(Constants.Action.ADD_FRIENDS_ACTION);
+        startActivity(intent);
     }
 
     // 获取好友请求

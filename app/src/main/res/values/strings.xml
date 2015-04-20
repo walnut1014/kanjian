@@ -77,5 +77,7 @@
     <string name="title_new_friend_mail">通讯录朋友</string>
     <string name="menu_add_friend">加好友</string>
     <string name="request_accept">接受</string>
+    <string name="friend_action_add_friend">添加好友</string>
+    <string name="friends_empty">暂无好友哦，\n要不主动点，去加几个好友？</string>
 
 </resources>

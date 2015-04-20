@@ -71,7 +71,7 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
         return friendRequestList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         @InjectView(R.id.avatar)
         public ImageView avatarImg;

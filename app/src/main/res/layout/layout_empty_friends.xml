@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:paddingTop="98dp"
+    android:gravity="center_horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:drawableTop="@drawable/pic_add_person"
+        android:gravity="center_horizontal"
+        android:textSize="20sp"
+        android:textColor="#a5a6a7"
+        android:drawablePadding="15dp"
+        android:text="@string/friends_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/add_friend_button"
+        style="@style/IButton.purple"
+        android:text="@string/action_add_friend"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="77dp"
+        android:layout_marginLeft="77dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height" />
+</LinearLayout>
