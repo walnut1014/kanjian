@@ -2,6 +2,9 @@ package name.walnut.kanjian.app.ui.my.relation;
 
 import com.android.volley.VolleyError;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
@@ -15,6 +18,17 @@ public class FetchRelationCountAction extends BaseResourceAction {
     public void onSuccess(Response response) {
         Logger.e(response.getData());
 
+        try {
+            JSONObject jsonObject = new JSONObject(response.getData());
+            int friendCount = jsonObject.getInt("friendCount");
+            int unreadCount = jsonObject.getInt("unreadCount");
+
+            MyFragment fragment = (MyFragment) getFragment();
+            fragment.showRelation(friendCount, unreadCount);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

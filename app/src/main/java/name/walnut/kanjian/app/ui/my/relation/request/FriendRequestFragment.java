@@ -57,6 +57,7 @@ public class FriendRequestFragment extends ActionBarFragment {
     @Override
     public void onDestroyView() {
         ButterKnife.reset(this);
+        adapter = null;
         super.onDestroyView();
     }
 
@@ -94,10 +95,10 @@ public class FriendRequestFragment extends ActionBarFragment {
     // 设置数据源并显示
     public void show(List<FriendRequest> requestList) {
         if (adapter == null) {
-            adapter = new FriendRequestAdapter(requestList);
+            adapter = new FriendRequestAdapter(getActionBarActivity(), requestList);
             recyclerView.setAdapter(adapter);
         } else {
-            adapter.setFriendRequestList(requestList);
+            adapter.setDataSet(requestList);
         }
     }
 }

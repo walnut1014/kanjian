@@ -28,6 +28,7 @@
             android:paddingLeft="12dp"
             android:drawablePadding="6dp"
             android:paddingRight="12dp"
+            android:singleLine="true"
             android:hint="@string/friend_search_hint"
             android:textColorHint="#dedfe0"
             android:background="@drawable/bg_search"

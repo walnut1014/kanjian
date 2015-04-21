@@ -69,4 +69,12 @@ public class SettingItemView extends FrameLayout {
         }
     }
 
+    /**
+     * 显示extra
+     * @param extra
+     */
+    public void setExtra(String extra) {
+        extraTv.setText(extra);
+    }
+
 }

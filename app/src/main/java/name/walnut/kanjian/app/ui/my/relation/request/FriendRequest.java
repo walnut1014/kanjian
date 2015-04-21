@@ -11,6 +11,9 @@ public class FriendRequest {
 
     private RequestState state = RequestState.accept;
 
+    private String contactsName = null;
+
+
     public void setMobilePhone(String mobilePhone) {
         this.mobilePhone = mobilePhone;
     }
@@ -39,6 +42,14 @@ public class FriendRequest {
 
     public String getMobilePhone() {
         return mobilePhone;
+    }
+
+    public String getContactsName() {
+        return contactsName;
+    }
+
+    public void setContactsName(String name) {
+        this.contactsName = name;
     }
 
     public static enum RequestState {

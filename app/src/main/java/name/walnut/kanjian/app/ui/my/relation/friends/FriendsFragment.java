@@ -62,6 +62,7 @@ public class FriendsFragment extends ActionBarFragment {
     @Override
     public void onDestroyView() {
         ButterKnife.reset(this);
+        adapter = null;
         super.onDestroyView();
     }
 

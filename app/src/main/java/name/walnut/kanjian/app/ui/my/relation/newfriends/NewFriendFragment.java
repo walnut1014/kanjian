@@ -50,6 +50,7 @@ public class NewFriendFragment extends ActionBarFragment {
     @Override
     public void onDestroyView() {
         ButterKnife.reset(this);
+        adapter = null;
         super.onDestroyView();
     }
 

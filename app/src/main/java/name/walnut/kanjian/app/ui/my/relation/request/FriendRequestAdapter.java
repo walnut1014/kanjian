@@ -1,5 +1,6 @@
 package name.walnut.kanjian.app.ui.my.relation.request;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,24 +15,16 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.support.AbsListAdapter;
 
 /**
  * 好友请求 adapter
  */
-public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdapter.ViewHolder>{
+public class FriendRequestAdapter extends AbsListAdapter<FriendRequest, FriendRequestAdapter.ViewHolder>{
 
-    private List<FriendRequest> friendRequestList;
 
-    public FriendRequestAdapter(List<FriendRequest> friendRequestList) {
-        setFriendRequestList(friendRequestList);
-    }
-
-    public void setFriendRequestList(List<FriendRequest> friendRequestList) {
-        this.friendRequestList = friendRequestList;
-        if (this.friendRequestList == null) {
-            this.friendRequestList = new ArrayList<>();
-        }
-        notifyDataSetChanged();
+    public FriendRequestAdapter(Context context, List<FriendRequest> list) {
+        super(context, list);
     }
 
     @Override
@@ -43,9 +36,15 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        FriendRequest friendRequest = friendRequestList.get(i);
+        FriendRequest friendRequest = getItem(i);
         viewHolder.nicknameTv.setText(friendRequest.getMobilePhone());
-        viewHolder.introTv.setText(friendRequest.getMobilePhone());
+        String name = friendRequest.getContactsName();
+        if (null == name) {
+            name = context.getString(R.string.friend_request_unknown);
+        } else {
+            name = context.getString(R.string.friend_request_name, name);
+        }
+        viewHolder.introTv.setText(name);
         // TODO
         switch (friendRequest.getState()) {
             case waitVerify:
@@ -64,11 +63,6 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
                 viewHolder.statusTv.setText("");
                 break;
         }
-    }
-
-    @Override
-    public int getItemCount() {
-        return friendRequestList.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

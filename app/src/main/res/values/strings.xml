@@ -81,5 +81,7 @@
     <string name="friends_empty">暂无好友哦，\n要不主动点，去加几个好友？</string>
     <string name="friend_search_cancel">取消</string>
     <string name="title_fragment_search_result">搜索结果</string>
+    <string name="friend_request_unknown">不在手机通讯录内</string>
+    <string name="friend_request_name">手机联系人：%s</string>
 
 </resources>

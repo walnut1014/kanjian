@@ -57,19 +57,19 @@ public class MyFragment extends ActionBarFragment {
     }
 
     @OnClick(R.id.my_title_friend_request)
-    public void intoFriendRequestsActivity() {
+    public void startFriendRequestsActivity() {
         Intent intent = new Intent(Constants.Action.FRIEND_REQUEST_ACTION);
         startActivity(intent);
     }
 
     @OnClick(R.id.my_title_friends)
-    public void intoFriendsActivity() {
+    public void startFriendsActivity() {
         Intent intent = new Intent(Constants.Action.FRIENDS_ACTION);
         startActivity(intent);
     }
 
     @OnClick(R.id.my_title_add_friend)
-    public void intoAddFriendActivity() {
+    public void startAddFriendActivity() {
         Intent intent = new Intent(Constants.Action.ADD_FRIENDS_ACTION);
         startActivity(intent);
     }
@@ -83,4 +83,21 @@ public class MyFragment extends ActionBarFragment {
     public boolean showBack() {
         return false;
     }
+
+
+    public void showRelation(int friendCount, int unreadCount) {
+        showFriendCount(friendCount);
+        showUnreadCount(unreadCount);
+    }
+
+    private void showFriendCount(int friendCount) {
+        friendsView.setExtra(friendCount+"");
+        friendsView.showDot(false);
+    }
+
+    private void showUnreadCount(int unreadCount) {
+        friendRequestView.setExtra(unreadCount+"");
+        friendRequestView.showDot(unreadCount > 0);
+    }
+
 }
