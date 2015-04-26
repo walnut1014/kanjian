@@ -140,6 +140,6 @@ public final class Resource{
     private String url;
     private RequestMethod method;
 
-    private final static String CONTEXT_PATH = "http://120.25.201.172:8080";
-   // private final static String CONTEXT_PATH = "http://192.168.1.76:8080";
+    //private final static String CONTEXT_PATH = "http://120.25.201.172:8080";
+    private final static String CONTEXT_PATH = "http://192.168.1.104:8080";
 }

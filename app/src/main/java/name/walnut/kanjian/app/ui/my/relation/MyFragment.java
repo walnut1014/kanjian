@@ -20,8 +20,12 @@ import android.view.ViewGroup;
 
 public class MyFragment extends ActionBarFragment {
 
-    @ResourceWeave(actionClass = FetchRelationCountAction.class)
-    public Resource relationCountResource;
+    @ResourceWeave(actionClass = MyAccountInitCountAction.class)
+    public Resource myAccountInitResource;
+
+    //TODO 模拟用户登录
+    @ResourceWeave(actionClass = MockLoginAction.class)
+    public Resource loginResource;
 
     @InjectView(R.id.my_title_friend_request)
     SettingItemView friendRequestView;
@@ -47,7 +51,11 @@ public class MyFragment extends ActionBarFragment {
     }
 
     private void fetchRelationCount() {
-        relationCountResource.send();
+        //TODO 模拟用户登录
+        loginResource.addParam("mobilephone", "13622309539")
+                .addParam("password", "123456").send();
+
+        myAccountInitResource.send();
     }
 
     @Override

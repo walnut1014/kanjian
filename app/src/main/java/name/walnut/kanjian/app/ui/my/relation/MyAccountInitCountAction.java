@@ -13,12 +13,14 @@ import name.walnut.kanjian.app.utils.Logger;
 /**
  * 获取好友数和好友请求数 action
  */
-public class FetchRelationCountAction extends BaseResourceAction {
+public class MyAccountInitCountAction extends BaseResourceAction {
     @Override
     public void onSuccess(Response response) {
         Logger.e(response.getData());
 
         try {
+
+            //TODO 头像路径 “headPhoto/"+headPhotoPath
             JSONObject jsonObject = new JSONObject(response.getData());
             int friendCount = jsonObject.getInt("friendCount");
             int unreadCount = jsonObject.getInt("unreadCount");
