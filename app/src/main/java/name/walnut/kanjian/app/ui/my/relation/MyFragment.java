@@ -23,10 +23,6 @@ public class MyFragment extends ActionBarFragment {
     @ResourceWeave(actionClass = MyAccountInitCountAction.class)
     public Resource myAccountInitResource;
 
-    //TODO 模拟用户登录
-    @ResourceWeave(actionClass = MockLoginAction.class)
-    public Resource loginResource;
-
     @InjectView(R.id.my_title_friend_request)
     SettingItemView friendRequestView;
     @InjectView(R.id.my_title_friends)
@@ -51,10 +47,6 @@ public class MyFragment extends ActionBarFragment {
     }
 
     private void fetchRelationCount() {
-        //TODO 模拟用户登录
-        loginResource.addParam("mobilephone", "13622309539")
-                .addParam("password", "123456").send();
-
         myAccountInitResource.send();
     }
 

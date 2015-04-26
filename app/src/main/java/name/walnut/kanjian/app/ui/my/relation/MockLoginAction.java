@@ -17,7 +17,7 @@ public class MockLoginAction extends BaseResourceAction {
 
     @Override
     public void onSuccess(Response response) {
-
+        Logger.e(response.getData());
     }
 
     @Override

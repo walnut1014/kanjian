@@ -13,9 +13,13 @@ public enum ResourceRegister {
     /*-----------------------relation模块-----------------------*/
     myAccountInitResource("my/accountInit", RequestMethod.GET), //我的账户初始页面，包括昵称，头像
     relationListResource("relation/list", RequestMethod.GET), //获得所有添加好友请求,包括已同意，未同意和待验证
-    invitFriendResource("relation/invit", RequestMethod.POST),//邀请好友
+    //邀请好友(long id)
+    invitFriendResource("relation/invit", RequestMethod.POST),
     friendsResource("relation/friends", RequestMethod.GET),//获得所有的好友
-    queryUserResource("relation/queryUser", RequestMethod.GET)//通过手机号查询用户
+
+    /*-----------------------公共模块-----------------------*/
+    //通过手机号查询用户（String mobilePhone）
+    queryUserResource("user", RequestMethod.GET)
     ;
 
     ResourceRegister(String url, RequestMethod method) {
