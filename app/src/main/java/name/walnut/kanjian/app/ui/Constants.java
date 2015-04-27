@@ -1,5 +1,7 @@
 package name.walnut.kanjian.app.ui;
 
+import android.net.Uri;
+
 import name.walnut.kanjian.app.resource.impl.Resource;
 
 public class Constants {
@@ -32,7 +34,8 @@ public class Constants {
         final static int NICKNAME_MAX_LENGTH = 32;
     }
 
-    public static String getFrescoUrl(String path) {
-        return Resource.getUrl("headPhoto/") + path;
+    // TODO photo 管理
+    public static Uri getFrescoUrl(String path) {
+        return Uri.parse(Resource.getUrl("headPhoto/") + path);
     }
 }
