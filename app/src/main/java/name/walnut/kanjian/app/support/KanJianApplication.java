@@ -5,6 +5,7 @@ import android.os.Environment;
 
 import java.io.File;
 
+import name.walnut.kanjian.app.account.Account;
 import name.walnut.kanjian.app.entity.PhotoContext;
 import name.walnut.kanjian.app.push.PushReceiver;
 import name.walnut.kanjian.app.support.rest.RequestQueueContext;
@@ -14,13 +15,19 @@ public class KanJianApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		RequestQueueContext.INSTANCE.initRequestQueue(this);
 
-		INTANCE = this;
-		
+		INSTANCE = this;
+
+
 		File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
-		
+
 		PhotoContext.INSTANCE.init(file.getPath());
+
+        // 账号信息
+        Account.INSTANCE.init(this);
+
+        // 网络请求
+		RequestQueueContext.INSTANCE.initRequestQueue(this);
 
         // 短信验证 SDK
         SMSController.init(this);
@@ -28,9 +35,12 @@ public class KanJianApplication extends Application {
         // 消息推送
         PushReceiver.INSTANCE.init(this);
 
+        // 图片加载
+        FrescoContext.INSTANCE.init(this);
+
     }
 	
-	public static Application INTANCE;
+	public static Application INSTANCE;
 	
 	public static boolean isLogin = false;
 	

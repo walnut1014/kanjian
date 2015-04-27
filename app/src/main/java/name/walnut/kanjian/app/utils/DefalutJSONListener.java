@@ -37,7 +37,7 @@ public abstract class DefalutJSONListener implements Listener<JSONObject> {
     public abstract void onSuccess(JSONObject data);
 
     public void onFailed(String errorMsg) {
-        Toast toast = Toast.makeText(KanJianApplication.INTANCE,
+        Toast toast = Toast.makeText(KanJianApplication.INSTANCE,
                 errorMsg, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();

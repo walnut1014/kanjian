@@ -127,7 +127,7 @@ public final class Resource{
         }
     }
 
-    private static String getUrl(String uri) {
+    public static String getUrl(String uri) {
         if(!uri.startsWith("/"))
             uri = "/" + uri;
         return CONTEXT_PATH + uri;

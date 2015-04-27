@@ -45,6 +45,9 @@ public class LoginFragment extends ActionBarFragment implements Constants.Action
 		View view = inflater.inflate(R.layout.fragment_login, container, false);
 
         ButterKnife.inject(this, view);
+        // 测试账号
+        mobilephoneTv.setEditText("13100000000");
+        passwordTv.setEditText("123456");
 		return view;
 	}
 

@@ -15,11 +15,11 @@ public class ToastUtils {
     }
 
     public static void toast(String msg, int duration) {
-        Toast.makeText(KanJianApplication.INTANCE, msg, duration).show();
+        Toast.makeText(KanJianApplication.INSTANCE, msg, duration).show();
     }
 
     public static void toast(int msg, int duration) {
-        Toast.makeText(KanJianApplication.INTANCE, msg, duration).show();
+        Toast.makeText(KanJianApplication.INSTANCE, msg, duration).show();
     }
 
 }

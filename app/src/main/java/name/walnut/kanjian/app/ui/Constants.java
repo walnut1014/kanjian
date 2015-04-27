@@ -1,5 +1,7 @@
 package name.walnut.kanjian.app.ui;
 
+import name.walnut.kanjian.app.resource.impl.Resource;
+
 public class Constants {
     public static interface Action {
 
@@ -28,5 +30,9 @@ public class Constants {
         final static int PASSWORD_MAX_LENGTH = 20;
 
         final static int NICKNAME_MAX_LENGTH = 32;
+    }
+
+    public static String getFrescoUrl(String path) {
+        return Resource.getUrl("headPhoto/") + path;
     }
 }

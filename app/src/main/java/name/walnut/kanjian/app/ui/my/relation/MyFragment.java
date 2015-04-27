@@ -4,25 +4,32 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.account.Account;
 import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.views.SettingItemView;
 
-import android.app.ActionBar;
-import android.app.Fragment;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.facebook.drawee.view.SimpleDraweeView;
 
 public class MyFragment extends ActionBarFragment {
 
     @ResourceWeave(actionClass = MyAccountInitCountAction.class)
     public Resource myAccountInitResource;
 
+    @InjectView(R.id.my_avatar)
+    SimpleDraweeView avatarView;
+    @InjectView(R.id.my_nickname)
+    TextView nicknameTv;
     @InjectView(R.id.my_title_friend_request)
     SettingItemView friendRequestView;
     @InjectView(R.id.my_title_friends)
@@ -43,6 +50,7 @@ public class MyFragment extends ActionBarFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        showAccount();
         fetchRelationCount();
     }
 
@@ -85,9 +93,23 @@ public class MyFragment extends ActionBarFragment {
     }
 
 
-    public void showRelation(int friendCount, int unreadCount) {
-        showFriendCount(friendCount);
-        showUnreadCount(unreadCount);
+    /**
+     * 显示账号相关信息
+     */
+    public void showAccount() {
+        showFriendCount(Account.INSTANCE.getFriendCount());
+        showUnreadCount(Account.INSTANCE.getUnreadCount());
+        showNickname(Account.INSTANCE.getNickname());
+        showAvatar(Account.INSTANCE.getHeadPhotoPath());
+    }
+
+    private void showAvatar(String headPhotoPath) {
+        Uri uri = Uri.parse(Constants.getFrescoUrl(headPhotoPath));
+        avatarView.setImageURI(uri);
+    }
+
+    private void showNickname(String nickname) {
+        nicknameTv.setText(nickname);
     }
 
     private void showFriendCount(int friendCount) {
