@@ -98,7 +98,8 @@ public class SearchDialogFragment extends DialogFragment {
     @OnClick(R.id.search_text)
     void search() {
         dismiss();
+        String queryStr = searchEdit.getText().toString();
         ActionBarActivity activity = (ActionBarActivity) getActivity();
-        activity.switchFragment(new SearchResultFragment());
+        activity.switchFragment(SearchResultFragment.newInstance(queryStr));
     }
 }
