@@ -25,9 +25,6 @@ public class MyFragment extends ActionBarFragment {
     @ResourceWeave(actionClass = RelationCountAction.class)
     public Resource relationCountResource;
 
-    @ResourceWeave(actionClass = RelationCountAction.class)
-    public Resource invitFriendResource;
-
     @InjectView(R.id.my_avatar)
     SimpleDraweeView avatarView;
     @InjectView(R.id.my_nickname)
@@ -57,8 +54,7 @@ public class MyFragment extends ActionBarFragment {
     }
 
     private void fetchRelationCount() {
-        //relationCountResource.send();
-        invitFriendResource.addParam("id", 1).send();
+        relationCountResource.send();
     }
 
     @Override
