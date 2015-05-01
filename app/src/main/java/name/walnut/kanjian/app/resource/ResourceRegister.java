@@ -11,7 +11,7 @@ public enum ResourceRegister {
     smsValidateResource("passport/smsvalidate", RequestMethod.POST), //验证验证码
 
     /*-----------------------relation模块-----------------------*/
-    myAccountInitResource("my/accountInit", RequestMethod.GET), //我的账户初始页面，包括昵称，头像
+    relationCountResource("relation/count", RequestMethod.GET), //未读消息数以及好友数
     relationListResource("relation/list", RequestMethod.GET), //获得所有添加好友请求,包括已同意，未同意和待验证
     //邀请好友(long id)
     invitFriendResource("relation/invit", RequestMethod.POST),

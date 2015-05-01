@@ -1,11 +1,17 @@
 package name.walnut.kanjian.app.ui.login.action;
 
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.account.Account;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.ui.Constants;
@@ -19,6 +25,14 @@ public class LoginAction extends BaseResourceAction {
     @Override
     public void onSuccess(Response response) {
         dismissMessage();
+
+        System.out.println(response);
+        try {
+            JSONObject jsonObject = new JSONObject(response.getData());
+            //
+        } catch (JSONException ex) {
+            Log.e("系统错误","解析json异常",ex);
+        }
 
         getActivity().finish();
         Intent intent = new Intent(Constants.Action.MAIN_ACTION);

@@ -12,7 +12,6 @@ import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.views.SettingItemView;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,8 +22,11 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 public class MyFragment extends ActionBarFragment {
 
-    @ResourceWeave(actionClass = MyAccountInitCountAction.class)
-    public Resource myAccountInitResource;
+    @ResourceWeave(actionClass = RelationCountAction.class)
+    public Resource relationCountResource;
+
+    @ResourceWeave(actionClass = RelationCountAction.class)
+    public Resource invitFriendResource;
 
     @InjectView(R.id.my_avatar)
     SimpleDraweeView avatarView;
@@ -55,7 +57,8 @@ public class MyFragment extends ActionBarFragment {
     }
 
     private void fetchRelationCount() {
-        myAccountInitResource.send();
+        //relationCountResource.send();
+        invitFriendResource.addParam("id", 1).send();
     }
 
     @Override
@@ -97,8 +100,6 @@ public class MyFragment extends ActionBarFragment {
      * 显示账号相关信息
      */
     public void showAccount() {
-        showFriendCount(Account.INSTANCE.getFriendCount());
-        showUnreadCount(Account.INSTANCE.getUnreadCount());
         showNickname(Account.INSTANCE.getNickname());
         showAvatar(Account.INSTANCE.getHeadPhotoPath());
     }

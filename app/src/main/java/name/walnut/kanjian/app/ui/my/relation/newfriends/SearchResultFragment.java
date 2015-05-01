@@ -39,7 +39,7 @@ public class SearchResultFragment extends ActionBarFragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String query = getArguments().getString(QUERY);
-        queryUserResource.addParam("mobilePhone", query)
+        queryUserResource.addParam("mobilephone", query)
                 .send();
     }
 
