@@ -12,9 +12,15 @@ public enum ResourceRegister {
 
     /*-----------------------relation模块-----------------------*/
     relationCountResource("relation/count", RequestMethod.GET), //未读消息数以及好友数
+    /*
+     * agree 是否同意
+     * invited 是否为被邀请人
+     */
     relationListResource("relation/list", RequestMethod.GET), //获得所有添加好友请求,包括已同意，未同意和待验证
     //邀请好友(long id)
     invitFriendResource("relation/invit", RequestMethod.POST),
+    //同意他人的邀请(long id)
+    agreeInvitResource("relation/agreeInvit", RequestMethod.POST),
     friendsResource("relation/friends", RequestMethod.GET),//获得所有的好友
 
     /*-----------------------公共模块-----------------------*/
