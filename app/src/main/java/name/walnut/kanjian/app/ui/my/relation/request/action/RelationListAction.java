@@ -1,5 +1,7 @@
 package name.walnut.kanjian.app.ui.my.relation.request.action;
 
+import android.app.Fragment;
+
 import com.android.volley.VolleyError;
 
 import org.json.JSONArray;
@@ -12,6 +14,7 @@ import java.util.Map;
 
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.BaseResourceAction;
+import name.walnut.kanjian.app.support.KanJianApplication;
 import name.walnut.kanjian.app.ui.my.relation.request.FriendRequest;
 import name.walnut.kanjian.app.ui.my.relation.request.FriendRequestFragment;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
@@ -49,7 +52,8 @@ public class RelationListAction extends BaseResourceAction {
         }
         if (phones.size() > 0) {
             String[] phoneArray = new String[phones.size()];
-            Map<String, String> nameMap = ContactsUtils.getContactsByPhone(getActivity(), phones.toArray(phoneArray));
+            Map<String, String> nameMap = ContactsUtils.getContactsByPhone(KanJianApplication.INSTANCE,
+                    phones.toArray(phoneArray));
 
             for (FriendRequest request : requestList) {
                 String name = nameMap.get(request.getMobilePhone());
@@ -73,7 +77,9 @@ public class RelationListAction extends BaseResourceAction {
 
     // 请求结果
     private void onRequestResult(List<FriendRequest> requestList) {
-        FriendRequestFragment fragment = (FriendRequestFragment) getFragment();
-        fragment.show(requestList);
+        Fragment fragment = getFragment();
+        if (fragment != null && fragment instanceof FriendRequestFragment) {
+            ((FriendRequestFragment) fragment).show(requestList);
+        }
     }
 }

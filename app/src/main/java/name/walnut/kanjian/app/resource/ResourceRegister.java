@@ -25,6 +25,7 @@ public enum ResourceRegister {
 
     /*-----------------------公共模块-----------------------*/
     //通过手机号查询用户（String mobilePhone）
+    //查询多手机号(String mobilephones：'13000000000,13000000001,13000000002')
     queryUserResource("user", RequestMethod.GET)
     ;
 

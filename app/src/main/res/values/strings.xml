@@ -88,5 +88,10 @@
     <string name="dialog_message_agree_invite">正在添加好友</string>
     <string name="friends_photo_count">%s 张照片</string>
     <string name="friend_search_empty">没有符合的结果</string>
+    <string name="contacts_friend">通讯录朋友</string>
+    <string name="relation_wait_verify">待验证</string>
+    <string name="relation_agree">已加为好友</string>
+    <string name="dialog_message_fetch_contacts">正在获取朋友信息</string>
+    <string name="friend_search_content">搜索：%s</string>
 
 </resources>

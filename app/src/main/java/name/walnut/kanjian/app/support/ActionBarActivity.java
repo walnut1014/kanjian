@@ -54,11 +54,16 @@ public abstract class ActionBarActivity extends Activity {
 
     public void showMessage(String message) {
         LayoutInflater inflater = getLayoutInflater();
-        final View vPopupWindow=inflater.inflate(R.layout.popup_message, null, false);
-        pw= new PopupWindow(vPopupWindow, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT,true);
+        final View vPopupWindow = inflater.inflate(R.layout.popup_message, null, false);
+        pw = new PopupWindow(vPopupWindow, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT,true);
 
         ((TextView) vPopupWindow.findViewById(R.id.message)).setText(message);
-        pw.showAtLocation(findViewById(containerViewId), Gravity.CENTER, 0, 0);
+        findViewById(containerViewId).post(new Runnable() {
+            @Override
+            public void run() {
+                pw.showAtLocation(findViewById(containerViewId), Gravity.CENTER, 0, 0);
+            }
+        });
 
     }
 

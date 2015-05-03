@@ -1,9 +1,12 @@
 package name.walnut.kanjian.app.ui.my.relation.newfriends.action;
 
+import android.app.Fragment;
+
 import com.android.volley.VolleyError;
 
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.BaseResourceAction;
+import name.walnut.kanjian.app.ui.my.relation.newfriends.NewFriendFragment;
 import name.walnut.kanjian.app.ui.my.relation.newfriends.SearchResultFragment;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
 
@@ -29,7 +32,16 @@ public class AgreeInviteAction extends BaseResourceAction {
     }
 
     private void onResult(boolean success) {
-        SearchResultFragment fragment = (SearchResultFragment) getFragment();
-        fragment.onAgreeInviteResult(success);
+        Fragment fragment = getFragment();
+        if (fragment == null) return;
+
+        if (fragment instanceof SearchResultFragment) {
+            SearchResultFragment searchResultFragment = (SearchResultFragment) fragment;
+            searchResultFragment.onAgreeInviteResult(success);
+
+        } else if (fragment instanceof NewFriendFragment) {
+            NewFriendFragment newFriendFragment = (NewFriendFragment) fragment;
+            newFriendFragment.onAgreeInviteResult(success);
+        }
     }
 }

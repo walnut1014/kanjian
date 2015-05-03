@@ -1,5 +1,7 @@
 package name.walnut.kanjian.app.ui.my.relation.friends;
 
+import android.app.Fragment;
+
 import com.android.volley.VolleyError;
 
 import org.json.JSONArray;
@@ -55,8 +57,10 @@ public class FetchFriendsAction extends BaseResourceAction {
     }
 
     private void onRequestResult(List<FriendInfo> friendList) {
-        FriendsFragment fragment = (FriendsFragment) getFragment();
-        fragment.showFriends(friendList);
+        Fragment fragment = getFragment();
+        if (fragment != null && (fragment instanceof FriendsFragment)) {
+            ((FriendsFragment) fragment).showFriends(friendList);
+        }
     }
 
 }

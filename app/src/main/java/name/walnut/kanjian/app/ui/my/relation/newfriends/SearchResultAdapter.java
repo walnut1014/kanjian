@@ -30,7 +30,7 @@ public class SearchResultAdapter extends AbsListAdapter<Friend, SearchResultAdap
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = inflater.inflate(R.layout.layout_new_friend, viewGroup, false);
+        View view = inflater.inflate(R.layout.layout_friend_search, viewGroup, false);
         return new ViewHolder(view);
     }
 
@@ -62,7 +62,7 @@ public class SearchResultAdapter extends AbsListAdapter<Friend, SearchResultAdap
             case WAIT_VERIFY:   // 等待好友验证
                 viewHolder.sendBtn.setVisibility(View.GONE);
                 viewHolder.statusTv.setVisibility(View.VISIBLE);
-                viewHolder.statusTv.setText("待验证");
+                viewHolder.statusTv.setText(R.string.relation_wait_verify);
                 break;
             case ACCEPT:    // 接受好友请求
                 viewHolder.statusTv.setVisibility(View.GONE);
@@ -80,7 +80,7 @@ public class SearchResultAdapter extends AbsListAdapter<Friend, SearchResultAdap
             case AGREE:     // 已加为好友
                 viewHolder.sendBtn.setVisibility(View.GONE);
                 viewHolder.statusTv.setVisibility(View.VISIBLE);
-                viewHolder.statusTv.setText("已加为好友");
+                viewHolder.statusTv.setText(R.string.relation_agree);
                 break;
             default:
                 break;

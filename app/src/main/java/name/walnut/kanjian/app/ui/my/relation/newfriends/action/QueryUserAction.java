@@ -1,5 +1,7 @@
 package name.walnut.kanjian.app.ui.my.relation.newfriends.action;
 
+import android.app.Fragment;
+
 import com.android.volley.VolleyError;
 
 import org.json.JSONArray;
@@ -12,7 +14,9 @@ import java.util.Map;
 
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.BaseResourceAction;
+import name.walnut.kanjian.app.support.KanJianApplication;
 import name.walnut.kanjian.app.ui.my.relation.newfriends.Friend;
+import name.walnut.kanjian.app.ui.my.relation.newfriends.NewFriendFragment;
 import name.walnut.kanjian.app.ui.my.relation.newfriends.SearchResultFragment;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
 import name.walnut.kanjian.app.utils.ContactsUtils;
@@ -61,7 +65,9 @@ public class QueryUserAction extends BaseResourceAction {
         if (phones.size() > 0) {
             // 根据手机号查询通讯录信息
             String[] phoneArray = new String[phones.size()];
-            Map<String, String> nameMap = ContactsUtils.getContactsByPhone(getActivity(), phones.toArray(phoneArray));
+            Map<String, String> nameMap =
+                    ContactsUtils.getContactsByPhone(
+                            KanJianApplication.INSTANCE, phones.toArray(phoneArray));
 
             for (Friend request : friendList) {
                 String name = nameMap.get(request.getMobilePhone());
@@ -86,7 +92,17 @@ public class QueryUserAction extends BaseResourceAction {
     }
 
     private void onRequestResult(List<Friend> friends) {
-        SearchResultFragment fragment = (SearchResultFragment) getFragment();
-        fragment.showSearchResult(friends);
+        Fragment fragment = getFragment();
+        if (fragment == null) return;
+
+        // TODO bug, 网络较差条件下，如果通讯录好友比查询结果还要晚得到，结果会显示通讯录
+        if (fragment instanceof SearchResultFragment) {
+            SearchResultFragment searchResultFragment = (SearchResultFragment) fragment;
+            searchResultFragment.showSearchResult(friends);
+
+        } else if (fragment instanceof NewFriendFragment) {
+            NewFriendFragment newFriendFragment = (NewFriendFragment) fragment;
+            newFriendFragment.showContactsFriends(friends);
+        }
     }
 }

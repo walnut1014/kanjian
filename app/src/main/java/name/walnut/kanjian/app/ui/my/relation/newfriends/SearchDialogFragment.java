@@ -4,11 +4,9 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -21,7 +19,6 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import butterknife.OnEditorAction;
 import butterknife.OnTextChanged;
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.ActionBarActivity;
@@ -55,7 +52,6 @@ public class SearchDialogFragment extends DialogFragment {
         final View view = inflater.inflate(R.layout.fragment_friend_search, null, false);
 
         ButterKnife.inject(this, view);
-        searchEdit.setText("13000000003");
 
         Dialog dialog=new Dialog(getActivity(), R.style.SearchDialog);
 
@@ -92,7 +88,7 @@ public class SearchDialogFragment extends DialogFragment {
             searchContentTv.setVisibility(View.GONE);
         } else {
             searchContentTv.setVisibility(View.VISIBLE);
-            searchContentTv.setText("搜索："+text);
+            searchContentTv.setText(getString(R.string.friend_search_content, text));
         }
     }
 

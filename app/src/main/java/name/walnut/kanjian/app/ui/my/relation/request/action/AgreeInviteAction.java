@@ -1,5 +1,7 @@
 package name.walnut.kanjian.app.ui.my.relation.request.action;
 
+import android.app.Fragment;
+
 import com.android.volley.VolleyError;
 
 import name.walnut.kanjian.app.R;
@@ -29,7 +31,9 @@ public class AgreeInviteAction extends BaseResourceAction {
     }
 
     private void onResult(boolean success) {
-        FriendRequestFragment fragment = (FriendRequestFragment) getFragment();
-        fragment.onAgreeInviteResult(success);
+        Fragment fragment = getFragment();
+        if (fragment != null && fragment instanceof FriendRequestFragment) {
+            ((FriendRequestFragment) fragment).onAgreeInviteResult(success);
+        }
     }
 }
