@@ -83,5 +83,10 @@
     <string name="title_fragment_search_result">搜索结果</string>
     <string name="friend_request_unknown">不在手机通讯录内</string>
     <string name="friend_request_name">手机联系人：%s</string>
+    <string name="request_send">加为好友</string>
+    <string name="dialog_message_invite_friend">正在发送好友申请</string>
+    <string name="dialog_message_agree_invite">正在添加好友</string>
+    <string name="friends_photo_count">%s 张照片</string>
+    <string name="friend_search_empty">没有符合的结果</string>
 
 </resources>

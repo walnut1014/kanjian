@@ -22,6 +22,10 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 public class MyFragment extends ActionBarFragment {
 
+    public static final int ACTIVITY_REQUEST_FRIENDS_REQUEST = 0;
+    public static final int ACTIVITY_REQUEST_FRIENDS = 1;
+    public static final int ACTIVITY_REQUEST_ADD_FRIENDS = 2;
+
     @ResourceWeave(actionClass = RelationCountAction.class)
     public Resource relationCountResource;
 
@@ -53,6 +57,7 @@ public class MyFragment extends ActionBarFragment {
         fetchRelationCount();
     }
 
+    // 刷新好友关系
     private void fetchRelationCount() {
         relationCountResource.send();
     }
@@ -66,19 +71,19 @@ public class MyFragment extends ActionBarFragment {
     @OnClick(R.id.my_title_friend_request)
     public void startFriendRequestsActivity() {
         Intent intent = new Intent(Constants.Action.FRIEND_REQUEST_ACTION);
-        startActivity(intent);
+        startActivityForResult(intent, ACTIVITY_REQUEST_FRIENDS_REQUEST);
     }
 
     @OnClick(R.id.my_title_friends)
     public void startFriendsActivity() {
         Intent intent = new Intent(Constants.Action.FRIENDS_ACTION);
-        startActivity(intent);
+        startActivityForResult(intent, ACTIVITY_REQUEST_FRIENDS);
     }
 
     @OnClick(R.id.my_title_add_friend)
     public void startAddFriendActivity() {
         Intent intent = new Intent(Constants.Action.ADD_FRIENDS_ACTION);
-        startActivity(intent);
+        startActivityForResult(intent, ACTIVITY_REQUEST_ADD_FRIENDS);
     }
 
     @Override
@@ -91,6 +96,15 @@ public class MyFragment extends ActionBarFragment {
         return false;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case ACTIVITY_REQUEST_FRIENDS:
+                fetchRelationCount();
+                break;
+        }
+    }
 
     /**
      * 显示账号相关信息
@@ -106,6 +120,11 @@ public class MyFragment extends ActionBarFragment {
 
     private void showNickname(String nickname) {
         nicknameTv.setText(nickname);
+    }
+
+    public void showRelationCount(int friendCount, int unreadCount) {
+        showFriendCount(friendCount);
+        showUnreadCount(unreadCount);
     }
 
     private void showFriendCount(int friendCount) {

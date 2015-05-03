@@ -1,30 +1,32 @@
 package name.walnut.kanjian.app.ui.my.relation.request;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.facebook.drawee.view.SimpleDraweeView;
+
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.AbsListAdapter;
+import name.walnut.kanjian.app.ui.Constants;
 
 /**
  * 好友请求 adapter
  */
 public class FriendRequestAdapter extends AbsListAdapter<FriendRequest, FriendRequestAdapter.ViewHolder>{
 
+    private FriendRequestFragment fragment;
 
-    public FriendRequestAdapter(Context context, List<FriendRequest> list) {
-        super(context, list);
+    public FriendRequestAdapter(FriendRequestFragment fragment, List<FriendRequest> list) {
+        super(fragment.getActionBarActivity(), list);
+        this.fragment = fragment;
     }
 
     @Override
@@ -35,40 +37,49 @@ public class FriendRequestAdapter extends AbsListAdapter<FriendRequest, FriendRe
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        FriendRequest friendRequest = getItem(i);
-        viewHolder.nicknameTv.setText(friendRequest.getMobilePhone());
+    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+        final FriendRequest friendRequest = getItem(position);
+        viewHolder.nicknameTv.setText(friendRequest.getNickName());
         String name = friendRequest.getContactsName();
-        if (null == name) {
-            name = context.getString(R.string.friend_request_unknown);
-        } else {
-            name = context.getString(R.string.friend_request_name, name);
-        }
+        name = (name == null)
+                    ? context.getString(R.string.friend_request_unknown)
+                    : context.getString(R.string.friend_request_name, name);
         viewHolder.introTv.setText(name);
-        // TODO
-        switch (friendRequest.getState()) {
-            case waitVerify:
-                viewHolder.acceptBtn.setVisibility(View.GONE);
-                viewHolder.statusTv.setVisibility(View.VISIBLE);
-                viewHolder.statusTv.setText("待验证");
-                break;
-            case sendRequest:
-                viewHolder.acceptBtn.setVisibility(View.GONE);
-                viewHolder.statusTv.setVisibility(View.VISIBLE);
-                viewHolder.statusTv.setText("已加为好友");
-                break;
-            case accept:
-                viewHolder.acceptBtn.setVisibility(View.VISIBLE);
-                viewHolder.statusTv.setVisibility(View.GONE);
-                viewHolder.statusTv.setText("");
-                break;
+        viewHolder.avatarImg.setImageURI(Constants.getFrescoUrl(friendRequest.getAvatar()));
+        if (friendRequest.isAgree()) {
+            // 已同意
+            viewHolder.acceptBtn.setVisibility(View.GONE);
+            viewHolder.statusTv.setVisibility(View.VISIBLE);
+            viewHolder.statusTv.setText("已加为好友");
+            viewHolder.acceptBtn.setOnClickListener(null);
+
+        } else if (!friendRequest.isInvited()) {
+            // 接受
+            viewHolder.acceptBtn.setVisibility(View.VISIBLE);
+            viewHolder.statusTv.setVisibility(View.GONE);
+            viewHolder.statusTv.setText("");
+            viewHolder.acceptBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 接受好友邀请
+                    fragment.agreeInvite(friendRequest, position);
+                }
+            });
+
+        } else {
+            // 待验证
+            viewHolder.acceptBtn.setVisibility(View.GONE);
+            viewHolder.statusTv.setVisibility(View.VISIBLE);
+            viewHolder.statusTv.setText("待验证");
+            viewHolder.acceptBtn.setOnClickListener(null);
         }
+
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    protected static class ViewHolder extends RecyclerView.ViewHolder {
 
         @InjectView(R.id.avatar)
-        public ImageView avatarImg;
+        public SimpleDraweeView avatarImg;
         @InjectView(R.id.nickname)
         public TextView nicknameTv;
         @InjectView(R.id.intro)

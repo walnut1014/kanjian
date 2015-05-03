@@ -92,9 +92,9 @@ public class FriendsFragment extends ActionBarFragment {
         startActivity(intent);
     }
 
-    public void showFriends(List<Friend> friendList) {
+    public void showFriends(List<FriendInfo> friendList) {
         if (adapter == null) {
-            adapter = new FriendsAdapter(getActionBarActivity(), friendList);
+            adapter = new FriendsAdapter(this, friendList);
             recyclerView.setAdapter(adapter);
         } else {
             adapter.setDataSet(friendList);

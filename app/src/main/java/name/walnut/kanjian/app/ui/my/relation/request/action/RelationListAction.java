@@ -7,7 +7,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -32,10 +31,15 @@ public class RelationListAction extends BaseResourceAction {
             JSONArray array = new JSONArray(response.getData());
             for (int i = 0; i < array.length(); i++) {
                 JSONObject jsonObject = array.getJSONObject(i);
-                FriendRequest request = new FriendRequest();
                 String phone = jsonObject.getString("mobilephone");
+
+                FriendRequest request = new FriendRequest();
+                request.setId(jsonObject.getLong("id"));
+                request.setAvatar(jsonObject.getString("headPhotoPath"));
                 request.setMobilePhone(phone);
-                request.setStatusStr(jsonObject.getString("relationStatus"));
+                request.setNickName(jsonObject.getString("nickName"));
+                request.setAgree(jsonObject.getBoolean("agree"));
+                request.setInvited(jsonObject.getBoolean("invited"));
 
                 requestList.add(request);
                 phones.add(phone);

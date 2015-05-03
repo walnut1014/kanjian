@@ -13,9 +13,9 @@ import name.walnut.kanjian.app.support.AbsListAdapter;
 /**
  * 添加好友 adapter
  */
-public class NewFriendAdapter extends AbsListAdapter<ContactsFriend, NewFriendAdapter.ViewHolder> {
+public class NewFriendAdapter extends AbsListAdapter<Friend, NewFriendAdapter.ViewHolder> {
 
-    public NewFriendAdapter(Context context, List<ContactsFriend> list) {
+    public NewFriendAdapter(Context context, List<Friend> list) {
         super(context, list);
     }
 
@@ -26,7 +26,7 @@ public class NewFriendAdapter extends AbsListAdapter<ContactsFriend, NewFriendAd
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        ContactsFriend friend = getItem(i);
+
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

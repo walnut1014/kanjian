@@ -21,6 +21,7 @@ import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.ui.Constants;
+import name.walnut.kanjian.app.ui.my.relation.request.action.AgreeInviteAction;
 import name.walnut.kanjian.app.ui.my.relation.request.action.RelationListAction;
 
 /**
@@ -32,9 +33,15 @@ public class FriendRequestFragment extends ActionBarFragment {
     SuperRecyclerView recyclerView;
 
     @ResourceWeave(actionClass = RelationListAction.class)
-    public Resource relationListResource;
+    public Resource relationListResource;   // 获取好友请求列表
+
+    @ResourceWeave(actionClass = AgreeInviteAction.class)
+    public Resource agreeInvitResource; // 接受好友请求
 
     private FriendRequestAdapter adapter;
+
+    private FriendRequest friendRequest;    // 点击接受的friend
+    private int position;  // 在adapter中的位置
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -95,10 +102,29 @@ public class FriendRequestFragment extends ActionBarFragment {
     // 设置数据源并显示
     public void show(List<FriendRequest> requestList) {
         if (adapter == null) {
-            adapter = new FriendRequestAdapter(getActionBarActivity(), requestList);
+            adapter = new FriendRequestAdapter(this, requestList);
             recyclerView.setAdapter(adapter);
         } else {
             adapter.setDataSet(requestList);
         }
+    }
+
+    // 接受好友请求
+    public void agreeInvite(FriendRequest friendRequest, int position) {
+        this.position = position;
+        this.friendRequest = friendRequest;
+        showMessage(R.string.dialog_message_agree_invite);
+        agreeInvitResource.addParam("id", friendRequest.getId())
+                .send();
+    }
+
+    // 接受好友请求 结果
+    public void onAgreeInviteResult(boolean success) {
+        dismissMessage();
+        if (success) {
+            friendRequest.setAgree(true);
+            adapter.notifyItemChanged(position);
+        }
+        friendRequest = null;
     }
 }

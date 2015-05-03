@@ -9,13 +9,14 @@ import android.view.ViewGroup;
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
 
 import java.util.List;
+import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
-import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.support.ActionBarFragment;
+import name.walnut.kanjian.app.utils.ContactsUtils;
 
 /**
  * 添加好友fragment
@@ -33,11 +34,6 @@ public class NewFriendFragment extends ActionBarFragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_new_friend, container, false);
@@ -45,6 +41,14 @@ public class NewFriendFragment extends ActionBarFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         showContactsFriends(null);
         return rootView;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // 获取本地所有手机号
+        Map<String, String> contacts = ContactsUtils.getAllContacts(getActionBarActivity());
+
     }
 
     @Override
@@ -69,7 +73,7 @@ public class NewFriendFragment extends ActionBarFragment {
 
     }
 
-    public void showContactsFriends(List<ContactsFriend> friendList) {
+    public void showContactsFriends(List<Friend> friendList) {
         if (adapter == null) {
             adapter = new NewFriendAdapter(getActionBarActivity(), friendList);
             recyclerView.setAdapter(adapter);

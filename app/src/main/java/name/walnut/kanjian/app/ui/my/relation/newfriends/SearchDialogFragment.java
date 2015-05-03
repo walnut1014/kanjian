@@ -55,6 +55,7 @@ public class SearchDialogFragment extends DialogFragment {
         final View view = inflater.inflate(R.layout.fragment_friend_search, null, false);
 
         ButterKnife.inject(this, view);
+        searchEdit.setText("13000000003");
 
         Dialog dialog=new Dialog(getActivity(), R.style.SearchDialog);
 

@@ -26,10 +26,18 @@ public class LoginAction extends BaseResourceAction {
     public void onSuccess(Response response) {
         dismissMessage();
 
-        System.out.println(response);
+        Logger.e(response.getData());
+
         try {
             JSONObject jsonObject = new JSONObject(response.getData());
-            //
+            // 缓存个人信息到本地
+
+            long id = jsonObject.optLong("id");
+            String avatarPath = jsonObject.optString("headPhotoPath");
+            String nickname = jsonObject.optString("nickName");
+            String mobilePhone = jsonObject.optString("mobilephone");
+
+            Account.INSTANCE.setAccount(id, nickname, avatarPath, mobilePhone);
         } catch (JSONException ex) {
             Log.e("系统错误","解析json异常",ex);
         }

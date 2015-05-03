@@ -1,0 +1,38 @@
+package name.walnut.kanjian.app.ui.my.relation.newfriends.action;
+
+import com.android.volley.VolleyError;
+
+import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.support.BaseResourceAction;
+import name.walnut.kanjian.app.ui.my.relation.newfriends.SearchResultFragment;
+import name.walnut.kanjian.app.ui.util.ToastUtils;
+import name.walnut.kanjian.app.utils.Logger;
+
+/**
+ * 好友邀请 action
+ */
+public class InviteFriendAction extends BaseResourceAction {
+    @Override
+    public void onSuccess(Response response) {
+        Logger.e(response.getData());
+        onResult(true);
+    }
+
+    @Override
+    public void onFailed(Response response) {
+        onResult(false);
+        ToastUtils.toast(response.getMessage());
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError volleyError) {
+        Logger.e(volleyError.getMessage());
+        onResult(false);
+        ToastUtils.toast(R.string.toast_error_network);
+    }
+
+    public void onResult(boolean success) {
+        SearchResultFragment fragment = (SearchResultFragment) getFragment();
+        fragment.onInviteResult(success);
+    }
+}
