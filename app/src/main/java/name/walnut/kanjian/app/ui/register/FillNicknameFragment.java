@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.io.File;
 
@@ -49,10 +48,24 @@ public class FillNicknameFragment extends ActionBarFragment {
 
     private String token;
     private String password;
+    private String nickname;
 
-    public FillNicknameFragment(String token, String password) {
-        this.token = token;
-        this.password = password;
+    public FillNicknameFragment() {}
+
+    public static FillNicknameFragment newInstance(String token, String password) {
+        Bundle bundle = new Bundle();
+        bundle.putString("token", token);
+        bundle.putString("password", password);
+        FillNicknameFragment fragment = new FillNicknameFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        token = getArguments().getString("token");
+        password = getArguments().getString("password");
     }
 
     @Override
@@ -88,6 +101,8 @@ public class FillNicknameFragment extends ActionBarFragment {
             ToastUtils.toast(R.string.toast_empty_nickname);
 
         } else {
+            this.nickname = nickname;
+
             showMessage(R.string.dialog_message_fill_nickname);
             // TODO 上传图片
             registerResource.addParam("token", token)
@@ -118,4 +133,7 @@ public class FillNicknameFragment extends ActionBarFragment {
         });
     }
 
+    public String getNickname() {
+        return nickname;
+    }
 }

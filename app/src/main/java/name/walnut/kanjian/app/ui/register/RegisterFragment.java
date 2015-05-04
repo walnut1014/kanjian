@@ -66,7 +66,7 @@ public class RegisterFragment extends ActionBarFragment implements Constants.Act
 
     @OnClick(R.id.register)
     void register() {
-        mobilephone = mobilephoneTv.getEditText().getText().toString();
+        String mobilephone = mobilephoneTv.getEditText().getText().toString();
 
         if (TextUtils.isEmpty(mobilephone)) {
             ToastUtils.toast(R.string.toast_register_empty_phone, Toast.LENGTH_SHORT);
@@ -75,6 +75,8 @@ public class RegisterFragment extends ActionBarFragment implements Constants.Act
             ToastUtils.toast(R.string.toast_register_error_format_phone, Toast.LENGTH_SHORT);
 
         } else {
+            this.mobilephone = mobilephone;
+
             showMessage(R.string.dialog_message_register);
 
             registerSendResource.addParam("mobilephone", mobilephone)
@@ -83,7 +85,7 @@ public class RegisterFragment extends ActionBarFragment implements Constants.Act
         }
     }
 
-    boolean isMobilePhoneAvailable(String mobilephone) {
+    private boolean isMobilePhoneAvailable(String mobilephone) {
         return RegexUtils.isMobilePhone(mobilephone);
     }
 

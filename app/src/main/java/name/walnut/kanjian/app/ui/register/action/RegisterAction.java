@@ -1,15 +1,15 @@
 package name.walnut.kanjian.app.ui.register.action;
 
 import android.content.Intent;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.BaseResourceAction;
-import name.walnut.kanjian.app.support.KanJianApplication;
 import name.walnut.kanjian.app.ui.Constants;
+import name.walnut.kanjian.app.ui.register.FillNicknameFragment;
+import name.walnut.kanjian.app.ui.register.RegisterActivity;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
 
 /**
@@ -19,6 +19,13 @@ public class RegisterAction extends BaseResourceAction {
     @Override
     public void onSuccess(Response response) {
         dismissMessage();
+
+        FillNicknameFragment fragment = (FillNicknameFragment) getFragment();
+
+        RegisterActivity activity = (RegisterActivity) getActivity();
+        activity.setAvatar(response.getData());
+        activity.setNickName(fragment.getNickname());
+        activity.onRegisterSuccess();   // 保存账号信息
 
         // 注册成功，弹出提示，跳转到主页面
         ToastUtils.toast(R.string.toast_register_succeed);

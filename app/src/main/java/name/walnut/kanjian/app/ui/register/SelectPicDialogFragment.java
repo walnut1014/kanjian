@@ -21,7 +21,6 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
-import name.walnut.kanjian.app.utils.Logger;
 
 public class SelectPicDialogFragment extends DialogFragment {
 
@@ -135,8 +134,6 @@ public class SelectPicDialogFragment extends DialogFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Logger.d(requestCode+"");
-        Logger.d(data+"");
 
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
@@ -156,7 +153,6 @@ public class SelectPicDialogFragment extends DialogFragment {
     }
 
     public void selectPhoto(Uri uri) {
-        Logger.e(uri.toString());
         if (listener != null) {
             listener.onSelect(uri);
         }

@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -30,8 +29,20 @@ public class FillPasswordFragment extends ActionBarFragment{
 
     private String token;
 
-    public FillPasswordFragment(String token) {
-        this.token = token;
+    public FillPasswordFragment() {}
+
+    public static FillPasswordFragment newInstance(String token) {
+        Bundle bundle = new Bundle();
+        bundle.putString("token", token);
+        FillPasswordFragment fragment = new FillPasswordFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        token = getArguments().getString("token");
     }
 
     @Override
@@ -64,7 +75,7 @@ public class FillPasswordFragment extends ActionBarFragment{
 
         } else {
             // 跳转到完善资料界面
-            switchFragment(new FillNicknameFragment(token, password));
+            switchFragment(FillNicknameFragment.newInstance(token, password));
 
         }
     }

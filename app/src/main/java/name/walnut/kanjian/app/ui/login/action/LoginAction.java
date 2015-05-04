@@ -2,11 +2,9 @@ package name.walnut.kanjian.app.ui.login.action;
 
 import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,7 +15,6 @@ import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.login.LoginAlertDialogFragment;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
-import name.walnut.kanjian.app.utils.Logger;
 
 
 public class LoginAction extends BaseResourceAction {
@@ -25,8 +22,6 @@ public class LoginAction extends BaseResourceAction {
     @Override
     public void onSuccess(Response response) {
         dismissMessage();
-
-        Logger.e(response.getData());
 
         try {
             JSONObject jsonObject = new JSONObject(response.getData());
@@ -37,7 +32,7 @@ public class LoginAction extends BaseResourceAction {
             String nickname = jsonObject.optString("nickName");
             String mobilePhone = jsonObject.optString("mobilephone");
 
-            Account.INSTANCE.setAccount(id, nickname, avatarPath, mobilePhone);
+            Account.INSTANCE.setAccount(nickname, avatarPath, mobilePhone);
         } catch (JSONException ex) {
             Log.e("系统错误","解析json异常",ex);
         }
@@ -53,7 +48,6 @@ public class LoginAction extends BaseResourceAction {
 
         //{"message":"您的手机号13622309539还未注册","data":-1,"success":false}
         //{"message":"登陆密码错误","data":-2,"success":false}
-        Logger.d(response.getMessage());
         // 账号未注册
         switch (response.getData()) {
             case MESSAGE_CODE_UNREGISTER:
