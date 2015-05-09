@@ -81,8 +81,7 @@ public class ContactsUtils {
         if (cursor == null) {
             return resultMap;
         }
-        for( int i = 0; i < cursor.getCount(); i++ )
-        {
+        for( int i = 0; i < cursor.getCount(); i++ ){
             cursor.moveToPosition(i);
 
             // 取得联系人名字

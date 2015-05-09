@@ -15,7 +15,7 @@ import java.util.Map;
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.support.KanJianApplication;
-import name.walnut.kanjian.app.ui.my.relation.newfriends.Friend;
+import name.walnut.kanjian.app.ui.my.relation.newfriends.pojo.Friend;
 import name.walnut.kanjian.app.ui.my.relation.newfriends.NewFriendFragment;
 import name.walnut.kanjian.app.ui.my.relation.newfriends.SearchResultFragment;
 import name.walnut.kanjian.app.ui.util.ToastUtils;

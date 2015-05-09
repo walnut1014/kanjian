@@ -20,6 +20,7 @@ public class RelationCountAction extends BaseResourceAction {
     @Override
     public void onSuccess(Response response) {
 
+        Logger.e(response.getData());
         try {
             //设置未读消息数以及好友个数
             JSONObject jsonObject = new JSONObject(response.getData());

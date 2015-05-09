@@ -108,8 +108,9 @@ public final class Resource{
                 }
 
                 @Override
-                public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, JSONObject errorResponse) {
-    //                NetworkResponse response = new NetworkResponse(statusCode, rawJsonData.getBytes(), Collections.<String, String>emptyMap(), false);
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable,
+                                                    String rawJsonData, JSONObject errorResponse) {
+
                     VolleyError volleyError = new VolleyError(throwable);
                     resourceAction.onErrorResponse(volleyError);
                 }

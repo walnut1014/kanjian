@@ -20,6 +20,8 @@ import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.ui.my.relation.newfriends.action.AgreeInviteAction;
 import name.walnut.kanjian.app.ui.my.relation.newfriends.action.InviteFriendAction;
 import name.walnut.kanjian.app.ui.my.relation.newfriends.action.QueryUserAction;
+import name.walnut.kanjian.app.ui.my.relation.newfriends.pojo.Friend;
+import name.walnut.kanjian.app.ui.my.relation.newfriends.pojo.RelationStatus;
 
 /**
  * 搜索结果 fragment
@@ -107,7 +109,7 @@ public class SearchResultFragment extends ActionBarFragment{
     // 发送好友邀请 结果
     public void onInviteResult(boolean success) {
         if (success) {
-            friend.setRelation(Friend.RelationShip.WAIT_VERIFY);
+            friend.setRelation(RelationStatus.WAIT_VERIFY);
             adapter.notifyItemChanged(this.position);
         }
         dismissMessage();
@@ -128,7 +130,7 @@ public class SearchResultFragment extends ActionBarFragment{
     public void onAgreeInviteResult(boolean success) {
         dismissMessage();
         if (success) {
-            friend.setRelation(Friend.RelationShip.AGREE);
+            friend.setRelation(RelationStatus.AGREE);
             adapter.notifyItemChanged(position);
         }
         friend = null;

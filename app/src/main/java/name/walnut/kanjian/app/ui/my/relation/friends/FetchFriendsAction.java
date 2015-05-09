@@ -22,7 +22,6 @@ import name.walnut.kanjian.app.utils.Logger;
 public class FetchFriendsAction extends BaseResourceAction {
     @Override
     public void onSuccess(Response response) {
-        Logger.e(response.getData());
         List<FriendInfo> friendInfos = new ArrayList<>();
         try {
             JSONArray jsonArray = new JSONArray(response.getData());

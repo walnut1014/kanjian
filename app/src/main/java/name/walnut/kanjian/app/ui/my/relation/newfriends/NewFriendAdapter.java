@@ -15,6 +15,7 @@ import butterknife.InjectView;
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.AbsListAdapter;
 import name.walnut.kanjian.app.ui.Constants;
+import name.walnut.kanjian.app.ui.my.relation.newfriends.pojo.Friend;
 
 /**
  * 添加好友 adapter

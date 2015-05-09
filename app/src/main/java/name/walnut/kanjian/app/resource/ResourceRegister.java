@@ -8,7 +8,6 @@ public enum ResourceRegister {
     registerSendResource("passport/register/sendCode", RequestMethod.GET), //发送注册手机验证码
     forgetPasswordSendResource("passport/forgotPassword/sendCode", RequestMethod.POST), //找回密码发送手机号验证码
     forgetPasswordResetResource("passport/setPassword", RequestMethod.POST), //重设密码
-    smsValidateResource("passport/smsvalidate", RequestMethod.POST), //验证验证码
 
     /*-----------------------relation模块-----------------------*/
     relationCountResource("relation/count", RequestMethod.GET), //未读消息数以及好友数
@@ -26,7 +25,18 @@ public enum ResourceRegister {
     /*-----------------------公共模块-----------------------*/
     //通过手机号查询用户（String mobilePhone）
     //查询多手机号(String mobilephones：'13000000000,13000000001,13000000002')
-    queryUserResource("user", RequestMethod.GET)
+    queryUserResource("user", RequestMethod.GET),
+    smsValidateResource("smsvalidate", RequestMethod.POST), //验证验证码
+
+    /*-----------------------设置模块-----------------------*/
+    //修改头像（File headPhoto）
+    modifyHeedPohotoResource("setting/modifyHeedPohoto", RequestMethod.UPLOAD),
+    //修改昵称(Stirng nickName)
+    modifyNickNameResource("setting/modifyNickName", RequestMethod.POST),
+    //验证手机号是否为当前登陆手机号(String mobilephone),修改密码发送验证码前使用
+    isCurrMobilephoneResource("setting/isCurrMobilephone", RequestMethod.GET),
+    //退出，*没有返回值
+    exitResource("setting/exit", RequestMethod.POST)
     ;
 
     ResourceRegister(String url, RequestMethod method) {

@@ -1,4 +1,4 @@
-package name.walnut.kanjian.app.ui.my.relation.newfriends;
+package name.walnut.kanjian.app.ui.my.relation.newfriends.pojo;
 
 /**
  * 好友 entity
@@ -15,7 +15,7 @@ public class Friend {
 
     private String contactsName = null; //  手机通讯录中名称
 
-    private RelationShip relation = RelationShip.NO_RELATION;
+    private RelationStatus relation = RelationStatus.NO_RELATION;
 
     public Friend() {}
 
@@ -59,11 +59,11 @@ public class Friend {
         this.nickName = nickName;
     }
 
-    public RelationShip getRelation() {
+    public RelationStatus getRelation() {
         return relation;
     }
 
-    public void setRelation(RelationShip relation) {
+    public void setRelation(RelationStatus relation) {
         this.relation = relation;
     }
 
@@ -72,35 +72,14 @@ public class Friend {
      * @param relationCode NO_RELATION(0), WAIT_VERIFY(1), ACCEPT(2), AGREE(3), 其他值按 NO_RELATION 处理
      */
     public void setRelation(int relationCode) {
-        RelationShip[] relationShips = RelationShip.values();
-        for (RelationShip relationShip : relationShips) {
-            if (relationShip.status == relationCode) {
-                setRelation(relationShip);
+        RelationStatus[] relationShips = RelationStatus.values();
+        for (RelationStatus relationStatus : relationShips) {
+            if (relationStatus.getStatus() == relationCode) {
+                setRelation(relationStatus);
                 return;
             }
         }
-        setRelation(RelationShip.NO_RELATION);
+        setRelation(RelationStatus.NO_RELATION);
     }
 
-    /**
-     * 好友关系
-     */
-    public static enum RelationShip {
-        NO_RELATION(0),    // 没有关系
-        WAIT_VERIFY(1),    // 等待验证
-        ACCEPT(2),         // 接受
-        AGREE(3),          // 已添加为好友
-        ;
-
-        RelationShip(int status) {
-            this.status = status;
-        }
-
-        public int getStatus() {
-            return status;
-        }
-
-        private int status; //服务器中状态码
-
-    }
 }
