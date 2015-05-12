@@ -50,4 +50,18 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <style name="ITextView" parent="android:TextAppearance.Widget.TextView">
+
+    </style>
+
+    <style name="ITextView.Setting">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:background">@drawable/bg_my_item</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawableRight">@drawable/icon_arrow</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">14dp</item>
+    </style>
+
 </resources>

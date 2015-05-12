@@ -2,6 +2,8 @@ package name.walnut.kanjian.app.ui.login;
 
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.ActionBarActivity;
+import name.walnut.kanjian.app.ui.Constants;
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -14,8 +16,12 @@ public class LoginActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.setContentView(R.layout.activity_login);		
-		
+		this.setContentView(R.layout.activity_login);
+
+
+        Intent intent = new Intent(Constants.Action.MAIN_ACTION);
+        startActivity(intent);
+
 		switchFragment(new LoginFragment());
 	}
 	

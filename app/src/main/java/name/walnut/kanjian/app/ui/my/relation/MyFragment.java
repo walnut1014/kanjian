@@ -22,9 +22,10 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 public class MyFragment extends ActionBarFragment {
 
-    public static final int ACTIVITY_REQUEST_FRIENDS_REQUEST = 0;
-    public static final int ACTIVITY_REQUEST_FRIENDS = 1;
-    public static final int ACTIVITY_REQUEST_ADD_FRIENDS = 2;
+    private static final int ACTIVITY_REQUEST_FRIENDS_REQUEST = 0;
+    private static final int ACTIVITY_REQUEST_FRIENDS = 1;
+    private static final int ACTIVITY_REQUEST_ADD_FRIENDS = 2;
+    private static final int ACTIVITY_REQUEST_SETTING = 3;
 
     @ResourceWeave(actionClass = RelationCountAction.class)
     public Resource relationCountResource;
@@ -84,6 +85,12 @@ public class MyFragment extends ActionBarFragment {
     public void startAddFriendActivity() {
         Intent intent = new Intent(Constants.Action.ADD_FRIENDS_ACTION);
         startActivityForResult(intent, ACTIVITY_REQUEST_ADD_FRIENDS);
+    }
+    
+    @OnClick(R.id.my_title_setting)
+    public void startSettingActivity() {
+        Intent intent = new Intent(Constants.Action.SETTING_ACTION);
+        startActivityForResult(intent, ACTIVITY_REQUEST_SETTING);
     }
 
     @Override

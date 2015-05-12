@@ -2,6 +2,8 @@ package name.walnut.kanjian.app.support;
 
 import android.view.View;
 
+import name.walnut.kanjian.app.R;
+
 public abstract class ActionBarFragment extends BaseFragment{
 
     protected ActionBarBuilder builder;
@@ -14,6 +16,7 @@ public abstract class ActionBarFragment extends BaseFragment{
                 .setTitle(getTitle())
                 .showBack(showBack())
                 .setBackStyle(getActionBarBackStyle())
+                .setBackText(getActionBarBackText())
                 .setBackClickListener(getActionBarBackClickListener())
                 .setMenuView(getActionBarMenuView())
                 .build();
@@ -67,6 +70,10 @@ public abstract class ActionBarFragment extends BaseFragment{
      */
     protected ActionBarBuilder.BackStyle getActionBarBackStyle() {
         return ActionBarBuilder.BackStyle.ARROW;
+    }
+
+    protected String getActionBarBackText() {
+        return getString(R.string.action_submit);
     }
 
     /**

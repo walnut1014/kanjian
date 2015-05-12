@@ -41,6 +41,11 @@ public class ActionBarBuilder {
         return this;
     }
 
+    public ActionBarBuilder setBackText(String backText) {
+        this.backText = backText;
+        return this;
+    }
+
     public ActionBarBuilder setBackClickListener(View.OnClickListener listener) {
         this.backListener = listener;
         return this;
@@ -73,6 +78,7 @@ public class ActionBarBuilder {
         // 左上返回按钮
         backButton = (ImageButton) customView.findViewById(R.id.btnActionBack);
         backTextButton = (TextView) customView.findViewById(R.id.action_back_text);
+        backTextButton.setText(backText);
         backButton.setOnClickListener(backListener);
         backTextButton.setOnClickListener(backListener);
         if (!showBack) {
@@ -106,6 +112,7 @@ public class ActionBarBuilder {
     private String title = "";
     private boolean showBack = false;
     private BackStyle backStyle = BackStyle.ARROW;
+    private String backText = "";
     private View.OnClickListener backListener;
     private View menuView;
 

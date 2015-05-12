@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/activity_background"
+    android:paddingTop="23dp"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/setting_avatar_container"
+        android:background="@drawable/bg_my_item"
+        android:layout_width="match_parent"
+        android:layout_height="85dp">
+        <TextView
+            style="@style/ITextView.Setting"
+            android:text="@string/setting_title_avatar"
+            android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="35dp"
+            xmlns:fresco="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/setting_avatar"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            fresco:placeholderImage="@drawable/icon_avatar_default"/>
+        </RelativeLayout>
+
+    <include layout="@layout/layout_my_divide"/>
+
+    <RelativeLayout
+        android:background="@drawable/bg_my_item"
+        android:id="@+id/setting_nickname_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="@string/setting_title_nickname"
+            style="@style/ITextView.Setting"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height" />
+        <TextView
+            android:id="@+id/setting_nickname"
+            android:text="二狗子"
+            android:textSize="18sp"
+            android:textColor="@color/text_gray"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="35dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    <include layout="@layout/layout_my_divide"/>
+
+    <TextView
+        android:id="@+id/setting_password"
+        style="@style/ITextView.Setting"
+        android:text="@string/setting_title_password"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height" />
+
+    <include layout="@layout/layout_my_divide"/>
+
+    <TextView
+        android:id="@+id/setting_logout"
+        style="@style/ITextView.Setting"
+        android:text="@string/setting_title_logout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height" />
+
+
+</LinearLayout>

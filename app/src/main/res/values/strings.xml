@@ -93,5 +93,19 @@
     <string name="relation_agree">已加为好友</string>
     <string name="dialog_message_fetch_contacts">正在获取朋友信息</string>
     <string name="friend_search_content">搜索：%s</string>
+    <string name="title_activity_setting">设置</string>
+    <string name="setting_title_avatar">头像</string>
+    <string name="setting_title_nickname">昵称</string>
+    <string name="setting_title_logout">退出账号</string>
+    <string name="setting_title_password">修改密码</string>
+    <string name="title_activity_update_nickname">昵称</string>
+    <string name="update_nickname_hint">请输入昵称</string>
+    <string name="action_cancel">取消</string>
+    <string name="menu_submit">完成</string>
+    <string name="dialog_logout_tip">退出后不会删除任何资料记录，下次登录依然可以使用本账号</string>
+    <string name="dialog_logout">退出</string>
+    <string name="dialog_cancel">取消</string>
+    <string name="dialog_message_update_avatar">正在上传头像</string>
+    <string name="dialog_message_update_nickname">正在修改昵称</string>
 
 </resources>

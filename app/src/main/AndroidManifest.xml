@@ -254,6 +254,15 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+        <!--设置activity-->
+        <activity android:name=".ui.my.setting.SettingActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="kanjian.intent.action.SETTING"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

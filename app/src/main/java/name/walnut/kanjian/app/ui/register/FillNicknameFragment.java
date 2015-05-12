@@ -22,6 +22,7 @@ import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.ui.Constants;
+import name.walnut.kanjian.app.ui.common.SelectPicDialogFragment;
 import name.walnut.kanjian.app.ui.register.action.RegisterAction;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
 import name.walnut.kanjian.app.utils.UriUtils;

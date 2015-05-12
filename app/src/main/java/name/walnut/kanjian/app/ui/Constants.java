@@ -25,6 +25,8 @@ public class Constants {
         final static String FRIENDS_ACTION = "kanjian.intent.action.FRIENDS"; // 我的好友
 
         final static String ADD_FRIENDS_ACTION = "kanjian.intent.action.ADD_FRIENDS"; // 添加好友
+
+        final static String SETTING_ACTION = "kanjian.intent.action.SETTING";    // 设置
     }
 
     public static interface Materials {

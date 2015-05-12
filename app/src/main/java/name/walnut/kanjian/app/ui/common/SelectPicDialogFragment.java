@@ -1,28 +1,19 @@
-package name.walnut.kanjian.app.ui.register;
+package name.walnut.kanjian.app.ui.common;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
 
-public class SelectPicDialogFragment extends DialogFragment {
+public class SelectPicDialogFragment extends BaseBottomMenuDialogFragment {
 
     private static final int SELECT_PIC_KITKAT = 1; // Android4.4 从图库选择图片
     private static final int SELECT_PIC = 2;    // Android 从图库选择图片
@@ -52,37 +43,14 @@ public class SelectPicDialogFragment extends DialogFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        imageUri = Uri.parse(IMAGE_FILE_LOCATION);
+    protected int getLayoutResId() {
+        return R.layout.popup_select_pic;
     }
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-
-        LayoutInflater inflater =
-                (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View view = inflater.inflate(R.layout.popup_select_pic, null, false);
-
-        ButterKnife.inject(this, view);
-
-        Dialog dialog=new Dialog(getActivity());
-
-        Window window = dialog.getWindow();
-        window.requestFeature(Window.FEATURE_NO_TITLE);
-        window.setGravity(Gravity.BOTTOM);
-        window.setWindowAnimations(R.style.PopupAnimation);
-
-        window.getDecorView().setPadding(0, 0, 0, 0);
-
-        WindowManager.LayoutParams layoutParams = window.getAttributes();
-        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
-        layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        window.setAttributes(layoutParams);
-
-        dialog.setContentView(view);
-        dialog.show();
-        return dialog;
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        imageUri = Uri.parse(IMAGE_FILE_LOCATION);
     }
 
     @OnClick(R.id.popup_cancel)
@@ -157,7 +125,6 @@ public class SelectPicDialogFragment extends DialogFragment {
             listener.onSelect(uri);
         }
     }
-
 
     public interface SelectPicListener {
         public void onSelect(Uri uri) ;
