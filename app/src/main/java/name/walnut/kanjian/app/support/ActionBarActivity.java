@@ -1,6 +1,5 @@
 package name.walnut.kanjian.app.support;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -13,7 +12,7 @@ import android.widget.TextView;
 import name.walnut.kanjian.app.R;
 
 
-public abstract class ActionBarActivity extends Activity {
+public abstract class ActionBarActivity extends BaseActivity {
 
     public ActionBarActivity(int containerViewId) {
         this.containerViewId = containerViewId;

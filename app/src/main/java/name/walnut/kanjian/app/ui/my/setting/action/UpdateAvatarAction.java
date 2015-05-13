@@ -14,7 +14,7 @@ public class UpdateAvatarAction extends BaseResourceAction {
     @Override
     public void onSuccess(Response response) {
         dismissMessage();
-        // TODO
+        // TODO 更换头像成功
         ToastUtils.toast("更改成功");
     }
 

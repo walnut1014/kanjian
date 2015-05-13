@@ -18,10 +18,6 @@ public class LoginActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_login);
 
-
-        Intent intent = new Intent(Constants.Action.MAIN_ACTION);
-        startActivity(intent);
-
 		switchFragment(new LoginFragment());
 	}
 	

@@ -19,6 +19,14 @@ public enum Account {
         mobilePhone = preferences.getString(KEY_MOBILE_PHONE, "");
     }
 
+    public synchronized void clear(Context context) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(ACCOUNT_FILE, Context.MODE_PRIVATE).edit();
+        editor.clear().apply();
+        this.nickname = "";
+        this.headPhotoPath = "";
+        this.mobilePhone = "";
+    }
+
     public synchronized void setAccount(String nickname, String headPhotoPath, String mobilePhone) {
         SharedPreferences.Editor editor = context.getSharedPreferences(ACCOUNT_FILE, Context.MODE_PRIVATE).edit();
         editor.putString(KEY_NICKNAME, nickname)

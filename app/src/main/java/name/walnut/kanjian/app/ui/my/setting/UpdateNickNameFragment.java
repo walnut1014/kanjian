@@ -26,6 +26,8 @@ public class UpdateNickNameFragment extends ActionBarFragment {
 
     private static final String ARGS_NICKNAME = "nickname";
 
+    private String nickname;
+
     @InjectView(R.id.nickname_edittext)
     ClearEditText nicknameEdit;
 
@@ -99,10 +101,15 @@ public class UpdateNickNameFragment extends ActionBarFragment {
             ToastUtils.toast(R.string.toast_empty_nickname);
 
         } else {
+            this.nickname = nickname;
             showMessage(R.string.dialog_message_update_nickname);
 
             modifyNickNameResource.addParam("nickName", nickname)
                     .send();
         }
+    }
+
+    public String getNickName() {
+        return nickname;
     }
 }

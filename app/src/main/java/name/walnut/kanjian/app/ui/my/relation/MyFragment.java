@@ -110,6 +110,10 @@ public class MyFragment extends ActionBarFragment {
             case ACTIVITY_REQUEST_FRIENDS:
                 fetchRelationCount();
                 break;
+            case ACTIVITY_REQUEST_SETTING:
+                // 从设置回来，刷新账号信息
+                showAccount();
+                break;
         }
     }
 

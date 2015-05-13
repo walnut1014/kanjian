@@ -3,8 +3,10 @@ package name.walnut.kanjian.app.ui.my.setting.action;
 import com.android.volley.VolleyError;
 
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.account.Account;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.BaseResourceAction;
+import name.walnut.kanjian.app.ui.my.setting.UpdateNickNameFragment;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
 
 /**
@@ -15,9 +17,11 @@ public class UpdateNickNameAction extends BaseResourceAction{
     public void onSuccess(Response response) {
         dismissMessage();
 
-        // TODO
-        ToastUtils.toast("昵称修改成功");
+        // 修改昵称成功，保存并返回
+        UpdateNickNameFragment fragment = (UpdateNickNameFragment) getFragment();
+        Account.INSTANCE.setNickname(fragment.getNickName());
 
+        fragment.getActionBarActivity().onBackPressed();
     }
 
     @Override
