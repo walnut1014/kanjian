@@ -80,7 +80,7 @@ public class SettingFragment extends ActionBarFragment {
                 showMessage(R.string.dialog_message_update_avatar);
                 String imgPath = UriUtils.getPath(getActivity(), uri);
                 File photo = new File(imgPath);
-                modifyHeedPohotoResource.addParam("headPhoto", photo)
+                modifyHeedPohotoResource.addParam("photo", photo)
                         .send();
             }
         });

@@ -30,7 +30,7 @@ public enum ResourceRegister {
 
     /*-----------------------设置模块-----------------------*/
     //修改头像（File headPhoto）
-    modifyHeedPohotoResource("setting/modifyHeedPohoto", RequestMethod.UPLOAD),
+    modifyHeedPohotoResource("setting/modifyHeadPhoto", RequestMethod.UPLOAD),
     //修改昵称(Stirng nickName)
     modifyNickNameResource("setting/modifyNickName", RequestMethod.POST),
     //验证手机号是否为当前登陆手机号(String mobilephone),修改密码发送验证码前使用
