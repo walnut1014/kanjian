@@ -261,6 +261,14 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+        <!--修改密码activity-->
+        <activity android:name=".ui.my.setting.password.ResetPasswordActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="kanjian.intent.action.RESET_PASSWORD"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
 
     </application>
 

@@ -1,23 +1,21 @@
-package name.walnut.kanjian.app.ui.password.action;
+package name.walnut.kanjian.app.ui.my.setting.password.action;
 
 import com.android.volley.VolleyError;
 
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.BaseResourceAction;
-import name.walnut.kanjian.app.ui.password.FillPasswordFragment;
-import name.walnut.kanjian.app.ui.password.VerifyCodeFragment;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
 
 /**
- * 忘记密码 验证验证码
+ * 忘记密码 重设密码
  */
-public class ForgetVerifyCodeAction extends BaseResourceAction {
+public class ResetPasswordAction extends BaseResourceAction {
     @Override
     public void onSuccess(Response response) {
         dismissMessage();
-        VerifyCodeFragment fragment = (VerifyCodeFragment) getFragment();
-        fragment.switchFragment(FillPasswordFragment.newInstance(response.getData()));
+        getActivity().finish();
+        ToastUtils.toast("修改密码成功！");
     }
 
     @Override
@@ -31,7 +29,6 @@ public class ForgetVerifyCodeAction extends BaseResourceAction {
         dismissMessage();
         ToastUtils.toast(R.string.toast_error_network);
     }
-
 
     private void dismissMessage() {
         ActionBarFragment fragment = (ActionBarFragment) getFragment();

@@ -1,4 +1,4 @@
-package name.walnut.kanjian.app.ui.password;
+package name.walnut.kanjian.app.ui.my.setting.password;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,7 +16,7 @@ import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.ui.Constants;
-import name.walnut.kanjian.app.ui.password.action.ForgetPasswordResetAction;
+import name.walnut.kanjian.app.ui.my.setting.password.action.ResetPasswordAction;
 import name.walnut.kanjian.app.ui.util.RegexUtils;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
 import name.walnut.kanjian.app.views.ClearEditText;
@@ -33,7 +33,7 @@ public class FillPasswordFragment extends ActionBarFragment{
     @InjectView(R.id.fill_password_submit)
     Button submitBtn;
 
-    @ResourceWeave(actionClass = ForgetPasswordResetAction.class)
+    @ResourceWeave(actionClass = ResetPasswordAction.class)
     public Resource forgetPasswordResetResource;
 
 

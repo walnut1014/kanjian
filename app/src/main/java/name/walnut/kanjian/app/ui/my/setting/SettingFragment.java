@@ -95,6 +95,8 @@ public class SettingFragment extends ActionBarFragment {
     @OnClick(R.id.setting_password)
     void changePassword() {
         // 修改密码
+        Intent intent = new Intent(Constants.Action.RESET_PASSWORD_ACTION);
+        startActivity(intent);
     }
 
     @OnClick(R.id.setting_logout)
