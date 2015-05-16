@@ -125,7 +125,7 @@ public class SettingFragment extends ActionBarFragment {
     }
 
     public void updateAvatar() {
-        // TODO 重新加载图片
+        // 重新加载图片
         Uri avatarUri = Constants.getFileUri(Account.INSTANCE.getHeadPhotoPath());
         avatarView.setImageURI(avatarUri);
     }
