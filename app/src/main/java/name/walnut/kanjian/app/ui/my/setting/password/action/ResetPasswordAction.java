@@ -15,7 +15,7 @@ public class ResetPasswordAction extends BaseResourceAction {
     public void onSuccess(Response response) {
         dismissMessage();
         getActivity().finish();
-        ToastUtils.toast("修改密码成功！");
+        ToastUtils.toast(R.string.toast_reset_password_success);
     }
 
     @Override

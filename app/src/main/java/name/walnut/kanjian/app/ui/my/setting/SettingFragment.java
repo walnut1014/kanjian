@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -70,6 +71,12 @@ public class SettingFragment extends ActionBarFragment {
     public void onDestroyView() {
         ButterKnife.reset(this);
         super.onDestroyView();
+    }
+
+    @OnClick(R.id.setting_avatar)
+    void showAvatar() {
+        // 放大显示头像
+        DetailAvatarDialogFragment.showDialog(getFragmentManager());
     }
 
     @OnClick(R.id.setting_avatar_container)

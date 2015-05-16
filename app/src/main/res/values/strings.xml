@@ -108,5 +108,6 @@
     <string name="dialog_message_update_avatar">正在上传头像</string>
     <string name="dialog_message_update_nickname">正在修改昵称</string>
     <string name="title_activity_fill_phone">请填写手机号</string>
+    <string name="toast_reset_password_success">重置密码成功</string>
 
 </resources>

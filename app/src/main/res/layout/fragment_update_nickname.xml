@@ -9,6 +9,7 @@
     <name.walnut.kanjian.app.views.ClearEditText
         android:id="@+id/nickname_edittext"
         app:hint="@string/update_nickname_hint"
+        app:maxLength="@integer/nickname_max_length"
         android:background="@color/background_edit"
         android:paddingLeft="@dimen/activity_setting_horizontal_margin"
         android:paddingRight="@dimen/activity_setting_horizontal_margin"

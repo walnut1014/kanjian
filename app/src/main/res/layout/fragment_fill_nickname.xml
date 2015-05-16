@@ -51,6 +51,7 @@
         <name.walnut.kanjian.app.views.ClearEditText
             android:id="@+id/fill_nickname_edit"
             app:hint="@string/fill_nickname_edit_hint"
+            app:maxLength="@integer/nickname_max_length"
             android:layout_width="wrap_content"
             android:paddingLeft="14dp"
             android:paddingRight="@dimen/activity_setting_horizontal_margin"
