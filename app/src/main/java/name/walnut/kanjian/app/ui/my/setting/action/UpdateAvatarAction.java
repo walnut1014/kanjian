@@ -17,13 +17,12 @@ public class UpdateAvatarAction extends BaseResourceAction {
     public void onSuccess(Response response) {
         dismissMessage();
 
+        // 修改头像成功，保存新路径，更新界面头像
         String head = response.getData();
         Account.INSTANCE.setHeadPhotoPath(head);
 
         SettingFragment fragment = (SettingFragment) getFragment();
         fragment.updateAvatar();
-        // TODO 更换头像成功
-        ToastUtils.toast("更改成功");
     }
 
     @Override
