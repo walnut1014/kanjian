@@ -60,7 +60,7 @@ public class DetailAvatarDialogFragment extends DialogFragment {
         dialog.setContentView(view);
 
         avatarView.setAspectRatio(1.0f);
-        avatarView.setImageURI(Constants.getFrescoUrl(Account.INSTANCE.getHeadPhotoPath()));
+        avatarView.setImageURI(Constants.getFileUri(Account.INSTANCE.getHeadPhotoPath()));
 
         return dialog;
     }
