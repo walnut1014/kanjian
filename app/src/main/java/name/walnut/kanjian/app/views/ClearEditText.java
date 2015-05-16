@@ -3,6 +3,7 @@ package name.walnut.kanjian.app.views;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -37,6 +38,7 @@ public class ClearEditText extends FrameLayout {
             android.R.attr.text,
             android.R.attr.inputType,
     };
+    private static final InputFilter[] NO_FILTERS = new InputFilter[0];
 
     private EditText mEditText;
     private ImageButton mClearButton;
@@ -48,6 +50,7 @@ public class ClearEditText extends FrameLayout {
     private CharSequence text = "";
     private int inputType = EditorInfo.TYPE_CLASS_TEXT;
     private CharSequence hint = "";
+    private int maxLength = -1;
 
 
     public ClearEditText(Context context) {
@@ -78,6 +81,7 @@ public class ClearEditText extends FrameLayout {
         mClearButton = (ImageButton) this.findViewById(R.id.clear_button);
 
         hint = a.getString(R.styleable.ClearEditText_hint);
+        maxLength = a.getInteger(R.styleable.ClearEditText_maxLength, -1);
         a.recycle();
 
         a = context.obtainStyledAttributes(attrs, ATTRS);
@@ -131,6 +135,11 @@ public class ClearEditText extends FrameLayout {
         mEditText.setClickable(clickable);
         mEditText.setText(text);
         mEditText.setInputType(inputType);
+        if (maxLength >= 0) {
+            mEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
+        } else {
+            mEditText.setFilters(NO_FILTERS);
+        }
 
         mEditText.setHint(hint);
 

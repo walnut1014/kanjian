@@ -13,6 +13,7 @@
 
     <declare-styleable name="ClearEditText">
         <attr name="hint" format="string|reference"/>
+        <attr name="maxLength" format="integer"/>
     </declare-styleable>
 
     <declare-styleable name="SettingItemView">
