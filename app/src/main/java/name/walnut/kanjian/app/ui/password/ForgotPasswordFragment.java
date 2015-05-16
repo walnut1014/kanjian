@@ -69,11 +69,8 @@ public class ForgotPasswordFragment extends ActionBarFragment{
 
         } else {
             showMessage(R.string.dialog_message_forgot_password);
-            // TODO 验证手机号码是否注册
-
             forgetPasswordSendResource.addParam("mobilephone", mobilephone)
                     .send();
-
         }
     }
 

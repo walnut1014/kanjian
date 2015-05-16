@@ -62,7 +62,8 @@ public class SettingFragment extends ActionBarFragment {
         super.onViewCreated(view, savedInstanceState);
         // 显示个人资料
         nickNameTv.setText(Account.INSTANCE.getNickname());
-        avatarView.setImageURI(Constants.getFrescoUrl(Account.INSTANCE.getHeadPhotoPath()));
+        System.out.println(Constants.getFileUri(Account.INSTANCE.getHeadPhotoPath()));
+        avatarView.setImageURI(Constants.getFileUri(Account.INSTANCE.getHeadPhotoPath()));
     }
 
     @Override
@@ -118,7 +119,7 @@ public class SettingFragment extends ActionBarFragment {
 
     public void updateAvatar() {
         // TODO 重新加载图片
-        Uri avatarUri = Constants.getFrescoUrl(Account.INSTANCE.getHeadPhotoPath());
+        Uri avatarUri = Constants.getFileUri(Account.INSTANCE.getHeadPhotoPath());
         avatarView.setImageURI(avatarUri);
     }
 

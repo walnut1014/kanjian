@@ -45,7 +45,7 @@ public class FriendRequestAdapter extends AbsListAdapter<FriendRequest, FriendRe
                     ? context.getString(R.string.friend_request_unknown)
                     : context.getString(R.string.friend_request_name, name);
         viewHolder.introTv.setText(name);
-        viewHolder.avatarImg.setImageURI(Constants.getFrescoUrl(friendRequest.getAvatar()));
+        viewHolder.avatarImg.setImageURI(Constants.getFileUri(friendRequest.getAvatar()));
         if (friendRequest.isAgree()) {
             // 已同意
             viewHolder.acceptBtn.setVisibility(View.GONE);

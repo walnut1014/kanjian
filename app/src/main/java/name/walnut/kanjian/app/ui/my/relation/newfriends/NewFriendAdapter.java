@@ -46,7 +46,7 @@ public class NewFriendAdapter extends AbsListAdapter<Friend, NewFriendAdapter.Vi
 
         final Friend friend = getItem(position);
 
-        viewHolder.avatar.setImageURI(Constants.getFrescoUrl(friend.getAvatar()));
+        viewHolder.avatar.setImageURI(Constants.getFileUri(friend.getAvatar()));
         viewHolder.nickNameTv.setText(friend.getNickName());
 
         String contactsName = friend.getContactsName();

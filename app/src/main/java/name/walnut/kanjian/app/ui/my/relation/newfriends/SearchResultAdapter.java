@@ -38,7 +38,7 @@ public class SearchResultAdapter extends AbsListAdapter<Friend, SearchResultAdap
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         final Friend friend = getItem(position);
-        viewHolder.avatar.setImageURI(Constants.getFrescoUrl(friend.getAvatar()));
+        viewHolder.avatar.setImageURI(Constants.getFileUri(friend.getAvatar()));
         viewHolder.nickNameTv.setText(friend.getNickName());
 
         String contactsName = friend.getContactsName();

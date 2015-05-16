@@ -51,7 +51,7 @@ public class FriendsAdapter extends AbsListAdapter<FriendInfo, FriendsAdapter.Vi
         FriendInfo friend = getItem(i);
         viewHolder.introTv.setText(context.getString(
                 R.string.friends_photo_count, friend.getPhotoCount()));
-        viewHolder.avatarImg.setImageURI(Constants.getFrescoUrl(friend.getAvatar()));
+        viewHolder.avatarImg.setImageURI(Constants.getFileUri(friend.getAvatar()));
         viewHolder.nicknameTv.setText(friend.getNickName());
     }
 

@@ -40,8 +40,8 @@ public class Constants {
         final static int NICKNAME_MAX_LENGTH = 32;
     }
 
-    // TODO photo 管理
-    public static Uri getFrescoUrl(String path) {
-        return Uri.parse(Resource.getUrl("headPhoto/") + path);
+   //TODO 获得头像
+    public static Uri getFileUri(String path) {
+        return Uri.parse(Resource.getUrl("file/"+path));
     }
 }

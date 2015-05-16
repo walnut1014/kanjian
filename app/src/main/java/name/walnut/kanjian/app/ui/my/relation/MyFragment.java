@@ -126,7 +126,7 @@ public class MyFragment extends ActionBarFragment {
     }
 
     private void showAvatar(String headPhotoPath) {
-        avatarView.setImageURI(Constants.getFrescoUrl(headPhotoPath));
+        avatarView.setImageURI(Constants.getFileUri(headPhotoPath));
     }
 
     private void showNickname(String nickname) {

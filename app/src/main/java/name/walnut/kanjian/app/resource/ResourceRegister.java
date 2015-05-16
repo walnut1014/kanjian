@@ -6,7 +6,7 @@ public enum ResourceRegister {
     loginResource("passport/login", RequestMethod.POST), //登陆Resource
     registerResource("passport/register", RequestMethod.UPLOAD), //完善资料完成注册 Resource
     registerSendResource("passport/register/sendCode", RequestMethod.GET), //发送注册手机验证码
-    forgetPasswordSendResource("passport/forgotPassword/sendCode", RequestMethod.POST), //找回密码发送手机号验证码
+    forgetPasswordSendResource("passport/forgotPassword/sendCode", RequestMethod.GET), //找回密码发送手机号验证码
     forgetPasswordResetResource("passport/setPassword", RequestMethod.POST), //重设密码
 
     /*-----------------------relation模块-----------------------*/
