@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.umeng.message.UmengRegistrar;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -20,6 +22,7 @@ import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.login.action.LoginAction;
 import name.walnut.kanjian.app.ui.util.RegexUtils;
+import name.walnut.kanjian.app.utils.Logger;
 import name.walnut.kanjian.app.views.ClearEditText;
 
 public class LoginFragment extends ActionBarFragment implements Constants.Action{
@@ -83,9 +86,15 @@ public class LoginFragment extends ActionBarFragment implements Constants.Action
 
         } else {
             showMessage(R.string.dialog_message_login);
+            // 获取设备Device Token
+            String deviceToken = UmengRegistrar.getRegistrationId(getActionBarActivity());
+            if (TextUtils.isEmpty(deviceToken)) {
+                Logger.e("设备还未注册");
+            }
             //发送登陆请求
             loginResource.addParam("mobilephone", phone)
                     .addParam("password", password)
+                    .addParam("deviceToken", deviceToken)
                     .send();
         }
 

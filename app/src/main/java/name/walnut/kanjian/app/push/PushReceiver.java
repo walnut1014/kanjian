@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.umeng.message.PushAgent;
 import com.umeng.message.UmengMessageHandler;
+import com.umeng.message.UmengRegistrar;
 import com.umeng.message.entity.UMessage;
 
 import name.walnut.kanjian.app.utils.Logger;

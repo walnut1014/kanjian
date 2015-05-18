@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.push.PushReceiver;
 import name.walnut.kanjian.app.support.BaseActivity;
 
 public class LaunchActivity extends BaseActivity implements Constants.Action{
@@ -34,7 +35,7 @@ public class LaunchActivity extends BaseActivity implements Constants.Action{
          * 开启客户端推送服务，不要在Application onCreate() 中调用 mPushAgent.enable();
          * 由于SDK 设计的逻辑， 这会造成循环。
          */
-//        PushReceiver.INSTANCE.getPushAgent().enable();
+        PushReceiver.INSTANCE.getPushAgent().enable();
 
 		this.setContentView(R.layout.activity_launch);
 

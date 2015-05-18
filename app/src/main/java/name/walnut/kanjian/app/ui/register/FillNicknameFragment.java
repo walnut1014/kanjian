@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.umeng.message.UmengRegistrar;
+
 import java.io.File;
 
 import butterknife.ButterKnife;
@@ -25,6 +27,7 @@ import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.common.SelectPicDialogFragment;
 import name.walnut.kanjian.app.ui.register.action.RegisterAction;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
+import name.walnut.kanjian.app.utils.Logger;
 import name.walnut.kanjian.app.utils.UriUtils;
 import name.walnut.kanjian.app.views.ClearEditText;
 
@@ -105,10 +108,18 @@ public class FillNicknameFragment extends ActionBarFragment {
             this.nickname = nickname;
 
             showMessage(R.string.dialog_message_fill_nickname);
+
+            // 获取设备Device Token
+            String deviceToken = UmengRegistrar.getRegistrationId(getActionBarActivity());
+            if (TextUtils.isEmpty(deviceToken)) {
+                Logger.e("设备还未注册");
+            }
+
             // TODO 上传图片
             registerResource.addParam("token", token)
                     .addParam("nickName", nickname)
-                    .addParam("password", password);
+                    .addParam("password", password)
+                    .addParam("deviceToken", deviceToken);
             if (avatarUri != null) {
                 String photoPath = UriUtils.getPath(getActivity(), avatarUri);
                 File photo = new File(photoPath);
