@@ -8,14 +8,15 @@ import name.walnut.kanjian.app.ui.my.relation.MyFragment;
  */
 public enum TabResource {
 
-    MESSAGE(MyFragment.class, R.drawable.ic_tab_list),
-    CAMERA(MyFragment.class, R.drawable.ic_tab_camera),
-    MY(MyFragment.class, R.drawable.ic_tab_my),
+    MESSAGE(MyFragment.class, R.drawable.ic_tab_list, R.string.tab_title_message),
+    CAMERA(null, R.drawable.ic_tab_camera, R.string.tab_title_empty),
+    MY(MyFragment.class, R.drawable.ic_tab_my, R.string.tab_title_my),
     ;
 
-    TabResource(Class<?> fragment, int resId) {
+    TabResource(Class<?> fragment, int resId, int titleId) {
         this.fragment = fragment;
         this.resId = resId;
+        this.titleId = titleId;
     }
 
     public Class getFragment() {
@@ -26,6 +27,11 @@ public enum TabResource {
         return resId;
     }
 
+    public int getTitleId() {
+        return titleId;
+    }
+
     private Class fragment;
     private int resId;
+    private int titleId;
 }

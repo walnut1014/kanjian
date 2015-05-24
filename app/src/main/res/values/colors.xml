@@ -6,7 +6,7 @@
     <color name="black">#040404</color>
     <color name="purple">#694dd0</color>
     <color name="purple_dark">#843fd7</color>
-    <color name="gray">#a5a5a5</color>
+    <color name="gray">#a5a6a7</color>
     <color name="creamy_white">#f3f0eb</color>
 
     <color name="actionbar_title_color">@color/white</color>
@@ -14,7 +14,12 @@
     <color name="text_white">@color/white</color>
     <color name="text_purple">@color/purple</color>
     <color name="text_gray">@color/gray</color>
+    <color name="text_hint">#dddedf</color>
+
+
     <color name="activity_background">@color/creamy_white</color>
+    <color name="background_tab">@color/white</color>
+
 
     <color name="button_purple_nor">@color/purple</color>
     <color name="button_purple_press">@color/purple_dark</color>
@@ -32,8 +37,5 @@
 
     <color name="background_divide">#dddedf</color>
     <color name="background_search_border">#dddedf</color>
-
-    <color name="text_hint">#dddedf</color>
-    
 
 </resources>

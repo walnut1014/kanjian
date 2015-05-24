@@ -109,5 +109,9 @@
     <string name="dialog_message_update_nickname">正在修改昵称</string>
     <string name="title_activity_fill_phone">请填写手机号</string>
     <string name="toast_reset_password_success">重置密码成功</string>
+    <string name="tab_title_message">Whocare</string>
+    <string name="tab_title_my">我</string>
+    <string name="tab_title_empty" >" "</string>
+    <string name="title_activity_upload_pic">上传图片</string>
 
 </resources>

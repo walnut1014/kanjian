@@ -5,11 +5,15 @@
     android:gravity="center"
     android:orientation="vertical" >
 
-    <ImageView
-        android:id="@+id/imageview"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:focusable="false" >
-    </ImageView>
+    <TextView
+        android:id="@+id/tab_item"
+        android:paddingTop="4dp"
+        android:focusable="false"
+        android:gravity="center_horizontal|bottom"
+        android:textColor="@color/text_gray"
+        android:textSize="14sp"
+        android:drawablePadding="0dp"
+        android:layout_width="90dp"
+        android:layout_height="48dp" />
 
 </LinearLayout>

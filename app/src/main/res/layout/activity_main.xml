@@ -1,6 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="fill_parent" android:layout_height="fill_parent" >
+    android:layout_gravity="bottom"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
     <FrameLayout
         android:id="@+id/content"
@@ -8,21 +10,41 @@
         android:layout_weight="1"
         android:layout_height="0dp"/>
 
-    <View
-        android:background="@color/purple_dark"
+    <RelativeLayout
+        android:background="@color/activity_background"
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:layout_height="62dp">
 
-    <android.support.v13.app.FragmentTabHost
-        android:id="@android:id/tabhost"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <android.support.v13.app.FragmentTabHost
+            android:background="@color/background_tab"
+            android:id="@android:id/tabhost"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
 
-        <FrameLayout
-            android:id="@android:id/tabcontent"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="0" />
-        </android.support.v13.app.FragmentTabHost>
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="0" />
+            </android.support.v13.app.FragmentTabHost>
+
+        <View
+            android:background="@color/purple_dark"
+            android:layout_width="match_parent"
+            android:layout_above="@android:id/tabhost"
+            android:layout_height="0.5dp"/>
+
+        <ImageButton
+            android:visibility="visible"
+            android:id="@+id/tab_camera"
+            android:contentDescription="@null"
+            android:background="@drawable/bg_camera"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_tab_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        </RelativeLayout>
 
 </LinearLayout>
