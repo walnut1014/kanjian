@@ -1,5 +1,6 @@
 package name.walnut.kanjian.app.ui.login.action;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.util.Log;
 
@@ -12,9 +13,10 @@ import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.account.Account;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.BaseResourceAction;
+import name.walnut.kanjian.app.support.KJAlertDialogFragment;
 import name.walnut.kanjian.app.ui.Constants;
-import name.walnut.kanjian.app.ui.login.LoginAlertDialogFragment;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
+import name.walnut.kanjian.app.views.KJAlertDialog;
 
 
 public class LoginAction extends BaseResourceAction {
@@ -49,9 +51,22 @@ public class LoginAction extends BaseResourceAction {
         //{"message":"您的手机号13622309539还未注册","data":-1,"success":false}
         //{"message":"登陆密码错误","data":-2,"success":false}
         // 账号未注册
+        final Fragment fragment = getFragment();
         switch (response.getData()) {
             case MESSAGE_CODE_UNREGISTER:
-                LoginAlertDialogFragment.showDialog(getFragment().getFragmentManager(), response.getMessage());
+                final KJAlertDialogFragment dialogFragment = new KJAlertDialogFragment()
+                        .setContent(response.getMessage())
+                        .setNegativeText(fragment.getString(R.string.dialog_login_alert_cancel))
+                        .setPositiveText(fragment.getString(R.string.dialog_login_alert_continue))
+                        .setPositiveClickListener(new KJAlertDialog.OnKJClickListener() {
+                            @Override
+                            public void onClick(KJAlertDialog dialog) {
+                                getActivity().finish();
+                                Intent intent = new Intent(Constants.Action.REGISTER_ACTION);
+                                fragment.startActivity(intent);
+                            }
+                        });
+                dialogFragment.show(fragment.getFragmentManager());
                 break;
             case MESSAGE_CODE_UNMATCH:
                 // 密码不正确

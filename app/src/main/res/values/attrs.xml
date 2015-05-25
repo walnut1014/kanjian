@@ -24,4 +24,8 @@
         <attr name="showDot" format="boolean"/>
         <attr name="extraContent" format="string"/>
     </declare-styleable>
+
+    <declare-styleable name="UploadPreviewView">
+        <attr name="checked" format="boolean"/>
+    </declare-styleable>
 </resources>

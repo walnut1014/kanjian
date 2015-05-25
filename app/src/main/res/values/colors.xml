@@ -23,6 +23,7 @@
 
     <color name="button_purple_nor">@color/purple</color>
     <color name="button_purple_press">@color/purple_dark</color>
+    <color name="button_purple_unable">#909192</color>
 
     <color name="button_white_press">#9b73ea</color>
     <color name="button_white_press_light">#DFDAFB</color>
@@ -37,5 +38,7 @@
 
     <color name="background_divide">#dddedf</color>
     <color name="background_search_border">#dddedf</color>
+
+    <color name="background_upload_preview_image">#cbcccd</color>
 
 </resources>

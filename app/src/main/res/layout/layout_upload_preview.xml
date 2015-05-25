@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/upload_container"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        xmlns:fresco="http://schemas.android.com/apk/res-auto"
+        fresco:backgroundImage="@color/background_upload_preview_image"
+        fresco:placeholderImage="@drawable/default_upload_preview"
+        android:id="@+id/upload_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/upload_check"
+        style="@style/photo_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/upload_text"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:gravity="start|top"
+        android:singleLine="false"
+        android:textSize="16sp"
+        android:textColor="@color/text_white"
+        android:layout_gravity="bottom"
+        android:background="@color/black_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="112dp" />
+
+</FrameLayout>

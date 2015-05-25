@@ -2,7 +2,6 @@
 <resources>
 
     <style name="AppBaseTheme" parent="android:Theme.Light">
-        <item name="android:alertDialogStyle">@style/IAlertDialog</item>
     </style>
 
     <style name="main_tab_bottom">

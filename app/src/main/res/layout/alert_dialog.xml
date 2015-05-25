@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="@drawable/bg_dialog_login_warning"
+    android:background="@drawable/bg_dialog"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
     android:paddingBottom="8dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/content"
@@ -14,6 +14,9 @@
         android:layout_marginBottom="32dp"
         android:textColor="@color/text_black"
         android:textSize="18sp"
+        android:gravity="center"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -24,18 +27,16 @@
         <Button
             style="@style/IButton.white"
             android:id="@+id/negative_button"
-            android:text="@string/dialog_login_alert_cancel"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_height" />
         <Button
-            android:layout_marginLeft="10dp"
             style="@style/IButton.purple"
-            android:text="@string/dialog_login_alert_continue"
             android:id="@+id/positive_button"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_height" />
-        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

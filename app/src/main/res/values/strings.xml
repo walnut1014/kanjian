@@ -8,7 +8,6 @@
     <string name="main_friends">好友</string>
     <string name="text_login">登录</string>
     <string name="text_register">注册</string>
-    <!-- <string name="text_launch_clause">使用Whocare，就表示您同意Whocare的<![CDATA[<br /><font color="#9974f8"><u>使用条款</u></font><font color="#ffffff">和</font><font color="#9974f8"><u>隐私策略</u></font>]]></string> -->
     <string name="text_launch_clause">使用Whocare，就表示您同意Whocare的\n<a href="clause_use">使用条款</a>和<a href="privacy">隐私策略</a></string>
     <string name="launch_account_tip">已有Whocare账号了？</string>
     <string name="text_forgot_pasword">找回密码</string>
@@ -113,5 +112,9 @@
     <string name="tab_title_my">我</string>
     <string name="tab_title_empty" >" "</string>
     <string name="title_activity_upload_pic">上传图片</string>
+    <string name="action_upload">开始上传照片</string>
+    <string name="dialog_upload_title_reselect">可以重新挑选照片啦！哈哈哈哈哈哈</string>
+    <string name="dialog_upload_button_positive">马上挑选</string>
+    <string name="dialog_upload_button_negative">再看看这两张</string>
 
 </resources>
