@@ -272,6 +272,7 @@
 
         <!--上传图片activity-->
         <activity android:name=".ui.upload.UploadActivity"
+            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="kanjian.intent.action.UPLOAD_PIC"/>

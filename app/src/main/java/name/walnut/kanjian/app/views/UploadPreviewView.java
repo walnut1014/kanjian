@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Checkable;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
@@ -28,6 +29,11 @@ public class UploadPreviewView extends FrameLayout implements Checkable{
     private EditText mTextView;
     private CheckBox mCheckBox;
     private SimpleDraweeView mImageView;
+    private OnCheckedChangeListener mOnCheckedChangeListener;
+
+    public interface OnCheckedChangeListener {
+        void onCheckedChanged(UploadPreviewView buttonView, boolean isChecked);
+    }
 
     public UploadPreviewView(Context context) {
         super(context);
@@ -66,6 +72,12 @@ public class UploadPreviewView extends FrameLayout implements Checkable{
                 return false;
             }
         });
+        mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                setChecked(isChecked);
+            }
+        });
 
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.UploadPreviewView, defStyleAttr, 0);
 
@@ -78,6 +90,9 @@ public class UploadPreviewView extends FrameLayout implements Checkable{
 
     @Override
     public void setChecked(boolean checked) {
+        if (mChecked != checked && mOnCheckedChangeListener != null) {
+            mOnCheckedChangeListener.onCheckedChanged(this, checked);
+        }
         mChecked = checked;
         mCheckBox.setChecked(checked);
     }
@@ -129,5 +144,9 @@ public class UploadPreviewView extends FrameLayout implements Checkable{
      */
     public void setAspectRatio(float aspectRatio) {
         mImageView.setAspectRatio(aspectRatio);
+    }
+
+    public void setOnCheckedChangeListener(OnCheckedChangeListener listener) {
+        this.mOnCheckedChangeListener = listener;
     }
 }
