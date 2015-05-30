@@ -22,8 +22,12 @@ import butterknife.InjectView;
 import butterknife.InjectViews;
 import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.resource.impl.Resource;
+import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.KJAlertDialogFragment;
+import name.walnut.kanjian.app.ui.register.action.VerifyCodeAction;
+import name.walnut.kanjian.app.ui.upload.action.ResidueTimeAction;
 import name.walnut.kanjian.app.views.KJAlertDialog;
 import name.walnut.kanjian.app.views.UploadPreviewRadioManager;
 import name.walnut.kanjian.app.views.UploadPreviewView;
@@ -37,10 +41,15 @@ public class UploadFragment extends ActionBarFragment{
 
     private UploadPreviewRadioManager radioManager;
 
+    private long residueTime; //上传上传距离24小时剩余时间
+
     @InjectViews({R.id.upload_image_1, R.id.upload_image_2})
     UploadPreviewView[] previewViews;
     @InjectView(R.id.upload)
     Button uploadBtn;
+
+    @ResourceWeave(actionClass = ResidueTimeAction.class)
+    public Resource residueTimeResource;
 
     @Override
     protected String getTitle() {
@@ -100,6 +109,8 @@ public class UploadFragment extends ActionBarFragment{
         setImage(getImagePath());
 
         uploadBtn.setEnabled(true);
+        //获得剩余时间
+        residueTimeResource.send();
 
         return view;
     }
@@ -112,7 +123,11 @@ public class UploadFragment extends ActionBarFragment{
 
     @OnClick(R.id.upload)
     void startUpload() {
-        showWaitDialog();
+        if(residueTime == 0)
+            //TODO 上传照片
+            ;
+        else
+            showWaitDialog();
     }
 
     /**
@@ -177,4 +192,7 @@ public class UploadFragment extends ActionBarFragment{
         return uris;
     }
 
+    public void setResidueTime(long residueTime) {
+        this.residueTime = residueTime;
+    }
 }
