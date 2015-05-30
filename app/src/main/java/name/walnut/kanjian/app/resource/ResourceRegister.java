@@ -42,7 +42,17 @@ public enum ResourceRegister {
     //验证手机号是否为当前登陆手机号(String mobilephone),修改密码发送验证码前使用
     isCurrMobilephoneResource("setting/isCurrMobilephone", RequestMethod.GET),
     //退出，*没有返回值
-    exitResource("setting/exit", RequestMethod.POST)
+    exitResource("setting/exit", RequestMethod.POST),
+
+    /*-----------------------主功能-----------------------*/
+    //上传图片(File photo, String content)
+    uploadPhotoResource("message/photo", RequestMethod.UPLOAD),
+    //获得用户还剩多长时间可以上传照片
+    residueTimeResource("message/photo/residueTime", RequestMethod.GET),
+    //通过照片ID删除照片(long id)
+    deletePhotoResource("message/photo/delete", RequestMethod.POST),
+    //针对某条消息做评论(long id, String content)
+    repayResource("message/repay", RequestMethod.POST)
     ;
 
     ResourceRegister(String url, RequestMethod method) {
