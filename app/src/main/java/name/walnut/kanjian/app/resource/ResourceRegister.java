@@ -45,6 +45,8 @@ public enum ResourceRegister {
     exitResource("setting/exit", RequestMethod.POST),
 
     /*-----------------------主功能-----------------------*/
+    //设置用户照片选择时间
+    setSelectTimeResource("message/photo/selectTime", RequestMethod.POST),
     //上传图片(File photo, String content)
     uploadPhotoResource("message/photo", RequestMethod.UPLOAD),
     //获得用户还剩多长时间可以上传照片

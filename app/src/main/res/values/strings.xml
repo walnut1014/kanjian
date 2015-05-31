@@ -117,6 +117,6 @@
     <string name="dialog_upload_reselect_positive">马上挑选</string>
     <string name="dialog_upload_button_negative">再看看这两张</string>
     <string name="dialog_upload_wait_positive">我知道了</string>
-    <string name="dialog_upload_title_wait">再过 12 小时 03 分钟就可以重新挑选图片咯 ～ ～</string>
+    <string name="dialog_upload_title_wait">再过 %1$s 小时 %2$s 分钟就可以重新挑选图片咯 ～ ～</string>
 
 </resources>

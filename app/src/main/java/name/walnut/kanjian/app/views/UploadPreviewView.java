@@ -3,6 +3,7 @@ package name.walnut.kanjian.app.views;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.net.Uri;
+import android.text.InputFilter;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -22,9 +23,12 @@ import name.walnut.kanjian.app.R;
  */
 public class UploadPreviewView extends FrameLayout implements Checkable{
 
+    private static final InputFilter[] NO_FILTERS = new InputFilter[0];
+
     private boolean mChecked;
     private boolean mShowDescription;
     private boolean mShowChecked;
+    private Uri mImgUri;
 
     private EditText mTextView;
     private CheckBox mCheckBox;
@@ -82,10 +86,17 @@ public class UploadPreviewView extends FrameLayout implements Checkable{
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.UploadPreviewView, defStyleAttr, 0);
 
         final boolean checked = a.getBoolean(R.styleable.UploadPreviewView_checked, false);
-        setChecked(checked);
+        final int maxLength = a.getInteger(R.styleable.UploadPreviewView_maxLength, -1);
 
         a.recycle();
 
+        setChecked(checked);
+
+        if (maxLength >= 0) {
+            mTextView.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
+        } else {
+            mTextView.setFilters(NO_FILTERS);
+        }
     }
 
     @Override
@@ -132,10 +143,23 @@ public class UploadPreviewView extends FrameLayout implements Checkable{
      * @param uri
      */
     public void setImageURI(Uri uri) {
+        mImgUri = uri;
         mImageView.setImageURI(uri);
         boolean show = uri != null;
         showChecked(show);
         showDescription(show);
+    }
+
+    public Uri getImgUri() {
+        return mImgUri;
+    }
+
+    /**
+     * 获取图片描述
+     * @return
+     */
+    public String getDescription() {
+        return mTextView.getText().toString();
     }
 
     /**
