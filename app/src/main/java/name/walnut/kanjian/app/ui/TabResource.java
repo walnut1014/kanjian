@@ -1,6 +1,7 @@
 package name.walnut.kanjian.app.ui;
 
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.ui.main.PhotosFlowFragment;
 import name.walnut.kanjian.app.ui.my.relation.MyFragment;
 
 /**
@@ -8,7 +9,7 @@ import name.walnut.kanjian.app.ui.my.relation.MyFragment;
  */
 public enum TabResource {
 
-    MESSAGE(MyFragment.class, R.drawable.ic_tab_list, R.string.tab_title_message),
+    MESSAGE(PhotosFlowFragment.class, R.drawable.ic_tab_list, R.string.tab_title_message),
     CAMERA(null, R.drawable.ic_tab_camera, R.string.tab_title_empty),
     MY(MyFragment.class, R.drawable.ic_tab_my, R.string.tab_title_my),
     ;

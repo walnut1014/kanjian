@@ -1,14 +1,11 @@
 package name.walnut.kanjian.app.ui.my.relation;
 
-import android.util.Log;
-
 import com.android.volley.VolleyError;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import name.walnut.kanjian.app.R;
-import name.walnut.kanjian.app.account.Account;
 import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
 import name.walnut.kanjian.app.utils.Logger;
@@ -28,7 +25,9 @@ public class RelationCountAction extends BaseResourceAction {
             int unreadCount = jsonObject.getInt("unreadCount");
 
             MyFragment fragment = (MyFragment) getFragment();
-            fragment.showRelationCount(friendCount, unreadCount);
+            if (fragment != null && !fragment.isDetached()) {
+                fragment.showRelationCount(friendCount, unreadCount);
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();

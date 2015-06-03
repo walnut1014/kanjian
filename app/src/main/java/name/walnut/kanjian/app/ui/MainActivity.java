@@ -64,7 +64,8 @@ public class MainActivity extends ActionBarActivity {
             if (tabResource[i].equals(TabResource.CAMERA)) {
                 indicator.setVisibility(View.INVISIBLE);
             }
-            TabHost.TabSpec tabSpec = tabHost.newTabSpec("").setIndicator(indicator);
+            String tag = getString(tabResource[i].getTitleId());
+            TabHost.TabSpec tabSpec = tabHost.newTabSpec(tag).setIndicator(indicator);
             tabHost.addTab(tabSpec, tabResource[i].getFragment(), null);
         }
     }

@@ -2,8 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="83dp"
-    android:paddingRight="83dp"
+    android:paddingLeft="77dp"
+    android:paddingRight="77dp"
     android:background="#b0000000"
     android:alpha="0.7">
 

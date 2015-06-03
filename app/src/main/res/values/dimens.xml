@@ -34,4 +34,5 @@
 
     <dimen name="layout_friend_margin_left">8dp</dimen>
 
+    <dimen name="layout_empty_button_horizontal_margin">68dp</dimen>
 </resources>

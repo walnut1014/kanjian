@@ -97,17 +97,6 @@
             </intent-filter>
         </activity>
 
-        <!-- 上传照片Activity -->
-        <activity
-            android:name=".ui.main.UploadActivity"
-            android:screenOrientation="portrait" >
-            <!--<intent-filter>-->
-                <!--<action android:name="kanjian.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.DEFAULT" />-->
-            <!--</intent-filter>-->
-        </activity>
-
         <!-- 测试Activity -->
         <activity
             android:name=".test.TestActivity"

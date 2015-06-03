@@ -10,7 +10,7 @@
         android:drawableTop="@drawable/pic_add_person"
         android:gravity="center_horizontal"
         android:textSize="20sp"
-        android:textColor="#a5a6a7"
+        android:textColor="@color/text_gray"
         android:drawablePadding="15dp"
         android:text="@string/friend_search_empty"
         android:layout_width="wrap_content"

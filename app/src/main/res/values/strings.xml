@@ -118,5 +118,8 @@
     <string name="dialog_upload_button_negative">再看看这两张</string>
     <string name="dialog_upload_wait_positive">我知道了</string>
     <string name="dialog_upload_title_wait">再过 %1$s 小时 %2$s 分钟就可以重新挑选图片咯 ～ ～</string>
+    <string name="title_activity_photos_flow">看见</string>
+    <string name="photos_flow_empty">亲，你还没发过照片呢，\n开来一张吧</string>
+    <string name="action_camera">马上来一张</string>
 
 </resources>
