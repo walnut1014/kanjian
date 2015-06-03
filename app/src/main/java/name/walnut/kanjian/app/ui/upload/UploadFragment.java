@@ -109,7 +109,10 @@ public class UploadFragment extends ActionBarFragment implements UploadPreviewRa
     public void stopAnimation() {
         refreshing = false;
         refreshBtn.setEnabled(true);
-        refreshBtn.getAnimation().cancel();
+        Animation animation = refreshBtn.getAnimation();
+        if (animation != null) {
+            animation.cancel();
+        }
     }
 
     @Nullable
