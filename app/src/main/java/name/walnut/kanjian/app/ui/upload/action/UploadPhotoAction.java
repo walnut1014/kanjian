@@ -1,10 +1,13 @@
 package name.walnut.kanjian.app.ui.upload.action;
 
+import android.app.Activity;
+
 import com.android.volley.VolleyError;
 
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.BaseResourceAction;
+import name.walnut.kanjian.app.ui.upload.UploadFragment;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
 
 /**
@@ -17,6 +20,12 @@ public class UploadPhotoAction extends BaseResourceAction {
         dismissMessage();
 
         ToastUtils.toast("上传成功");
+
+        UploadFragment fragment = (UploadFragment) getFragment();
+        if (fragment != null) {
+            getActivity().setResult(Activity.RESULT_OK);
+            getActivity().finish();
+        }
     }
 
     @Override

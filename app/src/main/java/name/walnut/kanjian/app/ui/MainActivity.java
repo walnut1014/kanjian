@@ -20,6 +20,8 @@ import name.walnut.kanjian.app.support.ActionBarActivity;
 
 public class MainActivity extends ActionBarActivity {
 
+    public static final int ACTIVITY_REQUEST_SELECT_PHOTO = 0xf;
+
     private FragmentTabHost tabHost;
     private TabResource tabResource[] = TabResource.values();
     private LayoutInflater layoutInflater;
@@ -49,7 +51,16 @@ public class MainActivity extends ActionBarActivity {
     @OnClick(R.id.tab_camera)
     void selectPic() {
         Intent intent = new Intent(Constants.Action.UPLOAD_PIC_ACTION);
-        startActivity(intent);
+        startActivityForResult(intent, ACTIVITY_REQUEST_SELECT_PHOTO);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ACTIVITY_REQUEST_SELECT_PHOTO && resultCode == RESULT_OK) {
+            // 上传图片成功, 切换到第一页
+            tabHost.setCurrentTabByTag(getString(TabResource.MESSAGE.getTitleId()));
+        }
     }
 
     private void initTab() {

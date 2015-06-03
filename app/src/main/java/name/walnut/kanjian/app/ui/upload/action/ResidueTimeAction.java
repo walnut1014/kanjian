@@ -16,13 +16,16 @@ import name.walnut.kanjian.app.ui.util.ToastUtils;
 public class ResidueTimeAction extends BaseResourceAction {
     @Override
     public void onSuccess(Response response) {
-        UploadFragment fragment =(UploadFragment) this.getFragment();
-        fragment.setResidueTime(Long.valueOf(response.getData()));
+        UploadFragment fragment = (UploadFragment) this.getFragment();
+        long residueTime = Long.valueOf(response.getData());
+
         // TODO 解析json，获取hour和minute
-        int hour = 12;  // 剩余小时
-        int minute = 13; // 剩余分钟
+        int hour = (int) ((residueTime / 1000) / 60 / 60); // 剩余小时
+        int minute = (int) ((residueTime / 1000) / 60 % 60); // 剩余分钟
         boolean reselect = (hour == 0 && minute == 0); // 能否重新挑选
         if (fragment != null) {
+            fragment.setResidueTime(residueTime);
+            fragment.stopAnimation();
             if (reselect) {
                 fragment.showReselectDialog();
             } else {
