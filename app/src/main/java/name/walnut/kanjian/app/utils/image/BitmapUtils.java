@@ -2,11 +2,13 @@ package name.walnut.kanjian.app.utils.image;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Environment;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 /**
  * 图片工具类
@@ -18,7 +20,7 @@ public class BitmapUtils {
      * @param path 图片原路径
      * @param scaleName 新图片文件名
      * @param options 压缩参数，损耗、分辨率、图片格式
-     * @return
+     * @return 图片路径，可能为原图片路径
      */
     public static String decodeFile(Context context, String path, String scaleName, final CompressOptions options) {
         String imagePath = null;
@@ -58,7 +60,16 @@ public class BitmapUtils {
     }
 
     // Store to tmp file
-    private static String saveBitmapToSdCard(Context context, Bitmap bitmap, String fileName, CompressOptions options) {
+
+    /**
+     * 保存图片到data/data/PACKAGE_NAME/cache/目录下
+     * @param context
+     * @param bitmap
+     * @param fileName
+     * @param options
+     * @return 图片路径
+     */
+    public static String saveBitmapToSdCard(Context context, Bitmap bitmap, String fileName, CompressOptions options) {
 
         FileOutputStream fos = null;
         try {
@@ -84,4 +95,28 @@ public class BitmapUtils {
         return null;
     }
 
+
+    /**
+     * 根据图片路径获取图片的相关信息
+     * @param imagePath
+     * @return
+     */
+    public static String getBitmapInfo(String imagePath) {
+        Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+
+        StringBuilder originStr = new StringBuilder("");
+
+        File file = new File(imagePath);
+        DecimalFormat format = new DecimalFormat("#.00");
+        String fileSize = format.format(file.length() / 1024.0);
+
+        originStr.append(imagePath).append("\n")
+                .append("size:").append(fileSize).append("\n");
+
+        if (bitmap != null) {
+            originStr.append("width:").append(bitmap.getWidth()).append("\n")
+                    .append("height:").append(bitmap.getHeight()).append("\n");
+        }
+        return originStr.toString();
+    }
 }

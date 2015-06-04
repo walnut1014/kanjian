@@ -2,7 +2,6 @@ package name.walnut.kanjian.app.ui.upload;
 
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,10 +17,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-import com.facebook.common.file.FileUtils;
-
 import java.io.File;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,14 +30,12 @@ import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.KJAlertDialogFragment;
-
 import name.walnut.kanjian.app.ui.upload.action.ResidueTimeAction;
 import name.walnut.kanjian.app.ui.upload.action.SetSelectTimeAction;
 import name.walnut.kanjian.app.ui.upload.action.UploadPhotoAction;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
 import name.walnut.kanjian.app.utils.Logger;
 import name.walnut.kanjian.app.utils.UriUtils;
-
 import name.walnut.kanjian.app.utils.image.BitmapUtils;
 import name.walnut.kanjian.app.utils.image.CompressOptions;
 import name.walnut.kanjian.app.views.KJAlertDialog;
@@ -170,8 +164,8 @@ public class UploadFragment extends ActionBarFragment implements UploadPreviewRa
 
                 String scaleImgPath =  BitmapUtils.decodeFile(getActionBarActivity(), params[0], "tmp.tmp", options);
 
-                Logger.i("压缩前："+getImageInfo(params[0]));
-                Logger.i("压缩后："+getImageInfo(scaleImgPath));
+                Logger.i("压缩前："+BitmapUtils.getBitmapInfo(params[0]));
+                Logger.i("压缩后："+BitmapUtils.getBitmapInfo(scaleImgPath));
 
                 return scaleImgPath;
             }
@@ -194,26 +188,6 @@ public class UploadFragment extends ActionBarFragment implements UploadPreviewRa
             }
 
         }.execute(imagePath);
-    }
-
-    // TODO 根据图片路径获取图片的相关信息
-    private String getImageInfo(String imagePath) {
-        Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-
-        StringBuilder originStr = new StringBuilder("");
-
-        File file = new File(imagePath);
-        DecimalFormat format = new DecimalFormat("#.00");
-        String fileSize = format.format(file.length() / 1024.0);
-
-        originStr.append(imagePath).append("\n")
-                .append("size:").append(fileSize).append("\n");
-
-        if (bitmap != null) {
-            originStr.append("width:").append(bitmap.getWidth()).append("\n")
-                    .append("height:").append(bitmap.getHeight()).append("\n");
-        }
-        return originStr.toString();
     }
 
     /**
