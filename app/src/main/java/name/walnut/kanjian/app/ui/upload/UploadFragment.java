@@ -1,10 +1,14 @@
 package name.walnut.kanjian.app.ui.upload;
 
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +21,7 @@ import android.widget.ImageButton;
 import com.facebook.common.file.FileUtils;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,8 +38,12 @@ import name.walnut.kanjian.app.support.KJAlertDialogFragment;
 import name.walnut.kanjian.app.ui.upload.action.ResidueTimeAction;
 import name.walnut.kanjian.app.ui.upload.action.SetSelectTimeAction;
 import name.walnut.kanjian.app.ui.upload.action.UploadPhotoAction;
+import name.walnut.kanjian.app.ui.util.ToastUtils;
+import name.walnut.kanjian.app.utils.Logger;
 import name.walnut.kanjian.app.utils.UriUtils;
 
+import name.walnut.kanjian.app.utils.image.BitmapUtils;
+import name.walnut.kanjian.app.utils.image.CompressOptions;
 import name.walnut.kanjian.app.views.KJAlertDialog;
 import name.walnut.kanjian.app.views.UploadPreviewRadioManager;
 import name.walnut.kanjian.app.views.UploadPreviewView;
@@ -145,16 +154,66 @@ public class UploadFragment extends ActionBarFragment implements UploadPreviewRa
 
     @OnClick(R.id.upload)
     void startUpload() {
+        showMessage(R.string.dialog_message_upload_photo);
         // 上传照片
-        UploadPreviewView checkedView = radioManager.getCheckedView();
+        final UploadPreviewView checkedView = radioManager.getCheckedView();
         Uri uri = checkedView.getImgUri();
         String imagePath = UriUtils.getPath(getActionBarActivity(), uri);
-        File image = new File(imagePath);
-        String content = checkedView.getDescription();
 
-        uploadPhotoResource.addParam("photo", image)
-                .addParam("content", content)
-                .send();
+
+        new AsyncTask<String, Void, String>() {
+
+            @Override
+            protected String doInBackground(String... params) {
+
+                CompressOptions options = new CompressOptions(1600, 1600, 80, Bitmap.CompressFormat.JPEG);
+
+                String scaleImgPath =  BitmapUtils.decodeFile(getActionBarActivity(), params[0], "tmp.tmp", options);
+
+                Logger.i("压缩前："+getImageInfo(params[0]));
+                Logger.i("压缩后："+getImageInfo(scaleImgPath));
+
+                return scaleImgPath;
+            }
+
+            @Override
+            protected void onPostExecute(String str) {
+                super.onPostExecute(str);
+
+                if (TextUtils.isEmpty(str)) {
+                    ToastUtils.toast("加载图片出错！");
+                    return;
+                }
+
+                File image = new File(str);
+                String content = checkedView.getDescription();
+
+                uploadPhotoResource.addParam("photo", image)
+                        .addParam("content", content)
+                        .send();
+            }
+
+        }.execute(imagePath);
+    }
+
+    // TODO 根据图片路径获取图片的相关信息
+    private String getImageInfo(String imagePath) {
+        Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+
+        StringBuilder originStr = new StringBuilder("");
+
+        File file = new File(imagePath);
+        DecimalFormat format = new DecimalFormat("#.00");
+        String fileSize = format.format(file.length() / 1024.0);
+
+        originStr.append(imagePath).append("\n")
+                .append("size:").append(fileSize).append("\n");
+
+        if (bitmap != null) {
+            originStr.append("width:").append(bitmap.getWidth()).append("\n")
+                    .append("height:").append(bitmap.getHeight()).append("\n");
+        }
+        return originStr.toString();
     }
 
     /**
@@ -227,6 +286,7 @@ public class UploadFragment extends ActionBarFragment implements UploadPreviewRa
     public void setResidueTime(long residueTime) {
         this.residueTime = residueTime;
     }
+
     @Override
     public void onCheckedChanged(UploadPreviewRadioManager manager, UploadPreviewView checkedView) {
         uploadBtn.setEnabled(checkedView != null);

@@ -121,5 +121,6 @@
     <string name="title_activity_photos_flow">看见</string>
     <string name="photos_flow_empty">亲，你还没发过照片呢，\n开来一张吧</string>
     <string name="action_camera">马上来一张</string>
+    <string name="dialog_message_upload_photo">正在发布图片</string>
 
 </resources>
