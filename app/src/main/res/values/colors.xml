@@ -7,7 +7,7 @@
     <color name="purple">#694dd0</color>
     <color name="purple_dark">#843fd7</color>
     <color name="gray">#a5a6a7</color>
-    <color name="creamy_white">#f3f0eb</color>
+    <color name="creamy_white">#f4f0eb</color>
 
     <color name="actionbar_title_color">@color/white</color>
     <color name="text_black">@color/black</color>
@@ -40,5 +40,7 @@
     <color name="background_search_border">#dddedf</color>
 
     <color name="background_upload_preview_image">#cbcccd</color>
+
+    <color name="divide_bg">@color/gray</color>
 
 </resources>

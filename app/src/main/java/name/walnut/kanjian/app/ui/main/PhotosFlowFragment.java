@@ -1,32 +1,44 @@
 package name.walnut.kanjian.app.ui.main;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import com.malinskiy.superrecyclerview.OnMoreListener;
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.ActionBarFragment;
+import name.walnut.kanjian.app.support.DividerItemDecoration;
 import name.walnut.kanjian.app.ui.Constants;
+import name.walnut.kanjian.app.utils.Logger;
 
 /**
  * 首页看照片 Fragment
  */
-public class PhotosFlowFragment extends ActionBarFragment {
+public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListener{
+
+    private final int ITEM_LEFT_TO_LOAD_MORE = 1;
 
     @InjectView(R.id.list)
     SuperRecyclerView recyclerView;
+
+    private List<PhotosFlow> photosFlowList = new ArrayList<>();
+    private PhotosFlowAdapter photosFlowAdapter;
 
     @Override
     protected String getTitle() {
@@ -60,7 +72,24 @@ public class PhotosFlowFragment extends ActionBarFragment {
         ButterKnife.inject(this, view);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActionBarActivity()));
-        recyclerView.setAdapter(new PhotosFlowAdapter(getActionBarActivity(), new ArrayList<PhotosFlow>()));
+
+        // 设置分割线
+        final Drawable divider = getResources().getDrawable(R.drawable.divider);
+        RecyclerView.ItemDecoration decoration =
+                new DividerItemDecoration(
+                        getActionBarActivity(), divider, DividerItemDecoration.VERTICAL_LIST);
+        recyclerView.addItemDecoration(decoration);
+
+        recyclerView.setupMoreListener(this, ITEM_LEFT_TO_LOAD_MORE);
+
+        photosFlowList.clear();
+        for (int i = 0; i < 10; i++) {
+            PhotosFlow flow = new PhotosFlow();
+            photosFlowList.add(flow);
+        }
+
+        photosFlowAdapter = new PhotosFlowAdapter(getActionBarActivity(), photosFlowList);
+        recyclerView.setAdapter(photosFlowAdapter);
 
         return view;
     }
@@ -70,5 +99,33 @@ public class PhotosFlowFragment extends ActionBarFragment {
         // 开始发表图片
         Intent intent = new Intent(Constants.Action.UPLOAD_PIC_ACTION);
         startActivity(intent);
+    }
+
+    @Override
+    public void onMoreAsked(int numberOfItems, int numberBeforeMore, int currentItemPos) {
+        Logger.e("onMoreAsked");
+
+        new AsyncTask<Void, Void, Void>() {
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                for (int i = 0; i < 5; i++) {
+                    photosFlowAdapter.add(new PhotosFlow());
+                }
+                recyclerView.hideMoreProgress();
+            }
+        }.execute();
+
     }
 }
