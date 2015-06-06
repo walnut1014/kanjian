@@ -35,6 +35,42 @@ public abstract class AbsListAdapter<T, VH extends RecyclerView.ViewHolder>
         return list.get(position);
     }
 
+    /**
+     * 添加一个item
+     * @param item
+     */
+    public void add(T item) {
+        insert(item, list.size());
+    }
+
+    /**
+     * 插入一个item
+     * @param item
+     * @param position
+     */
+    public void insert(T item, int position) {
+        list.add(position, item);
+        notifyItemInserted(position);
+    }
+
+    /**
+     * 删除position
+     * @param position
+     */
+    public void remove(int position) {
+        list.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    /**
+     * 清空
+     */
+    public void clear() {
+        int size = list.size();
+        list.clear();
+        notifyItemRangeRemoved(0, size);
+    }
+
     @Override
     public int getItemCount() {
         return list.size();
