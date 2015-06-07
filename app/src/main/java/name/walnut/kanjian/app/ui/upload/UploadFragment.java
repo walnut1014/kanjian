@@ -20,6 +20,7 @@ import android.widget.ImageButton;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -29,7 +30,6 @@ import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
-import name.walnut.kanjian.app.support.KJAlertDialogFragment;
 import name.walnut.kanjian.app.ui.upload.action.ResidueTimeAction;
 import name.walnut.kanjian.app.ui.upload.action.SetSelectTimeAction;
 import name.walnut.kanjian.app.ui.upload.action.UploadPhotoAction;
@@ -38,14 +38,14 @@ import name.walnut.kanjian.app.utils.Logger;
 import name.walnut.kanjian.app.utils.UriUtils;
 import name.walnut.kanjian.app.utils.image.BitmapUtils;
 import name.walnut.kanjian.app.utils.image.CompressOptions;
-import name.walnut.kanjian.app.views.KJAlertDialog;
 import name.walnut.kanjian.app.views.UploadPreviewRadioManager;
 import name.walnut.kanjian.app.views.UploadPreviewView;
 
 /**
  * 上传图片 fragment
  */
-public class UploadFragment extends ActionBarFragment implements UploadPreviewRadioManager.OnCheckedChangeListener{
+public class UploadFragment extends ActionBarFragment
+        implements UploadPreviewRadioManager.OnCheckedChangeListener, UploadPreviewView.OnImageChangeListener{
 
     private static final float AspectRatio = 1.42f; //照片显示比例
 
@@ -60,6 +60,8 @@ public class UploadFragment extends ActionBarFragment implements UploadPreviewRa
 
     private ImageButton refreshBtn;
     private boolean refreshing = false;
+
+    private UploadImageCache imageCache;
 
     @ResourceWeave(actionClass = ResidueTimeAction.class)
     public Resource residueTimeResource;
@@ -108,7 +110,10 @@ public class UploadFragment extends ActionBarFragment implements UploadPreviewRa
         return button;
     }
 
-    // 停止刷新动画
+
+    /**
+     * 停止右上角刷新动画
+     */
     public void stopAnimation() {
         refreshing = false;
         refreshBtn.setEnabled(true);
@@ -131,13 +136,27 @@ public class UploadFragment extends ActionBarFragment implements UploadPreviewRa
         for (UploadPreviewView previewView : previewViews) {
             previewView.setAspectRatio(AspectRatio);
             previewView.setImageURI(null);
+            previewView.setOnImageChangeListener(this);
 
             radioManager.register(previewView);
         }
 
-        setImage(getImagePath());   // todo 设置图片路径
-        setSelectTimeResource.send();
+        List<Uri> selected = UploadImageCache.INSTANCE.getImageUris();
+        for (Uri uri : selected) {
+            Logger.e("选中的图片路径：" + uri);
+        }
+        setImage(selected);   // 设置图片路径
+
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (savedInstanceState == null) {
+            // 获取剩余时间
+            residueTimeResource.send();
+        }
     }
 
     @Override
@@ -148,12 +167,16 @@ public class UploadFragment extends ActionBarFragment implements UploadPreviewRa
 
     @OnClick(R.id.upload)
     void startUpload() {
-        showMessage(R.string.dialog_message_upload_photo);
         // 上传照片
         final UploadPreviewView checkedView = radioManager.getCheckedView();
+        if (checkedView == null) {
+            ToastUtils.toast(R.string.toast_error_unselected_image);
+            return;
+        }
         Uri uri = checkedView.getImgUri();
         String imagePath = UriUtils.getPath(getActionBarActivity(), uri);
 
+        showMessage(R.string.dialog_message_upload_photo);
 
         new AsyncTask<String, Void, String>() {
 
@@ -190,58 +213,49 @@ public class UploadFragment extends ActionBarFragment implements UploadPreviewRa
         }.execute(imagePath);
     }
 
+
+    // 重新选择图片后，缓存图片路径
+    public void onImageReselect(List<Uri> imageUris) {
+        if (imageUris != null) {
+
+            // 在设置时间结果出来后，缓存
+            showMessage(getString(R.string.dialog_message_upload_update_photo));
+
+            UploadImageCache.INSTANCE.addToTmpCache(imageUris);
+            updateRemoteSelectTime();
+        }
+    }
+
+    /**
+     * 更新服务器选择照片时间
+     */
+    public void updateRemoteSelectTime() {
+        setSelectTimeResource.send();
+    }
+
     /**
      * 设置图片
      * @param uris
      */
-    public void setImage(Uri[] uris) {
-        int min = Math.min(uris.length, previewViews.length);
+    public void setImage(List<Uri> uris) {
+        int min = Math.min(uris.size(), previewViews.length);
 
         for (int i = 0; i < min; i++) {
-            previewViews[i].setImageURI(uris[i]);
+            previewViews[i].setImageURI(uris.get(i));
         }
     }
 
-    // 时间未够，等待
-    public void showWaitDialog(int hour, int minute) {
-        new KJAlertDialogFragment()
-                .setContent(getString(R.string.dialog_upload_title_wait, hour, minute))
-                .setPositiveText(getString(R.string.dialog_upload_wait_positive))
-                .show(getFragmentManager());
-    }
 
-    // 已到24小时，重新挑选图片
-    public void showReselectDialog() {
-        new KJAlertDialogFragment()
-                .setContent(getString(R.string.dialog_upload_title_reselect))
-                .setPositiveText(getString(R.string.dialog_upload_reselect_positive))
-                .setNegativeText(getString(R.string.dialog_upload_button_negative))
-                .setPositiveClickListener(new KJAlertDialog.OnKJClickListener() {
-                    @Override
-                    public void onClick(KJAlertDialog dialog) {
-                        // TODO 马上挑选
-                        startReselectPhoto();
-                    }
-                })
-                .show(getFragmentManager());
-    }
-
-    // 重新挑选图片
-    private void startReselectPhoto() {
-
-    }
-
-    // 获取本地图库图片
-    private Uri[] getImagePath() {
+    // 随机获取本地图库两张图片
+    public List<Uri> getImagePath() {
         List<Uri> uriList = new ArrayList<>();
-        Uri[] uris = {};
 
         Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
         Cursor cursor = getActionBarActivity().getContentResolver().query(uri, null, MediaStore.Images.Media.MIME_TYPE + "=? or "
                         + MediaStore.Images.Media.MIME_TYPE + "=?",
                 new String[]{"image/jpeg", "image/png"}, MediaStore.Images.Media.DATE_MODIFIED);
         if(cursor == null){
-            return uris;
+            return uriList;
         }
         while (cursor.moveToNext()) {
             //获取图片的路径
@@ -252,8 +266,17 @@ public class UploadFragment extends ActionBarFragment implements UploadPreviewRa
             uriList.add(imgUri);
         }
         cursor.close();
-        uris = uriList.toArray(uris);
-        return uris;
+
+        Random random = new Random();
+
+        int target1 = random.nextInt(uriList.size());
+        int target2 = random.nextInt(uriList.size());
+
+        List<Uri> result = new ArrayList<>();
+        result.add(uriList.get(target1));
+        result.add(uriList.get(target2));
+
+        return result;
     }
 
 
@@ -263,6 +286,14 @@ public class UploadFragment extends ActionBarFragment implements UploadPreviewRa
 
     @Override
     public void onCheckedChanged(UploadPreviewRadioManager manager, UploadPreviewView checkedView) {
-        uploadBtn.setEnabled(checkedView != null);
+    }
+
+    @Override
+    public void onImageChanged(UploadPreviewView view, Uri oldUri, Uri newUri) {
+        boolean enable = true;
+        for (UploadPreviewView previewView : previewViews) {
+            enable = enable && previewView.isAvailableImage();
+        }
+        uploadBtn.setEnabled(enable);
     }
 }

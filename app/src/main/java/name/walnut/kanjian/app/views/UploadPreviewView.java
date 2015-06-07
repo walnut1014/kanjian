@@ -16,6 +16,9 @@ import android.widget.FrameLayout;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import java.net.URI;
+
+import m.framework.ui.widget.asyncview.OnImageGotListener;
 import name.walnut.kanjian.app.R;
 
 /**
@@ -34,9 +37,17 @@ public class UploadPreviewView extends FrameLayout implements Checkable{
     private CheckBox mCheckBox;
     private SimpleDraweeView mImageView;
     private OnCheckedChangeListener mOnCheckedChangeListener;
+    private OnImageChangeListener mOnImageChangeListener;
 
     public interface OnCheckedChangeListener {
         void onCheckedChanged(UploadPreviewView buttonView, boolean isChecked);
+    }
+
+    /**
+     * 图片改变监听器
+     */
+    public interface OnImageChangeListener {
+        void onImageChanged(UploadPreviewView view, Uri oldUri, Uri newUri);
     }
 
     public UploadPreviewView(Context context) {
@@ -143,15 +154,41 @@ public class UploadPreviewView extends FrameLayout implements Checkable{
      * @param uri
      */
     public void setImageURI(Uri uri) {
-        mImgUri = uri;
-        mImageView.setImageURI(uri);
-        boolean show = uri != null;
+
+        // 判断uri是否为有效图片路径，
+        if (!isAvailableImage(uri)) {
+            uri = null;
+        }
+
+        Uri oldUri = mImgUri;
+        Uri newUri = uri;
+
+        mImgUri = newUri;
+        mImageView.setImageURI(newUri);
+        boolean show = newUri != null;
         showChecked(show);
         showDescription(show);
+
+        if (mOnImageChangeListener != null && newUri != oldUri) {
+            mOnImageChangeListener.onImageChanged(this, oldUri, newUri);
+        }
+    }
+
+    private boolean isAvailableImage(Uri uri) {
+        // TODO 判断uri是否为有效图片路径
+        return uri != null;
     }
 
     public Uri getImgUri() {
         return mImgUri;
+    }
+
+    /**
+     * 判断图片是否存在
+     * @return
+     */
+    public boolean isAvailableImage() {
+        return isAvailableImage(mImgUri);
     }
 
     /**
@@ -172,5 +209,9 @@ public class UploadPreviewView extends FrameLayout implements Checkable{
 
     public void setOnCheckedChangeListener(OnCheckedChangeListener listener) {
         this.mOnCheckedChangeListener = listener;
+    }
+
+    public void setOnImageChangeListener(OnImageChangeListener onImageChangeListener) {
+        this.mOnImageChangeListener = onImageChangeListener;
     }
 }

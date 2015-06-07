@@ -122,5 +122,7 @@
     <string name="photos_flow_empty">亲，你还没发过照片呢，\n开来一张吧</string>
     <string name="action_camera">马上来一张</string>
     <string name="dialog_message_upload_photo">正在发布图片</string>
+    <string name="dialog_message_upload_update_photo">正在更新图片</string>
+    <string name="toast_error_unselected_image">请选择一张要上传的图片</string>
 
 </resources>

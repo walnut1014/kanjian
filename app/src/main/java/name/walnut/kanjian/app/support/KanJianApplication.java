@@ -9,6 +9,7 @@ import name.walnut.kanjian.app.account.Account;
 import name.walnut.kanjian.app.entity.PhotoContext;
 import name.walnut.kanjian.app.push.PushReceiver;
 import name.walnut.kanjian.app.support.rest.RequestQueueContext;
+import name.walnut.kanjian.app.ui.upload.UploadImageCache;
 
 public class KanJianApplication extends Application {
 
@@ -38,6 +39,8 @@ public class KanJianApplication extends Application {
         // 图片加载
         FrescoContext.INSTANCE.init(this);
 
+        // 上传图片路径
+        UploadImageCache.INSTANCE.init(this);
     }
 	
 	public static Application INSTANCE;
