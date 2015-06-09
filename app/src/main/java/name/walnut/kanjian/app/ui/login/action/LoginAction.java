@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.account.Account;
+import name.walnut.kanjian.app.account.AccountBean;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.support.KJAlertDialogFragment;
@@ -34,7 +35,11 @@ public class LoginAction extends BaseResourceAction {
             String nickname = jsonObject.optString("nickName");
             String mobilePhone = jsonObject.optString("mobilephone");
 
-            Account.INSTANCE.setAccount(nickname, avatarPath, mobilePhone);
+            AccountBean accountBean = new AccountBean();
+            accountBean.setHeadPhotoPath(avatarPath);
+            accountBean.setMobilePhone(mobilePhone);
+            accountBean.setNickname(nickname);
+            Account.INSTANCE.setAccount(accountBean);
         } catch (JSONException ex) {
             Log.e("系统错误","解析json异常",ex);
         }

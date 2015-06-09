@@ -24,8 +24,6 @@ public class KanJianApplication extends Application {
 
 		PhotoContext.INSTANCE.init(file.getPath());
 
-        // 账号信息
-        Account.INSTANCE.init(this);
 
         // 网络请求
 		RequestQueueContext.INSTANCE.initRequestQueue(this);

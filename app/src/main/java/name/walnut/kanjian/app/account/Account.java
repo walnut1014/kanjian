@@ -10,72 +10,46 @@ public enum Account {
     INSTANCE
     ;
 
-    public synchronized void init(Context context) {
-        this.context = context.getApplicationContext();
-        SharedPreferences preferences =
-                this.context.getSharedPreferences(ACCOUNT_FILE, Context.MODE_PRIVATE);
-        nickname = preferences.getString(KEY_NICKNAME, "");
-        headPhotoPath = preferences.getString(KEY_AVATAR_PATH, "");
-        mobilePhone = preferences.getString(KEY_MOBILE_PHONE, "");
+    Account() {
+        accountBean = null;
     }
 
+    /**
+     * 清楚账号缓存
+     * @param context
+     */
     public synchronized void clear(Context context) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(ACCOUNT_FILE, Context.MODE_PRIVATE).edit();
-        editor.clear().apply();
-        this.nickname = "";
-        this.headPhotoPath = "";
-        this.mobilePhone = "";
+        this.accountBean = new AccountBean();
     }
 
-    public synchronized void setAccount(String nickname, String headPhotoPath, String mobilePhone) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(ACCOUNT_FILE, Context.MODE_PRIVATE).edit();
-        editor.putString(KEY_NICKNAME, nickname)
-              .putString(KEY_AVATAR_PATH, headPhotoPath)
-              .putString(KEY_MOBILE_PHONE, mobilePhone)
-              .apply();
-        this.nickname = nickname;
-        this.headPhotoPath = headPhotoPath;
-        this.mobilePhone = mobilePhone;
+    public synchronized void setAccount(AccountBean accountBean) {
+        this.accountBean = accountBean;
     }
 
     public String getNickname() {
-        return nickname;
+        return accountBean.getNickname();
     }
 
     public synchronized void setNickname(String nickname) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(ACCOUNT_FILE, Context.MODE_PRIVATE).edit();
-        editor.putString(KEY_NICKNAME, nickname).apply();
-        this.nickname = nickname;
+        this.accountBean.setNickname(nickname);
     }
 
     public String getHeadPhotoPath() {
-        return headPhotoPath;
+        return accountBean.getHeadPhotoPath();
     }
 
     public synchronized void setHeadPhotoPath(String headPhotoPath) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(ACCOUNT_FILE, Context.MODE_PRIVATE).edit();
-        editor.putString(KEY_AVATAR_PATH, headPhotoPath).apply();
-        this.headPhotoPath = headPhotoPath;
+        accountBean.setHeadPhotoPath(headPhotoPath);
     }
 
     public String getMobilePhone() {
-        return mobilePhone;
+        return this.accountBean.getMobilePhone();
     }
 
     public synchronized void setMobilePhone(String mobilePhone) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(ACCOUNT_FILE, Context.MODE_PRIVATE).edit();
-        editor.putString(KEY_MOBILE_PHONE, mobilePhone).apply();
-        this.mobilePhone = mobilePhone;
+        this.accountBean.setMobilePhone(mobilePhone);
     }
 
-    private Context context;
+    private AccountBean accountBean;
 
-    private String nickname;
-    private String headPhotoPath;
-    private String mobilePhone;
-
-    private static final String ACCOUNT_FILE = "name.walnut.kanjian.app.account";
-    private static final String KEY_NICKNAME = "nickname";
-    private static final String KEY_AVATAR_PATH = "avatar_path";
-    private static final String KEY_MOBILE_PHONE = "mobilePhone";
 }
