@@ -34,7 +34,7 @@ public class LoginAction extends BaseResourceAction {
             String nickname = jsonObject.optString("nickName");
             String mobilePhone = jsonObject.optString("mobilephone");
 
-            Account.INSTANCE.setAccount(nickname, avatarPath, mobilePhone);
+            Account.INSTANCE.setAccount(jsonObject);
         } catch (JSONException ex) {
             Log.e("系统错误","解析json异常",ex);
         }

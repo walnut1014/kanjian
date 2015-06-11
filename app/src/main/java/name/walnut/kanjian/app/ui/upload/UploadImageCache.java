@@ -58,7 +58,8 @@ public enum UploadImageCache {
             urisStr.add(uri.toString());
         }
 
-        SharedPreferences preferences = context.getApplicationContext().getSharedPreferences(CACHE_FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getApplicationContext()
+                                            .getSharedPreferences(CACHE_FILE_NAME, Context.MODE_PRIVATE);
         preferences.edit()
                 .putStringSet(key, urisStr).apply();
     }
