@@ -2,6 +2,7 @@ package name.walnut.kanjian.app.ui.register;
 
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.account.Account;
+import name.walnut.kanjian.app.account.AccountBean;
 import name.walnut.kanjian.app.support.ActionBarActivity;
 import android.os.Bundle;
 
@@ -21,7 +22,11 @@ public class RegisterActivity extends ActionBarActivity {
 
     public void onRegisterSuccess() {
         // 缓存用户信息到本地
-        Account.INSTANCE.setAccount(nickName, avatar, mobilephone);
+        AccountBean accountBean = new AccountBean();
+        accountBean.setMobilePhone(mobilephone);
+        accountBean.setNickname(nickName);
+        accountBean.setHeadPhotoPath(avatar);
+        Account.INSTANCE.setAccount(accountBean);
     }
 
 
