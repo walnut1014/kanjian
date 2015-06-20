@@ -12,7 +12,7 @@ import java.util.Set;
 import name.walnut.kanjian.app.account.Account;
 
 /**
- * 选择图片缓存
+ * 选择图片缓存, 使用注册手机号作为key值
  */
 public enum UploadImageCache {
 

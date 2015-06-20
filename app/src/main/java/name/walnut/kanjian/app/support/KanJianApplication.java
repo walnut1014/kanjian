@@ -37,8 +37,7 @@ public class KanJianApplication extends Application {
         // 图片加载
         FrescoContext.INSTANCE.init(this);
 
-        // 上传图片路径
-        UploadImageCache.INSTANCE.init(this);
+
     }
 	
 	public static Application INSTANCE;

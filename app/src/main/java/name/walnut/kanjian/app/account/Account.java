@@ -1,7 +1,6 @@
 package name.walnut.kanjian.app.account;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
 /**
  * 账号信息缓存类
@@ -11,7 +10,7 @@ public enum Account {
     ;
 
     Account() {
-        accountBean = null;
+        accountBean = new AccountBean();
     }
 
     /**

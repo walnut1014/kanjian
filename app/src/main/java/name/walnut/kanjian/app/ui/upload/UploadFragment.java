@@ -30,6 +30,7 @@ import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
+import name.walnut.kanjian.app.support.KanJianApplication;
 import name.walnut.kanjian.app.ui.upload.action.ResidueTimeAction;
 import name.walnut.kanjian.app.ui.upload.action.SetSelectTimeAction;
 import name.walnut.kanjian.app.ui.upload.action.UploadPhotoAction;
@@ -60,8 +61,6 @@ public class UploadFragment extends ActionBarFragment
 
     private ImageButton refreshBtn;
     private boolean refreshing = false;
-
-    private UploadImageCache imageCache;
 
     @ResourceWeave(actionClass = ResidueTimeAction.class)
     public Resource residueTimeResource;
@@ -121,6 +120,15 @@ public class UploadFragment extends ActionBarFragment
         if (animation != null) {
             animation.cancel();
         }
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // 上传图片路径
+        UploadImageCache.INSTANCE.init(KanJianApplication.INSTANCE);
+
     }
 
     @Nullable
