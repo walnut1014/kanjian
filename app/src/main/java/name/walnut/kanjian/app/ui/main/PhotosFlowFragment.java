@@ -22,7 +22,6 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
-import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.DividerItemDecoration;
 import name.walnut.kanjian.app.ui.Constants;
@@ -41,9 +40,6 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
     SuperRecyclerView recyclerView;
     @InjectView(R.id.comment_area)
     CommentView commentArea;
-
-    // TODO 获取图片resource
-    public Resource fetchPhotosFlowResource;
 
     private List<PhotosFlow> photosFlowList = new ArrayList<>();
     private PhotosFlowAdapter photosFlowAdapter;
@@ -133,16 +129,13 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
         super.onViewCreated(view, savedInstanceState);
 
         // TODO 模拟获取数据
-        photosFlowList.clear();
         for (int i = 0; i < 10; i++) {
             PhotosFlow flow = new PhotosFlow();
-            photosFlowList.add(flow);
+            photosFlowAdapter.add(flow);
         }
 
-        // TODO
-        if (fetchPhotosFlowResource != null) {
-            fetchPhotosFlowResource.send();
-        }
+
+        // TODO 请求照片流
 
     }
 
