@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,10 +23,12 @@ import name.walnut.kanjian.app.utils.Logger;
 public class PhotosFlowAdapter extends AbsListAdapter<PhotosFlow, PhotosFlowAdapter.ViewHolder> {
 
     private ViewCache commentsCache;
+    private PhotosFlowFragment fragment;
 
-    public PhotosFlowAdapter(Context context, List<PhotosFlow> list) {
-        super(context, list);
+    public PhotosFlowAdapter(PhotosFlowFragment fragment, List<PhotosFlow> list) {
+        super(fragment.getActionBarActivity(), list);
         commentsCache = new ViewCache();
+        this.fragment = fragment;
     }
 
     @Override
@@ -41,10 +44,14 @@ public class PhotosFlowAdapter extends AbsListAdapter<PhotosFlow, PhotosFlowAdap
         long startTime = System.currentTimeMillis();
         Logger.e("start:" + startTime);
 
-        PhotosFlow photosFlow = getItem(position);
-        Logger.e("评论数量：" + photosFlow.comments.size());
+        final PhotosFlow photosFlow = getItem(position);
+        int commentCount = photosFlow.comments.size();
+        Logger.e("评论数量：" + commentCount);
 
-        View commentView = commentsCache.get(photosFlow);
+        ViewGroup commentView = commentsCache.get(photosFlow);
+        if (commentView != null && commentView.getChildCount() != commentCount) {
+            commentView = null;
+        }
         if (commentView == null) {
             commentView = onCreateCommentView(context, photosFlow.comments);
             commentsCache.put(photosFlow, commentView);
@@ -63,6 +70,13 @@ public class PhotosFlowAdapter extends AbsListAdapter<PhotosFlow, PhotosFlowAdap
             holder.commentsContainer.addView(commentView);
         }
 
+        holder.messageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragment.showCommentArea(photosFlow);
+            }
+        });
+
         long useTime = System.currentTimeMillis() - startTime;
         Logger.e("useTime:" + useTime);
     }
@@ -74,7 +88,7 @@ public class PhotosFlowAdapter extends AbsListAdapter<PhotosFlow, PhotosFlowAdap
         holder.commentsContainer.removeAllViews();  // 移除评论Views
     }
 
-    private View onCreateCommentView(Context context, List<Comment> commentList) {
+    private ViewGroup onCreateCommentView(Context context, List<Comment> commentList) {
         long startTime = System.currentTimeMillis();
         Logger.e("onCreateCommentView："+startTime);
 
@@ -102,6 +116,9 @@ public class PhotosFlowAdapter extends AbsListAdapter<PhotosFlow, PhotosFlowAdap
 
         @InjectView(R.id.comments_container)
         FrameLayout commentsContainer;
+        @InjectView(R.id.message)
+        ImageButton messageBtn;
+
 
         public ViewHolder(Context context, View itemView) {
             super(itemView);
