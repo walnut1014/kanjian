@@ -53,8 +53,10 @@ public enum ResourceRegister {
     residueTimeResource("message/photo/residueTime", RequestMethod.GET),
     //通过照片ID删除照片(long id)
     deletePhotoResource("message/photo/delete", RequestMethod.POST),
-    //针对某条消息做评论(long id, String content)
-    repayResource("message/repay", RequestMethod.POST)
+    //针对某条消息做评论(long id //父消息的ID, String content)
+    repayResource("message/repay", RequestMethod.POST),
+    //主页消息(int page //页数)
+    mainResource("message/main", RequestMethod.GET),
     ;
 
     ResourceRegister(String url, RequestMethod method) {
