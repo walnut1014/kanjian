@@ -22,10 +22,13 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.resource.impl.Resource;
+import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.DividerItemDecoration;
 import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.MainActivity;
+import name.walnut.kanjian.app.ui.main.action.FetchPhotosFlowAction;
 import name.walnut.kanjian.app.utils.Logger;
 import name.walnut.kanjian.app.views.CommentView;
 
@@ -41,10 +44,15 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
     @InjectView(R.id.comment_area)
     CommentView commentArea;
 
+    @ResourceWeave(actionClass = FetchPhotosFlowAction.class)
+    public Resource mainResource;
+
     private List<PhotosFlow> photosFlowList = new ArrayList<>();
     private PhotosFlowAdapter photosFlowAdapter;
 
     private PhotosFlow targetCommentPhotosFlow; // 评论的消息流
+
+    private int page = 1;   // 当前显示页
 
     @Override
     protected String getTitle() {
@@ -128,15 +136,7 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // TODO 模拟获取数据
-        for (int i = 0; i < 10; i++) {
-            PhotosFlow flow = new PhotosFlow();
-            photosFlowAdapter.add(flow);
-        }
-
-
-        // TODO 请求照片流
-
+        fetchPhotos(page);
     }
 
     @OnClick(R.id.action_camera)
@@ -194,4 +194,11 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
         activity.showTab();
     }
 
+    /**
+     * 根据页码获取照片
+     * @param page
+     */
+    private void fetchPhotos(int page) {
+        mainResource.addParam("page", page).send();
+    }
 }

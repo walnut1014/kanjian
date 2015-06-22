@@ -16,11 +16,11 @@ public class FetchPhotosFlowAction extends BaseResourceAction {
 
     @Override
     public void onFailed(Response response) {
-
+        Logger.e(response.getMessage());
     }
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
-
+        Logger.e(volleyError+"");
     }
 }
