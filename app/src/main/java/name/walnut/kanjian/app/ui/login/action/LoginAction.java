@@ -34,11 +34,13 @@ public class LoginAction extends BaseResourceAction {
             String avatarPath = jsonObject.optString("headPhotoPath");
             String nickname = jsonObject.optString("nickName");
             String mobilePhone = jsonObject.optString("mobilephone");
+            int photoCount = jsonObject.optInt("photoCount", 0);
 
             AccountBean accountBean = new AccountBean();
             accountBean.setHeadPhotoPath(avatarPath);
             accountBean.setMobilePhone(mobilePhone);
             accountBean.setNickname(nickname);
+            accountBean.setPhotoCount(photoCount);
 
             Account.INSTANCE.setAccount(accountBean);
         } catch (JSONException ex) {

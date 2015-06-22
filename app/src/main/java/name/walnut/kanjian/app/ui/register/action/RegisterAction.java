@@ -22,6 +22,7 @@ public class RegisterAction extends BaseResourceAction {
 
         FillNicknameFragment fragment = (FillNicknameFragment) getFragment();
 
+        // TODO 注册缺少一些返回信息
         RegisterActivity activity = (RegisterActivity) getActivity();
         activity.setAvatar(response.getData());
         activity.setNickName(fragment.getNickname());

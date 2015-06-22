@@ -13,6 +13,7 @@ import name.walnut.kanjian.app.views.SettingItemView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -137,7 +138,7 @@ public class MyFragment extends ActionBarFragment {
     }
 
     private void showPhotoCount(int count) {
-        photoCountTv.setText(String.valueOf(count));
+        photoCountTv.setText(Html.fromHtml(getString(R.string.my_photo_count, count)));
     }
 
     public void showRelationCount(int friendCount, int unreadCount) {

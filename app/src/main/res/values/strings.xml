@@ -125,5 +125,6 @@
     <string name="dialog_message_upload_update_photo">正在更新图片</string>
     <string name="toast_error_unselected_image">请选择一张要上传的图片</string>
     <string name="comment_send">发送</string>
+    <string name="my_photo_count"><![CDATA[<font color="#694dd0">%s</font>]]>张照片</string>
 
 </resources>
