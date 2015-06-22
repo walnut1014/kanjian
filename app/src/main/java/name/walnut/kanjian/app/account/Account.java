@@ -8,6 +8,7 @@ import android.content.Context;
 public enum Account {
     INSTANCE
     ;
+    private int photoCount;
 
     Account() {
         accountBean = new AccountBean();
@@ -49,6 +50,9 @@ public enum Account {
         this.accountBean.setMobilePhone(mobilePhone);
     }
 
-    private AccountBean accountBean;
+    public int getPhotoCount() {
+        return accountBean.getPhotoCount();
+    }
 
+    private AccountBean accountBean;
 }

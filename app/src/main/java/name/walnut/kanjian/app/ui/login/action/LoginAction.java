@@ -39,6 +39,7 @@ public class LoginAction extends BaseResourceAction {
             accountBean.setHeadPhotoPath(avatarPath);
             accountBean.setMobilePhone(mobilePhone);
             accountBean.setNickname(nickname);
+
             Account.INSTANCE.setAccount(accountBean);
         } catch (JSONException ex) {
             Log.e("系统错误","解析json异常",ex);

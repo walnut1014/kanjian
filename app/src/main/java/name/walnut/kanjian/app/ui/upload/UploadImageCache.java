@@ -58,13 +58,14 @@ public enum UploadImageCache {
             urisStr.add(uri.toString());
         }
 
-        SharedPreferences preferences = context.getApplicationContext().getSharedPreferences(CACHE_FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getApplicationContext()
+                                            .getSharedPreferences(CACHE_FILE_NAME, Context.MODE_PRIVATE);
         preferences.edit()
                 .putStringSet(key, urisStr).apply();
     }
 
     /**
-     * 获取缓存的图片, 需在{@link name.walnut.kanjian.app.account.Account#init(android.content.Context)}后调用
+     * 获取缓存的图片
      * @param context
      * @return
      */

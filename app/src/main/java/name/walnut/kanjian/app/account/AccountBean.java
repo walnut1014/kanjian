@@ -8,6 +8,7 @@ public class AccountBean {
     private String nickname;
     private String headPhotoPath;
     private String mobilePhone;
+    private int photoCount;
 
     public String getNickname() {
         return nickname;
@@ -31,5 +32,13 @@ public class AccountBean {
 
     public void setMobilePhone(String mobilePhone) {
         this.mobilePhone = mobilePhone;
+    }
+
+    public int getPhotoCount() {
+        return photoCount;
+    }
+
+    public void setPhotoCount(int photoCount) {
+        this.photoCount = photoCount;
     }
 }

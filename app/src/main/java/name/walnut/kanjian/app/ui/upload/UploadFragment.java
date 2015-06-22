@@ -253,13 +253,13 @@ public class UploadFragment extends ActionBarFragment
         }
     }
 
-
     // 随机获取本地图库两张图片
     public List<Uri> getImagePath() {
         List<Uri> uriList = new ArrayList<>();
 
         Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-        Cursor cursor = getActionBarActivity().getContentResolver().query(uri, null, MediaStore.Images.Media.MIME_TYPE + "=? or "
+        Cursor cursor = getActionBarActivity().getContentResolver().query(uri, null,
+                MediaStore.Images.Media.MIME_TYPE + "=? or "
                         + MediaStore.Images.Media.MIME_TYPE + "=?",
                 new String[]{"image/jpeg", "image/png"}, MediaStore.Images.Media.DATE_MODIFIED);
         if(cursor == null){

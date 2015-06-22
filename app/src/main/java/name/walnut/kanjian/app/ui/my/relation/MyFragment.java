@@ -34,6 +34,8 @@ public class MyFragment extends ActionBarFragment {
     SimpleDraweeView avatarView;
     @InjectView(R.id.my_nickname)
     TextView nicknameTv;
+    @InjectView(R.id.my_photo_count)
+    TextView photoCountTv;
     @InjectView(R.id.my_title_friend_request)
     SettingItemView friendRequestView;
     @InjectView(R.id.my_title_friends)
@@ -123,6 +125,7 @@ public class MyFragment extends ActionBarFragment {
     public void showAccount() {
         showNickname(Account.INSTANCE.getNickname());
         showAvatar(Account.INSTANCE.getHeadPhotoPath());
+        showPhotoCount(Account.INSTANCE.getPhotoCount());
     }
 
     private void showAvatar(String headPhotoPath) {
@@ -131,6 +134,10 @@ public class MyFragment extends ActionBarFragment {
 
     private void showNickname(String nickname) {
         nicknameTv.setText(nickname);
+    }
+
+    private void showPhotoCount(int count) {
+        photoCountTv.setText(String.valueOf(count));
     }
 
     public void showRelationCount(int friendCount, int unreadCount) {

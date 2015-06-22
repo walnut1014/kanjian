@@ -62,8 +62,8 @@ public class SettingFragment extends ActionBarFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // 显示个人资料
+        System.out.println(Account.INSTANCE.getNickname());
         nickNameTv.setText(Account.INSTANCE.getNickname());
-        System.out.println(Constants.getFileUri(Account.INSTANCE.getHeadPhotoPath()));
         avatarView.setImageURI(Constants.getFileUri(Account.INSTANCE.getHeadPhotoPath()));
     }
 
