@@ -22,12 +22,17 @@ public class MainActivity extends ActionBarActivity {
 
     public static final int ACTIVITY_REQUEST_SELECT_PHOTO = 0xf;
 
-    private FragmentTabHost tabHost;
     private TabResource tabResource[] = TabResource.values();
     private LayoutInflater layoutInflater;
 
+    @InjectView(android.R.id.tabhost)
+    FragmentTabHost tabHost;
+
     @InjectView(R.id.tab_camera)
     ImageButton cameraBtn;
+
+    @InjectView(R.id.divide)
+    View divide;
 
     public MainActivity() {
         super(0);
@@ -63,8 +68,25 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    /**
+     * 隐藏底部tab栏， 键盘弹出时调用
+     */
+    public void hideTab() {
+        tabHost.setVisibility(View.GONE);
+        cameraBtn.setVisibility(View.GONE);
+        divide.setVisibility(View.GONE);
+    }
+
+    /**
+     * 显示底部tab栏，键盘隐藏时调用
+     */
+    public void showTab() {
+        tabHost.setVisibility(View.VISIBLE);
+        cameraBtn.setVisibility(View.VISIBLE);
+        divide.setVisibility(View.VISIBLE);
+    }
+
     private void initTab() {
-        tabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
         tabHost.setup(this, getFragmentManager(), R.id.content);
         tabHost.getTabWidget().setDividerDrawable(null);
 

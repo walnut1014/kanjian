@@ -22,10 +22,13 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.DividerItemDecoration;
 import name.walnut.kanjian.app.ui.Constants;
+import name.walnut.kanjian.app.ui.MainActivity;
 import name.walnut.kanjian.app.utils.Logger;
+import name.walnut.kanjian.app.views.CommentView;
 
 /**
  * 首页看照片 Fragment
@@ -36,9 +39,16 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
 
     @InjectView(R.id.list)
     SuperRecyclerView recyclerView;
+    @InjectView(R.id.comment_area)
+    CommentView commentArea;
+
+    // TODO 获取图片resource
+    public Resource fetchPhotosFlowResource;
 
     private List<PhotosFlow> photosFlowList = new ArrayList<>();
     private PhotosFlowAdapter photosFlowAdapter;
+
+    private PhotosFlow targetCommentPhotosFlow; // 评论的消息流
 
     @Override
     protected String getTitle() {
@@ -82,16 +92,58 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
 
         recyclerView.setupMoreListener(this, ITEM_LEFT_TO_LOAD_MORE);
 
+        photosFlowAdapter = new PhotosFlowAdapter(this, photosFlowList);
+        recyclerView.setAdapter(photosFlowAdapter);
+
+        commentArea.setSendClickListener(new CommentView.OnSendClickListener() {
+            @Override
+            public void onSend(final String message, CommentView view) {
+                if (targetCommentPhotosFlow != null) {
+                    new AsyncTask<Void, Void, Void>() {
+
+                        @Override
+                        protected Void doInBackground(Void... params) {
+                            //TODO 发送评论消息
+                            return null;
+                        }
+
+                        @Override
+                        protected void onPostExecute(Void aVoid) {
+                            super.onPostExecute(aVoid);
+                            // TODO 模拟评论成功
+                            Comment comment = new Comment();
+                            comment.content = message;
+                            targetCommentPhotosFlow.comments.add(comment);
+                            int position = photosFlowList.indexOf(targetCommentPhotosFlow);
+                            photosFlowAdapter.notifyItemChanged(position);
+
+                        }
+                    }.execute();
+
+                }
+                hideCommentArea();
+            }
+        });
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // TODO 模拟获取数据
         photosFlowList.clear();
         for (int i = 0; i < 10; i++) {
             PhotosFlow flow = new PhotosFlow();
             photosFlowList.add(flow);
         }
 
-        photosFlowAdapter = new PhotosFlowAdapter(getActionBarActivity(), photosFlowList);
-        recyclerView.setAdapter(photosFlowAdapter);
+        // TODO
+        if (fetchPhotosFlowResource != null) {
+            fetchPhotosFlowResource.send();
+        }
 
-        return view;
     }
 
     @OnClick(R.id.action_camera)
@@ -128,4 +180,25 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
         }.execute();
 
     }
+
+    /**
+     * 显示评论框
+     */
+    public void showCommentArea(PhotosFlow photosFlow) {
+        targetCommentPhotosFlow = photosFlow;
+        commentArea.setVisibility(View.VISIBLE);
+        MainActivity activity = (MainActivity) getActionBarActivity();
+        activity.hideTab();
+    }
+
+    /**
+     * 隐藏评论框
+     */
+    public void hideCommentArea() {
+        targetCommentPhotosFlow = null;
+        commentArea.setVisibility(View.GONE);
+        MainActivity activity = (MainActivity) getActionBarActivity();
+        activity.showTab();
+    }
+
 }

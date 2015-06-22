@@ -8,14 +8,14 @@ import android.view.ViewParent;
 /**
  * Created by baiya on 15/6/6.
  */
-public class ViewCache extends LruCache<PhotosFlow, View> {
+public class ViewCache extends LruCache<PhotosFlow, ViewGroup> {
 
     public ViewCache() {
         super(10);
     }
 
     @Override
-    protected void entryRemoved(boolean evicted, PhotosFlow key, View oldValue, View newValue) {
+    protected void entryRemoved(boolean evicted, PhotosFlow key, ViewGroup oldValue, ViewGroup newValue) {
         super.entryRemoved(evicted, key, oldValue, newValue);
 
         if (oldValue != null) {
