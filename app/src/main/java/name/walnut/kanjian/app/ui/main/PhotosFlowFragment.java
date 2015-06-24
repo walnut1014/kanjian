@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -51,6 +52,7 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
     private PhotosFlowAdapter photosFlowAdapter;
 
     private PhotosFlow targetCommentPhotosFlow; // 评论的消息流
+    private Comment targetComment;  // 评论目标
 
     private int page = 1;   // 当前显示页
 
@@ -67,7 +69,7 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
     @Override
     protected View getActionBarMenuView() {
         ImageButton view = (ImageButton) LayoutInflater.from(getActionBarActivity()).inflate(R.layout.action_bar_menu_button, null, false);
-        view.setImageResource(R.drawable.icon_add_person);
+        view.setImageResource(R.drawable.icon_add_friend);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,13 +98,11 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
 
         recyclerView.setupMoreListener(this, ITEM_LEFT_TO_LOAD_MORE);
 
-        photosFlowAdapter = new PhotosFlowAdapter(this, photosFlowList);
-        recyclerView.setAdapter(photosFlowAdapter);
-
         commentArea.setSendClickListener(new CommentView.OnSendClickListener() {
             @Override
             public void onSend(final String message, CommentView view) {
-                if (targetCommentPhotosFlow != null) {
+                final PhotosFlow target = targetCommentPhotosFlow;
+                if (target != null) {
                     new AsyncTask<Void, Void, Void>() {
 
                         @Override
@@ -114,11 +114,12 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
                         @Override
                         protected void onPostExecute(Void aVoid) {
                             super.onPostExecute(aVoid);
+                            commentArea.resetComment();
                             // TODO 模拟评论成功
                             Comment comment = new Comment();
                             comment.content = message;
-                            targetCommentPhotosFlow.comments.add(comment);
-                            int position = photosFlowList.indexOf(targetCommentPhotosFlow);
+                            target.comments.add(comment);
+                            int position = photosFlowList.indexOf(target);
                             photosFlowAdapter.notifyItemChanged(position);
 
                         }
@@ -136,7 +137,33 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        fetchPhotos(page);
+        if (photosFlowAdapter == null) {
+            photosFlowAdapter = new PhotosFlowAdapter(this, photosFlowList);
+
+            for (int i = 0; i < 5; i++) {
+                PhotosFlow photosFlow = new PhotosFlow();
+                photosFlowAdapter.add(photosFlow);
+            }
+
+            fetchFirstPagePhotos();
+        }
+        recyclerView.setAdapter(photosFlowAdapter);
+
+        recyclerView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideCommentArea();
+                return false;
+            }
+
+        });
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
     }
 
     @OnClick(R.id.action_camera)
@@ -150,38 +177,44 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
     public void onMoreAsked(int numberOfItems, int numberBeforeMore, int currentItemPos) {
         Logger.e("onMoreAsked");
 
-        new AsyncTask<Void, Void, Void>() {
-
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                for (int i = 0; i < 5; i++) {
-                    photosFlowAdapter.add(new PhotosFlow());
-                }
-                recyclerView.hideMoreProgress();
-            }
-        }.execute();
-
+        recyclerView.hideMoreProgress();
+        fetchNextPagePhotos();
     }
 
     /**
      * 显示评论框
      */
     public void showCommentArea(PhotosFlow photosFlow) {
+        showCommentArea(photosFlow, null);
+    }
+
+    /**
+     * 显示评论框
+     * @param photosFlow
+     * @param comment
+     */
+    public void showCommentArea(PhotosFlow photosFlow, Comment comment) {
+        if (targetCommentPhotosFlow != photosFlow || targetComment != comment) {
+            commentArea.setVisibility(View.GONE);
+        }
         targetCommentPhotosFlow = photosFlow;
+        targetComment = comment;
         commentArea.setVisibility(View.VISIBLE);
+        if (targetComment != null) {
+            String replyStr = getString(R.string.reply);
+            commentArea.setHint(replyStr + "：" + targetComment.sender);
+        } else {
+            commentArea.setHint("");
+        }
         MainActivity activity = (MainActivity) getActionBarActivity();
         activity.hideTab();
+
+        scrollList(photosFlow);
+    }
+
+    private void scrollList(PhotosFlow photosFlow) {
+
+        recyclerView.scrollTo(recyclerView.getScrollX(), 0);
     }
 
     /**
@@ -192,6 +225,22 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
         commentArea.setVisibility(View.GONE);
         MainActivity activity = (MainActivity) getActionBarActivity();
         activity.showTab();
+    }
+
+    /**
+     * 获取第一页照片
+     */
+    private void fetchFirstPagePhotos() {
+        page = 1;
+        fetchPhotos(page);
+    }
+
+    /**
+     * 获取下一页照片
+     */
+    private void fetchNextPagePhotos() {
+        page ++;
+        fetchPhotos(page);
     }
 
     /**

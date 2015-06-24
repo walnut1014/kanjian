@@ -1,6 +1,7 @@
 package name.walnut.kanjian.app.views;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,6 +62,7 @@ public class CommentView extends FrameLayout {
      */
     public void resetComment() {
         mCommentEdit.setText("");
+        mCommentEdit.setHint("");
     }
 
     /**
@@ -69,6 +71,14 @@ public class CommentView extends FrameLayout {
      */
     public void setHint(String hint) {
         mCommentEdit.setHint(hint);
+    }
+
+    /**
+     * 设置文字
+     * @param text
+     */
+    public void setText(CharSequence text) {
+        mCommentEdit.setText(text);
     }
 
     public OnSendClickListener getSendClickListener() {
@@ -89,6 +99,7 @@ public class CommentView extends FrameLayout {
             mCommentEdit.requestFocusFromTouch();
             inputMethodManager.showSoftInput(mCommentEdit, InputMethodManager.SHOW_FORCED);
         } else {
+
             inputMethodManager.hideSoftInputFromWindow(getWindowToken(), 0);
         }
     }

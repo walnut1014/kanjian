@@ -9,11 +9,20 @@ import java.util.Random;
  */
 public class PhotosFlow {
 
-    List<Comment> comments;
+    public long id;         // 消息id
+    public String content;  // 内容
+    public String photoPath;    // 图片路径
+    public boolean root;    // 主消息
+    public long sendTime;   // 发送时间
+    public String sender;   // 发送人昵称
+    public long senderId;   // 发送人id
+
+    public List<Comment> comments;
+
 
     public PhotosFlow() {
         comments = new ArrayList<>();
-        int commentsCount = createRange(1, 10);
+        int commentsCount = createRange(-1, 10);
         for (int i = 0; i < commentsCount; i++) {
             Comment comment = new Comment();
             comments.add(comment);

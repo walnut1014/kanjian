@@ -126,5 +126,7 @@
     <string name="toast_error_unselected_image">请选择一张要上传的图片</string>
     <string name="comment_send">发送</string>
     <string name="my_photo_count"><![CDATA[<font color="#694dd0">%s</font>]]>张照片</string>
+    <string name="action_delete">删除</string>
+    <string name="reply">回复</string>
 
 </resources>

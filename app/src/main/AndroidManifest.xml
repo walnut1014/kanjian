@@ -56,7 +56,7 @@
         <!-- 主界面Activity -->
         <activity
             android:name=".ui.MainActivity"
-            android:windowSoftInputMode="adjustResize"
+            android:windowSoftInputMode="adjustResize|stateHidden"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="kanjian.intent.action.MAIN" />
