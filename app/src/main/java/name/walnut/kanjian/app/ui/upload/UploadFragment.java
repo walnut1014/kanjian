@@ -2,6 +2,7 @@ package name.walnut.kanjian.app.ui.upload;
 
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -270,8 +272,11 @@ public class UploadFragment extends ActionBarFragment
             String path = cursor.getString(cursor
                     .getColumnIndex(MediaStore.Images.Media.DATA));
 
-            Uri imgUri = Uri.fromFile(new File(path));
-            uriList.add(imgUri);
+            if (filterPhoto(path)) {
+                Uri imgUri = Uri.fromFile(new File(path));
+                uriList.add(imgUri);
+            }
+
         }
         cursor.close();
 
@@ -285,6 +290,26 @@ public class UploadFragment extends ActionBarFragment
         result.add(uriList.get(target2));
 
         return result;
+    }
+
+    /**
+     * 是否为手机照片
+     * @param path
+     * @return 如果符合要求，返回true
+     */
+    private boolean filterPhoto(String path) {
+        try {
+            ExifInterface exif = new ExifInterface(path);
+            // 判断设备型号, 如果不为空，则认为是手机拍照照片
+            String tagMake = exif.getAttribute(ExifInterface.TAG_MODEL);
+            if (!TextUtils.isEmpty(tagMake)) {
+                return true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
 
