@@ -5,10 +5,19 @@ package name.walnut.kanjian.app.account;
  */
 public class AccountBean {
 
+    private long id;
     private String nickname;
     private String headPhotoPath;
     private String mobilePhone;
     private int photoCount;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getNickname() {
         return nickname;

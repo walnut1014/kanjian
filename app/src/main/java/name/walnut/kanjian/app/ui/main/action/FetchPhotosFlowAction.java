@@ -2,7 +2,15 @@ package name.walnut.kanjian.app.ui.main.action;
 
 import com.android.volley.VolleyError;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import name.walnut.kanjian.app.support.BaseResourceAction;
+import name.walnut.kanjian.app.ui.main.Comment;
+import name.walnut.kanjian.app.ui.main.PhotosFlow;
+import name.walnut.kanjian.app.ui.main.PhotosFlowAdapter;
+import name.walnut.kanjian.app.ui.main.PhotosFlowFragment;
 import name.walnut.kanjian.app.utils.Logger;
 
 /**
@@ -12,6 +20,59 @@ public class FetchPhotosFlowAction extends BaseResourceAction {
     @Override
     public void onSuccess(Response response) {
         Logger.e(response.getData());
+
+        PhotosFlowFragment flowFragment = (PhotosFlowFragment) getFragment();
+        PhotosFlowAdapter adapter;
+        int oldLength;
+        if (flowFragment != null) {
+            adapter = flowFragment.getPhotosFlowAdapter();
+            oldLength = adapter.getItemCount();
+        } else {
+            return;
+        }
+
+        try {
+            JSONArray jsonArray = new JSONArray(response.getData());
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject itemJson = jsonArray.getJSONObject(i);
+                PhotosFlow photosFlow = new PhotosFlow();
+                photosFlow.setSender(itemJson.optString("sender"));
+                photosFlow.setId(itemJson.optLong("id"));
+                photosFlow.setContent(itemJson.optString("content"));
+                photosFlow.setRoot(itemJson.optBoolean("root"));
+                photosFlow.setSendTime(itemJson.optLong("sendTime"));
+                photosFlow.setSenderId(itemJson.optLong("senderId"));
+                photosFlow.setPhotoPath(itemJson.optString("photoPath"));
+
+                JSONArray commentJson = itemJson.getJSONArray("repayMessages");
+                for (int j = 0; j < commentJson.length(); j++) {
+                    JSONObject itemCommentJson = commentJson.getJSONObject(j);
+                    Comment comment = new Comment();
+                    comment.setSender(itemCommentJson.getString("sender"));
+                    comment.setSenderTime(itemCommentJson.getLong("sendTime"));
+                    comment.setParentId(itemCommentJson.getLong("prentId"));
+                    comment.setId(itemCommentJson.getLong("id"));
+                    comment.setContent(itemCommentJson.getString("content"));
+                    comment.setSenderId(itemCommentJson.getLong("senderId"));
+                    comment.setRoot(itemCommentJson.getBoolean("root"));
+                    comment.setReceiver(itemCommentJson.optString("receiver", null));
+
+                    photosFlow.addComment(comment);
+                }
+
+                adapter.add(photosFlow);
+            }
+
+            int newLength = adapter.getItemCount();
+            if (flowFragment.recyclerView.getAdapter() != null) {
+                adapter.notifyItemRangeInserted(oldLength, newLength - oldLength);
+            } else {
+                flowFragment.recyclerView.setAdapter(adapter);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

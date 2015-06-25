@@ -1,6 +1,7 @@
 package name.walnut.kanjian.app.views;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.text.Layout;
 import android.text.Selection;
@@ -15,6 +16,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+
+import name.walnut.kanjian.app.R;
 
 public class SpanTextView extends TextView {
 
@@ -31,7 +34,14 @@ public class SpanTextView extends TextView {
 	public SpanTextView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		mContext = context;
-	}
+
+        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SpanTextView, 0, 0);
+
+        spanColor = a.getColor(R.styleable.SpanTextView_spanColor, spanColor);
+
+        a.recycle();
+
+    }
 
 	private int mStart = -1;
 

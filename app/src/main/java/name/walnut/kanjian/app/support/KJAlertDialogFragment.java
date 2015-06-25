@@ -7,7 +7,11 @@ import android.os.Bundle;
 import name.walnut.kanjian.app.views.KJAlertDialog;
 
 /**
- *
+ * 简单的提示对话框，可以设置内容和两个按钮文字
+ * {@link name.walnut.kanjian.app.support.KJAlertDialogFragment#setContent(String)} 设置提示内容
+ * {@link name.walnut.kanjian.app.support.KJAlertDialogFragment#setNegativeText(String)}设置右边按钮文字
+ * {@link name.walnut.kanjian.app.support.KJAlertDialogFragment#setPositiveText(String)}设置左边按钮文字
+ * {@link name.walnut.kanjian.app.support.KJAlertDialogFragment#showNegativeButton(boolean)}是否显示右边的按钮
  */
 public class KJAlertDialogFragment extends DialogFragment {
 

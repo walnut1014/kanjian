@@ -1,10 +1,8 @@
 package name.walnut.kanjian.app.ui.main;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.text.Selection;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -13,14 +11,15 @@ import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.URLSpan;
+import android.util.LruCache;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 
@@ -29,19 +28,25 @@ import butterknife.InjectView;
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.account.Account;
 import name.walnut.kanjian.app.support.AbsListAdapter;
+import name.walnut.kanjian.app.support.KJAlertDialogFragment;
+import name.walnut.kanjian.app.ui.Constants;
+import name.walnut.kanjian.app.ui.util.ToastUtils;
 import name.walnut.kanjian.app.utils.Logger;
+import name.walnut.kanjian.app.utils.TimeUtils;
+import name.walnut.kanjian.app.views.KJAlertDialog;
 
 /**
  * 看照片 adapter
  */
 public class PhotosFlowAdapter extends AbsListAdapter<PhotosFlow, PhotosFlowAdapter.ViewHolder> {
 
-    private ViewCache commentsCache;
+    private LruCache<PhotosFlow, ViewGroup> commentsCache;
+    private static final int COMMENT_CACHE_LENGTH = 30;
     private PhotosFlowFragment fragment;
 
     public PhotosFlowAdapter(PhotosFlowFragment fragment, List<PhotosFlow> list) {
         super(fragment.getActionBarActivity(), list);
-        commentsCache = new ViewCache();
+        commentsCache = new LruCache<>(COMMENT_CACHE_LENGTH);
         this.fragment = fragment;
     }
 
@@ -54,12 +59,111 @@ public class PhotosFlowAdapter extends AbsListAdapter<PhotosFlow, PhotosFlowAdap
     }
 
     @Override
+    public long getItemId(int position) {
+        return getItem(position).getId();
+    }
+
+    @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         long startTime = System.currentTimeMillis();
         Logger.e("start:" + startTime);
 
         final PhotosFlow photosFlow = getItem(position);
-        int commentCount = photosFlow.comments.size();
+
+        /*
+         * 初始化评论内容
+         */
+        initCommentView(holder, photosFlow);
+
+        /*
+         * 没有评论，不显示评论区
+         */
+        if (photosFlow.getComments().size() == 0) {
+            holder.commentsContainer.setVisibility(View.GONE);
+        } else {
+            holder.commentsContainer.setVisibility(View.VISIBLE);
+        }
+
+        /*
+         * 留言按钮点击事件
+         */
+        holder.messageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragment.showCommentArea(photosFlow);
+            }
+        });
+
+        /*
+         * 如果浏览到自己的图片，显示“删除”按钮
+         */
+        if (Account.INSTANCE.getNickname().equals(photosFlow.getSender())) {
+            holder.deleteBtn.setVisibility(View.VISIBLE);
+        } else {
+            holder.deleteBtn.setVisibility(View.INVISIBLE);
+        }
+
+        /*
+         * 删除按钮点击事件
+         */
+        holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 删除图片
+                final long timeNow = System.currentTimeMillis();
+                // 如果上传时间距今超过24小时，则允许删除
+                boolean allowDelete = (timeNow - photosFlow.getSendTime()) > 1000 * 60 * 60 * 24;
+
+                if (allowDelete) {
+
+                    new KJAlertDialogFragment()
+                            .setContent(context.getString(R.string.dialog_delete_confirm_title))
+                            .setPositiveClickListener(new KJAlertDialog.OnKJClickListener() {
+                                @Override
+                                public void onClick(KJAlertDialog dialog) {
+                                    // 确认删除
+                                    ToastUtils.toast("确认删除");
+                                }
+                            })
+                            .show(fragment.getFragmentManager());
+
+                } else {
+                    new KJAlertDialogFragment()
+                            .setContent(context.getString(R.string.dialog_delete_not_allowed_title))
+                            .showNegativeButton(false)
+                            .setPositiveText(context.getString(R.string.dialog_delete_not_allowed_button_positive))
+                            .show(fragment.getFragmentManager());
+                }
+
+            }
+        });
+
+
+        // 设置内容，TODO 缺少头像
+        holder.descriptionTv.setText(photosFlow.getContent());
+        if (TextUtils.isEmpty(photosFlow.getContent())) {
+            holder.descriptionTv.setVisibility(View.GONE);
+        } else {
+            holder.descriptionTv.setVisibility(View.VISIBLE);
+        }
+        holder.submitterTv.setText(photosFlow.getSender());
+        holder.photoView.setImageURI(Constants.getFileUri(photosFlow.getPhotoPath()));
+        holder.timeTv.setText(TimeUtils.getTimeDiff(photosFlow.getSendTime()));
+
+        long useTime = System.currentTimeMillis() - startTime;
+        Logger.e("useTime:" + useTime);
+    }
+
+    @Override
+    public void onViewRecycled(ViewHolder holder) {
+        super.onViewRecycled(holder);
+        Logger.e("onViewRecycled");
+        holder.commentsContainer.removeAllViews();  // 移除评论Views
+    }
+
+    private void initCommentView(ViewHolder holder, final PhotosFlow photosFlow) {
+
+        final int commentCount = photosFlow.getComments().size(); // 评论总数
         Logger.e("评论数量：" + commentCount);
 
         /**
@@ -94,54 +198,6 @@ public class PhotosFlowAdapter extends AbsListAdapter<PhotosFlow, PhotosFlowAdap
             // 添加
             holder.commentsContainer.addView(commentView);
         }
-
-        /**
-         * 没有评论，不显示评论区
-         */
-        if (photosFlow.comments.size() == 0) {
-            holder.commentsContainer.setVisibility(View.GONE);
-        } else {
-            holder.commentsContainer.setVisibility(View.VISIBLE);
-        }
-
-        /**
-         * 留言按钮点击事件
-         */
-        holder.messageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fragment.showCommentArea(photosFlow);
-            }
-        });
-
-        /**
-         * 如果浏览到自己的图片，显示“删除”按钮
-         */
-        if (Account.INSTANCE.getNickname().equals(photosFlow.sender)) {
-            holder.deleteBtn.setVisibility(View.VISIBLE);
-        } else {
-            holder.deleteBtn.setVisibility(View.INVISIBLE);
-        }
-
-        /**
-         * 删除按钮点击事件
-         */
-        holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 删除图片
-            }
-        });
-
-        long useTime = System.currentTimeMillis() - startTime;
-        Logger.e("useTime:" + useTime);
-    }
-
-    @Override
-    public void onViewRecycled(ViewHolder holder) {
-        super.onViewRecycled(holder);
-        Logger.e("onViewRecycled");
-        holder.commentsContainer.removeAllViews();  // 移除评论Views
     }
 
     /**
@@ -162,7 +218,7 @@ public class PhotosFlowAdapter extends AbsListAdapter<PhotosFlow, PhotosFlowAdap
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        final List<Comment> commentList = photosFlow.comments;
+        final List<Comment> commentList = photosFlow.getComments();
 
         for (int i = 0; i < commentList.size(); i++) {
             View view = inflater.inflate(R.layout.layout_comment, container, false);
@@ -190,25 +246,25 @@ public class PhotosFlowAdapter extends AbsListAdapter<PhotosFlow, PhotosFlowAdap
 
             final String replyStr = context.getString(R.string.reply);
 
-            if (TextUtils.isEmpty(comment.receiver)) {
-                commentStr = comment.sender + "：" + comment.content;
+            if (TextUtils.isEmpty(comment.getReceiver())) {
+                commentStr = comment.getSender() + "：" + comment.getContent();
             } else {
-                commentStr = comment.sender + replyStr + comment.receiver + "：" + comment.content;
+                commentStr = comment.getSender() + replyStr + comment.getReceiver() + "：" + comment.getContent();
             }
 
             /**
              * 评论名点击事件
              */
             SpannableStringBuilder builder = new SpannableStringBuilder(commentStr);
-            builder.setSpan(new CommentClickableSpan(context, comment.senderId),
-                    0, comment.sender.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+            builder.setSpan(new CommentClickableSpan(context, comment.getSenderId()),
+                    0, comment.getSender().length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
 
-            if (!TextUtils.isEmpty(comment.receiver)) {
+            if (!TextUtils.isEmpty(comment.getReceiver())) {
                 // 回复主消息
 
-                int start = comment.sender.length() + replyStr.length();
-                builder.setSpan(new CommentClickableSpan(context, comment.senderId),
-                        start, start + comment.receiver.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+                int start = comment.getSender().length() + replyStr.length();
+                builder.setSpan(new CommentClickableSpan(context, comment.getSenderId()),
+                        start, start + comment.getReceiver().length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
             }
 
             textView.setText(builder);
@@ -230,7 +286,15 @@ public class PhotosFlowAdapter extends AbsListAdapter<PhotosFlow, PhotosFlowAdap
         @InjectView(R.id.action_delete)
         TextView deleteBtn;
         @InjectView(R.id.time)
-        TextView time;
+        TextView timeTv;
+        @InjectView(R.id.photo)
+        SimpleDraweeView photoView;
+        @InjectView(R.id.description)
+        TextView descriptionTv;
+        @InjectView(R.id.submitter_name)
+        TextView submitterTv;
+        @InjectView(R.id.avatar)
+        SimpleDraweeView avatarView;
 
         public ViewHolder(Context context, View itemView) {
             super(itemView);
@@ -260,7 +324,7 @@ public class PhotosFlowAdapter extends AbsListAdapter<PhotosFlow, PhotosFlowAdap
         }
 
         @Override
-        public void updateDrawState(TextPaint ds) {
+        public void updateDrawState(@NonNull TextPaint ds) {
             super.updateDrawState(ds);
             ds.setColor(context.getResources().getColor(R.color.text_purple_dark));
             ds.setUnderlineText(false);

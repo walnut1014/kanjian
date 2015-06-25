@@ -28,12 +28,14 @@
             style="@style/IButton.white"
             android:id="@+id/negative_button"
             android:layout_marginRight="10dp"
+            android:text="@string/action_negative"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_height" />
         <Button
             style="@style/IButton.purple"
             android:id="@+id/positive_button"
+            android:text="@string/action_positive"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_height" />

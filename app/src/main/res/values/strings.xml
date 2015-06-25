@@ -128,5 +128,10 @@
     <string name="my_photo_count"><![CDATA[<font color="#694dd0">%s</font>]]>张照片</string>
     <string name="action_delete">删除</string>
     <string name="reply">回复</string>
+    <string name="dialog_delete_not_allowed_title">亲，只能删除超过存在24小时的照片哦</string>
+    <string name="dialog_delete_not_allowed_button_positive">我知道了</string>
+    <string name="dialog_delete_confirm_title">确认删除？</string>
+    <string name="action_negative">取消</string>
+    <string name="action_positive">确认</string>
 
 </resources>

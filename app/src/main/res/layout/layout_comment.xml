@@ -5,11 +5,12 @@
     android:background="@drawable/bg_comment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <name.walnut.kanjian.app.views.SpanTextView
         android:id="@+id/comment_text"
-        android:text="@string/text_launch_clause"
+        app:spanColor="@color/gray_dark"
         android:textColor="@color/text_black"
         android:textSize="16sp"
         android:textColorHighlight="@android:color/transparent"

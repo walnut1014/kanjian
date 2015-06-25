@@ -41,6 +41,7 @@ public class LoginAction extends BaseResourceAction {
             accountBean.setMobilePhone(mobilePhone);
             accountBean.setNickname(nickname);
             accountBean.setPhotoCount(photoCount);
+            accountBean.setId(id);
 
             Account.INSTANCE.setAccount(accountBean);
         } catch (JSONException ex) {

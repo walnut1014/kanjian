@@ -30,6 +30,7 @@ import name.walnut.kanjian.app.support.DividerItemDecoration;
 import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.MainActivity;
 import name.walnut.kanjian.app.ui.main.action.FetchPhotosFlowAction;
+import name.walnut.kanjian.app.ui.main.action.RepayAction;
 import name.walnut.kanjian.app.utils.Logger;
 import name.walnut.kanjian.app.views.CommentView;
 
@@ -41,12 +42,15 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
     private final int ITEM_LEFT_TO_LOAD_MORE = 1;
 
     @InjectView(R.id.list)
-    SuperRecyclerView recyclerView;
+    public SuperRecyclerView recyclerView;
     @InjectView(R.id.comment_area)
     CommentView commentArea;
 
     @ResourceWeave(actionClass = FetchPhotosFlowAction.class)
     public Resource mainResource;
+
+    @ResourceWeave(actionClass = RepayAction.class)
+    public Resource repayResource;
 
     private List<PhotosFlow> photosFlowList = new ArrayList<>();
     private PhotosFlowAdapter photosFlowAdapter;
@@ -101,29 +105,15 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
         commentArea.setSendClickListener(new CommentView.OnSendClickListener() {
             @Override
             public void onSend(final String message, CommentView view) {
-                final PhotosFlow target = targetCommentPhotosFlow;
-                if (target != null) {
-                    new AsyncTask<Void, Void, Void>() {
+                final PhotosFlow photosFlow = targetCommentPhotosFlow;
+                final Comment comment = targetComment;
+                if (photosFlow != null) {
 
-                        @Override
-                        protected Void doInBackground(Void... params) {
-                            //TODO 发送评论消息
-                            return null;
-                        }
+                    long targetId = (comment != null) ? comment.getId() : photosFlow.getId();
 
-                        @Override
-                        protected void onPostExecute(Void aVoid) {
-                            super.onPostExecute(aVoid);
-                            commentArea.resetComment();
-                            // TODO 模拟评论成功
-                            Comment comment = new Comment();
-                            comment.content = message;
-                            target.comments.add(comment);
-                            int position = photosFlowList.indexOf(target);
-                            photosFlowAdapter.notifyItemChanged(position);
-
-                        }
-                    }.execute();
+                    repayResource.addParam("id", targetId)
+                            .addParam("content", message)
+                            .send();
 
                 }
                 hideCommentArea();
@@ -139,15 +129,10 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
 
         if (photosFlowAdapter == null) {
             photosFlowAdapter = new PhotosFlowAdapter(this, photosFlowList);
-
-            for (int i = 0; i < 5; i++) {
-                PhotosFlow photosFlow = new PhotosFlow();
-                photosFlowAdapter.add(photosFlow);
-            }
-
             fetchFirstPagePhotos();
+        } else {
+            recyclerView.setAdapter(photosFlowAdapter);
         }
-        recyclerView.setAdapter(photosFlowAdapter);
 
         recyclerView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -202,7 +187,7 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
         commentArea.setVisibility(View.VISIBLE);
         if (targetComment != null) {
             String replyStr = getString(R.string.reply);
-            commentArea.setHint(replyStr + "：" + targetComment.sender);
+            commentArea.setHint(replyStr + "：" + targetComment.getSender());
         } else {
             commentArea.setHint("");
         }
@@ -212,8 +197,11 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
         scrollList(photosFlow);
     }
 
+    /**
+     * 将列表滚动到评论框上面
+     * @param photosFlow
+     */
     private void scrollList(PhotosFlow photosFlow) {
-
         recyclerView.scrollTo(recyclerView.getScrollX(), 0);
     }
 
@@ -249,5 +237,9 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
      */
     private void fetchPhotos(int page) {
         mainResource.addParam("page", page).send();
+    }
+
+    public PhotosFlowAdapter getPhotosFlowAdapter() {
+        return photosFlowAdapter;
     }
 }

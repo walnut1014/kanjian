@@ -33,4 +33,9 @@
         <attr name="checked" format="boolean"/>
         <attr name="maxLength"/>
     </declare-styleable>
+
+    <declare-styleable name="SpanTextView">
+        <attr name="spanColor" format="color"/>
+    </declare-styleable>
+
 </resources>
