@@ -6,6 +6,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.ui.main.Comment;
 import name.walnut.kanjian.app.ui.main.PhotosFlow;
@@ -23,15 +26,15 @@ public class FetchPhotosFlowAction extends BaseResourceAction {
 
         PhotosFlowFragment flowFragment = (PhotosFlowFragment) getFragment();
         PhotosFlowAdapter adapter;
-        int oldLength;
         if (flowFragment != null) {
             adapter = flowFragment.getPhotosFlowAdapter();
-            oldLength = adapter.getItemCount();
         } else {
             return;
         }
 
         try {
+            List<PhotosFlow> photosFlows = new ArrayList<>();
+
             JSONArray jsonArray = new JSONArray(response.getData());
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject itemJson = jsonArray.getJSONObject(i);
@@ -60,12 +63,16 @@ public class FetchPhotosFlowAction extends BaseResourceAction {
                     photosFlow.addComment(comment);
                 }
 
-                adapter.add(photosFlow);
+                photosFlows.add(photosFlow);
             }
 
-            int newLength = adapter.getItemCount();
+            List<PhotosFlow> oldDataSet = adapter.getItems();
+            oldDataSet.addAll(photosFlows);
+            adapter.setItems(oldDataSet);
+
+
             if (flowFragment.recyclerView.getAdapter() != null) {
-                adapter.notifyItemRangeInserted(oldLength, newLength - oldLength);
+                adapter.notifyDataSetChanged();
             } else {
                 flowFragment.recyclerView.setAdapter(adapter);
             }

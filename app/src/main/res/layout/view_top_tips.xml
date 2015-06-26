@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tip_container"
+    android:background="@color/activity_background"
+    android:paddingTop="11dp"
+    android:paddingBottom="11dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tip_news"
+        android:textSize="12sp"
+        android:textColor="@color/text_white"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="5dp"
+        android:drawableRight="@drawable/icon_arrow"
+        android:drawablePadding="32dp"
+        android:background="@drawable/bg_top_tip"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/tip_news"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:id="@+id/divide"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
+    <TextView
+        android:id="@+id/tip_remind"
+        android:textSize="14sp"
+        android:textColor="@color/text_gray"
+        android:gravity="center_horizontal"
+        android:text="@string/tip_remind"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

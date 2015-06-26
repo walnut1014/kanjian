@@ -2,7 +2,6 @@ package name.walnut.kanjian.app.ui.main;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -57,6 +56,8 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
 
     private PhotosFlow targetCommentPhotosFlow; // 评论的消息流
     private Comment targetComment;  // 评论目标
+
+    private Header header;  // 顶部提示
 
     private int page = 1;   // 当前显示页
 
@@ -134,6 +135,11 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
             recyclerView.setAdapter(photosFlowAdapter);
         }
 
+        header = new Header();
+        photosFlowAdapter.setHeader(header);
+        showNewsTip(true, 3);
+        showRemindTip(true);
+
         recyclerView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -169,7 +175,7 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
     /**
      * 显示评论框
      */
-    public void showCommentArea(PhotosFlowAdapter.ViewHolder viewHolder, PhotosFlow photosFlow) {
+    public void showCommentArea(PhotosFlowViewHolder viewHolder, PhotosFlow photosFlow) {
         showCommentArea(viewHolder, photosFlow, null);
     }
 
@@ -178,7 +184,7 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
      * @param photosFlow
      * @param comment
      */
-    public void showCommentArea(PhotosFlowAdapter.ViewHolder viewHolder, PhotosFlow photosFlow, Comment comment) {
+    public void showCommentArea(PhotosFlowViewHolder viewHolder, PhotosFlow photosFlow, Comment comment) {
         if (targetCommentPhotosFlow != photosFlow || targetComment != comment) {
             commentArea.setVisibility(View.GONE);
         }
@@ -201,7 +207,7 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
      * 将列表滚动到评论框上面
      * @param photosFlow
      */
-    private void scrollList(PhotosFlowAdapter.ViewHolder viewHolder, PhotosFlow photosFlow) {
+    private void scrollList(PhotosFlowViewHolder viewHolder, PhotosFlow photosFlow) {
 
         int[] location = new int[2];
         viewHolder.itemView.getLocationInWindow(location);
@@ -252,4 +258,25 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
     public PhotosFlowAdapter getPhotosFlowAdapter() {
         return photosFlowAdapter;
     }
+
+
+    /**
+     * 显示顶部新消息提醒
+     * @param show
+     */
+    public void showNewsTip(boolean show, int newsCount) {
+        header.setNewsCount(newsCount);
+        header.showNewsTip(show);
+        photosFlowAdapter.notifyItemChanged(0);
+    }
+
+    /**
+     * 显示顶部“发照片”提醒
+     * @param show
+     */
+    public void showRemindTip(boolean show) {
+        header.setShowRemindTip(show);
+        photosFlowAdapter.notifyItemChanged(0);
+    }
+
 }

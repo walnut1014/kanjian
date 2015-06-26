@@ -24,6 +24,10 @@ import android.view.View;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/**
+ * 列表分割线，第一个默认不设置
+ */
 public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
     private static final int[] ATTRS = new int[]{
@@ -85,6 +89,10 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         final int childCount = parent.getChildCount();
         for (int i = 0; i < childCount; i++) {
             final View child = parent.getChildAt(i);
+            int position = parent.getChildPosition(child);
+            if (!showVerticalFirst() && position == 0) {
+                continue;
+            }
             final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
                 .getLayoutParams();
             final int top = child.getBottom() + params.bottomMargin;
@@ -110,8 +118,18 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         }
     }
 
+    public boolean showVerticalFirst() {
+        return false;
+    }
+
     @Override
     public void getItemOffsets(Rect outRect, int itemPosition, RecyclerView parent) {
+        super.getItemOffsets(outRect, itemPosition, parent);
+        if (!showVerticalFirst() && itemPosition == 0) {
+            // 第一个不设置装饰器
+            outRect.set(0, 0, 0, 0);
+            return;
+        }
         if (mOrientation == VERTICAL_LIST) {
             outRect.set(0, 0, 0, mDivider.getIntrinsicHeight());
         } else {
