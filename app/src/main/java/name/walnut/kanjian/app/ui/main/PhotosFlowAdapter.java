@@ -64,7 +64,7 @@ public class PhotosFlowAdapter extends AbsListAdapter<PhotosFlow, PhotosFlowAdap
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         long startTime = System.currentTimeMillis();
         Logger.e("start:" + startTime);
 
@@ -90,7 +90,7 @@ public class PhotosFlowAdapter extends AbsListAdapter<PhotosFlow, PhotosFlowAdap
         holder.messageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragment.showCommentArea(photosFlow);
+                fragment.showCommentArea(holder, photosFlow);
             }
         });
 
@@ -190,7 +190,7 @@ public class PhotosFlowAdapter extends AbsListAdapter<PhotosFlow, PhotosFlowAdap
         }
         if (commentView == null) {
             // 评论区View没有缓存或者缓存失效，创建新的评论区View
-            commentView = onCreateCommentView(context, photosFlow);
+            commentView = onCreateCommentView(context, holder, photosFlow);
             commentsCache.put(photosFlow, commentView);
         }
         if (commentView.getParent() != holder.commentsContainer) {
@@ -206,7 +206,7 @@ public class PhotosFlowAdapter extends AbsListAdapter<PhotosFlow, PhotosFlowAdap
      * @param photosFlow
      * @return
      */
-    private ViewGroup onCreateCommentView(final Context context, final PhotosFlow photosFlow) {
+    private ViewGroup onCreateCommentView(final Context context, final ViewHolder viewHolder, final PhotosFlow photosFlow) {
         long startTime = System.currentTimeMillis();
         Logger.e("onCreateCommentView："+startTime);
 
@@ -233,7 +233,7 @@ public class PhotosFlowAdapter extends AbsListAdapter<PhotosFlow, PhotosFlowAdap
                 @Override
                 public void onClick(View v) {
                     Logger.e("comment  onClick");
-                    fragment.showCommentArea(photosFlow, comment);
+                    fragment.showCommentArea(viewHolder, photosFlow, comment);
                 }
             });
 

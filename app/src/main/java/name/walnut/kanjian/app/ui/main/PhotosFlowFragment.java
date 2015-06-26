@@ -169,8 +169,8 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
     /**
      * 显示评论框
      */
-    public void showCommentArea(PhotosFlow photosFlow) {
-        showCommentArea(photosFlow, null);
+    public void showCommentArea(PhotosFlowAdapter.ViewHolder viewHolder, PhotosFlow photosFlow) {
+        showCommentArea(viewHolder, photosFlow, null);
     }
 
     /**
@@ -178,7 +178,7 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
      * @param photosFlow
      * @param comment
      */
-    public void showCommentArea(PhotosFlow photosFlow, Comment comment) {
+    public void showCommentArea(PhotosFlowAdapter.ViewHolder viewHolder, PhotosFlow photosFlow, Comment comment) {
         if (targetCommentPhotosFlow != photosFlow || targetComment != comment) {
             commentArea.setVisibility(View.GONE);
         }
@@ -194,15 +194,25 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
         MainActivity activity = (MainActivity) getActionBarActivity();
         activity.hideTab();
 
-        scrollList(photosFlow);
+        scrollList(viewHolder, photosFlow);
     }
 
     /**
      * 将列表滚动到评论框上面
      * @param photosFlow
      */
-    private void scrollList(PhotosFlow photosFlow) {
-        recyclerView.scrollTo(recyclerView.getScrollX(), 0);
+    private void scrollList(PhotosFlowAdapter.ViewHolder viewHolder, PhotosFlow photosFlow) {
+
+        int[] location = new int[2];
+        viewHolder.itemView.getLocationInWindow(location);
+        int height = viewHolder.itemView.getHeight();
+
+        int[] commentAreaLocation = new int[2];
+        commentArea.getLocationInWindow(commentAreaLocation);
+
+        int offset = (location[1] + height) - commentAreaLocation[1];
+
+        recyclerView.getRecyclerView().scrollBy(0, offset);
     }
 
     /**

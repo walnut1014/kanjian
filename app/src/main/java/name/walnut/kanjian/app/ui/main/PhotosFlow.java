@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
 
 /**
  * 看照片 bean
@@ -102,19 +101,6 @@ public class PhotosFlow {
                 return (int) (lhs.getSenderTime() - rhs.getSenderTime());
             }
         });
-    }
-
-    private int createRange(int min, int max) {
-        if (min >= max) {
-            return -1;
-        }
-        Random random = new Random();
-        int result = random.nextInt();
-        if (result <= 0) {
-            result = result + Integer.MAX_VALUE;
-        }
-        result = (result % (max - min)) + min;
-        return result;
     }
 
 }
