@@ -133,7 +133,7 @@ public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<Ph
         });
 
 
-        // 设置内容，TODO 缺少头像
+        // 设置内容
         holder.descriptionTv.setText(photosFlow.getContent());
         if (TextUtils.isEmpty(photosFlow.getContent())) {
             holder.descriptionTv.setVisibility(View.GONE);
@@ -143,6 +143,7 @@ public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<Ph
         holder.submitterTv.setText(photosFlow.getSender());
         holder.photoView.setImageURI(Constants.getFileUri(photosFlow.getPhotoPath()));
         holder.timeTv.setText(TimeUtils.getTimeDiff(photosFlow.getSendTime()));
+        holder.avatarView.setImageURI(Constants.getFileUri(photosFlow.getAvatarPath()));
 
         long useTime = System.currentTimeMillis() - startTime;
         Logger.e("useTime:" + useTime);

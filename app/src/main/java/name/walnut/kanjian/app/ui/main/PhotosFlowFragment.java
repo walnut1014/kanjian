@@ -117,6 +117,7 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
                             .send();
 
                 }
+                commentArea.resetComment();
                 hideCommentArea();
             }
         });

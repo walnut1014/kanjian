@@ -17,6 +17,7 @@ public class PhotosFlow {
     private long sendTime;   // 发送时间
     private String sender;   // 发送人昵称
     private long senderId;   // 发送人id
+    private String avatarPath;  // 头像
 
     private List<Comment> comments;
 
@@ -79,6 +80,14 @@ public class PhotosFlow {
 
     public void setSenderId(long senderId) {
         this.senderId = senderId;
+    }
+
+    public String getAvatarPath() {
+        return avatarPath;
+    }
+
+    public void setAvatarPath(String avatarPath) {
+        this.avatarPath = avatarPath;
     }
 
     public List<Comment> getComments() {

@@ -7,13 +7,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
+import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.ui.main.Comment;
 import name.walnut.kanjian.app.ui.main.PhotosFlow;
 import name.walnut.kanjian.app.ui.main.PhotosFlowAdapter;
 import name.walnut.kanjian.app.ui.main.PhotosFlowFragment;
+import name.walnut.kanjian.app.ui.util.ToastUtils;
 import name.walnut.kanjian.app.utils.Logger;
 
 /**
@@ -46,7 +50,9 @@ public class FetchPhotosFlowAction extends BaseResourceAction {
                 photosFlow.setSendTime(itemJson.optLong("sendTime"));
                 photosFlow.setSenderId(itemJson.optLong("senderId"));
                 photosFlow.setPhotoPath(itemJson.optString("photoPath"));
+                photosFlow.setAvatarPath(itemJson.getString("headPath"));
 
+                List<Comment> commentList = new ArrayList<>();
                 JSONArray commentJson = itemJson.getJSONArray("repayMessages");
                 for (int j = 0; j < commentJson.length(); j++) {
                     JSONObject itemCommentJson = commentJson.getJSONObject(j);
@@ -59,16 +65,34 @@ public class FetchPhotosFlowAction extends BaseResourceAction {
                     comment.setSenderId(itemCommentJson.getLong("senderId"));
                     comment.setRoot(itemCommentJson.getBoolean("root"));
                     comment.setReceiver(itemCommentJson.optString("receiver", null));
+                    comment.setReceiverId(itemCommentJson.optLong("receiverId"));
 
-                    photosFlow.addComment(comment);
+                    commentList.add(comment);
                 }
+
+                Collections.sort(commentList, new Comparator<Comment>() {
+                    @Override
+                    public int compare(Comment lhs, Comment rhs) {
+                        return (int) (lhs.getSenderTime() - rhs.getSenderTime());
+                    }
+                });
+
+                photosFlow.setComments(commentList);
 
                 photosFlows.add(photosFlow);
             }
 
-            List<PhotosFlow> oldDataSet = adapter.getItems();
-            oldDataSet.addAll(photosFlows);
-            adapter.setItems(oldDataSet);
+            List<PhotosFlow> photosFlowList = adapter.getItems();
+            photosFlowList.addAll(photosFlows);
+
+            Collections.sort(photosFlowList, new Comparator<PhotosFlow>() {
+                @Override
+                public int compare(PhotosFlow lhs, PhotosFlow rhs) {
+                    return (int) (rhs.getSendTime() - lhs.getSendTime());
+                }
+            });
+
+            adapter.setItems(photosFlowList);
 
 
             if (flowFragment.recyclerView.getAdapter() != null) {
@@ -85,10 +109,12 @@ public class FetchPhotosFlowAction extends BaseResourceAction {
     @Override
     public void onFailed(Response response) {
         Logger.e(response.getMessage());
+        ToastUtils.toast(response.getMessage());
     }
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
         Logger.e(volleyError+"");
+        ToastUtils.toast(R.string.toast_error_network);
     }
 }
