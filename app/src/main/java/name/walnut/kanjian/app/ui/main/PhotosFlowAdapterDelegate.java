@@ -144,6 +144,13 @@ public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<Ph
         holder.photoView.setImageURI(Constants.getFileUri(photosFlow.getPhotoPath()));
         holder.timeTv.setText(TimeUtils.getTimeDiff(photosFlow.getSendTime()));
         holder.avatarView.setImageURI(Constants.getFileUri(photosFlow.getAvatarPath()));
+        holder.photoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DetailPhotoDialogFragment.showDialog(
+                        fragment.getFragmentManager(), photosFlow.getPhotoPath());
+            }
+        });
 
         long useTime = System.currentTimeMillis() - startTime;
         Logger.e("useTime:" + useTime);

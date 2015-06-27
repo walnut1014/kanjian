@@ -39,4 +39,10 @@
         <item name="android:windowExitAnimation">@anim/fade_out_top_right_corner</item>
     </style>
 
+    <!--点击显示图片详情动画-->
+    <style name="PhotoPopupAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/fade_in_center</item>
+        <item name="android:windowExitAnimation">@anim/fade_out_center</item>
+    </style>
+
 </resources>

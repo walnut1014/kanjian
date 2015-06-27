@@ -1,4 +1,4 @@
-package name.walnut.kanjian.app.ui.my.setting;
+package name.walnut.kanjian.app.ui.main;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -23,19 +23,26 @@ import name.walnut.kanjian.app.ui.Constants;
 /**
  * 显示头像详情dialog fragment
  */
-public class DetailAvatarDialogFragment extends DialogFragment {
+public class DetailPhotoDialogFragment extends DialogFragment {
+
+    private static final String KEY_PHOTO = "photo";
 
     @InjectView(R.id.photo)
-    SimpleDraweeView avatarView;
+    SimpleDraweeView photoView;
 
-    public static DetailAvatarDialogFragment showDialog(FragmentManager fragmentManager) {
-        DetailAvatarDialogFragment fragment = new DetailAvatarDialogFragment();
+    public static DetailPhotoDialogFragment showDialog(FragmentManager fragmentManager, String photoPath) {
+        DetailPhotoDialogFragment fragment = new DetailPhotoDialogFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(KEY_PHOTO, photoPath);
+        fragment.setArguments(bundle);
         fragment.show(fragmentManager, "dialog");
         return fragment;
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+        final String photoPath = getArguments().getString(KEY_PHOTO);
 
         LayoutInflater inflater =
                 (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -48,7 +55,7 @@ public class DetailAvatarDialogFragment extends DialogFragment {
         Window window = dialog.getWindow();
         window.requestFeature(Window.FEATURE_NO_TITLE);
         window.setGravity(Gravity.BOTTOM);
-        window.setWindowAnimations(R.style.AvatarPopupAnimation);
+        window.setWindowAnimations(R.style.PhotoPopupAnimation);
 
         window.getDecorView().setPadding(0, 0, 0, 0);
 
@@ -59,8 +66,8 @@ public class DetailAvatarDialogFragment extends DialogFragment {
 
         dialog.setContentView(view);
 
-        avatarView.setAspectRatio(1.0f);
-        avatarView.setImageURI(Constants.getFileUri(Account.INSTANCE.getHeadPhotoPath()));
+        photoView.setAspectRatio(1.0f);
+        photoView.setImageURI(Constants.getFileUri(photoPath));
 
         return dialog;
     }
