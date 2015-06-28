@@ -22,14 +22,12 @@ public class PhotosFlowAdapter extends
 
     private Context context;
     private PhotosFlowFragment flowFragment;
-    private List<PhotosFlow> photosFlowList;
     private PhotosFlowAdapterDelegate adapterDelegate;
 
     public PhotosFlowAdapter(PhotosFlowFragment fragment, List<PhotosFlow> photosFlowList) {
         super();
         flowFragment = fragment;
         this.context = fragment.getActionBarActivity();
-        this.photosFlowList = photosFlowList;
         adapterDelegate = new PhotosFlowAdapterDelegate(fragment, photosFlowList);
     }
 
@@ -85,12 +83,11 @@ public class PhotosFlowAdapter extends
     @Override
     public void setItems(List<PhotosFlow> items) {
         super.setItems(items);
-        photosFlowList = items;
         adapterDelegate.setDataSet(items);
     }
 
     public List<PhotosFlow> getItems() {
-        return photosFlowList;
+        return adapterDelegate.getDataSet();
     }
 
     public static class HeaderViewHolder extends RecyclerView.ViewHolder{

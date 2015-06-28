@@ -24,7 +24,7 @@ import name.walnut.kanjian.app.utils.TimeUtils;
 import name.walnut.kanjian.app.views.KJAlertDialog;
 
 /**
- * 看照片 adapter
+ * 照片列表 adapter
  */
 public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<PhotosFlow> {
 
@@ -55,6 +55,11 @@ public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<Ph
     @Override
     public void setDataSet(List<PhotosFlow> dataSet) {
         photosFlowList = dataSet;
+    }
+
+    @Override
+    public List<PhotosFlow> getDataSet() {
+        return photosFlowList;
     }
 
     @Override

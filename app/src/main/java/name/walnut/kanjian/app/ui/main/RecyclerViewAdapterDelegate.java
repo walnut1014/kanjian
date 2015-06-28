@@ -13,4 +13,5 @@ public interface RecyclerViewAdapterDelegate<T> {
     public void onBindItemViewHolder(PhotosFlowViewHolder holder, int position);
     public PhotosFlowViewHolder onCreateItemViewHolder(ViewGroup parent, int viewType);
     public void setDataSet(List<T> dataSet);
+    public List<T> getDataSet();
 }

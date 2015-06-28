@@ -1,8 +1,6 @@
 package name.walnut.kanjian.app.ui.main;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -96,20 +94,6 @@ public class PhotosFlow {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
-    }
-
-    /**
-     * 添加评论
-     * @param comment
-     */
-    public void addComment(Comment comment) {
-        comments.add(comment);
-        Collections.sort(comments, new Comparator<Comment>() {
-            @Override
-            public int compare(Comment lhs, Comment rhs) {
-                return (int) (lhs.getSenderTime() - rhs.getSenderTime());
-            }
-        });
     }
 
 }
