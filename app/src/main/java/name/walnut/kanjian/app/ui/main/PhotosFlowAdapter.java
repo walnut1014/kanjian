@@ -23,18 +23,19 @@ public class PhotosFlowAdapter extends
     private Context context;
     private PhotosFlowFragment flowFragment;
     private PhotosFlowAdapterDelegate adapterDelegate;
+    private LayoutInflater inflater;
 
     public PhotosFlowAdapter(PhotosFlowFragment fragment, List<PhotosFlow> photosFlowList) {
         super();
         flowFragment = fragment;
         this.context = fragment.getActionBarActivity();
         adapterDelegate = new PhotosFlowAdapterDelegate(fragment, photosFlowList);
+        inflater = LayoutInflater.from(fragment.getActionBarActivity());
     }
 
     @Override
     protected RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.layout_top_tip, parent, false);
+        View view = inflater.inflate(R.layout.layout_main_header, parent, false);
         return new HeaderViewHolder(view);
     }
 
@@ -45,7 +46,8 @@ public class PhotosFlowAdapter extends
 
     @Override
     protected RecyclerView.ViewHolder onCreateFooterViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        View view = inflater.inflate(R.layout.layout_main_footer, parent, false);
+        return new FooterViewHolder(view);
     }
 
     @Override
@@ -98,6 +100,13 @@ public class PhotosFlowAdapter extends
         public HeaderViewHolder(View itemView) {
             super(itemView);
             ButterKnife.inject(this, itemView);
+        }
+    }
+
+    public static class FooterViewHolder extends RecyclerView.ViewHolder {
+
+        public FooterViewHolder(View itemView) {
+            super(itemView);
         }
     }
 

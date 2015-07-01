@@ -135,5 +135,6 @@
     <string name="action_positive">确认</string>
     <string name="tip_news">%s个新消息</string>
     <string name="tip_remind">传一张图片，即可查看好友新上传的图片哦～</string>
+    <string name="loading_more">正在加载...</string>
 
 </resources>

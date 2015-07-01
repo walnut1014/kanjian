@@ -48,7 +48,6 @@ public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<Ph
     public PhotosFlowViewHolder onCreateItemViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.layout_photos_flow, parent, false);
         PhotosFlowViewHolder viewHolder = new PhotosFlowViewHolder(context, view);
-        Logger.e("onCreateViewHolder");
         return viewHolder;
     }
 
@@ -65,7 +64,6 @@ public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<Ph
     @Override
     public void onBindItemViewHolder(final PhotosFlowViewHolder holder, int position) {
         long startTime = System.currentTimeMillis();
-        Logger.e("start:" + startTime);
 
         final PhotosFlow photosFlow = photosFlowList.get(position);
 
@@ -158,12 +156,10 @@ public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<Ph
         });
 
         long useTime = System.currentTimeMillis() - startTime;
-        Logger.e("useTime:" + useTime);
     }
 
     @Override
     public void onViewRecycled(PhotosFlowViewHolder holder) {
-        Logger.e("onViewRecycled");
         holder.commentsContainer.removeAllViews();  // 移除评论Views
     }
 
@@ -171,7 +167,6 @@ public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<Ph
     private void initCommentView(PhotosFlowViewHolder holder, final PhotosFlow photosFlow) {
 
         final int commentCount = photosFlow.getComments().size(); // 评论总数
-        Logger.e("评论数量：" + commentCount);
 
         /**
          * 构建评论区
@@ -182,7 +177,6 @@ public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<Ph
         if (commentView != null) {
             ViewGroup oldParent = (ViewGroup) commentView.getParent();
             if (oldParent != null && oldParent != holder.commentsContainer) {
-                Logger.e("removeView");
                 oldParent.removeView(commentView);
             }
         }
@@ -201,7 +195,6 @@ public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<Ph
             commentsCache.put(photosFlow, commentView);
         }
         if (commentView.getParent() != holder.commentsContainer) {
-            Logger.e("addView");
             // 添加
             holder.commentsContainer.addView(commentView);
         }

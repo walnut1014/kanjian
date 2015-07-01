@@ -32,6 +32,10 @@ public class FetchPhotosFlowAction extends BaseResourceAction {
         PhotosFlowAdapter adapter;
         if (flowFragment != null) {
             adapter = flowFragment.getPhotosFlowAdapter();
+            // 如果获取的是第一页，需要清空列表后再加入新数据
+            if (flowFragment.isFirstPage()) {
+                adapter.setItems(new ArrayList<PhotosFlow>());
+            }
         } else {
             return;
         }
@@ -85,6 +89,7 @@ public class FetchPhotosFlowAction extends BaseResourceAction {
             List<PhotosFlow> photosFlowList = adapter.getItems();
             photosFlowList.addAll(photosFlows);
 
+            // 按时间排序并加入到列表中
             Collections.sort(photosFlowList, new Comparator<PhotosFlow>() {
                 @Override
                 public int compare(PhotosFlow lhs, PhotosFlow rhs) {
@@ -100,6 +105,7 @@ public class FetchPhotosFlowAction extends BaseResourceAction {
             } else {
                 flowFragment.recyclerView.setAdapter(adapter);
             }
+            adapter.hideFooter();
 
         } catch (JSONException e) {
             e.printStackTrace();

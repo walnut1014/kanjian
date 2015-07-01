@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -36,7 +37,8 @@ import name.walnut.kanjian.app.views.CommentView;
 /**
  * 首页看照片 Fragment
  */
-public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListener{
+public class PhotosFlowFragment extends ActionBarFragment
+        implements OnMoreListener, SwipeRefreshLayout.OnRefreshListener{
 
     private final int ITEM_LEFT_TO_LOAD_MORE = 1;
 
@@ -60,6 +62,7 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
     private Header header;  // 顶部提示
 
     private int page = 1;   // 当前显示页
+    private boolean loading = false;    // 是否正在加载
 
     @Override
     protected String getTitle() {
@@ -88,7 +91,7 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_photos_flow, container, false);
+        final View view = inflater.inflate(R.layout.fragment_photos_flow, container, false);
 
         ButterKnife.inject(this, view);
 
@@ -102,6 +105,7 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
         recyclerView.addItemDecoration(decoration);
 
         recyclerView.setupMoreListener(this, ITEM_LEFT_TO_LOAD_MORE);
+        recyclerView.setRefreshListener(this);
 
         commentArea.setSendClickListener(new CommentView.OnSendClickListener() {
             @Override
@@ -109,9 +113,7 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
                 final PhotosFlow photosFlow = targetCommentPhotosFlow;
                 final Comment comment = targetComment;
                 if (photosFlow != null) {
-
                     long targetId = (comment != null) ? comment.getId() : photosFlow.getId();
-
                     repayResource.addParam("id", targetId)
                             .addParam("content", message)
                             .send();
@@ -138,6 +140,7 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
 
         header = new Header();
         photosFlowAdapter.setHeader(header);
+        photosFlowAdapter.setFooter(new Footer());
         showNewsTip(true, 3);
         showRemindTip(true);
 
@@ -169,6 +172,7 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
     public void onMoreAsked(int numberOfItems, int numberBeforeMore, int currentItemPos) {
         Logger.e("onMoreAsked");
 
+        photosFlowAdapter.showFooter();
         recyclerView.hideMoreProgress();
         fetchNextPagePhotos();
     }
@@ -236,6 +240,9 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
      * 获取第一页照片
      */
     private void fetchFirstPagePhotos() {
+        if (loading)
+            return;
+
         page = 1;
         fetchPhotos(page);
     }
@@ -244,6 +251,9 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
      * 获取下一页照片
      */
     private void fetchNextPagePhotos() {
+        if (loading)
+            return;
+
         page ++;
         fetchPhotos(page);
     }
@@ -280,4 +290,16 @@ public class PhotosFlowFragment extends ActionBarFragment implements OnMoreListe
         photosFlowAdapter.notifyItemChanged(0);
     }
 
+    @Override
+    public void onRefresh() {
+        fetchFirstPagePhotos();
+    }
+
+    /**
+     * 是否为第一页
+     * @return
+     */
+    public boolean isFirstPage() {
+        return page == 1;
+    }
 }
