@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v13.app.FragmentTabHost;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,10 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.push.PushBusProvider;
+import name.walnut.kanjian.app.push.message.BadgeMessage;
 import name.walnut.kanjian.app.support.ActionBarActivity;
+import name.walnut.kanjian.app.views.BadgeView;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -24,6 +28,7 @@ public class MainActivity extends ActionBarActivity {
 
     private TabResource tabResource[] = TabResource.values();
     private LayoutInflater layoutInflater;
+    private BadgeView[] badgeViews = new BadgeView[2];  // badgeViews[0]为首页消息数量，badgeViews[1]为个人界面消息
 
     @InjectView(android.R.id.tabhost)
     FragmentTabHost tabHost;
@@ -44,6 +49,7 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
         initView();
+        PushBusProvider.getInstance().register(this);
 	}
 
     private void initView() {
@@ -51,6 +57,22 @@ public class MainActivity extends ActionBarActivity {
 
         initTab();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        PushBusProvider.getInstance().unregister(this);
+        for (int i = 0; i < badgeViews.length; i++) {
+            badgeViews[i] = null;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // 小红点示例
+        showMessageCount(12);
     }
 
     @OnClick(R.id.tab_camera)
@@ -66,6 +88,14 @@ public class MainActivity extends ActionBarActivity {
             // 上传图片成功, 切换到第一页
             tabHost.setCurrentTabByTag(getString(TabResource.MESSAGE.getTitleId()));
         }
+    }
+
+    /**
+     * 小红点消息推送
+     * @param message
+     */
+    public void onEventMainThread(BadgeMessage message) {
+
     }
 
     /**
@@ -124,7 +154,68 @@ public class MainActivity extends ActionBarActivity {
         tabView.setCompoundDrawablesWithIntrinsicBounds(null, drawable, null, null);
         tabView.setText(tab.getTitleId());
 
+        int badgePosition = -1;
+        if (tab == TabResource.MESSAGE) {
+            badgePosition = 0;
+        } else if (tab == TabResource.MY) {
+            badgePosition = 1;
+        }
+
+        if (badgePosition != -1) {
+            BadgeView badgeView = new BadgeView(this, tabView);
+            badgeView.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
+            badgeView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
+            badgeView.setBadgeMargin(35, 0);
+            badgeView.setBackgroundResource(R.drawable.bg_notification);
+            badgeView.setGravity(Gravity.CENTER);
+
+            badgeViews[badgePosition] = badgeView;
+        }
+
         return view;
+    }
+
+    /**
+     * 显示首页未读数量
+     * @param count
+     */
+    public void showMessageCount(int count) {
+        showBadgeCount(0, count);
+    }
+
+    /**
+     * 显示个人界面未读数量
+     * @param count
+     */
+    public void showMyCount(int count) {
+        showBadgeCount(1, count);
+    }
+
+    /**
+     * 显示小红点
+     * @param position
+     * @param count
+     */
+    private void showBadgeCount(int position, int count) {
+        if (position < 0 || position >= badgeViews.length) {
+            return;
+        }
+        BadgeView badgeView = badgeViews[position];
+        badgeView.setText("" + count);
+        badgeView.show();
+    }
+
+    /**
+     * 隐藏小红点
+     * @param position
+     */
+    private void dismissBadge(int position) {
+        if (position < 0 || position >= badgeViews.length) {
+            return;
+        }
+        BadgeView badgeView = badgeViews[position];
+        badgeView.setText("");
+        badgeView.hide();
     }
 
 }
