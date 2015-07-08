@@ -155,7 +155,7 @@ public class PhotosFlowFragment extends ActionBarFragment
 
         });
 
-        PushBusProvider.getInstance().register(this);
+        PushBusProvider.getInstance().registerSticky(this);
     }
 
 

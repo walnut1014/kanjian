@@ -56,7 +56,7 @@ public class MainActivity extends ActionBarActivity {
         ButterKnife.inject(this);
         initView();
         // 注册推送监听事件
-        PushBusProvider.getInstance().register(this);
+        PushBusProvider.getInstance().registerSticky(this);
 	}
 
     private void initView() {

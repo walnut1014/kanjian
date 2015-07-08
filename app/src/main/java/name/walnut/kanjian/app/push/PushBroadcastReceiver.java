@@ -17,6 +17,6 @@ public class PushBroadcastReceiver extends BroadcastReceiver{
         BasePushEvent message = PushMessageResolve.resolve(messageStr);
         Logger.e(message.getClass().getName());
 
-        PushBusProvider.getInstance().post(message);
+        PushBusProvider.getInstance().postSticky(message);
     }
 }
