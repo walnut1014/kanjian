@@ -37,9 +37,8 @@ public class KanJianApplication extends Application {
         // 图片加载
         FrescoContext.INSTANCE.init(this);
 
-
     }
-	
+
 	public static Application INSTANCE;
 	
 	public static boolean isLogin = false;

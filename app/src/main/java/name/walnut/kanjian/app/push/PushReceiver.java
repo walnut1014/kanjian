@@ -1,12 +1,14 @@
 package name.walnut.kanjian.app.push;
 
 import android.content.Context;
+import android.content.Intent;
 
 import com.umeng.message.PushAgent;
 import com.umeng.message.UmengMessageHandler;
-import com.umeng.message.UmengRegistrar;
 import com.umeng.message.entity.UMessage;
 
+import name.walnut.kanjian.app.support.KanJianApplication;
+import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.utils.Logger;
 
 /**
@@ -25,8 +27,15 @@ public enum PushReceiver {
             @Override
             public void dealWithCustomMessage(final Context context, final UMessage msg) {
                 // 负责处理自定义消息，需由用户处理
-                BasePushMessage message = PushMessageResolve.resolve(msg.custom);
-                PushBusProvider.getInstance().post(message);
+
+                /*
+                 * 直接在这里使用EventBus机制分发消息时activity中接受不到，
+                 * 所以将消息传递到broadcast中再进行分发
+                 */
+                Intent intent = new Intent();
+                intent.putExtra("message", msg.custom);
+                intent.setAction(Constants.Action.PUAH_ACTION);
+                KanJianApplication.INSTANCE.sendBroadcast(intent);
 
                 Logger.e(msg.custom);
                 Logger.e(msg.extra.toString());
@@ -44,6 +53,7 @@ public enum PushReceiver {
         };
         mPushAgent.setMessageHandler(messageHandler);
     }
+
 
     public PushAgent getPushAgent() {
         return mPushAgent;

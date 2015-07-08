@@ -23,6 +23,8 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.push.PushBusProvider;
+import name.walnut.kanjian.app.push.message.MessagePushEvent;
 import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
@@ -141,8 +143,8 @@ public class PhotosFlowFragment extends ActionBarFragment
         header = new Header();
         photosFlowAdapter.setHeader(header);
         photosFlowAdapter.setFooter(new Footer());
-        showNewsTip(true, 3);
-        showRemindTip(true);
+        showNewsTip(false, 0);
+        showRemindTip(false);
 
         recyclerView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -152,13 +154,26 @@ public class PhotosFlowFragment extends ActionBarFragment
             }
 
         });
+
+        PushBusProvider.getInstance().register(this);
     }
 
 
     @Override
     public void onDestroyView() {
+        PushBusProvider.getInstance().unregister(this);
         super.onDestroyView();
         ButterKnife.reset(this);
+    }
+
+    /**
+     * 顶部小黑条
+     * @param event
+     */
+    public void onEventMainThread(MessagePushEvent event) {
+        int count = event.getCount();
+        boolean show = count != 0;
+        showNewsTip(show, count);
     }
 
     @OnClick(R.id.action_camera)

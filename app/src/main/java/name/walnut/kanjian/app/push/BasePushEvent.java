@@ -3,11 +3,11 @@ package name.walnut.kanjian.app.push;
 /**
  * 推送消息
  */
-public abstract class BasePushMessage {
+public abstract class BasePushEvent {
 
     protected String message;
 
-    public BasePushMessage(String message) {
+    public BasePushEvent(String message) {
         this.message = message;
         resolve(message);
     }

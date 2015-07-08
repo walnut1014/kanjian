@@ -126,6 +126,14 @@
             </intent-filter>
         </activity>
 
+        <!---->
+        <receiver android:name=".push.PushBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="kanjian.intent.action.PUSH"/>
+            </intent-filter>
+        </receiver>
+
         <!-- 友盟推送 start -->
         <receiver
             android:name="com.umeng.message.NotificationProxyBroadcastReceiver"

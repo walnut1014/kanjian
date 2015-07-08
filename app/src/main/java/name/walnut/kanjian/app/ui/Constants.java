@@ -7,6 +7,8 @@ import name.walnut.kanjian.app.resource.impl.Resource;
 public class Constants {
     public static interface Action {
 
+        final static String PUAH_ACTION = "kanjian.intent.action.PUSH"; // 推送
+
         final static String LAUNCH_ACTION = "kanjian.intent.action.LAUNCH"; // 启动加载
 
         final static String REGISTER_ACTION = "kanjian.intent.action.REGISTER";

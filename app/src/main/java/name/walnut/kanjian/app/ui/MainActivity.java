@@ -3,6 +3,8 @@ package name.walnut.kanjian.app.ui;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.support.v13.app.FragmentTabHost;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -17,9 +19,13 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.push.BasePushEvent;
 import name.walnut.kanjian.app.push.PushBusProvider;
-import name.walnut.kanjian.app.push.message.BadgeMessage;
+import name.walnut.kanjian.app.push.PushReceiver;
+import name.walnut.kanjian.app.push.message.NewFriendPushEvent;
+import name.walnut.kanjian.app.push.message.NewsPushEvent;
 import name.walnut.kanjian.app.support.ActionBarActivity;
+import name.walnut.kanjian.app.utils.Logger;
 import name.walnut.kanjian.app.views.BadgeView;
 
 public class MainActivity extends ActionBarActivity {
@@ -49,6 +55,7 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
         initView();
+        // 注册推送监听事件
         PushBusProvider.getInstance().register(this);
 	}
 
@@ -62,17 +69,11 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        // 解除推送事件监听
         PushBusProvider.getInstance().unregister(this);
         for (int i = 0; i < badgeViews.length; i++) {
             badgeViews[i] = null;
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // 小红点示例
-        showMessageCount(12);
     }
 
     @OnClick(R.id.tab_camera)
@@ -91,11 +92,23 @@ public class MainActivity extends ActionBarActivity {
     }
 
     /**
-     * 小红点消息推送
-     * @param message
+     * 个人tab 小红点消息推送
+     * @param event
      */
-    public void onEventMainThread(BadgeMessage message) {
+    public void onEventMainThread(NewFriendPushEvent event) {
+        Logger.e(event.getClass().getName());
+        int count = event.getCount();
+        showMyTabBadge(count != 0, count);
+    }
 
+    /**
+     * 首页tab 小红点消息推送
+     * @param event
+     */
+    public void onEventMainThread(NewsPushEvent event) {
+        Logger.e(event.getClass().getName());
+        int count = event.getCount();
+        showMainTabBadge(count != 0, count);
     }
 
     /**
@@ -179,16 +192,26 @@ public class MainActivity extends ActionBarActivity {
      * 显示首页未读数量
      * @param count
      */
-    public void showMessageCount(int count) {
-        showBadgeCount(0, count);
+    public void showMainTabBadge(boolean show, int count) {
+        final int MAIN_BADGE_POSITION = 0;
+        if (show) {
+            showBadge(MAIN_BADGE_POSITION, count);
+        } else {
+            dismissBadge(MAIN_BADGE_POSITION);
+        }
     }
 
     /**
      * 显示个人界面未读数量
      * @param count
      */
-    public void showMyCount(int count) {
-        showBadgeCount(1, count);
+    public void showMyTabBadge(boolean show, int count) {
+        final int MY_BADGE_POSITION = 1;
+        if (show) {
+            showBadge(MY_BADGE_POSITION, count);
+        } else {
+            dismissBadge(MY_BADGE_POSITION);
+        }
     }
 
     /**
@@ -196,7 +219,7 @@ public class MainActivity extends ActionBarActivity {
      * @param position
      * @param count
      */
-    private void showBadgeCount(int position, int count) {
+    private void showBadge(int position, int count) {
         if (position < 0 || position >= badgeViews.length) {
             return;
         }
