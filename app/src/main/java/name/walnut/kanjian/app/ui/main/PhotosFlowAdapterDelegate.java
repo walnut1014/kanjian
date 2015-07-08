@@ -1,6 +1,7 @@
 package name.walnut.kanjian.app.ui.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -147,6 +148,15 @@ public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<Ph
         holder.photoView.setImageURI(Constants.getFileUri(photosFlow.getPhotoPath()));
         holder.timeTv.setText(TimeUtils.getTimeDiff(photosFlow.getSendTime()));
         holder.avatarView.setImageURI(Constants.getFileUri(photosFlow.getAvatarPath()));
+        // 个人界面的点击监听器
+        View.OnClickListener personalPageClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startPersonalPageActivity(context, photosFlow.getSenderId(), photosFlow.getSender());
+            }
+        };
+        holder.submitterTv.setOnClickListener(personalPageClickListener);
+        holder.avatarView.setOnClickListener(personalPageClickListener);
         holder.photoView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -259,15 +269,23 @@ public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<Ph
              * 评论名点击事件
              */
             SpannableStringBuilder builder = new SpannableStringBuilder(commentStr);
-            builder.setSpan(new CommentClickableSpan(context, comment.getSenderId()),
-                    0, comment.getSender().length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+            builder.setSpan(
+                    new CommentClickableSpan(
+                            context, comment.getSenderId(), comment.getSender()),
+                    0,
+                    comment.getSender().length(),
+                    Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
 
             if (!TextUtils.isEmpty(comment.getReceiver())) {
                 // 回复主消息
 
                 int start = comment.getSender().length() + replyStr.length();
-                builder.setSpan(new CommentClickableSpan(context, comment.getSenderId()),
-                        start, start + comment.getReceiver().length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+                builder.setSpan(
+                        new CommentClickableSpan(
+                                context, comment.getReceiverId(), comment.getReceiver()),
+                        start,
+                        start + comment.getReceiver().length(),
+                        Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
             }
 
             textView.setText(builder);
@@ -278,6 +296,21 @@ public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<Ph
         Logger.e("onCreateCommentView：" + useTime);
 
         return container;
+    }
+
+
+    /**
+     * 跳转到个人主页
+     * @param context
+     * @param userId
+     * @param userName
+     */
+    private void startPersonalPageActivity(Context context, long userId, String userName) {
+        Intent intent = new Intent();
+        intent.putExtra("userId", userId);
+        intent.putExtra("userName", userName);
+        intent.setAction(Constants.Action.PERSONAL_PAGE_ACTION);
+        context.startActivity(intent);
     }
 
 }

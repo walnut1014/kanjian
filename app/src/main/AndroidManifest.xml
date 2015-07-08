@@ -278,6 +278,25 @@
             </intent-filter>
         </activity>
 
+        <!--新消息界面-->
+        <activity android:name=".ui.main.MessageActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="kanjian.intent.action.MESSAGE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <!--个人主页-->
+        <activity android:name=".ui.main.PersonalActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="kanjian.intent.action.PERSONAL_PAGE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

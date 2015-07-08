@@ -23,6 +23,10 @@ public class Constants {
 
         final static String PRIVACY_ACTION = "kanjian.intent.action.PRIVACY"; //隐私策略
 
+        final static String MESSAGE_ACTION = "kanjian.intent.action.MESSAGE";    //新消息界面
+
+        final static String PERSONAL_PAGE_ACTION = "kanjian.intent.action.PERSONAL_PAGE"; // 个人主页
+
         /* 我的账号相关界面 action */
         final static String FRIEND_REQUEST_ACTION = "kanjian.intent.action.FRIEND_REQUEST"; // 好友请求
 
@@ -36,6 +40,7 @@ public class Constants {
 
         /* 上传图片相关 action */
         final static String UPLOAD_PIC_ACTION = "kanjian.intent.action.UPLOAD_PIC"; // 上传图片
+
     }
 
     public static interface Materials {

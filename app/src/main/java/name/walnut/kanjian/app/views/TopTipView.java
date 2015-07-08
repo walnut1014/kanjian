@@ -58,6 +58,14 @@ public class TopTipView extends FrameLayout {
     }
 
     /**
+     * 设置小黑条点击事件
+     * @param onClickListener
+     */
+    public void setNewsTipClickListener(OnClickListener onClickListener) {
+        newsTipTv.setOnClickListener(onClickListener);
+    }
+
+    /**
      * 设置新消息提醒文字
      * @param text
      */

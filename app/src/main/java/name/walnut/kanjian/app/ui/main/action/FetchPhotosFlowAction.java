@@ -30,7 +30,7 @@ public class FetchPhotosFlowAction extends BaseResourceAction {
 
         PhotosFlowFragment flowFragment = (PhotosFlowFragment) getFragment();
         PhotosFlowAdapter adapter;
-        if (flowFragment != null) {
+        if (flowFragment != null && !flowFragment.isDetached()) {
             adapter = flowFragment.getPhotosFlowAdapter();
             // 如果获取的是第一页，需要清空列表后再加入新数据
             if (flowFragment.isFirstPage()) {
