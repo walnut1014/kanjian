@@ -1,5 +1,6 @@
 package name.walnut.kanjian.app.ui.register;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -63,6 +64,19 @@ public class FillNicknameFragment extends ActionBarFragment {
         FillNicknameFragment fragment = new FillNicknameFragment();
         fragment.setArguments(bundle);
         return fragment;
+    }
+
+    @Override
+    protected void onBack() {
+//        super.onBack();
+        // 直接返回输入手机号界面
+        RegisterActivity activity = (RegisterActivity) getActionBarActivity();
+        String mobilePhone = activity.getMobilephone();
+
+        Intent intent = new Intent(Constants.Action.REGISTER_ACTION);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("mobilephone", mobilePhone);
+        startActivity(intent);
     }
 
     @Override

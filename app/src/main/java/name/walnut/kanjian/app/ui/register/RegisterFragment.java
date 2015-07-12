@@ -54,6 +54,19 @@ public class RegisterFragment extends ActionBarFragment implements Constants.Act
 	}
 
     @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // 从注册最后一步回退时带有“mobilephone”信息
+        Intent intent = getActionBarActivity().getIntent();
+        String mobilephone = intent.getStringExtra("mobilephone");
+        if (!TextUtils.isEmpty(mobilephone)) {
+            mobilephoneTv.getEditText().setText(mobilephone);
+            mobilephoneTv.getEditText().setSelection(mobilephone.length());
+        }
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
