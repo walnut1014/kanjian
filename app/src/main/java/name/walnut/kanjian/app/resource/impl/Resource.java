@@ -15,6 +15,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -82,7 +83,6 @@ public final class Resource{
 
     // 使用 android-async-http库完成图片上传
     private void upload() {
-
         try {
             RequestParams params = new RequestParams();
             Set<Map.Entry<String, Object>> sets = paramMap.entrySet();
@@ -98,7 +98,6 @@ public final class Resource{
             }
             AsyncHttpClient client = new AsyncHttpClient();
             String _url = getUrl(url);
-
             client.addHeader("Cookie", "JSESSIONID="+ RequestQueueContext.INSTANCE.getSessionId() + ";");
             client.post(_url, params, new BaseJsonHttpResponseHandler<JSONObject>() {
 
@@ -141,6 +140,6 @@ public final class Resource{
     private String url;
     private RequestMethod method;
 
-    private final static String CONTEXT_PATH = "http://120.25.201.172:8080";
-//    private final static String CONTEXT_PATH = "http://192.168.1.105:8080";
+//   private final static String CONTEXT_PATH = "http://120.25.201.172:8080";
+    private final static String CONTEXT_PATH = "http://192.168.1.105:8080";
 }

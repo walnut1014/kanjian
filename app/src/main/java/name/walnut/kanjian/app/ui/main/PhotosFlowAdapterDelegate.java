@@ -147,7 +147,8 @@ public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<Ph
         holder.submitterTv.setText(photosFlow.getSender());
         holder.photoView.setImageURI(Constants.getFileUri(photosFlow.getPhotoPath()));
         holder.timeTv.setText(TimeUtils.getTimeDiff(photosFlow.getSendTime()));
-        holder.avatarView.setImageURI(Constants.getFileUri(photosFlow.getAvatarPath()));
+        if(photosFlow.getAvatarPath() != null)
+         holder.avatarView.setImageURI(Constants.getFileUri(photosFlow.getAvatarPath()));
         // 个人界面的点击监听器
         View.OnClickListener personalPageClickListener = new View.OnClickListener() {
             @Override

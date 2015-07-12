@@ -57,6 +57,10 @@ public enum ResourceRegister {
     repayResource("message/repay", RequestMethod.POST),
     //主页消息(int page //页数)
     mainResource("message/main", RequestMethod.GET),
+    //获得新消息数
+    newMessageCountResource("notification/count", RequestMethod.GET),
+    //获得新消息列表数据
+    newMessageResource("notification/newMessage", RequestMethod.GET)
     ;
 
     ResourceRegister(String url, RequestMethod method) {

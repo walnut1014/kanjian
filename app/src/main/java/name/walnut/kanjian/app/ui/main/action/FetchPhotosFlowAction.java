@@ -54,7 +54,8 @@ public class FetchPhotosFlowAction extends BaseResourceAction {
                 photosFlow.setSendTime(itemJson.optLong("sendTime"));
                 photosFlow.setSenderId(itemJson.optLong("senderId"));
                 photosFlow.setPhotoPath(itemJson.optString("photoPath"));
-                photosFlow.setAvatarPath(itemJson.getString("headPath"));
+                if(!itemJson.isNull("headPath"))
+                    photosFlow.setAvatarPath(itemJson.optString("headPath"));
 
                 List<Comment> commentList = new ArrayList<>();
                 JSONArray commentJson = itemJson.getJSONArray("repayMessages");

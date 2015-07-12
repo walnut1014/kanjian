@@ -19,7 +19,7 @@ public class RegisterAction extends BaseResourceAction {
     @Override
     public void onSuccess(Response response) {
         dismissMessage();
-
+        System.out.println(response.getData());
         FillNicknameFragment fragment = (FillNicknameFragment) getFragment();
 
         // TODO 注册返回信息缺少用户id

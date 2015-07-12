@@ -15,6 +15,20 @@ ADDED from AndroidManifest.xml:2:1
 		INJECTED from AndroidManifest.xml:0:0
 uses-sdk
 ADDED from AndroidManifest.xml:7:5
+MERGED from com.android.support:support-v4:21.0.3:15:5
+MERGED from com.android.support:support-v13:21.0.3:15:5
+MERGED from com.android.support:support-v4:21.0.3:15:5
+MERGED from com.malinskiy:superrecyclerview:1.1.0:8:5
+MERGED from com.android.support:recyclerview-v7:21.0.3:15:5
+MERGED from com.android.support:support-v4:21.0.3:15:5
+MERGED from com.facebook.fresco:fresco:0.5.0:5:5
+MERGED from com.facebook.fresco:drawee:0.5.0:5:5
+MERGED from com.android.support:support-v4:21.0.3:15:5
+MERGED from com.facebook.fresco:fbcore:0.5.0:5:5
+MERGED from com.facebook.fresco:fbcore:0.5.0:5:5
+MERGED from com.facebook.fresco:imagepipeline:0.5.0:5:5
+MERGED from com.android.support:support-v4:21.0.3:15:5
+MERGED from com.facebook.fresco:fbcore:0.5.0:5:5
 	android:targetSdkVersion
 		ADDED from AndroidManifest.xml:9:9
 		INJECTED from AndroidManifest.xml:0:0
@@ -33,133 +47,437 @@ ADDED from AndroidManifest.xml:12:5
 		ADDED from AndroidManifest.xml:12:22
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from AndroidManifest.xml:13:5
-	android:maxSdkVersion
-		ADDED from AndroidManifest.xml:15:9
 	android:name
-		ADDED from AndroidManifest.xml:14:9
+		ADDED from AndroidManifest.xml:13:22
+uses-permission#android.permission.MOUNT_UNMOUNT_FILESYSTEMS
+ADDED from AndroidManifest.xml:14:5
+	android:name
+		ADDED from AndroidManifest.xml:14:22
 uses-permission#android.permission.READ_PHONE_STATE
 ADDED from AndroidManifest.xml:16:5
 	android:name
 		ADDED from AndroidManifest.xml:16:22
 uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from AndroidManifest.xml:17:5
+	android:name
+		ADDED from AndroidManifest.xml:17:22
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from AndroidManifest.xml:18:5
+	android:name
+		ADDED from AndroidManifest.xml:18:22
+uses-permission#android.permission.RECEIVE_SMS
 ADDED from AndroidManifest.xml:19:5
 	android:name
 		ADDED from AndroidManifest.xml:19:22
-uses-permission#android.permission.ACCESS_WIFI_STATE
+uses-permission#android.permission.GET_TASKS
 ADDED from AndroidManifest.xml:20:5
 	android:name
 		ADDED from AndroidManifest.xml:20:22
-uses-permission#android.permission.RECEIVE_SMS
+uses-permission#android.permission.ACCESS_FINE_LOCATION
 ADDED from AndroidManifest.xml:21:5
 	android:name
 		ADDED from AndroidManifest.xml:21:22
-uses-permission#android.permission.GET_TASKS
+uses-permission#android.permission.READ_CONTACTS
 ADDED from AndroidManifest.xml:22:5
 	android:name
 		ADDED from AndroidManifest.xml:22:22
-uses-permission#android.permission.ACCESS_FINE_LOCATION
-ADDED from AndroidManifest.xml:23:5
+uses-permission#android.permission.WAKE_LOCK
+ADDED from AndroidManifest.xml:29:5
 	android:name
-		ADDED from AndroidManifest.xml:23:22
+		ADDED from AndroidManifest.xml:29:22
+uses-permission#android.permission.VIBRATE
+ADDED from AndroidManifest.xml:30:5
+	android:name
+		ADDED from AndroidManifest.xml:30:22
+uses-permission#android.permission.WRITE_SETTINGS
+ADDED from AndroidManifest.xml:31:5
+	android:name
+		ADDED from AndroidManifest.xml:31:22
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from AndroidManifest.xml:32:5
+	android:name
+		ADDED from AndroidManifest.xml:32:22
 application
-ADDED from AndroidManifest.xml:26:5
+ADDED from AndroidManifest.xml:34:5
+MERGED from com.android.support:support-v4:21.0.3:16:5
+MERGED from com.android.support:support-v13:21.0.3:16:5
+MERGED from com.android.support:support-v4:21.0.3:16:5
+MERGED from com.malinskiy:superrecyclerview:1.1.0:12:5
+MERGED from com.android.support:recyclerview-v7:21.0.3:17:5
+MERGED from com.android.support:support-v4:21.0.3:16:5
+MERGED from com.android.support:support-v4:21.0.3:16:5
+MERGED from com.android.support:support-v4:21.0.3:16:5
 	android:allowBackup
-		ADDED from AndroidManifest.xml:28:9
+		ADDED from AndroidManifest.xml:36:9
 	android:icon
-		ADDED from AndroidManifest.xml:29:9
+		ADDED from AndroidManifest.xml:37:9
 	android:theme
-		ADDED from AndroidManifest.xml:30:9
+		ADDED from AndroidManifest.xml:38:9
 	android:name
-		ADDED from AndroidManifest.xml:27:9
+		ADDED from AndroidManifest.xml:35:9
 activity#name.walnut.kanjian.app.ui.LaunchActivity
-ADDED from AndroidManifest.xml:33:9
+ADDED from AndroidManifest.xml:41:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:43:13
 	android:theme
-		ADDED from AndroidManifest.xml:35:13
+		ADDED from AndroidManifest.xml:44:13
 	android:name
-		ADDED from AndroidManifest.xml:34:13
-intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:36:13
-action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:37:17
+		ADDED from AndroidManifest.xml:42:13
+intent-filter#android.intent.category.DEFAULT+kanjian.intent.action.LAUNCH
+ADDED from AndroidManifest.xml:46:13
+action#kanjian.intent.action.LAUNCH
+ADDED from AndroidManifest.xml:47:17
 	android:name
-		ADDED from AndroidManifest.xml:37:25
-category#android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:39:17
-	android:name
-		ADDED from AndroidManifest.xml:39:27
-activity#name.walnut.kanjian.app.ui.MainActivity
-ADDED from AndroidManifest.xml:44:9
-	android:name
-		ADDED from AndroidManifest.xml:44:19
-activity#name.walnut.kanjian.app.ui.register.RegisterActivity
-ADDED from AndroidManifest.xml:55:9
-	android:name
-		ADDED from AndroidManifest.xml:55:19
-intent-filter#android.intent.category.DEFAULT+kanjian.intent.action.REGISTER
-ADDED from AndroidManifest.xml:56:13
-action#kanjian.intent.action.REGISTER
-ADDED from AndroidManifest.xml:57:17
-	android:name
-		ADDED from AndroidManifest.xml:57:25
+		ADDED from AndroidManifest.xml:47:25
 category#android.intent.category.DEFAULT
-ADDED from AndroidManifest.xml:59:17
+ADDED from AndroidManifest.xml:48:17
 	android:name
-		ADDED from AndroidManifest.xml:59:27
-activity#name.walnut.kanjian.app.ui.login.LoginActivity
-ADDED from AndroidManifest.xml:64:9
+		ADDED from AndroidManifest.xml:48:27
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:50:14
+action#android.intent.action.MAIN
+ADDED from AndroidManifest.xml:51:18
 	android:name
-		ADDED from AndroidManifest.xml:64:19
-intent-filter#android.intent.category.DEFAULT+kanjian.intent.action.LOGIN
-ADDED from AndroidManifest.xml:65:13
-action#kanjian.intent.action.LOGIN
-ADDED from AndroidManifest.xml:66:17
+		ADDED from AndroidManifest.xml:51:26
+category#android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:52:18
 	android:name
-		ADDED from AndroidManifest.xml:66:25
-activity#name.walnut.kanjian.app.ui.password.ForgotPasswordActivity
-ADDED from AndroidManifest.xml:73:9
+		ADDED from AndroidManifest.xml:52:28
+activity#name.walnut.kanjian.app.ui.MainActivity
+ADDED from AndroidManifest.xml:57:9
+	android:windowSoftInputMode
+		ADDED from AndroidManifest.xml:59:13
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:60:13
 	android:name
-		ADDED from AndroidManifest.xml:73:19
-intent-filter#android.intent.category.DEFAULT+kanjian.intent.action.FORGET_PASSWORD
-ADDED from AndroidManifest.xml:74:13
-action#kanjian.intent.action.FORGET_PASSWORD
-ADDED from AndroidManifest.xml:75:17
-	android:name
-		ADDED from AndroidManifest.xml:75:25
-activity#name.walnut.kanjian.app.ui.main.UploadActivity
-ADDED from AndroidManifest.xml:82:9
-	android:name
-		ADDED from AndroidManifest.xml:82:19
+		ADDED from AndroidManifest.xml:58:13
 intent-filter#android.intent.category.DEFAULT+kanjian.intent.action.MAIN
-ADDED from AndroidManifest.xml:83:13
+ADDED from AndroidManifest.xml:61:13
 action#kanjian.intent.action.MAIN
+ADDED from AndroidManifest.xml:62:17
+	android:name
+		ADDED from AndroidManifest.xml:62:25
+activity#name.walnut.kanjian.app.ui.register.RegisterActivity
+ADDED from AndroidManifest.xml:69:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:71:13
+	android:name
+		ADDED from AndroidManifest.xml:70:13
+intent-filter#android.intent.category.DEFAULT+kanjian.intent.action.REGISTER
+ADDED from AndroidManifest.xml:72:13
+action#kanjian.intent.action.REGISTER
+ADDED from AndroidManifest.xml:73:17
+	android:name
+		ADDED from AndroidManifest.xml:73:25
+activity#name.walnut.kanjian.app.ui.login.LoginActivity
+ADDED from AndroidManifest.xml:80:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:82:13
+	android:name
+		ADDED from AndroidManifest.xml:81:13
+intent-filter#android.intent.category.DEFAULT+kanjian.intent.action.LOGIN
+ADDED from AndroidManifest.xml:83:13
+action#kanjian.intent.action.LOGIN
 ADDED from AndroidManifest.xml:84:17
 	android:name
 		ADDED from AndroidManifest.xml:84:25
-activity#name.walnut.kanjian.app.test.TestActivity
+activity#name.walnut.kanjian.app.ui.password.ForgotPasswordActivity
 ADDED from AndroidManifest.xml:91:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:93:13
 	android:name
-		ADDED from AndroidManifest.xml:91:19
+		ADDED from AndroidManifest.xml:92:13
+intent-filter#android.intent.category.DEFAULT+kanjian.intent.action.FORGET_PASSWORD
+ADDED from AndroidManifest.xml:94:13
+action#kanjian.intent.action.FORGET_PASSWORD
+ADDED from AndroidManifest.xml:95:17
+	android:name
+		ADDED from AndroidManifest.xml:95:25
+activity#name.walnut.kanjian.app.test.TestActivity
+ADDED from AndroidManifest.xml:102:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:104:13
+	android:name
+		ADDED from AndroidManifest.xml:103:13
 intent-filter#android.intent.category.DEFAULT+test_activity
-ADDED from AndroidManifest.xml:92:13
+ADDED from AndroidManifest.xml:105:13
 action#test_activity
-ADDED from AndroidManifest.xml:93:17
+ADDED from AndroidManifest.xml:106:17
 	android:name
-		ADDED from AndroidManifest.xml:93:25
+		ADDED from AndroidManifest.xml:106:25
 activity#name.walnut.kanjian.app.ui.ClauseActivity
-ADDED from AndroidManifest.xml:98:9
+ADDED from AndroidManifest.xml:113:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:116:13
 	android:label
-		ADDED from AndroidManifest.xml:100:13
+		ADDED from AndroidManifest.xml:115:13
 	android:name
-		ADDED from AndroidManifest.xml:99:13
+		ADDED from AndroidManifest.xml:114:13
 intent-filter#android.intent.category.DEFAULT+kanjian.intent.action.CLAUSE
-ADDED from AndroidManifest.xml:101:13
+ADDED from AndroidManifest.xml:117:13
 action#kanjian.intent.action.CLAUSE
-ADDED from AndroidManifest.xml:102:17
+ADDED from AndroidManifest.xml:118:17
 	android:name
-		ADDED from AndroidManifest.xml:102:25
+		ADDED from AndroidManifest.xml:118:25
 intent-filter#android.intent.category.DEFAULT+kanjian.intent.action.PRIVACY
-ADDED from AndroidManifest.xml:106:13
+ADDED from AndroidManifest.xml:122:13
 action#kanjian.intent.action.PRIVACY
-ADDED from AndroidManifest.xml:107:17
+ADDED from AndroidManifest.xml:123:17
 	android:name
-		ADDED from AndroidManifest.xml:107:25
+		ADDED from AndroidManifest.xml:123:25
+receiver#name.walnut.kanjian.app.push.PushBroadcastReceiver
+ADDED from AndroidManifest.xml:130:9
+	android:exported
+		ADDED from AndroidManifest.xml:131:13
+	android:name
+		ADDED from AndroidManifest.xml:130:19
+intent-filter#kanjian.intent.action.PUSH
+ADDED from AndroidManifest.xml:132:13
+action#kanjian.intent.action.PUSH
+ADDED from AndroidManifest.xml:133:17
+	android:name
+		ADDED from AndroidManifest.xml:133:25
+receiver#com.umeng.message.NotificationProxyBroadcastReceiver
+ADDED from AndroidManifest.xml:138:9
+	android:exported
+		ADDED from AndroidManifest.xml:140:13
+	android:name
+		ADDED from AndroidManifest.xml:139:13
+receiver#com.umeng.message.SystemReceiver
+ADDED from AndroidManifest.xml:142:9
+	android:process
+		ADDED from AndroidManifest.xml:144:13
+	android:name
+		ADDED from AndroidManifest.xml:143:13
+intent-filter#android.intent.action.BOOT_COMPLETED
+ADDED from AndroidManifest.xml:145:13
+action#android.intent.action.BOOT_COMPLETED
+ADDED from AndroidManifest.xml:146:17
+	android:name
+		ADDED from AndroidManifest.xml:146:25
+intent-filter#android.net.conn.CONNECTIVITY_CHANGE
+ADDED from AndroidManifest.xml:148:13
+action#android.net.conn.CONNECTIVITY_CHANGE
+ADDED from AndroidManifest.xml:149:17
+	android:name
+		ADDED from AndroidManifest.xml:149:25
+intent-filter#android.intent.action.PACKAGE_REMOVED
+ADDED from AndroidManifest.xml:151:13
+action#android.intent.action.PACKAGE_REMOVED
+ADDED from AndroidManifest.xml:152:17
+	android:name
+		ADDED from AndroidManifest.xml:152:25
+data
+ADDED from AndroidManifest.xml:154:17
+	android:scheme
+		ADDED from AndroidManifest.xml:154:23
+receiver#com.umeng.message.MessageReceiver
+ADDED from AndroidManifest.xml:157:9
+	android:process
+		ADDED from AndroidManifest.xml:159:13
+	android:name
+		ADDED from AndroidManifest.xml:158:13
+intent-filter#org.agoo.android.intent.action.RECEIVE
+ADDED from AndroidManifest.xml:160:13
+action#org.agoo.android.intent.action.RECEIVE
+ADDED from AndroidManifest.xml:161:17
+	android:name
+		ADDED from AndroidManifest.xml:161:25
+receiver#com.umeng.message.ElectionReceiver
+ADDED from AndroidManifest.xml:164:9
+	android:process
+		ADDED from AndroidManifest.xml:166:13
+	android:name
+		ADDED from AndroidManifest.xml:165:13
+intent-filter#org.agoo.android.intent.action.ELECTION_RESULT_V4+umeng
+ADDED from AndroidManifest.xml:167:13
+action#org.agoo.android.intent.action.ELECTION_RESULT_V4
+ADDED from AndroidManifest.xml:168:17
+	android:name
+		ADDED from AndroidManifest.xml:168:25
+category#umeng
+ADDED from AndroidManifest.xml:170:17
+	android:name
+		ADDED from AndroidManifest.xml:170:27
+receiver#com.umeng.message.RegistrationReceiver
+ADDED from AndroidManifest.xml:173:9
+	android:exported
+		ADDED from AndroidManifest.xml:175:13
+	android:name
+		ADDED from AndroidManifest.xml:174:13
+intent-filter#name.walnut.kanjian.app.intent.action.COMMAND
+ADDED from AndroidManifest.xml:176:13
+action#name.walnut.kanjian.app.intent.action.COMMAND
+ADDED from AndroidManifest.xml:177:17
+	android:name
+		ADDED from AndroidManifest.xml:177:25
+receiver#com.umeng.message.BootBroadcastReceiver
+ADDED from AndroidManifest.xml:180:9
+	android:name
+		ADDED from AndroidManifest.xml:180:19
+service#com.umeng.message.UmengService
+ADDED from AndroidManifest.xml:186:9
+	android:label
+		ADDED from AndroidManifest.xml:189:13
+	android:process
+		ADDED from AndroidManifest.xml:190:13
+	android:exported
+		ADDED from AndroidManifest.xml:188:13
+	android:name
+		ADDED from AndroidManifest.xml:187:13
+intent-filter#name.walnut.kanjian.app.intent.action.START
+ADDED from AndroidManifest.xml:191:13
+action#name.walnut.kanjian.app.intent.action.START
+ADDED from AndroidManifest.xml:192:17
+	android:name
+		ADDED from AndroidManifest.xml:192:25
+intent-filter#name.walnut.kanjian.app.intent.action.COCKROACH
+ADDED from AndroidManifest.xml:194:13
+action#name.walnut.kanjian.app.intent.action.COCKROACH
+ADDED from AndroidManifest.xml:195:17
+	android:name
+		ADDED from AndroidManifest.xml:195:25
+intent-filter#org.agoo.android.intent.action.PING_V4+umeng
+ADDED from AndroidManifest.xml:197:13
+action#org.agoo.android.intent.action.PING_V4
+ADDED from AndroidManifest.xml:198:17
+	android:name
+		ADDED from AndroidManifest.xml:198:25
+service#com.umeng.message.UmengIntentService
+ADDED from AndroidManifest.xml:203:9
+	android:process
+		ADDED from AndroidManifest.xml:205:13
+	android:name
+		ADDED from AndroidManifest.xml:204:13
+meta-data#UMENG_APPKEY
+ADDED from AndroidManifest.xml:207:9
+	android:name
+		ADDED from AndroidManifest.xml:208:13
+	android:value
+		ADDED from AndroidManifest.xml:209:13
+meta-data#UMENG_MESSAGE_SECRET
+ADDED from AndroidManifest.xml:211:9
+	android:name
+		ADDED from AndroidManifest.xml:212:13
+	android:value
+		ADDED from AndroidManifest.xml:213:13
+meta-data#UMENG_CHANNEL
+ADDED from AndroidManifest.xml:215:9
+	android:name
+		ADDED from AndroidManifest.xml:216:13
+	android:value
+		ADDED from AndroidManifest.xml:217:13
+activity#name.walnut.kanjian.app.ui.my.relation.request.FriendRequestActivity
+ADDED from AndroidManifest.xml:223:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:225:13
+	android:label
+		ADDED from AndroidManifest.xml:226:13
+	android:name
+		ADDED from AndroidManifest.xml:224:13
+intent-filter#android.intent.category.DEFAULT+kanjian.intent.action.FRIEND_REQUEST
+ADDED from AndroidManifest.xml:227:13
+action#kanjian.intent.action.FRIEND_REQUEST
+ADDED from AndroidManifest.xml:228:17
+	android:name
+		ADDED from AndroidManifest.xml:228:25
+activity#name.walnut.kanjian.app.ui.my.relation.friends.FriendsActivity
+ADDED from AndroidManifest.xml:234:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:236:13
+	android:label
+		ADDED from AndroidManifest.xml:237:13
+	android:name
+		ADDED from AndroidManifest.xml:235:13
+intent-filter#android.intent.category.DEFAULT+kanjian.intent.action.FRIENDS
+ADDED from AndroidManifest.xml:238:13
+action#kanjian.intent.action.FRIENDS
+ADDED from AndroidManifest.xml:239:17
+	android:name
+		ADDED from AndroidManifest.xml:239:25
+activity#name.walnut.kanjian.app.ui.my.relation.newfriends.NewFriendActivity
+ADDED from AndroidManifest.xml:245:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:247:13
+	android:label
+		ADDED from AndroidManifest.xml:248:13
+	android:name
+		ADDED from AndroidManifest.xml:246:13
+intent-filter#android.intent.category.DEFAULT+kanjian.intent.action.ADD_FRIENDS
+ADDED from AndroidManifest.xml:249:13
+action#kanjian.intent.action.ADD_FRIENDS
+ADDED from AndroidManifest.xml:250:17
+	android:name
+		ADDED from AndroidManifest.xml:250:25
+activity#name.walnut.kanjian.app.ui.my.setting.SettingActivity
+ADDED from AndroidManifest.xml:255:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:256:13
+	android:name
+		ADDED from AndroidManifest.xml:255:19
+intent-filter#android.intent.category.DEFAULT+kanjian.intent.action.SETTING
+ADDED from AndroidManifest.xml:257:13
+action#kanjian.intent.action.SETTING
+ADDED from AndroidManifest.xml:258:17
+	android:name
+		ADDED from AndroidManifest.xml:258:25
+activity#name.walnut.kanjian.app.ui.my.setting.password.ResetPasswordActivity
+ADDED from AndroidManifest.xml:263:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:264:13
+	android:name
+		ADDED from AndroidManifest.xml:263:19
+intent-filter#android.intent.category.DEFAULT+kanjian.intent.action.RESET_PASSWORD
+ADDED from AndroidManifest.xml:265:13
+action#kanjian.intent.action.RESET_PASSWORD
+ADDED from AndroidManifest.xml:266:17
+	android:name
+		ADDED from AndroidManifest.xml:266:25
+activity#name.walnut.kanjian.app.ui.upload.UploadActivity
+ADDED from AndroidManifest.xml:272:9
+	android:windowSoftInputMode
+		ADDED from AndroidManifest.xml:273:13
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:274:13
+	android:name
+		ADDED from AndroidManifest.xml:272:19
+intent-filter#android.intent.category.DEFAULT+kanjian.intent.action.UPLOAD_PIC
+ADDED from AndroidManifest.xml:275:13
+action#kanjian.intent.action.UPLOAD_PIC
+ADDED from AndroidManifest.xml:276:17
+	android:name
+		ADDED from AndroidManifest.xml:276:25
+activity#name.walnut.kanjian.app.ui.main.MessageActivity
+ADDED from AndroidManifest.xml:282:9
+	android:windowSoftInputMode
+		ADDED from AndroidManifest.xml:283:13
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:284:13
+	android:name
+		ADDED from AndroidManifest.xml:282:19
+intent-filter#android.intent.category.DEFAULT+kanjian.intent.action.MESSAGE
+ADDED from AndroidManifest.xml:285:13
+action#kanjian.intent.action.MESSAGE
+ADDED from AndroidManifest.xml:286:17
+	android:name
+		ADDED from AndroidManifest.xml:286:25
+activity#name.walnut.kanjian.app.ui.main.PersonalActivity
+ADDED from AndroidManifest.xml:292:9
+	android:windowSoftInputMode
+		ADDED from AndroidManifest.xml:293:13
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:294:13
+	android:name
+		ADDED from AndroidManifest.xml:292:19
+intent-filter#android.intent.category.DEFAULT+kanjian.intent.action.PERSONAL_PAGE
+ADDED from AndroidManifest.xml:295:13
+action#kanjian.intent.action.PERSONAL_PAGE
+ADDED from AndroidManifest.xml:296:17
+	android:name
+		ADDED from AndroidManifest.xml:296:25
+activity#android.support.v7.widget.TestActivity
+ADDED from com.android.support:recyclerview-v7:21.0.3:18:9
+	android:label
+		ADDED from com.android.support:recyclerview-v7:21.0.3:18:19
+	android:name
+		ADDED from com.android.support:recyclerview-v7:21.0.3:18:60

@@ -177,11 +177,11 @@ public class NewFriendFragment extends ActionBarFragment {
 
     // 把手机号拼接成字符串
     private String getMobilePhones() {
-        StringBuilder builder = new StringBuilder("");
-        Set<String> keys = contactsMap.keySet();
 
-        for (String key : keys) {
-            builder.append(key).append(",");
+        StringBuilder builder = new StringBuilder();
+        for (String key : contactsMap.keySet()) {
+            String phone =  key.replaceAll(" ","");
+            builder.append(phone).append(",");
         }
 
         if (builder.length() > 0) {
