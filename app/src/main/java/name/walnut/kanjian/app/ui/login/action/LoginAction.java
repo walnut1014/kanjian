@@ -13,9 +13,11 @@ import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.account.Account;
 import name.walnut.kanjian.app.account.AccountBean;
 import name.walnut.kanjian.app.support.ActionBarFragment;
+import name.walnut.kanjian.app.support.ActivityManager;
 import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.support.KJAlertDialogFragment;
 import name.walnut.kanjian.app.ui.Constants;
+import name.walnut.kanjian.app.ui.MainActivity;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
 import name.walnut.kanjian.app.views.KJAlertDialog;
 
@@ -48,9 +50,11 @@ public class LoginAction extends BaseResourceAction {
             Log.e("系统错误","解析json异常",ex);
         }
 
-        getActivity().finish();
+//        getActivity().finish();
+
         Intent intent = new Intent(Constants.Action.MAIN_ACTION);
         getFragment().startActivity(intent);
+        ActivityManager.getScreenManager().popAllActivityExceptOne(MainActivity.class);
     }
 
     @Override

@@ -21,8 +21,20 @@ public class ActivityManager {
 
     //退出栈顶Activity
     public void popActivity(Activity activity) {
+        popActivityWithTransition(true, activity);
+    }
+
+    /**
+     * 退出activity
+     * @param transition 是否显示跳转动画
+     * @param activity
+     */
+    private void popActivityWithTransition(boolean transition, Activity activity) {
         if (activity != null) {
             //在从自定义集合中取出当前Activity时，也进行了Activity的关闭操作
+            if (!transition) {
+                activity.overridePendingTransition(0, 0);
+            }
             activity.finish();
             activityStack.remove(activity);
             activity = null;
@@ -55,7 +67,7 @@ public class ActivityManager {
             if (activity.getClass().equals(cls)) {
                 break;
             }
-            popActivity(activity);
+            popActivityWithTransition(false, activity);
         }
     }
 }

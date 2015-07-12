@@ -49,8 +49,10 @@ public class LoginFragment extends ActionBarFragment implements Constants.Action
 
         ButterKnife.inject(this, view);
         // 测试账号
-        mobilephoneTv.setEditText("13000000001");
+        String mobilePhone = "13000000001";
+        mobilephoneTv.setEditText(mobilePhone);
         passwordTv.setEditText("123456");
+        mobilephoneTv.getEditText().setSelection(mobilePhone.length());
 		return view;
 	}
 

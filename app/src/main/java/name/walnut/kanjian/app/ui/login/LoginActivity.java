@@ -21,12 +21,6 @@ public class LoginActivity extends ActionBarActivity {
 		switchFragment(new LoginFragment());
 	}
 	
-	public void intoMain() {
-		Intent intent = new Intent(MAIN_ACTION);
-		startActivity(intent);
-		finish();
-	}
-	
 	private final static String MAIN_ACTION = "kanjian.intent.action.MAIN";
 
 }
