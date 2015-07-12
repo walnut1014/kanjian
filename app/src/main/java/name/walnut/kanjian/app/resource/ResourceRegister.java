@@ -33,6 +33,7 @@ public enum ResourceRegister {
     //查询多手机号(String mobilephones：'13000000000,13000000001,13000000002')
     queryUserResource("user", RequestMethod.GET),
     smsValidateResource("smsvalidate", RequestMethod.POST), //验证验证码
+    isLoginResource("passport/isLogin", RequestMethod.GET), //是否登陆
 
     /*-----------------------设置模块-----------------------*/
     //修改头像（File headPhoto）
@@ -60,7 +61,15 @@ public enum ResourceRegister {
     //获得新消息数
     newMessageCountResource("notification/count", RequestMethod.GET),
     //获得新消息列表数据
-    newMessageResource("notification/newMessage", RequestMethod.GET)
+    newMessageResource("notification/newMessage", RequestMethod.GET),
+    //用户自己的相册(int page //页数)
+    selfPhotoResource("message/self", RequestMethod.GET),
+    //指定ID的相册(int page //页数)
+    userPhotoResource("message/{userId}", RequestMethod.GET),
+    //删除主消息(long id)
+    deleteMessageResource("message/delete", RequestMethod.POST),
+    //读取新消息(long messageId)
+    readNotificationResource("notification/read", RequestMethod.POST)
     ;
 
     ResourceRegister(String url, RequestMethod method) {
