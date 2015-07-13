@@ -77,6 +77,8 @@ public class PhotosFlowFragment extends ActionBarFragment
 
     private int deletePhotoFlowId;  // 被删除的照片id
 
+    private boolean isLastPage = false;   // 是否为最后一页
+
     @Override
     protected String getTitle() {
         return getString(R.string.title_activity_photos_flow);
@@ -204,9 +206,11 @@ public class PhotosFlowFragment extends ActionBarFragment
     public void onMoreAsked(int numberOfItems, int numberBeforeMore, int currentItemPos) {
         Logger.e("onMoreAsked");
 
-        photosFlowAdapter.showFooter();
         recyclerView.hideMoreProgress();
-        fetchNextPagePhotos();
+        if (!isLastPage) {
+            photosFlowAdapter.showFooter();
+            fetchNextPagePhotos();
+        }
     }
 
     /**
@@ -374,5 +378,12 @@ public class PhotosFlowFragment extends ActionBarFragment
     public void onDeleteFailed() {
         deletePhotoFlowId = 0;
         dismissMessage();
+    }
+
+    /**
+     * @param isLastPage
+     */
+    public void setLastPage(boolean isLastPage) {
+        this.isLastPage = isLastPage;
     }
 }

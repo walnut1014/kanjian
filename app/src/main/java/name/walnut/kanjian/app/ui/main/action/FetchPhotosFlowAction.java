@@ -40,10 +40,65 @@ public class FetchPhotosFlowAction extends BaseResourceAction {
             return;
         }
 
-        try {
-            List<PhotosFlow> photosFlows = new ArrayList<>();
+        List<PhotosFlow> newPhotosFlows = decodeResult(response.getData());
 
-            JSONArray jsonArray = new JSONArray(response.getData());
+        // 设置是否为最后一页
+        flowFragment.setLastPage(newPhotosFlows.isEmpty());
+
+        List<PhotosFlow> photosFlowList = adapter.getItems();
+        photosFlowList.addAll(newPhotosFlows);
+
+        // 按时间排序并加入到列表中
+        Collections.sort(photosFlowList, new Comparator<PhotosFlow>() {
+            @Override
+            public int compare(PhotosFlow lhs, PhotosFlow rhs) {
+                return (int) (rhs.getSendTime() - lhs.getSendTime());
+            }
+        });
+
+        adapter.setItems(photosFlowList);
+
+        if (flowFragment.recyclerView.getAdapter() != null) {
+            adapter.notifyDataSetChanged();
+        } else {
+            flowFragment.recyclerView.setAdapter(adapter);
+        }
+        adapter.hideFooter();
+
+    }
+
+    @Override
+    public void onFailed(Response response) {
+        Logger.e(response.getMessage());
+        ToastUtils.toast(response.getMessage());
+
+        onResult();
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError volleyError) {
+        Logger.e(volleyError+"");
+        ToastUtils.toast(R.string.toast_error_network);
+
+        onResult();
+    }
+
+    private void onResult() {
+        PhotosFlowFragment flowFragment = (PhotosFlowFragment) getFragment();
+        PhotosFlowAdapter adapter;
+        if (flowFragment != null && !flowFragment.isDetached()) {
+            adapter = flowFragment.getPhotosFlowAdapter();
+            // 如果获取的是第一页，需要清空列表后再加入新数据
+            flowFragment.recyclerView.setAdapter(adapter);
+            adapter.hideFooter();
+        }
+    }
+
+    private List<PhotosFlow> decodeResult(String data) {
+        List<PhotosFlow> photosFlows = new ArrayList<>();
+        try {
+
+            JSONArray jsonArray = new JSONArray(data);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject itemJson = jsonArray.getJSONObject(i);
                 PhotosFlow photosFlow = new PhotosFlow();
@@ -75,6 +130,7 @@ public class FetchPhotosFlowAction extends BaseResourceAction {
                     commentList.add(comment);
                 }
 
+                // 评论排序
                 Collections.sort(commentList, new Comparator<Comment>() {
                     @Override
                     public int compare(Comment lhs, Comment rhs) {
@@ -87,49 +143,10 @@ public class FetchPhotosFlowAction extends BaseResourceAction {
                 photosFlows.add(photosFlow);
             }
 
-            List<PhotosFlow> photosFlowList = adapter.getItems();
-            photosFlowList.addAll(photosFlows);
-
-            // 按时间排序并加入到列表中
-            Collections.sort(photosFlowList, new Comparator<PhotosFlow>() {
-                @Override
-                public int compare(PhotosFlow lhs, PhotosFlow rhs) {
-                    return (int) (rhs.getSendTime() - lhs.getSendTime());
-                }
-            });
-
-            adapter.setItems(photosFlowList);
-
-
-            if (flowFragment.recyclerView.getAdapter() != null) {
-                adapter.notifyDataSetChanged();
-            } else {
-                flowFragment.recyclerView.setAdapter(adapter);
-            }
-            adapter.hideFooter();
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void onFailed(Response response) {
-        Logger.e(response.getMessage());
-        ToastUtils.toast(response.getMessage());
-    }
-
-    @Override
-    public void onErrorResponse(VolleyError volleyError) {
-        Logger.e(volleyError+"");
-        ToastUtils.toast(R.string.toast_error_network);
-
-        PhotosFlowFragment flowFragment = (PhotosFlowFragment) getFragment();
-        PhotosFlowAdapter adapter;
-        if (flowFragment != null && !flowFragment.isDetached()) {
-            adapter = flowFragment.getPhotosFlowAdapter();
-            // 如果获取的是第一页，需要清空列表后再加入新数据
-            flowFragment.recyclerView.setAdapter(adapter);
-        }
+        return photosFlows;
     }
 }

@@ -124,7 +124,7 @@ public class PhotosFlowAdapter extends
     }
 
 
-    public static class HeaderViewHolder extends RecyclerView.ViewHolder{
+    static class HeaderViewHolder extends RecyclerView.ViewHolder{
 
         @InjectView(R.id.top_tip_view)
         TopTipView topTipView;
@@ -135,7 +135,7 @@ public class PhotosFlowAdapter extends
         }
     }
 
-    public static class FooterViewHolder extends RecyclerView.ViewHolder {
+    static class FooterViewHolder extends RecyclerView.ViewHolder {
 
         public FooterViewHolder(View itemView) {
             super(itemView);
