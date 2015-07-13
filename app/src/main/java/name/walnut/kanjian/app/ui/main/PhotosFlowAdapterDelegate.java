@@ -66,7 +66,6 @@ public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<Ph
 
     @Override
     public void onBindItemViewHolder(final PhotosFlowViewHolder holder, int position) {
-        long startTime = System.currentTimeMillis();
 
         final PhotosFlow photosFlow = photosFlowList.get(position);
 
@@ -123,7 +122,6 @@ public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<Ph
                                 public void onClick(KJAlertDialog dialog) {
                                     // 确认删除
                                     fragment.onDeleteClick(photosFlow);
-//                                    ToastUtils.toast("确认删除");
                                 }
                             })
                             .show(fragment.getFragmentManager());
@@ -169,7 +167,6 @@ public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<Ph
             }
         });
 
-        long useTime = System.currentTimeMillis() - startTime;
     }
 
     @Override
@@ -205,9 +202,12 @@ public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<Ph
         }
         if (commentView == null) {
             // 评论区View没有缓存或者缓存失效，创建新的评论区View
-            commentView = onCreateCommentView(context, holder, photosFlow);
+            commentView = onCreateCommentView(context, photosFlow);
             commentsCache.put(photosFlow, commentView);
         }
+
+        onBindCommentView(commentView, holder, photosFlow);
+
         if (commentView.getParent() != holder.commentsContainer) {
             // 添加
             holder.commentsContainer.addView(commentView);
@@ -222,10 +222,7 @@ public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<Ph
      */
     private ViewGroup onCreateCommentView(
             final Context context,
-            final PhotosFlowViewHolder viewHolder,
             final PhotosFlow photosFlow) {
-        long startTime = System.currentTimeMillis();
-        Logger.e("onCreateCommentView："+startTime);
 
         LinearLayout container = new LinearLayout(context);
         container.setOrientation(LinearLayout.VERTICAL);
@@ -240,19 +237,25 @@ public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<Ph
         for (int i = 0; i < commentList.size(); i++) {
             View view = inflater.inflate(R.layout.layout_comment, container, false);
             container.addView(view);
+        }
+
+        return container;
+    }
+
+    private void onBindCommentView(ViewGroup commentView,
+                                   final PhotosFlowViewHolder viewHolder,
+                                   final PhotosFlow photosFlow) {
+
+        final List<Comment> commentList = photosFlow.getComments();
+
+        int childCount = commentView.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View view = commentView.getChildAt(i);
 
             final TextView textView = (TextView) view.findViewById(R.id.comment_text);
             textView.setMovementMethod(LinkMovementMethod.getInstance());
 
             final Comment comment = commentList.get(i);
-
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Logger.e("comment  onClick");
-                    fragment.showCommentArea(viewHolder, photosFlow, comment);
-                }
-            });
 
             /**
              * 构造评论内容：
@@ -270,7 +273,7 @@ public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<Ph
             }
 
             /**
-             * 评论名点击事件
+             * 评论名 点击事件
              */
             SpannableStringBuilder builder = new SpannableStringBuilder(commentStr);
             builder.setSpan(
@@ -294,12 +297,24 @@ public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<Ph
 
             textView.setText(builder);
 
+            /**
+             * 评论点击事件
+             */
+            if (Account.INSTANCE.getId() == comment.getSenderId()) {
+                view.setEnabled(false);
+            } else {
+                view.setEnabled(true);
+            }
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Logger.e("comment  onClick");
+
+                    fragment.showCommentArea(viewHolder, photosFlow, comment);
+                }
+            });
         }
-
-        long useTime = System.currentTimeMillis() - startTime;
-        Logger.e("onCreateCommentView：" + useTime);
-
-        return container;
     }
 
 

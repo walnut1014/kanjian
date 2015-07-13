@@ -54,5 +54,9 @@ public enum Account {
         return accountBean.getPhotoCount();
     }
 
+    public long getId() {
+        return accountBean.getId();
+    }
+
     private AccountBean accountBean;
 }

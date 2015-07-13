@@ -168,8 +168,8 @@ public class PhotosFlowFragment extends ActionBarFragment
         });
 
         PushBusProvider.getInstance().registerSticky(this);
-    }
 
+    }
 
     @Override
     public void onDestroyView() {
@@ -221,7 +221,9 @@ public class PhotosFlowFragment extends ActionBarFragment
      * @param photosFlow
      * @param comment
      */
-    public void showCommentArea(PhotosFlowViewHolder viewHolder, PhotosFlow photosFlow, Comment comment) {
+    public void showCommentArea(final PhotosFlowViewHolder viewHolder,
+                                final PhotosFlow photosFlow,
+                                final Comment comment) {
         if (targetCommentPhotosFlow != photosFlow || targetComment != comment) {
             commentArea.setVisibility(View.GONE);
         }
@@ -237,7 +239,13 @@ public class PhotosFlowFragment extends ActionBarFragment
         MainActivity activity = (MainActivity) getActionBarActivity();
         activity.hideTab();
 
-        scrollList(viewHolder, photosFlow);
+        // 适当的加一些延迟, 否则d
+        commentArea.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                scrollList(viewHolder, photosFlow);
+            }
+        }, 100);
     }
 
     /**
