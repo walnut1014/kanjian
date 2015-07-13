@@ -3,8 +3,6 @@ package name.walnut.kanjian.app.ui;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.HandlerThread;
 import android.support.v13.app.FragmentTabHost;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -19,9 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
-import name.walnut.kanjian.app.push.BasePushEvent;
 import name.walnut.kanjian.app.push.PushBusProvider;
-import name.walnut.kanjian.app.push.PushReceiver;
 import name.walnut.kanjian.app.push.message.NewFriendPushEvent;
 import name.walnut.kanjian.app.push.message.NewsPushEvent;
 import name.walnut.kanjian.app.support.ActionBarActivity;
@@ -58,6 +54,16 @@ public class MainActivity extends ActionBarActivity {
         // 注册推送监听事件
         PushBusProvider.getInstance().registerSticky(this);
 	}
+
+    @Override
+    public void onBackPressed() {
+        // 退出到后台
+        Intent home = new Intent(Intent.ACTION_MAIN);
+        home.addCategory(Intent.CATEGORY_HOME);
+        startActivity(home);
+        String tag = getString(TabResource.MESSAGE.getTitleId());
+        tabHost.setCurrentTabByTag(tag);
+    }
 
     private void initView() {
         layoutInflater = LayoutInflater.from(this);
