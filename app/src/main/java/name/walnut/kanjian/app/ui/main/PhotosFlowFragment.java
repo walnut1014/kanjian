@@ -157,8 +157,8 @@ public class PhotosFlowFragment extends ActionBarFragment
         header = new Header();
         photosFlowAdapter.setHeader(header);
         photosFlowAdapter.setFooter(new Footer());
-        showNewsTip(0);
-        showRemindTip(false);
+//        showNewsTip(0);
+//        showRemindTip(false);
 
         recyclerView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -249,7 +249,7 @@ public class PhotosFlowFragment extends ActionBarFragment
             public void run() {
                 scrollList(viewHolder, photosFlow);
             }
-        }, 100);
+        }, 200);
     }
 
     /**
