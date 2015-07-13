@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:id="@+id/photo_container"
     android:gravity="center"
     android:background="#18191A"
@@ -8,7 +9,8 @@
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/photo"
+        fresco:actualImageScaleType="fitCenter"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 
     </RelativeLayout>

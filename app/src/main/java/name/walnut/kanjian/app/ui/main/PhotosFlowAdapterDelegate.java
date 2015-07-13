@@ -242,6 +242,12 @@ public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<Ph
         return container;
     }
 
+    /**
+     * 绑定评论数据
+     * @param commentView
+     * @param viewHolder
+     * @param photosFlow
+     */
     private void onBindCommentView(ViewGroup commentView,
                                    final PhotosFlowViewHolder viewHolder,
                                    final PhotosFlow photosFlow) {

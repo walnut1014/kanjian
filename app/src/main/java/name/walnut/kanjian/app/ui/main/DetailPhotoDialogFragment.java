@@ -66,7 +66,6 @@ public class DetailPhotoDialogFragment extends DialogFragment {
 
         dialog.setContentView(view);
 
-        photoView.setAspectRatio(1.0f);
         photoView.setImageURI(Constants.getFileUri(photoPath));
 
         return dialog;
