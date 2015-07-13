@@ -14,14 +14,17 @@ public class TimeUtils {
         int timeDiffInMinute = timeDiff / 60;   // 分钟差
         int timeDiffInHour = timeDiffInMinute / 60; // 小时差
         int timeDiffInDay = timeDiffInHour / 24; // 天差
-//        int timeDiffInMouth = timeDiffInDay / 30;   // 月差
+        int timeDiffInMouth = timeDiffInDay / 30;   // 月差
+        int timeDiffInYear = timeDiffInMouth / 12;  // 年差
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM月dd日 HH:mm");
         Date date = new Date(time);
         String dateFormatStr = dateFormat.format(date);
 
-        if (timeDiffInDay > 0) {
+        if (timeDiffInMouth > 0) {
             return dateFormatStr;
+        } else if (timeDiffInDay != 0) {
+            return timeDiffInDay + "天前";
         } else if (timeDiffInHour != 0) {
             return timeDiffInHour + "小时前";
         } else if (timeDiffInMinute != 0) {
