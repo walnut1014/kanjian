@@ -31,6 +31,7 @@ import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.DividerItemDecoration;
 import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.MainActivity;
+import name.walnut.kanjian.app.ui.main.action.DeleteMessageAction;
 import name.walnut.kanjian.app.ui.main.action.FetchPhotosFlowAction;
 import name.walnut.kanjian.app.ui.main.action.NewMessageCountAction;
 import name.walnut.kanjian.app.ui.main.action.RepayAction;
@@ -61,7 +62,9 @@ public class PhotosFlowFragment extends ActionBarFragment
     @ResourceWeave(actionClass = NewMessageCountAction.class)
     public Resource newMessageCountResource;
 
-    private List<PhotosFlow> photosFlowList = new ArrayList<>();
+    @ResourceWeave(actionClass = DeleteMessageAction.class)
+    public Resource deleteMessageResource;
+
     private PhotosFlowAdapter photosFlowAdapter;
 
     private PhotosFlow targetCommentPhotosFlow; // 评论的消息流
@@ -71,6 +74,8 @@ public class PhotosFlowFragment extends ActionBarFragment
 
     private int page = 1;   // 当前显示页
     private boolean loading = false;    // 是否正在加载
+
+    private int deletePhotoFlowId;  // 被删除的照片id
 
     @Override
     protected String getTitle() {
@@ -140,6 +145,7 @@ public class PhotosFlowFragment extends ActionBarFragment
         super.onViewCreated(view, savedInstanceState);
 
         if (photosFlowAdapter == null) {
+            List<PhotosFlow> photosFlowList = new ArrayList<>();
             photosFlowAdapter = new PhotosFlowAdapter(this, photosFlowList);
             fetchFirstPagePhotos();
         } else {
@@ -334,5 +340,31 @@ public class PhotosFlowFragment extends ActionBarFragment
      */
     public boolean isFirstPage() {
         return page == 1;
+    }
+
+    /**
+     * 删除照片
+     */
+    public void onDeleteClick(PhotosFlow photosFlow) {
+        showMessage(R.string.message_delete_loading);
+        deleteMessageResource
+                .addParam("id", photosFlow.getId())
+                .send();
+    }
+
+    /**
+     * 删除成功
+     */
+    public void onDeleteSuccess() {
+        photosFlowAdapter.removeItemById(deletePhotoFlowId);
+        deletePhotoFlowId = 0;
+    }
+
+    /**
+     * 删除失败
+     */
+    public void onDeleteFailed() {
+        deletePhotoFlowId = 0;
+        dismissMessage();
     }
 }

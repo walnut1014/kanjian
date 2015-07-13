@@ -122,7 +122,8 @@ public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<Ph
                                 @Override
                                 public void onClick(KJAlertDialog dialog) {
                                     // 确认删除
-                                    ToastUtils.toast("确认删除");
+                                    fragment.onDeleteClick(photosFlow);
+//                                    ToastUtils.toast("确认删除");
                                 }
                             })
                             .show(fragment.getFragmentManager());

@@ -103,6 +103,27 @@ public class PhotosFlowAdapter extends
         return adapterDelegate.getDataSet();
     }
 
+    /**
+     * 删除指定photoflowId 的行
+     * @param photoflowId
+     */
+    public void removeItemById(int photoflowId) {
+        int position = -1;
+        List<PhotosFlow> photosFlowList = adapterDelegate.getDataSet();
+        for (PhotosFlow photosFlow : photosFlowList) {
+            if (photosFlow.getId() == photoflowId) {
+                position = photosFlowList.indexOf(photosFlow);
+                break;
+            }
+        }
+        photosFlowList.remove(position);
+        if (hasHeader()) {
+            position ++;
+        }
+        notifyItemRemoved(position);
+    }
+
+
     public static class HeaderViewHolder extends RecyclerView.ViewHolder{
 
         @InjectView(R.id.top_tip_view)

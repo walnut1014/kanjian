@@ -46,7 +46,7 @@ public class MainActivity extends ActionBarActivity {
     View divide;
 
     public MainActivity() {
-        super(0);
+        super(R.id.content);
     }
 
     @Override
