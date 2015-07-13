@@ -14,6 +14,7 @@ import butterknife.InjectView;
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.HeaderRecyclerViewAdapter;
 import name.walnut.kanjian.app.ui.Constants;
+import name.walnut.kanjian.app.ui.main.bean.PhotosFlow;
 import name.walnut.kanjian.app.views.TopTipView;
 
 /**

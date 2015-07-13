@@ -32,7 +32,10 @@ import name.walnut.kanjian.app.support.DividerItemDecoration;
 import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.MainActivity;
 import name.walnut.kanjian.app.ui.main.action.FetchPhotosFlowAction;
+import name.walnut.kanjian.app.ui.main.action.NewMessageCountAction;
 import name.walnut.kanjian.app.ui.main.action.RepayAction;
+import name.walnut.kanjian.app.ui.main.bean.Comment;
+import name.walnut.kanjian.app.ui.main.bean.PhotosFlow;
 import name.walnut.kanjian.app.utils.Logger;
 import name.walnut.kanjian.app.views.CommentView;
 
@@ -54,6 +57,9 @@ public class PhotosFlowFragment extends ActionBarFragment
 
     @ResourceWeave(actionClass = RepayAction.class)
     public Resource repayResource;
+
+    @ResourceWeave(actionClass = NewMessageCountAction.class)
+    public Resource newMessageCountResource;
 
     private List<PhotosFlow> photosFlowList = new ArrayList<>();
     private PhotosFlowAdapter photosFlowAdapter;
@@ -143,7 +149,7 @@ public class PhotosFlowFragment extends ActionBarFragment
         header = new Header();
         photosFlowAdapter.setHeader(header);
         photosFlowAdapter.setFooter(new Footer());
-        showNewsTip(false, 0);
+        showNewsTip(0);
         showRemindTip(false);
 
         recyclerView.setOnTouchListener(new View.OnTouchListener() {
@@ -166,14 +172,19 @@ public class PhotosFlowFragment extends ActionBarFragment
         ButterKnife.reset(this);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        newMessageCountResource.send();
+    }
+
     /**
      * 顶部小黑条
      * @param event
      */
     public void onEventMainThread(MessagePushEvent event) {
         int count = event.getCount();
-        boolean show = count != 0;
-        showNewsTip(show, count);
+        showNewsTip(count);
     }
 
     @OnClick(R.id.action_camera)
@@ -285,6 +296,13 @@ public class PhotosFlowFragment extends ActionBarFragment
         return photosFlowAdapter;
     }
 
+    /**
+     * 显示顶部新消息提醒, 仅消息数量大于0才显示
+     * @param newsCount
+     */
+    public void showNewsTip(int newsCount) {
+        showNewsTip(newsCount > 0, newsCount);
+    }
 
     /**
      * 显示顶部新消息提醒

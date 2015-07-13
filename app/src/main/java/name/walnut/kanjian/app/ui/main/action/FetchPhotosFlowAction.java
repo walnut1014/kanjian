@@ -13,8 +13,8 @@ import java.util.List;
 
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.BaseResourceAction;
-import name.walnut.kanjian.app.ui.main.Comment;
-import name.walnut.kanjian.app.ui.main.PhotosFlow;
+import name.walnut.kanjian.app.ui.main.bean.Comment;
+import name.walnut.kanjian.app.ui.main.bean.PhotosFlow;
 import name.walnut.kanjian.app.ui.main.PhotosFlowAdapter;
 import name.walnut.kanjian.app.ui.main.PhotosFlowFragment;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
@@ -123,5 +123,13 @@ public class FetchPhotosFlowAction extends BaseResourceAction {
     public void onErrorResponse(VolleyError volleyError) {
         Logger.e(volleyError+"");
         ToastUtils.toast(R.string.toast_error_network);
+
+        PhotosFlowFragment flowFragment = (PhotosFlowFragment) getFragment();
+        PhotosFlowAdapter adapter;
+        if (flowFragment != null && !flowFragment.isDetached()) {
+            adapter = flowFragment.getPhotosFlowAdapter();
+            // 如果获取的是第一页，需要清空列表后再加入新数据
+            flowFragment.recyclerView.setAdapter(adapter);
+        }
     }
 }

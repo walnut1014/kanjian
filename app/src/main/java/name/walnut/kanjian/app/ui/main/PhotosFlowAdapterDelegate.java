@@ -19,6 +19,8 @@ import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.account.Account;
 import name.walnut.kanjian.app.support.KJAlertDialogFragment;
 import name.walnut.kanjian.app.ui.Constants;
+import name.walnut.kanjian.app.ui.main.bean.Comment;
+import name.walnut.kanjian.app.ui.main.bean.PhotosFlow;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
 import name.walnut.kanjian.app.utils.Logger;
 import name.walnut.kanjian.app.utils.TimeUtils;

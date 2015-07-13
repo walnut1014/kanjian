@@ -137,5 +137,7 @@
     <string name="tip_remind">传一张图片，即可查看好友新上传的图片哦～</string>
     <string name="loading_more">正在加载...</string>
     <string name="title_activity_message">新消息</string>
+    <string name="message_empty">暂无新消息</string>
+    <string name="message_intro_default">评论了你的照片</string>
 
 </resources>

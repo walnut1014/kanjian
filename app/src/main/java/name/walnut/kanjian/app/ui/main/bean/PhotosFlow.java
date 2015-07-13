@@ -1,4 +1,4 @@
-package name.walnut.kanjian.app.ui.main;
+package name.walnut.kanjian.app.ui.main.bean;
 
 import java.util.ArrayList;
 import java.util.List;
