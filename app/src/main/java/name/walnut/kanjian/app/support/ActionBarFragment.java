@@ -3,10 +3,57 @@ package name.walnut.kanjian.app.support;
 import android.view.View;
 
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.account.AuthManager;
+import name.walnut.kanjian.app.resource.ResourceRegister;
+import name.walnut.kanjian.app.resource.impl.DefaultResourceAction;
+import name.walnut.kanjian.app.resource.impl.Resource;
+import name.walnut.kanjian.app.resource.impl.ResourceActionFactory;
+import name.walnut.kanjian.app.resource.impl.ResourceFactory;
+import name.walnut.kanjian.app.ui.AuthAvailableAction;
 
 public abstract class ActionBarFragment extends BaseFragment{
 
     protected ActionBarBuilder builder;
+    private  Resource isLoginResource;
+
+    {
+        isLoginResource = ResourceFactory.INSTANCE.getResource(ResourceRegister.isLoginResource);
+        DefaultResourceAction action = (DefaultResourceAction) ResourceActionFactory.INSTANCE.getResourceAction(AuthAvailableAction.class);
+        action.setResource(isLoginResource);
+        action.setFragment(this);
+        isLoginResource.setResourceAction(action);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (isVerifyAuth() && AuthManager.INSTANCE.isLocalTimeout()) {
+            // 发送验证请求
+            verifyAuthAvailable();
+        }
+    }
+
+    /**
+     * 验证登录是否有效
+     */
+    private void verifyAuthAvailable() {
+        isLoginResource.send();
+    }
+
+    /**
+     * 是否验证账号是否有效
+     * @return
+     */
+    public boolean isVerifyAuth() {
+        return true;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        AuthManager.INSTANCE.setLastAppActiveTime();
+    }
+
 
     @Override
 	public void onResume() {

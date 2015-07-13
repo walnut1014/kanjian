@@ -20,19 +20,7 @@ public class RegisterActivity extends ActionBarActivity {
         switchFragment(new RegisterFragment());
 	}
 
-    public void onRegisterSuccess() {
-        // 缓存用户信息到本地
-        AccountBean accountBean = new AccountBean();
-        accountBean.setMobilePhone(mobilephone);
-        accountBean.setNickname(nickName);
-        accountBean.setHeadPhotoPath(avatar);
-        Account.INSTANCE.setAccount(accountBean);
-    }
-
-
     private String mobilephone; // 注册手机号
-    private String nickName;    // 昵称
-    private String avatar;      // 头像
 
     public String getMobilephone() {
         return mobilephone;
@@ -42,19 +30,4 @@ public class RegisterActivity extends ActionBarActivity {
         this.mobilephone = mobilephone;
     }
 
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
 }

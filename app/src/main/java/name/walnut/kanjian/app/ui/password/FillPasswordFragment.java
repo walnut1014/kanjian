@@ -48,6 +48,11 @@ public class FillPasswordFragment extends ActionBarFragment{
     }
 
     @Override
+    public boolean isVerifyAuth() {
+        return false;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         token = getArguments().getString("token");

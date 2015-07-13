@@ -50,8 +50,6 @@ public class LoginAction extends BaseResourceAction {
             Log.e("系统错误","解析json异常",ex);
         }
 
-//        getActivity().finish();
-
         Intent intent = new Intent(Constants.Action.MAIN_ACTION);
         getFragment().startActivity(intent);
         ActivityManager.getScreenManager().popAllActivityExceptOne(MainActivity.class);

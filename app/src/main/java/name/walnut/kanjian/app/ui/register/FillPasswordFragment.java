@@ -60,6 +60,11 @@ public class FillPasswordFragment extends ActionBarFragment{
     }
 
     @Override
+    public boolean isVerifyAuth() {
+        return false;
+    }
+
+    @Override
     public String getTitle() {
         return getString(R.string.title_fill_password);
     }

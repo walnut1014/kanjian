@@ -35,6 +35,10 @@ public class ForgotPasswordFragment extends ActionBarFragment{
 
     private String mobilephone;
 
+    @Override
+    public boolean isVerifyAuth() {
+        return false;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

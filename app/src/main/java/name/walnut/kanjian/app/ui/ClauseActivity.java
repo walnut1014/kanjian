@@ -38,6 +38,11 @@ public class ClauseActivity extends ActionBarActivity implements Constants.Actio
         protected ActionBarBuilder.BackStyle getActionBarBackStyle() {
             return ActionBarBuilder.BackStyle.TEXT;
         }
+
+        @Override
+        public boolean isVerifyAuth() {
+            return false;
+        }
     }
 
     public static class PrivacyFragment extends ActionBarFragment {
@@ -50,6 +55,11 @@ public class ClauseActivity extends ActionBarActivity implements Constants.Actio
         @Override
         protected ActionBarBuilder.BackStyle getActionBarBackStyle() {
             return ActionBarBuilder.BackStyle.TEXT;
+        }
+
+        @Override
+        public boolean isVerifyAuth() {
+            return false;
         }
     }
 }

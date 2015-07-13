@@ -59,6 +59,11 @@ public class VerifyCodeFragment extends ActionBarFragment {
     }
 
     @Override
+    public boolean isVerifyAuth() {
+        return false;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 

@@ -67,6 +67,11 @@ public class FillNicknameFragment extends ActionBarFragment {
     }
 
     @Override
+    public boolean isVerifyAuth() {
+        return false;
+    }
+
+    @Override
     protected void onBack() {
 //        super.onBack();
         // 直接返回输入手机号界面

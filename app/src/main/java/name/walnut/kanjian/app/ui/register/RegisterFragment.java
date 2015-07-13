@@ -73,6 +73,11 @@ public class RegisterFragment extends ActionBarFragment implements Constants.Act
     }
 
     @Override
+    public boolean isVerifyAuth() {
+        return false;
+    }
+
+    @Override
 	public String getTitle() {
 		return getResources().getString(R.string.text_register);
 	}

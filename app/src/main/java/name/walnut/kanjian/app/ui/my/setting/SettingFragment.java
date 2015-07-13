@@ -22,7 +22,7 @@ import name.walnut.kanjian.app.account.Account;
 import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
-import name.walnut.kanjian.app.support.ActivityManager;
+import name.walnut.kanjian.app.support.KanJianApplication;
 import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.common.SelectPicDialogFragment;
 import name.walnut.kanjian.app.ui.my.setting.action.LogoutAction;
@@ -115,11 +115,7 @@ public class SettingFragment extends ActionBarFragment {
             public void onLogout() {
                 exitResource.send();
 
-                // 清楚本地账号，退出所有activity，重新启动main
-                Account.INSTANCE.clear(getActionBarActivity());
-                ActivityManager.getScreenManager().popAllActivityExceptOne(null);
-                Intent intent = new Intent(Constants.Action.LAUNCH_ACTION);
-                startActivity(intent);
+                KanJianApplication.restart();
             }
         });
     }

@@ -1,6 +1,7 @@
 package name.walnut.kanjian.app.support;
 
 import android.app.Application;
+import android.content.Intent;
 import android.os.Environment;
 
 import java.io.File;
@@ -9,7 +10,7 @@ import name.walnut.kanjian.app.account.Account;
 import name.walnut.kanjian.app.entity.PhotoContext;
 import name.walnut.kanjian.app.push.PushReceiver;
 import name.walnut.kanjian.app.support.rest.RequestQueueContext;
-import name.walnut.kanjian.app.ui.upload.UploadImageCache;
+import name.walnut.kanjian.app.ui.Constants;
 
 public class KanJianApplication extends Application {
 
@@ -42,5 +43,14 @@ public class KanJianApplication extends Application {
 	public static Application INSTANCE;
 	
 	public static boolean isLogin = false;
-	
+
+
+    public static void restart() {
+        // 清楚本地账号，退出所有activity，重新启动main
+        Account.INSTANCE.clear(INSTANCE);
+        ActivityManager.getScreenManager().popAllActivityExceptOne(null);
+        Intent intent = new Intent(Constants.Action.LAUNCH_ACTION);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        INSTANCE.startActivity(intent);
+    }
 }

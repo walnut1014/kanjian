@@ -20,6 +20,12 @@ public abstract class BaseResourceAction extends DefaultResourceAction {
             response.success = obj.getBoolean("success");
             if(obj.has("data")){
                 response.data = obj.getString("data");
+
+                if (!response.success && "101".equals(response.data)) {
+                    // 用户未登录
+                    onAuthUnAvailable();
+                    return;
+                }
             }
             if(obj.has("message")){
                 response.message = obj.getString("message");
@@ -33,6 +39,10 @@ public abstract class BaseResourceAction extends DefaultResourceAction {
             Log.e("DefaultJSONListener", "系统错误", e);
         }
 
+    }
+
+    private void onAuthUnAvailable() {
+        KanJianApplication.restart();
     }
 
     public abstract void onSuccess(Response response);

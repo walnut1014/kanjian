@@ -57,6 +57,11 @@ public class LoginFragment extends ActionBarFragment implements Constants.Action
 	}
 
     @Override
+    public boolean isVerifyAuth() {
+        return false;
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
