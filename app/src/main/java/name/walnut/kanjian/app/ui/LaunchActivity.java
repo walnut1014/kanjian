@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.account.Account;
 import name.walnut.kanjian.app.push.PushReceiver;
 import name.walnut.kanjian.app.support.BaseActivity;
 
@@ -65,6 +66,13 @@ public class LaunchActivity extends BaseActivity implements Constants.Action{
             }, spannable.getSpanStart(url), spannable.getSpanEnd(url), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         clauseTv.setText(builder);
+
+        if (Account.INSTANCE.isAvailable()) {
+            overridePendingTransition(0, 0);
+            finish();
+            Intent intent = new Intent(Constants.Action.MAIN_ACTION);
+            startActivity(intent);
+        }
 
 	}
 
