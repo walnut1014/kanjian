@@ -360,7 +360,7 @@ public class PhotosFlowFragment extends ActionBarFragment
     public void onDeleteClick(PhotosFlow photosFlow) {
         showMessage(R.string.message_delete_loading);
         deleteMessageResource
-                .addParam("id", photosFlow.getId())
+                .addParam("id", Long.toString(photosFlow.getId()))
                 .send();
     }
 
