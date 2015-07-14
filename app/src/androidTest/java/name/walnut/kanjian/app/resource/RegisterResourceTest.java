@@ -14,7 +14,7 @@ public class RegisterResourceTest extends AndroidTestCase{
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        RequestQueueContext.INSTANCE.initRequestQueue(getContext());
+        RequestQueueContext.INSTANCE.init(getContext());
 
         registerSendResource = ResourceFactory.INSTANCE.getResource(ResourceRegister.registerSendResource);
     }
