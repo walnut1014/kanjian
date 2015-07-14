@@ -75,8 +75,6 @@ public class MyFragment extends ActionBarFragment {
     @OnClick(R.id.my_info_container)
     public void startPersonalPageActivity() {
         Intent intent = new Intent(Constants.Action.PERSONAL_PAGE_ACTION);
-        intent.putExtra("userId", 0);   // TODO 没有userId。。。
-        intent.putExtra("userName", Account.INSTANCE.getNickname());
         startActivity(intent);
     }
 

@@ -1,6 +1,5 @@
-package name.walnut.kanjian.app.ui.main;
+package name.walnut.kanjian.app.ui.album;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import name.walnut.kanjian.app.R;
