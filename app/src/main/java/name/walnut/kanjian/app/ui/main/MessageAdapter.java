@@ -1,6 +1,7 @@
 package name.walnut.kanjian.app.ui.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,7 @@ public class MessageAdapter extends AbsListAdapter<Message, MessageAdapter.Messa
 
     @Override
     public void onBindViewHolder(MessageViewHolder holder, int position) {
-        Message message = getItem(position);
+        final Message message = getItem(position);
 
         holder.avatarView.setImageURI(Constants.getFileUri(message.getRepayerAvatar()));
         holder.photoView.setImageURI(Constants.getFileUri(message.getPhoto()));
@@ -44,6 +45,8 @@ public class MessageAdapter extends AbsListAdapter<Message, MessageAdapter.Messa
             @Override
             public void onClick(View v) {
                 // TODO 跳转到个人界面
+                Intent intent = new Intent(Constants.Action.PERSONAL_PAGE_ACTION);
+                context.startActivity(intent);
             }
         });
     }

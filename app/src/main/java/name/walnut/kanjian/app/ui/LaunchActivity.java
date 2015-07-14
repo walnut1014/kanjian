@@ -28,8 +28,15 @@ public class LaunchActivity extends BaseActivity implements Constants.Action{
 
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
 		super.onCreate(savedInstanceState);
+
+        if (Account.INSTANCE.isAvailable()) {
+            finish();
+            Intent intent = new Intent(Constants.Action.MAIN_ACTION);
+            startActivity(intent);
+            overridePendingTransition(0, 0);
+            return;
+        }
 
         /**
          * TODO
@@ -66,14 +73,6 @@ public class LaunchActivity extends BaseActivity implements Constants.Action{
             }, spannable.getSpanStart(url), spannable.getSpanEnd(url), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         clauseTv.setText(builder);
-
-        if (Account.INSTANCE.isAvailable()) {
-            overridePendingTransition(0, 0);
-            finish();
-            Intent intent = new Intent(Constants.Action.MAIN_ACTION);
-            startActivity(intent);
-        }
-
 	}
 
     @OnClick(R.id.btnLogin)

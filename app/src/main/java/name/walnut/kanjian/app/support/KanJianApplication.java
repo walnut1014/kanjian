@@ -29,7 +29,7 @@ public class KanJianApplication extends Application {
         Account.INSTANCE.init(this);
 
         // 网络请求
-		RequestQueueContext.INSTANCE.initRequestQueue(this);
+		RequestQueueContext.INSTANCE.init(this);
 
         // 短信验证 SDK
         SMSController.init(this);

@@ -32,10 +32,10 @@ public class ActivityManager {
     private void popActivityWithTransition(boolean transition, Activity activity) {
         if (activity != null) {
             //在从自定义集合中取出当前Activity时，也进行了Activity的关闭操作
+            activity.finish();
             if (!transition) {
                 activity.overridePendingTransition(0, 0);
             }
-            activity.finish();
             activityStack.remove(activity);
             activity = null;
         }

@@ -289,7 +289,7 @@
         </activity>
 
         <!--个人主页-->
-        <activity android:name=".ui.main.PersonalActivity"
+        <activity android:name=".ui.album.PersonalActivity"
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:screenOrientation="portrait">
             <intent-filter>
