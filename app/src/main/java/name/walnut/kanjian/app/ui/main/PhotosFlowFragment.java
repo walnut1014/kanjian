@@ -178,6 +178,7 @@ public class PhotosFlowFragment extends ActionBarFragment
         PushBusProvider.getInstance().unregister(this);
         super.onDestroyView();
         ButterKnife.reset(this);
+        loading = false;
     }
 
     @Override
@@ -207,7 +208,7 @@ public class PhotosFlowFragment extends ActionBarFragment
         Logger.e("onMoreAsked");
 
         recyclerView.hideMoreProgress();
-        if (!isLastPage) {
+        if (!isLastPage && !loading) {
             photosFlowAdapter.showFooter();
             fetchNextPagePhotos();
         }
@@ -284,9 +285,8 @@ public class PhotosFlowFragment extends ActionBarFragment
      * 获取第一页照片
      */
     private void fetchFirstPagePhotos() {
-        if (loading)
-            return;
 
+        loading = true;
         page = 1;
         fetchPhotos(page);
     }
@@ -295,9 +295,8 @@ public class PhotosFlowFragment extends ActionBarFragment
      * 获取下一页照片
      */
     private void fetchNextPagePhotos() {
-        if (loading)
-            return;
 
+        loading = true;
         page ++;
         fetchPhotos(page);
     }
@@ -343,7 +342,9 @@ public class PhotosFlowFragment extends ActionBarFragment
 
     @Override
     public void onRefresh() {
-        fetchFirstPagePhotos();
+        if (!loading) {
+            fetchFirstPagePhotos();
+        }
     }
 
     /**
@@ -386,4 +387,9 @@ public class PhotosFlowFragment extends ActionBarFragment
     public void setLastPage(boolean isLastPage) {
         this.isLastPage = isLastPage;
     }
+
+    public void onLoadingResult() {
+        loading = false;
+    }
+
 }

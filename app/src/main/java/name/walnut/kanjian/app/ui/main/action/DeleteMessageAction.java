@@ -1,5 +1,7 @@
 package name.walnut.kanjian.app.ui.main.action;
 
+import android.util.Log;
+
 import com.android.volley.VolleyError;
 
 import name.walnut.kanjian.app.R;
@@ -25,12 +27,14 @@ public class DeleteMessageAction extends BaseResourceAction{
 
     @Override
     public void onFailed(Response response) {
+        Logger.e(response+"");
         ToastUtils.toast(response.getMessage());
         onResult();
     }
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
+        Logger.e(volleyError+"");
         ToastUtils.toast(R.string.toast_error_network);
         onResult();
     }

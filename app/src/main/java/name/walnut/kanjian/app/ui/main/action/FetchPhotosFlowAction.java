@@ -29,15 +29,14 @@ public class FetchPhotosFlowAction extends BaseResourceAction {
         Logger.e(response.getData());
 
         PhotosFlowFragment flowFragment = (PhotosFlowFragment) getFragment();
-        PhotosFlowAdapter adapter;
-        if (flowFragment != null && !flowFragment.isDetached()) {
-            adapter = flowFragment.getPhotosFlowAdapter();
-            // 如果获取的是第一页，需要清空列表后再加入新数据
-            if (flowFragment.isFirstPage()) {
-                adapter.setItems(new ArrayList<PhotosFlow>());
-            }
-        } else {
+        if (flowFragment == null || flowFragment.isDetached()) {
             return;
+        }
+
+        PhotosFlowAdapter adapter = flowFragment.getPhotosFlowAdapter();
+        // 如果获取的是第一页，需要清空列表后再加入新数据
+        if (flowFragment.isFirstPage()) {
+            adapter.setItems(new ArrayList<PhotosFlow>());
         }
 
         List<PhotosFlow> newPhotosFlows = decodeResult(response.getData());
@@ -65,6 +64,8 @@ public class FetchPhotosFlowAction extends BaseResourceAction {
         }
         adapter.hideFooter();
 
+        flowFragment.onLoadingResult();
+
     }
 
     @Override
@@ -91,6 +92,8 @@ public class FetchPhotosFlowAction extends BaseResourceAction {
             // 如果获取的是第一页，需要清空列表后再加入新数据
             flowFragment.recyclerView.setAdapter(adapter);
             adapter.hideFooter();
+
+            flowFragment.onLoadingResult();
         }
     }
 
