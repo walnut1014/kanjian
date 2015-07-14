@@ -34,7 +34,7 @@ public enum ResourceRegister {
     queryUserResource("user", RequestMethod.GET),
     smsValidateResource("smsvalidate", RequestMethod.POST), //验证验证码
     isLoginResource("passport/isLogin", RequestMethod.GET), //是否登陆
-    //当前用户(long messageId)
+    //当前用户
     currentUser("user/current", RequestMethod.GET),
 
     /*-----------------------设置模块-----------------------*/
