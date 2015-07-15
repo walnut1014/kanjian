@@ -26,6 +26,10 @@ class AlbumViewHolder extends RecyclerView.ViewHolder{
     ImageButton messageBtn;
     @InjectView(R.id.album_comments_container)
     FrameLayout commentsContainer;
+    @InjectView(R.id.album_date_month)
+    TextView monthTv;
+    @InjectView(R.id.album_date_day)
+    TextView dayTv;
 
     public AlbumViewHolder(View itemView) {
         super(itemView);

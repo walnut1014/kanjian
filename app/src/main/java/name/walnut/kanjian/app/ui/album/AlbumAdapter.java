@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import name.walnut.kanjian.app.R;
@@ -23,10 +25,12 @@ import name.walnut.kanjian.app.entity.EmptyFooter;
 import name.walnut.kanjian.app.entity.PhotosFlow;
 import name.walnut.kanjian.app.support.HeaderRecyclerViewAdapter;
 import name.walnut.kanjian.app.support.KJAlertDialogFragment;
+import name.walnut.kanjian.app.support.Month;
 import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.main.CommentClickableSpan;
 import name.walnut.kanjian.app.ui.main.DetailPhotoDialogFragment;
 import name.walnut.kanjian.app.utils.Logger;
+import name.walnut.kanjian.app.utils.TimeUtils;
 import name.walnut.kanjian.app.views.KJAlertDialog;
 
 /**
@@ -85,7 +89,6 @@ public class AlbumAdapter extends HeaderRecyclerViewAdapter<RecyclerView.ViewHol
         }
         final AlbumViewHolder viewHolder = (AlbumViewHolder) holder;
         final PhotosFlow photosFlow = getItem(position);
-
 
         /*
          * 初始化评论内容
@@ -167,6 +170,16 @@ public class AlbumAdapter extends HeaderRecyclerViewAdapter<RecyclerView.ViewHol
             }
         });
 
+        viewHolder.timeTv.setText(TimeUtils.getTime(photosFlow.getSendTime()));
+
+        Date date = new Date(photosFlow.getSendTime());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        viewHolder.monthTv.setText(Month.getJane(month).getJane());
+        viewHolder.dayTv.setText(Integer.toString(day));
     }
 
     @Override

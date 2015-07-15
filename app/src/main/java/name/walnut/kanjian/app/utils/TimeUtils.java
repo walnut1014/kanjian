@@ -34,4 +34,12 @@ public class TimeUtils {
         }
     }
 
+    public static String getTime(long time) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        Date date = new Date(time);
+        String dateFormatStr = dateFormat.format(date);
+
+        return dateFormatStr;
+    }
+
 }
