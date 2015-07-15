@@ -107,7 +107,7 @@ public class AlbumFragment extends ActionBarFragment
     @Override
     protected View getActionBarMenuView() {
         ImageButton view = (ImageButton) LayoutInflater.from(getActionBarActivity()).inflate(R.layout.action_bar_menu_button, null, false);
-        view.setImageResource(R.drawable.icon_camera_normal);
+        view.setImageResource(R.drawable.icon_camera_white);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
