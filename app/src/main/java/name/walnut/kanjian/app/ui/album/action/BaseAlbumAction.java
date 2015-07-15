@@ -1,4 +1,4 @@
-package name.walnut.kanjian.app.ui.main.action;
+package name.walnut.kanjian.app.ui.album.action;
 
 import com.android.volley.VolleyError;
 
@@ -11,93 +11,73 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import name.walnut.kanjian.app.R;
-import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.entity.Comment;
 import name.walnut.kanjian.app.entity.PhotosFlow;
-import name.walnut.kanjian.app.ui.main.PhotosFlowAdapter;
-import name.walnut.kanjian.app.ui.main.PhotosFlowFragment;
-import name.walnut.kanjian.app.ui.util.ToastUtils;
+import name.walnut.kanjian.app.support.BaseResourceAction;
+import name.walnut.kanjian.app.ui.album.AlbumAdapter;
+import name.walnut.kanjian.app.ui.album.AlbumFragment;
 import name.walnut.kanjian.app.utils.Logger;
 
 /**
- * 首页看照片action
+ * 相簿action
  */
-public class FetchPhotosFlowAction extends BaseResourceAction {
+public class BaseAlbumAction extends BaseResourceAction{
     @Override
     public void onSuccess(Response response) {
         Logger.e(response.getData());
 
-        PhotosFlowFragment flowFragment = (PhotosFlowFragment) getFragment();
-        if (flowFragment == null || flowFragment.isDetached()) {
+
+        AlbumFragment fragment = (AlbumFragment) getFragment();
+        if (fragment == null || fragment.isDetached()) {
             return;
         }
+        List<PhotosFlow> flowList = parseResponse(response.getData());
+        // 最后一页
+        fragment.setLastPage(flowList.isEmpty());
 
-        PhotosFlowAdapter adapter = flowFragment.getPhotosFlowAdapter();
-        // 如果获取的是第一页，需要清空列表后再加入新数据
-        if (flowFragment.isFirstPage()) {
-            adapter.setItems(new ArrayList<PhotosFlow>());
+        AlbumAdapter adapter = (AlbumAdapter) fragment.recyclerView.getAdapter();
+        if (adapter == null) {
+            adapter = new AlbumAdapter(fragment, null);
         }
-
-        List<PhotosFlow> newPhotosFlows = decodeResult(response.getData());
-
-        // 设置是否为最后一页
-        flowFragment.setLastPage(newPhotosFlows.isEmpty());
-
-        List<PhotosFlow> photosFlowList = adapter.getItems();
-        photosFlowList.addAll(newPhotosFlows);
-
+        List<PhotosFlow> dataSet = adapter.getItems();
+        dataSet.addAll(flowList);
         // 按时间排序并加入到列表中
-        Collections.sort(photosFlowList, new Comparator<PhotosFlow>() {
+        Collections.sort(dataSet, new Comparator<PhotosFlow>() {
             @Override
             public int compare(PhotosFlow lhs, PhotosFlow rhs) {
                 return (int) (rhs.getSendTime() - lhs.getSendTime());
             }
         });
+        adapter.setItems(dataSet);
 
-        adapter.setItems(photosFlowList);
-
-        if (flowFragment.recyclerView.getAdapter() != null) {
+        if (fragment.recyclerView.getAdapter() != null) {
             adapter.notifyDataSetChanged();
         } else {
-            flowFragment.recyclerView.setAdapter(adapter);
+            fragment.recyclerView.setAdapter(adapter);
         }
-        adapter.hideFooter();
 
-        flowFragment.onLoadingResult();
-
+        fragment.onLoadSuccess();
     }
 
     @Override
     public void onFailed(Response response) {
-        Logger.e(response.getMessage());
-        ToastUtils.toast(response.getMessage());
-
-        onResult();
+        AlbumFragment fragment = (AlbumFragment) getFragment();
+        if (fragment != null && fragment.isDetached()) {
+            fragment.onLoadFailed();
+        }
     }
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
-        Logger.e(volleyError+"");
-        ToastUtils.toast(R.string.toast_error_network);
-
-        onResult();
-    }
-
-    private void onResult() {
-        PhotosFlowFragment flowFragment = (PhotosFlowFragment) getFragment();
-        PhotosFlowAdapter adapter;
-        if (flowFragment != null && !flowFragment.isDetached()) {
-            adapter = flowFragment.getPhotosFlowAdapter();
-            // 如果获取的是第一页，需要清空列表后再加入新数据
-            flowFragment.recyclerView.setAdapter(adapter);
-            adapter.hideFooter();
-
-            flowFragment.onLoadingResult();
+        AlbumFragment fragment = (AlbumFragment) getFragment();
+        if (fragment != null && fragment.isDetached()) {
+            fragment.onLoadFailed();
         }
     }
 
-    private List<PhotosFlow> decodeResult(String data) {
+
+    // 解析结果
+    private List<PhotosFlow> parseResponse(String data) {
         List<PhotosFlow> photosFlows = new ArrayList<>();
         try {
 

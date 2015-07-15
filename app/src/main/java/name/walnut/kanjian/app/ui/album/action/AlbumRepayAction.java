@@ -1,4 +1,4 @@
-package name.walnut.kanjian.app.ui.main.action;
+package name.walnut.kanjian.app.ui.album.action;
 
 import com.android.volley.VolleyError;
 
@@ -12,18 +12,18 @@ import java.util.Comparator;
 import java.util.List;
 
 import name.walnut.kanjian.app.R;
-import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.entity.Comment;
 import name.walnut.kanjian.app.entity.PhotosFlow;
-import name.walnut.kanjian.app.ui.main.PhotosFlowAdapter;
-import name.walnut.kanjian.app.ui.main.PhotosFlowFragment;
+import name.walnut.kanjian.app.support.BaseResourceAction;
+import name.walnut.kanjian.app.ui.album.AlbumAdapter;
+import name.walnut.kanjian.app.ui.album.AlbumFragment;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
 import name.walnut.kanjian.app.utils.Logger;
 
 /**
  * 消息回复action
  */
-public class RepayAction extends BaseResourceAction{
+public class AlbumRepayAction extends BaseResourceAction{
     @Override
     public void onSuccess(Response response) {
         Logger.e(response.getData());
@@ -33,8 +33,8 @@ public class RepayAction extends BaseResourceAction{
             PhotosFlow photosFlow = parseResponse(response.getData());
 
             // 刷新
-            PhotosFlowFragment flowFragment = (PhotosFlowFragment) getFragment();
-            PhotosFlowAdapter adapter = flowFragment.getPhotosFlowAdapter();
+            AlbumFragment flowFragment = (AlbumFragment) getFragment();
+            AlbumAdapter adapter = flowFragment.getAdapter();
             List<PhotosFlow> flowList = adapter.getItems();
             List<PhotosFlow> removeList = new ArrayList<>();
             for (PhotosFlow item : flowList) {

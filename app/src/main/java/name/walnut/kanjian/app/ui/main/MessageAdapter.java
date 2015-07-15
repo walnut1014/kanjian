@@ -16,7 +16,7 @@ import butterknife.InjectView;
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.AbsListAdapter;
 import name.walnut.kanjian.app.ui.Constants;
-import name.walnut.kanjian.app.ui.main.bean.Message;
+import name.walnut.kanjian.app.entity.Message;
 
 /**
  * 新消息列表adapter

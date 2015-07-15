@@ -141,5 +141,6 @@
     <string name="message_intro_default">评论了你的照片</string>
     <string name="message_delete_success">已删除</string>
     <string name="message_delete_loading">正在删除...</string>
+    <string name="personal_album_empty">暂无照片</string>
 
 </resources>

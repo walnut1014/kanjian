@@ -132,6 +132,11 @@ public abstract class HeaderRecyclerViewAdapter<VH extends RecyclerView.ViewHold
         this.items = items;
     }
 
+    public List<T> getItems() {
+        validateItems(items);
+        return items;
+    }
+
     public void setFooter(F footer) {
         this.footer = footer;
     }

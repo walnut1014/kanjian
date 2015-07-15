@@ -1,7 +1,7 @@
-package name.walnut.kanjian.app.ui.main;
+package name.walnut.kanjian.app.ui.album;
 
 import android.content.Context;
-import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -13,99 +13,129 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.account.Account;
+import name.walnut.kanjian.app.entity.Comment;
+import name.walnut.kanjian.app.entity.EmptyFooter;
+import name.walnut.kanjian.app.entity.PhotosFlow;
+import name.walnut.kanjian.app.support.HeaderRecyclerViewAdapter;
 import name.walnut.kanjian.app.support.KJAlertDialogFragment;
 import name.walnut.kanjian.app.ui.Constants;
-import name.walnut.kanjian.app.entity.Comment;
-import name.walnut.kanjian.app.entity.PhotosFlow;
-import name.walnut.kanjian.app.ui.common.RecyclerViewAdapterDelegate;
+import name.walnut.kanjian.app.ui.main.CommentClickableSpan;
+import name.walnut.kanjian.app.ui.main.DetailPhotoDialogFragment;
 import name.walnut.kanjian.app.utils.Logger;
-import name.walnut.kanjian.app.utils.TimeUtils;
 import name.walnut.kanjian.app.views.KJAlertDialog;
 
 /**
- * 照片列表 adapter
+ * 相册adapter
  */
-public class PhotosFlowAdapterDelegate
-        implements RecyclerViewAdapterDelegate<PhotosFlowViewHolder, PhotosFlow> {
+public class AlbumAdapter extends HeaderRecyclerViewAdapter<RecyclerView.ViewHolder, Void, PhotosFlow, EmptyFooter>{
 
     private LruCache<PhotosFlow, ViewGroup> commentsCache;
     private static final int COMMENT_CACHE_LENGTH = 30;
-    private PhotosFlowFragment fragment;
-    private LayoutInflater inflater;
     private Context context;
-    private List<PhotosFlow> photosFlowList;
+    private AlbumFragment fragment;
+    private LayoutInflater inflater;
 
-    public PhotosFlowAdapterDelegate(PhotosFlowFragment fragment, List<PhotosFlow> list) {
+    public AlbumAdapter(AlbumFragment fragment, List<PhotosFlow> photosFlowList) {
         super();
-        commentsCache = new LruCache<>(COMMENT_CACHE_LENGTH);
         this.fragment = fragment;
-        inflater = LayoutInflater.from(fragment.getActionBarActivity());
         context = fragment.getActionBarActivity();
-        photosFlowList = list;
+        inflater = LayoutInflater.from(fragment.getActionBarActivity());
+        commentsCache = new LruCache<>(COMMENT_CACHE_LENGTH);
+        setFooter(new EmptyFooter());
+        if (null == photosFlowList) {
+            photosFlowList = new ArrayList<>();
+        }
+        setItems(photosFlowList);
+    }
+
+
+
+    @Override
+    protected RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent, int viewType) {
+        return null;
     }
 
     @Override
-    public PhotosFlowViewHolder onCreateItemViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.layout_photos_flow, parent, false);
-        return new PhotosFlowViewHolder(context, view);
+    protected RecyclerView.ViewHolder onCreateItemViewHolder(ViewGroup parent, int viewType) {
+        View view = inflater.inflate(R.layout.layout_album, parent, false);
+        return new AlbumViewHolder(view);
     }
 
     @Override
-    public void setDataSet(List<PhotosFlow> dataSet) {
-        photosFlowList = dataSet;
+    protected RecyclerView.ViewHolder onCreateFooterViewHolder(ViewGroup parent, int viewType) {
+        View view = inflater.inflate(R.layout.layout_main_footer, parent, false);
+        return new FooterViewHolder(view);
     }
 
     @Override
-    public List<PhotosFlow> getDataSet() {
-        return photosFlowList;
+    protected void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
+        // empty
     }
 
     @Override
-    public void onBindItemViewHolder(final PhotosFlowViewHolder holder, int position) {
+    protected void onBindItemViewHolder(RecyclerView.ViewHolder holder, int position) {
+        // hasHeader is false
+        if (!(holder instanceof AlbumViewHolder)) {
+            return;
+        }
+        final AlbumViewHolder viewHolder = (AlbumViewHolder) holder;
+        final PhotosFlow photosFlow = getItem(position);
 
-        final PhotosFlow photosFlow = photosFlowList.get(position);
 
         /*
          * 初始化评论内容
          */
-        initCommentView(holder, photosFlow);
+        initCommentView(viewHolder, photosFlow);
 
         /*
          * 没有评论，不显示评论区
          */
         if (photosFlow.getComments().size() == 0) {
-            holder.commentsContainer.setVisibility(View.GONE);
+            viewHolder.commentsContainer.setVisibility(View.GONE);
         } else {
-            holder.commentsContainer.setVisibility(View.VISIBLE);
+            viewHolder.commentsContainer.setVisibility(View.VISIBLE);
         }
+
+        /*
+         * 照片
+         */
+        viewHolder.photoView.setImageURI(Constants.getFileUri(photosFlow.getPhotoPath()));
+        viewHolder.photoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DetailPhotoDialogFragment.showDialog(
+                        fragment.getFragmentManager(), photosFlow.getPhotoPath());
+            }
+        });
 
         /*
          * 留言按钮点击事件
          */
-        holder.messageBtn.setOnClickListener(new View.OnClickListener() {
+        viewHolder.messageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragment.showCommentArea(holder, photosFlow);
+                fragment.showCommentArea(viewHolder, photosFlow);
             }
         });
 
         /*
          * 如果浏览到自己的图片，显示“删除”按钮
          */
-        if (Account.INSTANCE.getNickname().equals(photosFlow.getSender())) {
-            holder.deleteBtn.setVisibility(View.VISIBLE);
+        if (Account.INSTANCE.getId() == photosFlow.getSenderId()) {
+            viewHolder.deleteBtn.setVisibility(View.VISIBLE);
         } else {
-            holder.deleteBtn.setVisibility(View.INVISIBLE);
+            viewHolder.deleteBtn.setVisibility(View.INVISIBLE);
         }
 
         /*
          * 删除按钮点击事件
          */
-        holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+        viewHolder.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 删除图片
@@ -113,7 +143,7 @@ public class PhotosFlowAdapterDelegate
                 // 如果上传时间距今超过24小时，则允许删除
                 boolean allowDelete = (timeNow - photosFlow.getSendTime()) > 1000 * 60 * 60 * 24;
 
-                if (allowDelete) {
+                if (true) {
 
                     new KJAlertDialogFragment()
                             .setContent(context.getString(R.string.dialog_delete_confirm_title))
@@ -137,45 +167,50 @@ public class PhotosFlowAdapterDelegate
             }
         });
 
-
-        // 设置内容
-        holder.descriptionTv.setText(photosFlow.getContent());
-        if (TextUtils.isEmpty(photosFlow.getContent())) {
-            holder.descriptionTv.setVisibility(View.GONE);
-        } else {
-            holder.descriptionTv.setVisibility(View.VISIBLE);
-        }
-        holder.submitterTv.setText(photosFlow.getSender());
-        holder.photoView.setImageURI(Constants.getFileUri(photosFlow.getPhotoPath()));
-        holder.timeTv.setText(TimeUtils.getTimeDiff(photosFlow.getSendTime()));
-        if(photosFlow.getAvatarPath() != null)
-         holder.avatarView.setImageURI(Constants.getFileUri(photosFlow.getAvatarPath()));
-        // 个人界面的点击监听器
-        View.OnClickListener personalPageClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startPersonalPageActivity(context, photosFlow.getSenderId(), photosFlow.getSender());
-            }
-        };
-        holder.submitterTv.setOnClickListener(personalPageClickListener);
-        holder.avatarView.setOnClickListener(personalPageClickListener);
-        holder.photoView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DetailPhotoDialogFragment.showDialog(
-                        fragment.getFragmentManager(), photosFlow.getPhotoPath());
-            }
-        });
-
     }
 
     @Override
-    public void onViewRecycled(PhotosFlowViewHolder holder) {
-        holder.commentsContainer.removeAllViews();  // 移除评论Views
+    protected void onBindFooterViewHolder(RecyclerView.ViewHolder holder, int position) {
+        // empty
     }
 
+    @Override
+    protected final boolean hasHeader() {
+        return false;
+    }
 
-    private void initCommentView(PhotosFlowViewHolder holder, final PhotosFlow photosFlow) {
+    @Override
+    public void onViewRecycled(RecyclerView.ViewHolder holder) {
+        super.onViewRecycled(holder);
+        if (holder instanceof AlbumViewHolder) {
+            ((AlbumViewHolder) holder).commentsContainer.removeAllViews();  // 移除评论Views
+        }
+    }
+
+    /**
+     * 删除指定photoflowId 的行
+     * @param photoflowId
+     */
+    public void removeItemById(long photoflowId) {
+        int position = -1;
+        List<PhotosFlow> photosFlowList = getItems();
+        for (PhotosFlow photosFlow : photosFlowList) {
+            if (photosFlow.getId() == photoflowId) {
+                position = photosFlowList.indexOf(photosFlow);
+                break;
+            }
+        }
+        if (position == -1) {
+            return;
+        }
+        photosFlowList.remove(position);
+        if (hasHeader()) {
+            position ++;
+        }
+        notifyItemRemoved(position);
+    }
+
+    private void initCommentView(AlbumViewHolder holder, final PhotosFlow photosFlow) {
 
         final int commentCount = photosFlow.getComments().size(); // 评论总数
 
@@ -249,7 +284,7 @@ public class PhotosFlowAdapterDelegate
      * @param photosFlow
      */
     private void onBindCommentView(ViewGroup commentView,
-                                   final PhotosFlowViewHolder viewHolder,
+                                   final AlbumViewHolder viewHolder,
                                    final PhotosFlow photosFlow) {
 
         final List<Comment> commentList = photosFlow.getComments();
@@ -306,11 +341,7 @@ public class PhotosFlowAdapterDelegate
             /**
              * 评论点击事件
              */
-            if (Account.INSTANCE.getId() == comment.getSenderId()) {
-                view.setEnabled(false);
-            } else {
-                view.setEnabled(true);
-            }
+            view.setEnabled(Account.INSTANCE.getId() != comment.getSenderId());
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -324,18 +355,12 @@ public class PhotosFlowAdapterDelegate
     }
 
 
-    /**
-     * 跳转到个人主页
-     * @param context
-     * @param userId
-     * @param userName
-     */
-    private void startPersonalPageActivity(Context context, long userId, String userName) {
-        Intent intent = new Intent();
-        intent.putExtra("userId", userId);
-        intent.putExtra("userName", userName);
-        intent.setAction(Constants.Action.PERSONAL_PAGE_ACTION);
-        context.startActivity(intent);
+
+    static class FooterViewHolder extends RecyclerView.ViewHolder {
+
+        public FooterViewHolder(View itemView) {
+            super(itemView);
+        }
     }
 
 }

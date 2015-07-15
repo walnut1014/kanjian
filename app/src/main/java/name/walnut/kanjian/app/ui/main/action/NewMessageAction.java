@@ -13,7 +13,7 @@ import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.ui.main.MessageAdapter;
 import name.walnut.kanjian.app.ui.main.MessageFragment;
-import name.walnut.kanjian.app.ui.main.bean.Message;
+import name.walnut.kanjian.app.entity.Message;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
 import name.walnut.kanjian.app.utils.Logger;
 

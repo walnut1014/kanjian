@@ -1,4 +1,4 @@
-package name.walnut.kanjian.app.ui.main.bean;
+package name.walnut.kanjian.app.entity;
 
 /**
  * 照片流评论

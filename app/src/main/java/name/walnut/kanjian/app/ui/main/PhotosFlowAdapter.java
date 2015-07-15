@@ -12,26 +12,28 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.entity.EmptyFooter;
 import name.walnut.kanjian.app.support.HeaderRecyclerViewAdapter;
 import name.walnut.kanjian.app.ui.Constants;
-import name.walnut.kanjian.app.ui.main.bean.PhotosFlow;
+import name.walnut.kanjian.app.entity.PhotosFlow;
+import name.walnut.kanjian.app.ui.common.RecyclerViewAdapterDelegate;
 import name.walnut.kanjian.app.views.TopTipView;
 
 /**
  * 首页照片流
  */
 public class PhotosFlowAdapter extends
-        HeaderRecyclerViewAdapter<RecyclerView.ViewHolder, Header, PhotosFlow, Footer>{
+        HeaderRecyclerViewAdapter<RecyclerView.ViewHolder, Header, PhotosFlow, EmptyFooter>{
 
     private Context context;
     private PhotosFlowFragment flowFragment;
-    private PhotosFlowAdapterDelegate adapterDelegate;
+    private RecyclerViewAdapterDelegate<PhotosFlowViewHolder, PhotosFlow> adapterDelegate;
     private LayoutInflater inflater;
 
     public PhotosFlowAdapter(PhotosFlowFragment fragment, List<PhotosFlow> photosFlowList) {
         super();
         flowFragment = fragment;
-        this.context = fragment.getActionBarActivity();
+        context = fragment.getActionBarActivity();
         adapterDelegate = new PhotosFlowAdapterDelegate(fragment, photosFlowList);
         inflater = LayoutInflater.from(fragment.getActionBarActivity());
     }
@@ -78,7 +80,9 @@ public class PhotosFlowAdapter extends
         if (hasHeader()) {
             currPosition --;
         }
-        adapterDelegate.onBindItemViewHolder((PhotosFlowViewHolder)holder, currPosition);
+        if (holder instanceof PhotosFlowViewHolder) {
+            adapterDelegate.onBindItemViewHolder((PhotosFlowViewHolder) holder, currPosition);
+        }
     }
 
     @Override
@@ -123,7 +127,7 @@ public class PhotosFlowAdapter extends
         if (hasHeader()) {
             position ++;
         }
-        notifyItemRemoved(position);
+        notifyDataSetChanged();
     }
 
 

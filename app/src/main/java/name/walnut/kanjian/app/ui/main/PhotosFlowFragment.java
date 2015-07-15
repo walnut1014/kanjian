@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.entity.EmptyFooter;
 import name.walnut.kanjian.app.push.PushBusProvider;
 import name.walnut.kanjian.app.push.message.MessagePushEvent;
 import name.walnut.kanjian.app.resource.impl.Resource;
@@ -35,8 +36,8 @@ import name.walnut.kanjian.app.ui.main.action.DeleteMessageAction;
 import name.walnut.kanjian.app.ui.main.action.FetchPhotosFlowAction;
 import name.walnut.kanjian.app.ui.main.action.NewMessageCountAction;
 import name.walnut.kanjian.app.ui.main.action.RepayAction;
-import name.walnut.kanjian.app.ui.main.bean.Comment;
-import name.walnut.kanjian.app.ui.main.bean.PhotosFlow;
+import name.walnut.kanjian.app.entity.Comment;
+import name.walnut.kanjian.app.entity.PhotosFlow;
 import name.walnut.kanjian.app.utils.Logger;
 import name.walnut.kanjian.app.views.CommentView;
 
@@ -156,7 +157,7 @@ public class PhotosFlowFragment extends ActionBarFragment
 
         header = new Header();
         photosFlowAdapter.setHeader(header);
-        photosFlowAdapter.setFooter(new Footer());
+        photosFlowAdapter.setFooter(new EmptyFooter());
 //        showNewsTip(0);
 //        showRemindTip(false);
 
@@ -244,7 +245,7 @@ public class PhotosFlowFragment extends ActionBarFragment
         MainActivity activity = (MainActivity) getActionBarActivity();
         activity.hideTab();
 
-        // 适当的加一些延迟, 否则d
+        // 适当的加一些延迟
         commentArea.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -372,6 +373,7 @@ public class PhotosFlowFragment extends ActionBarFragment
     public void onDeleteSuccess() {
         photosFlowAdapter.removeItemById(deletePhotoFlowId);
         deletePhotoFlowId = 0;
+        dismissMessage();
     }
 
     /**

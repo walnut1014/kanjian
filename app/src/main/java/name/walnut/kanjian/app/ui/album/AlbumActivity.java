@@ -11,9 +11,9 @@ import name.walnut.kanjian.app.support.ActionBarActivity;
  * userId :  用户id
  * userName : 用户昵称
  */
-public class PersonalActivity extends ActionBarActivity{
+public class AlbumActivity extends ActionBarActivity{
 
-    public PersonalActivity() {
+    public AlbumActivity() {
         super(R.id.container);
     }
 
@@ -21,6 +21,6 @@ public class PersonalActivity extends ActionBarActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base_fragment);
-        switchFragment(PersonalFragment.newInstance());
+        switchFragment(AlbumFragment.newInstance());
     }
 }
