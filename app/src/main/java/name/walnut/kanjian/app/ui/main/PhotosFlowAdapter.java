@@ -107,7 +107,7 @@ public class PhotosFlowAdapter extends
      * 删除指定photoflowId 的行
      * @param photoflowId
      */
-    public void removeItemById(int photoflowId) {
+    public void removeItemById(long photoflowId) {
         int position = -1;
         List<PhotosFlow> photosFlowList = adapterDelegate.getDataSet();
         for (PhotosFlow photosFlow : photosFlowList) {
@@ -115,6 +115,9 @@ public class PhotosFlowAdapter extends
                 position = photosFlowList.indexOf(photosFlow);
                 break;
             }
+        }
+        if (position == -1) {
+            return;
         }
         photosFlowList.remove(position);
         if (hasHeader()) {

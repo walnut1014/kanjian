@@ -75,7 +75,7 @@ public class PhotosFlowFragment extends ActionBarFragment
     private int page = 1;   // 当前显示页
     private boolean loading = false;    // 是否正在加载
 
-    private int deletePhotoFlowId;  // 被删除的照片id
+    private long deletePhotoFlowId;  // 被删除的照片id
 
     private boolean isLastPage = false;   // 是否为最后一页
 
@@ -360,6 +360,7 @@ public class PhotosFlowFragment extends ActionBarFragment
      */
     public void onDeleteClick(PhotosFlow photosFlow) {
         showMessage(R.string.message_delete_loading);
+        deletePhotoFlowId = photosFlow.getId();
         deleteMessageResource
                 .addParam("id", Long.toString(photosFlow.getId()))
                 .send();
