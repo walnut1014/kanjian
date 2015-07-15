@@ -31,6 +31,9 @@ public class MyFragment extends ActionBarFragment {
     @ResourceWeave(actionClass = RelationCountAction.class)
     public Resource relationCountResource;
 
+    @ResourceWeave(actionClass = CurrentUserAction.class)
+    public Resource currentUserResource;
+
     @InjectView(R.id.my_avatar)
     SimpleDraweeView avatarView;
     @InjectView(R.id.my_nickname)
@@ -59,6 +62,11 @@ public class MyFragment extends ActionBarFragment {
         super.onViewCreated(view, savedInstanceState);
         showAccount();
         fetchRelationCount();
+        fetchCurrentUser();
+    }
+
+    private void fetchCurrentUser() {
+        currentUserResource.send();
     }
 
     // 刷新好友关系
