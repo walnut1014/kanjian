@@ -143,7 +143,7 @@ public class AlbumAdapter extends HeaderRecyclerViewAdapter<RecyclerView.ViewHol
                 // 如果上传时间距今超过24小时，则允许删除
                 boolean allowDelete = (timeNow - photosFlow.getSendTime()) > 1000 * 60 * 60 * 24;
 
-                if (true) {
+                if (allowDelete) {
 
                     new KJAlertDialogFragment()
                             .setContent(context.getString(R.string.dialog_delete_confirm_title))
@@ -207,7 +207,7 @@ public class AlbumAdapter extends HeaderRecyclerViewAdapter<RecyclerView.ViewHol
         if (hasHeader()) {
             position ++;
         }
-        notifyItemRemoved(position);
+        notifyDataSetChanged();
     }
 
     private void initCommentView(AlbumViewHolder holder, final PhotosFlow photosFlow) {
