@@ -44,7 +44,7 @@ public class QueryUserAction extends BaseResourceAction {
                     String avatar = null;
                     if(!jsonObject.isNull("headPhotoPath"))
                         avatar = jsonObject.getString("headPhotoPath");
-                    String nickName = jsonObject.getString("nickName");
+                    String nickName = jsonObject.optString("nickName");
                     String mobilePhone = jsonObject.optString("mobilephone");
                     int relationStatus = jsonObject.getInt("relationStatus");
 

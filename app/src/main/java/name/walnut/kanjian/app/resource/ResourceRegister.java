@@ -66,8 +66,8 @@ public enum ResourceRegister {
     newMessageResource("notification/newMessage", RequestMethod.GET),
     //用户自己的相册(int page //页数)
     selfPhotoResource("message/self", RequestMethod.GET),
-    //指定ID的相册(int page //页数)
-    userPhotoResource("message/{userId}", RequestMethod.GET),
+    //指定ID的相册(int page //页数, long userId // 用户id)
+    userPhotoResource("message", RequestMethod.GET),
     //删除主消息(long id)
     deleteMessageResource("message/delete", RequestMethod.POST),
     //读取新消息(long messageId)

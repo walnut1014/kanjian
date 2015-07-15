@@ -38,9 +38,9 @@ public class RelationListAction extends BaseResourceAction {
 
                 FriendRequest request = new FriendRequest();
                 request.setId(jsonObject.getLong("id"));
-                request.setAvatar(jsonObject.getString("headPhotoPath"));
+                request.setAvatar(jsonObject.optString("headPhotoPath"));
                 request.setMobilePhone(phone);
-                request.setNickName(jsonObject.getString("nickName"));
+                request.setNickName(jsonObject.optString("nickName"));
                 request.setAgree(jsonObject.getBoolean("agree"));
                 request.setInvited(jsonObject.getBoolean("invited"));
 

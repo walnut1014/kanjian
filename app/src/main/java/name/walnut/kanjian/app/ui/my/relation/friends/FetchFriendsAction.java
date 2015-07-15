@@ -33,7 +33,7 @@ public class FetchFriendsAction extends BaseResourceAction {
                     friend.setAvatar(jsonObject.getString("headPhotoPath"));
                 friend.setPhotoCount(jsonObject.getInt("photoCount"));
                 friend.setMobilePhone(jsonObject.getString("mobilephone"));
-                friend.setNickName(jsonObject.getString("nickName"));
+                friend.setNickName(jsonObject.optString("nickName"));
                 friend.setUserId(jsonObject.getLong("userId"));
 
                 friendInfos.add(friend);
