@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.malinskiy.superrecyclerview.OnMoreListener;
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
@@ -24,6 +25,7 @@ import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.DividerItemDecoration;
+import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.album.action.AlbumDeleteMessageAction;
 import name.walnut.kanjian.app.ui.album.action.AlbumRepayAction;
 import name.walnut.kanjian.app.ui.album.action.SelfAlbumAction;
@@ -99,6 +101,21 @@ public class AlbumFragment extends ActionBarFragment
 
         initRecyclerView();
         initCommentArea();
+        return view;
+    }
+
+    @Override
+    protected View getActionBarMenuView() {
+        ImageButton view = (ImageButton) LayoutInflater.from(getActionBarActivity()).inflate(R.layout.action_bar_menu_button, null, false);
+        view.setImageResource(R.drawable.icon_camera_normal);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Constants.Action.UPLOAD_PIC_ACTION);
+                startActivity(intent);
+                getActionBarActivity().finish();
+            }
+        });
         return view;
     }
 
