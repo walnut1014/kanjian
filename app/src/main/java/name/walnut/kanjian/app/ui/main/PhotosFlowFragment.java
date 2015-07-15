@@ -23,7 +23,8 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
-import name.walnut.kanjian.app.entity.EmptyFooter;
+import name.walnut.kanjian.app.entity.Comment;
+import name.walnut.kanjian.app.entity.PhotosFlow;
 import name.walnut.kanjian.app.push.PushBusProvider;
 import name.walnut.kanjian.app.push.message.MessagePushEvent;
 import name.walnut.kanjian.app.resource.impl.Resource;
@@ -36,8 +37,6 @@ import name.walnut.kanjian.app.ui.main.action.DeleteMessageAction;
 import name.walnut.kanjian.app.ui.main.action.FetchPhotosFlowAction;
 import name.walnut.kanjian.app.ui.main.action.NewMessageCountAction;
 import name.walnut.kanjian.app.ui.main.action.RepayAction;
-import name.walnut.kanjian.app.entity.Comment;
-import name.walnut.kanjian.app.entity.PhotosFlow;
 import name.walnut.kanjian.app.utils.Logger;
 import name.walnut.kanjian.app.views.CommentView;
 
@@ -68,16 +67,12 @@ public class PhotosFlowFragment extends ActionBarFragment
 
     private PhotosFlowAdapter photosFlowAdapter;
 
-    private PhotosFlow targetCommentPhotosFlow; // 评论的消息流
+    private PhotosFlow targetCommentPhotosFlow; // 评论的照片
     private Comment targetComment;  // 评论目标
-
-    private Header header;  // 顶部提示
 
     private int page = 1;   // 当前显示页
     private boolean loading = false;    // 是否正在加载
-
     private long deletePhotoFlowId;  // 被删除的照片id
-
     private boolean isLastPage = false;   // 是否为最后一页
 
     @Override
@@ -111,17 +106,7 @@ public class PhotosFlowFragment extends ActionBarFragment
 
         ButterKnife.inject(this, view);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActionBarActivity()));
-
-        // 设置分割线
-        final Drawable divider = getResources().getDrawable(R.drawable.divider);
-        RecyclerView.ItemDecoration decoration =
-                new DividerItemDecoration(
-                        getActionBarActivity(), divider, DividerItemDecoration.VERTICAL_LIST);
-        recyclerView.addItemDecoration(decoration);
-
-        recyclerView.setupMoreListener(this, ITEM_LEFT_TO_LOAD_MORE);
-        recyclerView.setRefreshListener(this);
+        initRecyclerView();
 
         commentArea.setSendClickListener(new CommentView.OnSendClickListener() {
             @Override
@@ -143,11 +128,32 @@ public class PhotosFlowFragment extends ActionBarFragment
         return view;
     }
 
+    private void initRecyclerView() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActionBarActivity()));
+
+        // 设置分割线
+        final Drawable divider = getResources().getDrawable(R.drawable.divider);
+        RecyclerView.ItemDecoration decoration =
+                new DividerItemDecoration(
+                        getActionBarActivity(), divider, DividerItemDecoration.VERTICAL_LIST);
+        recyclerView.addItemDecoration(decoration);
+
+        recyclerView.setupMoreListener(this, ITEM_LEFT_TO_LOAD_MORE);
+        recyclerView.setRefreshListener(this);
+        recyclerView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideCommentArea();
+                return false;
+            }
+        });
+    }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (photosFlowAdapter == null) {
+        if (photosFlowAdapter == null || photosFlowAdapter.getItems().isEmpty()) {
             List<PhotosFlow> photosFlowList = new ArrayList<>();
             photosFlowAdapter = new PhotosFlowAdapter(this, photosFlowList);
             fetchFirstPagePhotos();
@@ -155,20 +161,8 @@ public class PhotosFlowFragment extends ActionBarFragment
             recyclerView.setAdapter(photosFlowAdapter);
         }
 
-        header = new Header();
-        photosFlowAdapter.setHeader(header);
-        photosFlowAdapter.setFooter(new EmptyFooter());
         showNewsTip(0);
-//        showRemindTip(false);
-
-        recyclerView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                hideCommentArea();
-                return false;
-            }
-
-        });
+        showRemindTip(false);
 
         PushBusProvider.getInstance().registerSticky(this);
 
@@ -176,6 +170,9 @@ public class PhotosFlowFragment extends ActionBarFragment
 
     @Override
     public void onDestroyView() {
+        recyclerView.hideMoreProgress();
+        photosFlowAdapter.hideFooter();
+        recyclerView.getSwipeToRefresh().setRefreshing(false);
         PushBusProvider.getInstance().unregister(this);
         super.onDestroyView();
         ButterKnife.reset(this);
@@ -327,6 +324,7 @@ public class PhotosFlowFragment extends ActionBarFragment
      * @param show
      */
     public void showNewsTip(boolean show, int newsCount) {
+        Header header = photosFlowAdapter.getHeader();
         header.setNewsCount(newsCount);
         header.showNewsTip(show);
         photosFlowAdapter.notifyItemChanged(0);
@@ -337,6 +335,7 @@ public class PhotosFlowFragment extends ActionBarFragment
      * @param show
      */
     public void showRemindTip(boolean show) {
+        Header header = photosFlowAdapter.getHeader();
         header.setShowRemindTip(show);
         photosFlowAdapter.notifyItemChanged(0);
     }

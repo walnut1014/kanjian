@@ -36,6 +36,8 @@ public class PhotosFlowAdapter extends
         context = fragment.getActionBarActivity();
         adapterDelegate = new PhotosFlowAdapterDelegate(fragment, photosFlowList);
         inflater = LayoutInflater.from(fragment.getActionBarActivity());
+        setHeader(new Header());
+        setFooter(new EmptyFooter());
     }
 
     @Override
