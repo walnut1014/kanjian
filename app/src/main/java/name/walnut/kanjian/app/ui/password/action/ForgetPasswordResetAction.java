@@ -18,9 +18,10 @@ public class ForgetPasswordResetAction extends BaseResourceAction {
     @Override
     public void onSuccess(Response response) {
         dismissMessage();
-//        Toast.makeText(getActivity(), "成功", Toast.LENGTH_LONG).show();
+        ToastUtils.toast(R.string.forget_password_success);
+
         getActivity().finish();
-        Intent intent = new Intent(Constants.Action.MAIN_ACTION);
+        Intent intent = new Intent(Constants.Action.LAUNCH_ACTION);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         getFragment().startActivity(intent);
