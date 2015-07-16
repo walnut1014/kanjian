@@ -1,5 +1,6 @@
 package name.walnut.kanjian.app.ui.register;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -37,6 +38,16 @@ public class FillPasswordFragment extends ActionBarFragment{
         FillPasswordFragment fragment = new FillPasswordFragment();
         fragment.setArguments(bundle);
         return fragment;
+    }
+
+    @Override
+    protected void onBack() {
+//        super.onBack();
+        // 直接返回输入手机号界面
+        FragmentManager manager = getFragmentManager();
+        while (manager.getBackStackEntryCount() > 1) {
+            manager.popBackStackImmediate();
+        }
     }
 
     @Override

@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 /**
  * 注册输入手机号码fragment
+ * Intent extra:
+ * mobilephone: 注册手机号
  */
 public class RegisterFragment extends ActionBarFragment implements Constants.Action{
 
@@ -35,7 +37,7 @@ public class RegisterFragment extends ActionBarFragment implements Constants.Act
     @InjectView(R.id.login_tv)
     TextView loginTv;
 
-    @ResourceWeave(actionClass=RegisterSendAction.class)
+    @ResourceWeave(actionClass = RegisterSendAction.class)
     public Resource registerSendResource;  //注册发送手机验证码
 
     private String mobilephone;

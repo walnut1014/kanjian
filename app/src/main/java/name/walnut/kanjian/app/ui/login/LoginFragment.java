@@ -25,6 +25,10 @@ import name.walnut.kanjian.app.ui.util.RegexUtils;
 import name.walnut.kanjian.app.utils.Logger;
 import name.walnut.kanjian.app.views.ClearEditText;
 
+/*
+ * Intent Extra
+ * mobilephone: 登录手机号
+ */
 public class LoginFragment extends ActionBarFragment implements Constants.Action{
 
     @InjectView(R.id.login)
@@ -48,13 +52,21 @@ public class LoginFragment extends ActionBarFragment implements Constants.Action
 		View view = inflater.inflate(R.layout.fragment_login, container, false);
 
         ButterKnife.inject(this, view);
-        // 测试账号
-        String mobilePhone = "13000000001";
-        mobilephoneTv.setEditText(mobilePhone);
-        passwordTv.setEditText("123456");
-        mobilephoneTv.getEditText().setSelection(mobilePhone.length());
 		return view;
 	}
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // 从注册跳转来，自动填充注册手机号
+        Intent intent = getActionBarActivity().getIntent();
+        String mobilePhone = intent.getStringExtra("mobilephone");
+        mobilephoneTv.setEditText(mobilePhone);
+        if (mobilePhone != null) {
+            mobilephoneTv.getEditText().setSelection(mobilePhone.length());
+        }
+
+    }
 
     @Override
     public boolean isVerifyAuth() {
@@ -71,6 +83,11 @@ public class LoginFragment extends ActionBarFragment implements Constants.Action
 	public String getTitle() {
 		return getResources().getString(R.string.text_login);
 	}
+
+    // 获取手机号
+    public String getMobilePhone() {
+        return mobilephoneTv.getEditText().getText().toString();
+    }
 
     @OnClick(R.id.login)
     void login() {

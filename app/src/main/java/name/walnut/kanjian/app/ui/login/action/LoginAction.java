@@ -18,6 +18,7 @@ import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.support.KJAlertDialogFragment;
 import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.MainActivity;
+import name.walnut.kanjian.app.ui.login.LoginFragment;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
 import name.walnut.kanjian.app.views.KJAlertDialog;
 
@@ -62,7 +63,7 @@ public class LoginAction extends BaseResourceAction {
         //{"message":"您的手机号13622309539还未注册","data":-1,"success":false}
         //{"message":"登陆密码错误","data":-2,"success":false}
         // 账号未注册
-        final Fragment fragment = getFragment();
+        final LoginFragment fragment = (LoginFragment) getFragment();
         switch (response.getData()) {
             case MESSAGE_CODE_UNREGISTER:
                 final KJAlertDialogFragment dialogFragment = new KJAlertDialogFragment()
@@ -72,8 +73,10 @@ public class LoginAction extends BaseResourceAction {
                         .setPositiveClickListener(new KJAlertDialog.OnKJClickListener() {
                             @Override
                             public void onClick(KJAlertDialog dialog) {
+                                String mobilephone = fragment.getMobilePhone();
                                 getActivity().finish();
                                 Intent intent = new Intent(Constants.Action.REGISTER_ACTION);
+                                intent.putExtra("mobilephone", mobilephone);
                                 fragment.startActivity(intent);
                             }
                         });

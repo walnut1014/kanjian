@@ -1,10 +1,13 @@
 package name.walnut.kanjian.app.ui.register.action;
 
+import android.content.Intent;
+
 import com.android.volley.VolleyError;
 
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.BaseResourceAction;
+import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.register.RegisterActivity;
 import name.walnut.kanjian.app.ui.register.RegisterFragment;
 import name.walnut.kanjian.app.ui.register.VerifyCodeFragment;
@@ -33,6 +36,12 @@ public class RegisterSendAction extends BaseResourceAction{
         dismissMessage();
         RegisterFragment fragment = (RegisterFragment) getFragment();
         ToastUtils.toast(getActivity().getString(R.string.toast_registered, fragment.getMobilephone()));
+
+        getActivity().getFragmentManager().getBackStackEntryCount();
+        getActivity().finish();
+        Intent intent = new Intent(Constants.Action.LOGIN_ACTION);
+        intent.putExtra("mobilephone", fragment.getMobilephone());
+        getActivity().startActivity(intent);
     }
 
     @Override
