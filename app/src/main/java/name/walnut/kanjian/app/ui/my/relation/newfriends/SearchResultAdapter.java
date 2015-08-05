@@ -13,6 +13,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.account.Account;
 import name.walnut.kanjian.app.support.AbsListAdapter;
 import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.my.relation.newfriends.pojo.Friend;
@@ -47,6 +48,10 @@ public class SearchResultAdapter extends AbsListAdapter<Friend, SearchResultAdap
                 : context.getString(R.string.friend_request_name, contactsName);
         viewHolder.introTv.setText(contactsName);
 
+        if(friend.getMobilePhone().equals(Account.INSTANCE.getMobilePhone())) {
+            viewHolder.sendBtn.setVisibility(View.GONE);
+           return;
+        }
         switch (friend.getRelation()) {
             case NO_RELATION:   // 非好友
                 viewHolder.statusTv.setVisibility(View.GONE);

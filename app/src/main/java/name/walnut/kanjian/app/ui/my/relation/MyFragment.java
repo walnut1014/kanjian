@@ -166,7 +166,8 @@ public class MyFragment extends ActionBarFragment {
     }
 
     private void showUnreadCount(int unreadCount) {
-        friendRequestView.setExtra(unreadCount+"");
+        if(unreadCount!=0)
+            friendRequestView.setExtra(unreadCount+"");
         friendRequestView.showDot(unreadCount > 0);
     }
 

@@ -461,7 +461,7 @@ action#kanjian.intent.action.MESSAGE
 ADDED from AndroidManifest.xml:286:17
 	android:name
 		ADDED from AndroidManifest.xml:286:25
-activity#name.walnut.kanjian.app.ui.main.PersonalActivity
+activity#name.walnut.kanjian.app.ui.album.AlbumActivity
 ADDED from AndroidManifest.xml:292:9
 	android:windowSoftInputMode
 		ADDED from AndroidManifest.xml:293:13

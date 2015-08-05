@@ -19,7 +19,7 @@ public class ContactsUtils {
      * @return
      */
     public static Map<String, String> getAllContacts(Context context) {
-        return getContacts(context, null);
+        return getContacts(context,null);
     }
 
     /**

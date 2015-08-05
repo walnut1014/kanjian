@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.account.Account;
 import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
@@ -65,6 +66,11 @@ public class NewFriendFragment extends ActionBarFragment {
 
         // 获取本地所有手机号
         contactsMap = ContactsUtils.getAllContacts(getActionBarActivity());
+        //TODO 快速解决方案
+        for(String key : contactsMap.keySet()) {
+            if(key.equals(Account.INSTANCE.getMobilePhone()))
+                contactsMap.remove(key);
+        }
 
         fetchContactsFriends();
     }
