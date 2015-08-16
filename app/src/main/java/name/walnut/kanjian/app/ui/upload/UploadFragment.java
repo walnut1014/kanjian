@@ -80,15 +80,9 @@ public class UploadFragment extends ActionBarFragment
 
     @Override
     protected View getActionBarMenuView() {
-        final ImageButton button = (ImageButton) LayoutInflater.from(getActionBarActivity())
-                .inflate(R.layout.action_bar_menu_button, null);
+        final ImageButton button = (ImageButton) LayoutInflater.from(getActionBarActivity()).inflate(R.layout.action_bar_menu_button, null);
         button.setImageResource(R.drawable.icon_refresh);
-        final RotateAnimation animation = new RotateAnimation(
-                0, 360f,
-                Animation.RELATIVE_TO_SELF,
-                0.5f,
-                Animation.RELATIVE_TO_SELF,
-                0.5f);
+        final RotateAnimation animation = new RotateAnimation(0, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         animation.setRepeatMode(Animation.RESTART);
         animation.setRepeatCount(Animation.INFINITE);
         animation.setInterpolator(new LinearInterpolator());

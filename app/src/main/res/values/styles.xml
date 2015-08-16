@@ -45,4 +45,5 @@
         <item name="android:windowExitAnimation">@anim/fade_out_center</item>
     </style>
 
+
 </resources>

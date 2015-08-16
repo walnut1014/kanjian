@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android_custom="http://schemas.android.com/apk/res/name.walnut.kanjian.app"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.opengl.GLSurfaceView
+        android:id="@+id/surfaceView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <ImageView
+        android:id="@+id/white_filter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#bfffffff" />
+
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginBottom="20dip">
+
+    <name.walnut.kanjian.app.ui.upload.camera.RoundProgressBar
+        android:id="@+id/round_progress_bar"
+        android:layout_width="100dip"
+        android:layout_height="100dip"
+        android_custom:style="STROKE"
+        android_custom:roundWidth="5dip"
+        android_custom:roundProgressColor="#afff0000" />
+
+    <Button
+        android:id="@+id/btn_capture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/btn_camera_nor_oval"/>
+    <ImageView
+        android:id="@+id/ring_capture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/btn_camera_nor_ring"/>
+</RelativeLayout>
+</RelativeLayout>

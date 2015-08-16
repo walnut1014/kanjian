@@ -20,6 +20,6 @@ public class UploadActivity extends ActionBarActivity {
 
         setContentView(R.layout.activity_base_fragment);
 
-        switchFragment(new UploadFragment());
+        switchFragment(CameraFragment.newInstance());
     }
 }
