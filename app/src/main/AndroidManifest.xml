@@ -47,10 +47,10 @@
                 <action android:name="kanjian.intent.action.LAUNCH"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
-             <intent-filter>
-                 <action android:name="android.intent.action.MAIN" />
-                 <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+             <!--<intent-filter>-->
+                 <!--<action android:name="android.intent.action.MAIN" />-->
+                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
+             <!--</intent-filter>-->
         </activity>
 
         <!-- 主界面Activity -->
@@ -276,6 +276,10 @@
             <intent-filter>
                 <action android:name="kanjian.intent.action.UPLOAD_PIC"/>
                 <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 

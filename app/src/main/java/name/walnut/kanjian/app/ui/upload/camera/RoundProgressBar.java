@@ -87,8 +87,8 @@ public class RoundProgressBar extends View {
 		
 		//获取自定义属性和默认值
 		roundColor = mTypedArray.getColor(R.styleable.RoundProgressBar_roundColor, Color.WHITE);
-		roundProgressColor = mTypedArray.getColor(R.styleable.RoundProgressBar_roundProgressColor, Color.GREEN);
-		textColor = mTypedArray.getColor(R.styleable.RoundProgressBar_textColor, Color.GREEN);
+		roundProgressColor = mTypedArray.getColor(R.styleable.RoundProgressBar_roundProgressColor, Color.WHITE);
+		textColor = mTypedArray.getColor(R.styleable.RoundProgressBar_textColor, Color.WHITE);
 		textSize = mTypedArray.getDimension(R.styleable.RoundProgressBar_textSize, 15);
 		roundWidth = mTypedArray.getDimension(R.styleable.RoundProgressBar_roundWidth, 5);//圆环宽度
 		max = mTypedArray.getInteger(R.styleable.RoundProgressBar_max, 100);

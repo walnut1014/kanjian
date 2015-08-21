@@ -2,6 +2,7 @@ package name.walnut.kanjian.app.ui.upload;
 
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
@@ -16,6 +17,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -30,8 +32,11 @@ import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.ui.upload.GPUimageutil.GPUImage;
 import name.walnut.kanjian.app.ui.upload.GPUimageutil.GPUImageFilter;
 import name.walnut.kanjian.app.ui.upload.GPUimageutil.GPUImageGaussianBlurFilter;
+import name.walnut.kanjian.app.ui.upload.camera.ButtonAnimation;
 import name.walnut.kanjian.app.ui.upload.camera.CameraHelper;
 import name.walnut.kanjian.app.ui.upload.camera.RoundProgressBar;
+
+import static name.walnut.kanjian.app.ui.upload.camera.ButtonAnimation.*;
 
 
 public class CameraActivity extends Activity{
@@ -43,6 +48,9 @@ public class CameraActivity extends Activity{
     //Filter and Camera
     private GPUImage mGPUImage;
     private GPUImageFilter mGPUImageFilter;
+    /**
+     * sdlfjsldjlfs
+     */
     private CameraHelper mCameraHelper;
     private CameraLoader mCamera;
 
@@ -55,6 +63,7 @@ public class CameraActivity extends Activity{
     Timer mPhotoTimer;
     private int mPictureSum = 10;
     private int mPictureCount = 0;
+
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,14 +73,14 @@ public class CameraActivity extends Activity{
         mGPUImage.setGLSurfaceView((GLSurfaceView) findViewById(R.id.surfaceView));
         mCameraHelper = new CameraHelper(this);
         mCamera = new CameraLoader();
-        setGPUImageGaussianBlurFilter();
+        //setGPUImageGaussianBlurFilter();
 
-        mRoundProgressBar = (RoundProgressBar) findViewById(R.id.round_progress_bar);
-        mBtnCapture = (Button)findViewById(R.id.btn_capture);
-        mWhiteFilter = (ImageView)findViewById(R.id.white_filter);
-        mRingCapture= (ImageView)findViewById(R.id.ring_capture);
+        //mRoundProgressBar = (RoundProgressBar) findViewById(R.id.round_progress_bar);
+        //mBtnCapture = (Button)findViewById(R.id.btn_capture);
+        //mWhiteFilter = (ImageView)findViewById(R.id.white_filter);
+        //mRingCapture= (ImageView)findViewById(R.id.ring_capture);
         //setGPUImageNormalFilter();
-        mBtnCapture.setOnTouchListener(new View.OnTouchListener() {
+        /*mBtnCapture.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch(event.getAction()) {
@@ -89,6 +98,8 @@ public class CameraActivity extends Activity{
                                 if(mPictureCount<=100) {
                                     mPictureCount += 2;
                                     mRoundProgressBar.setProgress(mPictureCount);
+                                    mBtnCapture.setScaleX(1.1f);
+                                    mBtnCapture.setScaleY(1.1f);
                                 }}
                         }, 0,200);
                         break;
@@ -98,7 +109,13 @@ public class CameraActivity extends Activity{
                 }
                 return false;
             }
-        });
+        });/**/
+
+        /**
+         * author:ggh time:2015-08-19
+         */
+        RelativeLayout layout = (RelativeLayout) findViewById(R.id.layout);
+        layout.setOnTouchListener(new ButtonAnimation(this,layout));
     }
 
 
@@ -114,6 +131,45 @@ public class CameraActivity extends Activity{
         super.onPause();
     }
 
+    /**
+     * author:ggh time:2015-08-20
+     */
+    public void moreClick(View view){
+        view.setOnTouchListener(new ButtonAnimation(this, view, new OnClickActionUpListener() {
+            @Override
+            public void onActionUp() {
+                Log.d("CameraActivity","action up");
+            }
+        }));
+    }
+
+    /**
+     * author:ggh time:2015-08-20
+     */
+    public void photoClick(View view){
+        view.setOnTouchListener(new ButtonAnimation(this, view, new OnClickActionUpListener() {
+            @Override
+            public void onActionUp() {
+                Log.d("CameraActivity","action up");
+            }
+        }));
+    }
+
+    /**
+     * author:ggh time:2015-08-20
+     */
+    public void messageClick(View view){
+        view.setOnTouchListener(new ButtonAnimation(this, view, new OnClickActionUpListener() {
+            @Override
+            public void onActionUp() {
+                Log.d("CameraActivity","action up");
+            }
+        }));
+    }
+
+    /**
+     * 高斯模糊滤镜
+     */
     public void setGPUImageGaussianBlurFilter() {
         //高斯模糊滤镜
         mGPUImageFilter = new GPUImageGaussianBlurFilter(20.0f);
@@ -123,6 +179,9 @@ public class CameraActivity extends Activity{
         mGPUImage.setFilter(mGPUImageFilter);
     }
 
+    /**
+     * 正常滤镜
+     */
     public void setGPUImageNormalFilter() {
         //正常滤镜
         mGPUImageFilter = new GPUImageFilter();
