@@ -6,3 +6,8 @@
 .classpath
 project.properties
 
+app/build/*
+.gradle/*
+.idea/*
+build/*
+

@@ -19,7 +19,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int metaButtonBarStyle=0x7f010000;
     }
     public static final class color {
-        public static final int black_overlay=0x7f040000;
+        public static final int black_overlay=0x7f060000;
     }
     public static final class dimen {
         public static final int activity_horizontal_margin=0x7f050000;
@@ -79,38 +79,38 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int widget_edit_block_bg_normal=0x7f02001e;
     }
     public static final class id {
-        public static final int againSend=0x7f06001d;
-        public static final int btnActionBack=0x7f060006;
-        public static final int btnCommit=0x7f06001c;
-        public static final int btnFragLogin=0x7f060016;
-        public static final int btnFragRegister=0x7f06001a;
-        public static final int btnLogin=0x7f060009;
-        public static final int btnRegister=0x7f060008;
-        public static final int cancel=0x7f06001e;
-        public static final int editText1=0x7f060012;
-        public static final int login_container=0x7f06000a;
-        public static final int login_txtMobilephone=0x7f060014;
-        public static final int login_txtPassword=0x7f060015;
-        public static final int main_radio=0x7f060000;
-        public static final int next=0x7f060013;
-        public static final int popup_text=0x7f06001f;
-        public static final int radio_button0=0x7f060001;
-        public static final int radio_button1=0x7f060002;
-        public static final int radio_button2=0x7f060003;
-        public static final int radio_button3=0x7f060004;
-        public static final int radio_button4=0x7f060005;
-        public static final int register_container=0x7f06000b;
-        public static final int register_txtMobilephone=0x7f060018;
-        public static final int register_txtPassword=0x7f060019;
-        public static final int textNation=0x7f060017;
-        public static final int textView1=0x7f060007;
-        public static final int upload_btnSelect=0x7f060011;
-        public static final int upload_check1=0x7f06000e;
-        public static final int upload_check2=0x7f060010;
-        public static final int upload_container=0x7f06000c;
-        public static final int upload_imswitch1=0x7f06000d;
-        public static final int upload_imswitch2=0x7f06000f;
-        public static final int verificode_txtMobilephone=0x7f06001b;
+        public static final int againSend=0x7f07001d;
+        public static final int btnActionBack=0x7f070006;
+        public static final int btnCommit=0x7f07001c;
+        public static final int btnFragLogin=0x7f070016;
+        public static final int btnFragRegister=0x7f07001a;
+        public static final int btnLogin=0x7f070009;
+        public static final int btnRegister=0x7f070008;
+        public static final int cancel=0x7f07001e;
+        public static final int editText1=0x7f070012;
+        public static final int login_container=0x7f07000a;
+        public static final int login_txtMobilephone=0x7f070014;
+        public static final int login_txtPassword=0x7f070015;
+        public static final int main_radio=0x7f070000;
+        public static final int next=0x7f070013;
+        public static final int popup_text=0x7f07001f;
+        public static final int radio_button0=0x7f070001;
+        public static final int radio_button1=0x7f070002;
+        public static final int radio_button2=0x7f070003;
+        public static final int radio_button3=0x7f070004;
+        public static final int radio_button4=0x7f070005;
+        public static final int register_container=0x7f07000b;
+        public static final int register_txtMobilephone=0x7f070018;
+        public static final int register_txtPassword=0x7f070019;
+        public static final int textNation=0x7f070017;
+        public static final int textView1=0x7f070007;
+        public static final int upload_btnSelect=0x7f070011;
+        public static final int upload_check1=0x7f07000e;
+        public static final int upload_check2=0x7f070010;
+        public static final int upload_container=0x7f07000c;
+        public static final int upload_imswitch1=0x7f07000d;
+        public static final int upload_imswitch2=0x7f07000f;
+        public static final int verificode_txtMobilephone=0x7f07001b;
     }
     public static final class layout {
         public static final int action_bar_title=0x7f030000;
@@ -130,24 +130,24 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int main=0x7f090000;
     }
     public static final class string {
-        public static final int main_friends=0x7f070000;
-        public static final int main_home=0x7f070001;
-        public static final int main_manage_date=0x7f070002;
-        public static final int main_news=0x7f070003;
-        public static final int more=0x7f070004;
-        public static final int text_login=0x7f070005;
-        public static final int text_register=0x7f070006;
+        public static final int main_friends=0x7f080000;
+        public static final int main_home=0x7f080001;
+        public static final int main_manage_date=0x7f080002;
+        public static final int main_news=0x7f080003;
+        public static final int more=0x7f080004;
+        public static final int text_login=0x7f080005;
+        public static final int text_register=0x7f080006;
     }
     public static final class style {
         /**  API 11 theme customizations can go here. 
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f080003;
-        public static final int FullscreenActionBarStyle=0x7f080004;
-        public static final int FullscreenTheme=0x7f080005;
-        public static final int launch_text=0x7f080000;
-        public static final int main_tab_bottom=0x7f080001;
-        public static final int photo_checkbox=0x7f080002;
+        public static final int AppBaseTheme=0x7f040000;
+        public static final int FullscreenActionBarStyle=0x7f040001;
+        public static final int FullscreenTheme=0x7f040002;
+        public static final int launch_text=0x7f040003;
+        public static final int main_tab_bottom=0x7f040004;
+        public static final int photo_checkbox=0x7f040005;
     }
     public static final class styleable {
         /** Attributes that can be used with a ButtonBarContainerTheme.

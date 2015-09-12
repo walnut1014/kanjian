@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/Users/baiya/waibao/kanjian/app/src/main/assets"/></dataSet><dataSet config="debug"><source path="/Users/baiya/waibao/kanjian/app/src/debug/assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/walnut/project/android/kanjian/app/src/main/assets"/></dataSet><dataSet config="debug"><source path="/Users/walnut/project/android/kanjian/app/src/debug/assets"/></dataSet></merger>

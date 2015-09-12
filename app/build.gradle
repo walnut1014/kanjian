@@ -10,6 +10,11 @@ android {
         targetSdkVersion 19
     }
 
+    dependencies {
+        compile 'commons-io:commons-io:2.4'
+        compile 'com.mcxiaoke.volley:library:1.0.19'
+    }
+
     buildTypes {
         release {
             minifyEnabled false

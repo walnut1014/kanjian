@@ -2,18 +2,18 @@
 <items version="2" >
 
     <item
-        jar="/Users/baiya/Android/kanjian/app/libs/Volley.jar"
+        jar="/Users/walnut/.gradle/caches/modules-2/files-2.1/com.mcxiaoke.volley/library/1.0.19/a8f23f65fc1e522ee4a1a697ee569901a46741fa/library-1.0.19.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="2dd908289a096a92b5f266cefb6c1bda32762cef">
-        <dex dex="/Users/baiya/Android/kanjian/app/build/intermediates/pre-dexed/debug/Volley-2f58b8b9413c18ea03a5897518ae8c1a9310c84c.jar" />
+        sha1="a8f23f65fc1e522ee4a1a697ee569901a46741fa">
+        <dex dex="/Users/walnut/project/android/kanjian/app/build/intermediates/pre-dexed/debug/library-1.0.19-c922a8b5229bf8020d0b0b2b2d45d41e2cd8f147.jar" />
     </item>
     <item
-        jar="/Users/baiya/Android/kanjian/app/libs/commons-io-2.4.jar"
+        jar="/Users/walnut/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.4/b1b6ea3b7e4aa4f492509a4952029cd8e48019ad/commons-io-2.4.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
-        <dex dex="/Users/baiya/Android/kanjian/app/build/intermediates/pre-dexed/debug/commons-io-2.4-59553c778f2e9afac524c1c95699b763d3cbc274.jar" />
+        <dex dex="/Users/walnut/project/android/kanjian/app/build/intermediates/pre-dexed/debug/commons-io-2.4-0cfce17d57d3c74dc143374b302258dde709d4d4.jar" />
     </item>
 
 </items>
