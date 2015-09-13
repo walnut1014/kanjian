@@ -7,11 +7,7 @@ android {
         applicationId "name.walnut.kanjian.app"
         minSdkVersion 14
         targetSdkVersion 19
-        ndk {
-            moduleName "gpuimage-library"
-            ldLibs "log", "z", "m"
-            abiFilters "armeabi", "armeabi-v7a", "x86"
-        }
+
     }
 
     buildTypes {

@@ -1,144 +1,205 @@
 package name.walnut.kanjian.app.ui.upload;
 
-
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.ImageFormat;
 import android.hardware.Camera;
-import android.net.Uri;
-import android.opengl.GLSurfaceView;
+import android.hardware.Camera.AutoFocusCallback;
+import android.hardware.Camera.PictureCallback;
+import android.hardware.Camera.ShutterCallback;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
+import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.MotionEvent;
+import android.view.Display;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.Locale;
 
 import name.walnut.kanjian.app.R;
-import name.walnut.kanjian.app.ui.upload.GPUimageutil.GPUImage;
-import name.walnut.kanjian.app.ui.upload.GPUimageutil.GPUImageFilter;
-import name.walnut.kanjian.app.ui.upload.GPUimageutil.GPUImageGaussianBlurFilter;
-import name.walnut.kanjian.app.ui.upload.camera.ButtonAnimation;
-import name.walnut.kanjian.app.ui.upload.camera.CameraHelper;
-import name.walnut.kanjian.app.ui.upload.camera.RoundProgressBar;
 
-import static name.walnut.kanjian.app.ui.upload.camera.ButtonAnimation.*;
+import static name.walnut.kanjian.app.ui.upload.ButtonAnimation.OnClickActionUpListener;
 
 
-public class CameraActivity extends Activity{
+public class CameraActivity extends Activity {
 
     public static final int MEDIA_TYPE_IMAGE = 100;
     public static final int MEDIA_TYPE_VIDEO = 101;
     public static final int MSG_TAKE_PICTURE = 201;
+    private Camera mCamera;
+    private SurfaceView sView;
+    private SurfaceHolder surfaceHolder;
+    private int screenWidth, screenHeight;
+    boolean isPreview = false;
 
-    //Filter and Camera
-    private GPUImage mGPUImage;
-    private GPUImageFilter mGPUImageFilter;
-    /**
-     * sdlfjsldjlfs
-     */
-    private CameraHelper mCameraHelper;
-    private CameraLoader mCamera;
 
-    //UI
-    private RoundProgressBar mRoundProgressBar;
-    private ImageView mRingCapture,mWhiteFilter;
-    private Button mBtnCapture;
-
-    //ProgressBar
-    Timer mPhotoTimer;
-    private int mPictureSum = 10;
-    private int mPictureCount = 0;
-
-    @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_camera);
-
-        mGPUImage = new GPUImage(this);
-        mGPUImage.setGLSurfaceView((GLSurfaceView) findViewById(R.id.surfaceView));
-        mCameraHelper = new CameraHelper(this);
-        mCamera = new CameraLoader();
-        //setGPUImageGaussianBlurFilter();
-
-        //mRoundProgressBar = (RoundProgressBar) findViewById(R.id.round_progress_bar);
-        //mBtnCapture = (Button)findViewById(R.id.btn_capture);
-        //mWhiteFilter = (ImageView)findViewById(R.id.white_filter);
-        //mRingCapture= (ImageView)findViewById(R.id.ring_capture);
-        //setGPUImageNormalFilter();
-        /*mBtnCapture.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch(event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        setGPUImageNormalFilter();
-                        mRingCapture.setVisibility(View.GONE);
-                        mWhiteFilter.setVisibility(View.GONE);
-                        mBtnCapture.setBackgroundResource(R.drawable.btn_camera_press);
-                        mPhotoTimer = new java.util.Timer(true);
-                        mPhotoTimer.schedule(new TimerTask() {
-                            @Override
-                            public void run() {
-                                // TODO Auto-generated method stub
-                                Log.i("mPhotoTimer",String.valueOf(mPictureCount));
-                                if(mPictureCount<=100) {
-                                    mPictureCount += 2;
-                                    mRoundProgressBar.setProgress(mPictureCount);
-                                    mBtnCapture.setScaleX(1.1f);
-                                    mBtnCapture.setScaleY(1.1f);
-                                }}
-                        }, 0,200);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        mPhotoTimer.cancel();
-                        break;
-                }
-                return false;
+        WindowManager wm = getWindowManager();
+        Display display = wm.getDefaultDisplay();
+        DisplayMetrics metrics = new DisplayMetrics();
+        display.getMetrics(metrics);
+        screenWidth = metrics.widthPixels;
+        screenHeight = metrics.heightPixels;
+        // 获取界面中SurfaceView组件
+        sView = (SurfaceView) findViewById(R.id.surfaceView);
+        surfaceHolder = sView.getHolder();
+        // 为surfaceHolder添加一个回调监听器
+        surfaceHolder.addCallback(new SurfaceHolder.Callback() {
+            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
             }
-        });/**/
-
-        /**
-         * author:ggh time:2015-08-19
-         */
-        RelativeLayout layout = (RelativeLayout) findViewById(R.id.layout);
-        layout.setOnTouchListener(new ButtonAnimation(this,layout));
+            @Override
+            public void surfaceCreated(SurfaceHolder holder) {
+                initCamera();
+            }
+            @Override
+            public void surfaceDestroyed(SurfaceHolder holder) {
+                // 如果camera不为null ,释放摄像头
+                if (mCamera != null) {
+                    if (isPreview) {
+                        mCamera.stopPreview();
+                    }
+                    mCamera.release();
+                    mCamera = null;
+                }
+            }
+        });
+        RelativeLayout layout = (RelativeLayout) findViewById(R.id.pb_take_photo_layout);
+        layout.setOnTouchListener(new ButtonAnimation(this, layout));
     }
+
+    private void initCamera() {
+        if (!isPreview) {
+            mCamera = Camera.open(0);
+            mCamera.setDisplayOrientation(90);
+        }
+        if (mCamera != null && !isPreview) {
+            try {
+                Camera.Parameters parameters = mCamera.getParameters();
+                parameters.setPreviewSize(screenWidth, screenHeight);
+                parameters.setPreviewFpsRange(4, 10);
+                parameters.setPictureFormat(ImageFormat.JPEG);
+                parameters.set("jpeg-quality", 85);
+                parameters.setPictureSize(screenWidth, screenHeight);
+                mCamera.setPreviewDisplay(surfaceHolder);
+                mCamera.startPreview();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            isPreview = true;
+        }
+    }
+
+    /**
+     * 此方法在布局文件中调用
+     */
+    public void capture(View source) {
+        if (mCamera != null) {
+            mCamera.autoFocus(autoFocusCallback);  //④
+        }
+    }
+
+AutoFocusCallback autoFocusCallback = new AutoFocusCallback() {
+    // 当自动对焦时激发该方法
+    @Override
+    public void onAutoFocus(boolean success, Camera camera) {
+        if (success) {
+            // takePicture()方法需要传入3个监听器参数
+            // 第1个监听器：当用户按下快门时激发该监听器
+            // 第2个监听器：当相机获取原始照片时激发该监听器
+            // 第3个监听器：当相机获取JPG照片时激发该监听器
+            camera.takePicture(new ShutterCallback() {
+                public void onShutter() {
+                    // 按下快门瞬间会执行此处代码
+                }
+            }, new PictureCallback() {
+                public void onPictureTaken(byte[] data, Camera c) {
+                    // 此处代码可以决定是否需要保存原始照片信息
+                }
+            }, myJpegCallback);  //⑤
+        }
+    }
+};
+
+PictureCallback myJpegCallback = new PictureCallback() {
+    @Override
+    public void onPictureTaken(byte[] data, Camera camera) {
+        // 根据拍照所得的数据创建位图
+        final Bitmap bm = BitmapFactory.decodeByteArray(data, 0,
+                data.length);
+        String fileName = getFileNmae();
+        if (fileName == null) return;
+        // 创建一个位于SD卡上的文件
+        File file = new File(fileName);
+        FileOutputStream outStream = null;
+        try {
+            outStream = new FileOutputStream(file);
+            bm.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
+            outStream.close();
+            Toast.makeText(CameraActivity.this, "照片以保存到" + fileName,
+                    Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 重新浏览
+        camera.stopPreview();
+        camera.startPreview();
+        isPreview = true;
+    }
+};
+
+    /**
+     * 返回摄取照片的文件名
+     *
+     * @return 文件名
+     */
+    protected String getFileNmae() {
+        String fileName;
+        if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            Toast.makeText(this, "监测到你的手机没有插入SD卡，请插入SD卡后再试",Toast.LENGTH_LONG).show();
+            return null;
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss", Locale.getDefault());
+        fileName = Environment.getExternalStorageDirectory() + File.separator+ sdf.format(new Date()) + ".JPG";
+        return fileName;
+    }
+
 
 
     @Override
     protected void onResume() {
         super.onResume();
-        mCamera.onResume();
     }
 
     @Override
     protected void onPause() {
-        mCamera.onPause();
         super.onPause();
     }
 
     /**
      * author:ggh time:2015-08-20
      */
-    public void moreClick(View view){
+    public void moreClick(View view) {
         view.setOnTouchListener(new ButtonAnimation(this, view, new OnClickActionUpListener() {
             @Override
             public void onActionUp() {
-                Log.d("CameraActivity","action up");
+                Log.d("CameraActivity", "action up");
             }
         }));
     }
@@ -146,11 +207,11 @@ public class CameraActivity extends Activity{
     /**
      * author:ggh time:2015-08-20
      */
-    public void photoClick(View view){
+    public void photoClick(View view) {
         view.setOnTouchListener(new ButtonAnimation(this, view, new OnClickActionUpListener() {
             @Override
             public void onActionUp() {
-                Log.d("CameraActivity","action up");
+                Log.d("CameraActivity", "action up");
             }
         }));
     }
@@ -158,215 +219,13 @@ public class CameraActivity extends Activity{
     /**
      * author:ggh time:2015-08-20
      */
-    public void messageClick(View view){
+    public void messageClick(View view) {
         view.setOnTouchListener(new ButtonAnimation(this, view, new OnClickActionUpListener() {
-            @Override
             public void onActionUp() {
-                Log.d("CameraActivity","action up");
+                Log.d("CameraActivity", "action up");
             }
         }));
     }
 
-    /**
-     * 高斯模糊滤镜
-     */
-    public void setGPUImageGaussianBlurFilter() {
-        //高斯模糊滤镜
-        mGPUImageFilter = new GPUImageGaussianBlurFilter(20.0f);
 
-        //快速均值模糊滤镜
-        //mGPUImageFilter = new GPUImageBoxBlurFilter(5.0f);
-        mGPUImage.setFilter(mGPUImageFilter);
-    }
-
-    /**
-     * 正常滤镜
-     */
-    public void setGPUImageNormalFilter() {
-        //正常滤镜
-        mGPUImageFilter = new GPUImageFilter();
-        mGPUImage.setFilter(mGPUImageFilter);
-    }
-
-    private Handler mHandler = new Handler() {
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case CameraActivity.MSG_TAKE_PICTURE:
-                    mPictureCount+=10;
-                    mRoundProgressBar.setProgress(mPictureCount/mPictureCount);
-                    break;
-            }
-        }
-
-    };
-
-
-//    public void onClick(final View v) {
-//        switch (v.getId()) {
-//            case R.id.btn_capture:
-//                new Thread(new Runnable() {
-//
-//                    @Override
-//                    public void run() {
-//                        int progress = 0;
-//
-//                        while (progress <= 100) {
-//                            progress += 3;
-//
-//                            mRoundProgressBar.setProgress(progress);
-//
-//                            try {
-//                                Thread.sleep(100);
-//                            } catch (InterruptedException e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//
-//                    }
-//                }).start();
-//                if (mCamera.mCameraInstance.getParameters().getFocusMode().equals(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
-//                    takePicture();
-//                } else {
-//                    mCamera.mCameraInstance.autoFocus(new Camera.AutoFocusCallback() {
-//
-//                        @Override
-//                        public void onAutoFocus(final boolean success, final Camera camera) {
-//                            takePicture();
-//                        }
-//                    });
-//                }
-//                break;
-//        }
-//    }
-
-    private void takePicture() {
-        // TODO get a size that is about the size of the screen
-        Camera.Parameters params = mCamera.mCameraInstance.getParameters();
-        params.setRotation(90);
-        mCamera.mCameraInstance.setParameters(params);
-        for (Camera.Size size : params.getSupportedPictureSizes()) {
-            Log.i("ASDF", "Supported: " + size.width + "x" + size.height);
-        }
-        mCamera.mCameraInstance.takePicture(null, null,
-                new Camera.PictureCallback() {
-
-                    @Override
-                    public void onPictureTaken(byte[] data, final Camera camera) {
-
-                        final File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
-                        if (pictureFile == null) {
-                            Log.d("ASDF","Error creating media file, check storage permissions");
-                            return;
-                        }
-
-                        try {
-                            FileOutputStream fos = new FileOutputStream(pictureFile);
-                            fos.write(data);
-                            fos.close();
-                        } catch (FileNotFoundException e) {
-                            Log.d("ASDF", "File not found: " + e.getMessage());
-                        } catch (IOException e) {
-                            Log.d("ASDF", "Error accessing file: " + e.getMessage());
-                        }
-                        data = null;
-                        Bitmap bitmap = BitmapFactory.decodeFile(pictureFile.getAbsolutePath());
-                        // mGPUImage.setImage(bitmap);
-                        final GLSurfaceView view = (GLSurfaceView) findViewById(R.id.surfaceView);
-                        view.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
-                        mGPUImage.saveToPictures(bitmap, "GPUImage",
-                                System.currentTimeMillis() + ".jpg",
-                                new GPUImage.OnPictureSavedListener() {
-
-                                    @Override
-                                    public void onPictureSaved(final Uri uri) {
-                                        pictureFile.delete();
-                                        camera.startPreview();
-                                        view.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
-                                    }
-                                });
-                    }
-                });
-    }
-
-    private static File getOutputMediaFile(final int type) {
-
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "MyCameraApp");
-        if (!mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
-                Log.d("MyCameraApp", "failed to create directory");
-                return null;
-            }
-        }
-
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        File mediaFile;
-        if (type == MEDIA_TYPE_IMAGE) {
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-                    "IMG_" + timeStamp + ".jpg");
-        } else if (type == MEDIA_TYPE_VIDEO) {
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-                    "VID_" + timeStamp + ".mp4");
-        } else {
-            return null;
-        }
-
-        return mediaFile;
-    }
-
-
-    private class CameraLoader {
-
-        private int mCurrentCameraId = 0;
-        private Camera mCameraInstance;
-
-        public void onResume() {
-            setUpCamera(mCurrentCameraId);
-        }
-
-        public void onPause() {
-            releaseCamera();
-        }
-
-        public void switchCamera() {
-            releaseCamera();
-            mCurrentCameraId = (mCurrentCameraId + 1) % mCameraHelper.getNumberOfCameras();
-            setUpCamera(mCurrentCameraId);
-        }
-
-        private void setUpCamera(final int id) {
-            mCameraInstance = getCameraInstance(id);
-            Camera.Parameters parameters = mCameraInstance.getParameters();
-            // TODO adjust by getting supportedPreviewSizes and then choosing
-            // the best one for screen size (best fill screen)
-            if (parameters.getSupportedFocusModes().contains(
-                    Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
-                parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
-            }
-            mCameraInstance.setParameters(parameters);
-
-            int orientation = mCameraHelper.getCameraDisplayOrientation(
-                    CameraActivity.this, mCurrentCameraId);
-            CameraHelper.CameraInfo2 cameraInfo = new CameraHelper.CameraInfo2();
-            mCameraHelper.getCameraInfo(mCurrentCameraId, cameraInfo);
-            boolean flipHorizontal = cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT;
-            mGPUImage.setUpCamera(mCameraInstance, orientation, flipHorizontal, false);
-        }
-
-        private Camera getCameraInstance(final int id) {
-            Camera c = null;
-            try {
-                c = mCameraHelper.openCamera(id);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return c;
-        }
-
-        private void releaseCamera() {
-            mCameraInstance.setPreviewCallback(null);
-            mCameraInstance.release();
-            mCameraInstance = null;
-        }
-    }
 }

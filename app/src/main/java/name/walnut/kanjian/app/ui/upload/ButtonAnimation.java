@@ -1,10 +1,9 @@
 
-package name.walnut.kanjian.app.ui.upload.camera;
+package name.walnut.kanjian.app.ui.upload;
 
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -14,7 +13,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import name.walnut.kanjian.app.R;
-
+import name.walnut.kanjian.app.ui.upload.RoundProgressBar;
 /**
  * Created by GongGaohong on 15-8-19.
  * E-main Sagittarius_Ggh@126.com
@@ -67,7 +66,7 @@ public class ButtonAnimation implements View.OnTouchListener{
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         switch(view.getId()){
-            case R.id.layout:
+            case R.id.pb_take_photo_layout:
                 switch(motionEvent.getAction()){
                     case MotionEvent.ACTION_DOWN:
                         viewHolder.blackMasking.setVisibility(View.VISIBLE);

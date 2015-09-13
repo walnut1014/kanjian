@@ -1,4 +1,4 @@
-package name.walnut.kanjian.app.ui.upload.camera;
+package name.walnut.kanjian.app.ui.upload;
 
 import android.content.Context;
 import android.content.res.TypedArray;
