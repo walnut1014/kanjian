@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.newui.main.PhotoDetailsActivity;
+import name.walnut.kanjian.app.newui.photopage.PhotoPageActivity;
 import name.walnut.kanjian.app.newui.upload.UploadActivity;
 
 import static name.walnut.kanjian.app.newui.camera.ButtonAnimation.OnClickActionUpListener;
@@ -90,6 +91,7 @@ public class CameraActivity extends Activity {
             @Override
             public void onActionUp() {
                 Log.d("CameraActivity", "action up");
+                startActivity(new Intent(CameraActivity.this, PhotoPageActivity.class));
             }
         }));
         BtnCameraMessage.setOnTouchListener(new ButtonAnimation(this, BtnCameraMessage, new OnClickActionUpListener() {

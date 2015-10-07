@@ -47,5 +47,7 @@
 
     <color name="background_comment">#f2f3f4</color>
 
+    <color name="colorBlack">#000000</color>
+    <color name="colorGray">#515151</color>
 
 </resources>
