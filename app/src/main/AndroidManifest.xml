@@ -37,16 +37,40 @@
         android:icon="@drawable/ic_launcher"
         android:theme="@style/AppBaseTheme" >
 
-        <!-- 启动加载Activity -->
+
+        <!--摄像头activity-->
+        <activity android:name=".newui.camera.CameraActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="kanjian.intent.action.UPLOAD_PIC"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".newui.main.PhotoDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        </activity>
+
+
+        <activity android:name=".newui.upload.UploadActivity"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".ui.LaunchActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
 
-            <intent-filter>
+<!--            <intent-filter>
                 <action android:name="kanjian.intent.action.LAUNCH"/>
                 <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+            </intent-filter>-->
              <!--<intent-filter>-->
                  <!--<action android:name="android.intent.action.MAIN" />-->
                  <!--<category android:name="android.intent.category.LAUNCHER" />-->
@@ -268,20 +292,7 @@
             </intent-filter>
         </activity>
 
-        <!--上传图片activity-->
-        <activity android:name=".ui.upload.CameraActivity"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-            android:windowSoftInputMode="adjustResize"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="kanjian.intent.action.UPLOAD_PIC"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+
 
         <!--新消息界面-->
         <activity android:name=".ui.main.MessageActivity"

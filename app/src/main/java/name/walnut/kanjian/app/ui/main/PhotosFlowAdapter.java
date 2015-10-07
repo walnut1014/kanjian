@@ -22,8 +22,7 @@ import name.walnut.kanjian.app.views.TopTipView;
 /**
  * 首页照片流
  */
-public class PhotosFlowAdapter extends
-        HeaderRecyclerViewAdapter<RecyclerView.ViewHolder, Header, PhotosFlow, EmptyFooter>{
+public class PhotosFlowAdapter extends HeaderRecyclerViewAdapter<RecyclerView.ViewHolder, Header, PhotosFlow, EmptyFooter>{
 
     private Context context;
     private PhotosFlowFragment flowFragment;
@@ -62,9 +61,7 @@ public class PhotosFlowAdapter extends
         HeaderViewHolder headerViewHolder = (HeaderViewHolder) holder;
         headerViewHolder.topTipView.showRemindTip(getHeader().isShowRemindTip());
         headerViewHolder.topTipView.showNewsTip(getHeader().isShowNewsTip());
-        headerViewHolder.topTipView.setNewsTip(
-                context.getString(
-                        R.string.tip_news, getHeader().getNewsCount()));
+        headerViewHolder.topTipView.setNewsTip(context.getString(R.string.tip_news, getHeader().getNewsCount()));
         headerViewHolder.topTipView.setRemindTip(context.getString(R.string.tip_remind));
         headerViewHolder.topTipView.setNewsTipClickListener(new View.OnClickListener() {
             @Override

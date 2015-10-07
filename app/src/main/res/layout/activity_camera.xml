@@ -2,28 +2,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:android_custom="http://schemas.android.com/apk/res/name.walnut.kanjian.app"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <SurfaceView
         android:id="@+id/surfaceView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <ImageView
-        android:id="@+id/white_filter"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/pb_take_photo_layout"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="30dip"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true">
 
-        <name.walnut.kanjian.app.ui.upload.RoundProgressBar
+        <name.walnut.kanjian.app.newui.camera.RoundProgressBar
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:id="@+id/writeCircle"
@@ -61,75 +56,41 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/camera_button_photo"
-        android:onClick="photoClick"
-        android:padding="20dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/camera_button_photo" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/camera_button_personal"
-        android:onClick="moreClick"
-        android:padding="20dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/camera_button_personal"/>
-
-    </RelativeLayout>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/camera_logo"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="20dip"
+        android:src="@drawable/camera_logo" />
 
-    <RelativeLayout
+    <ImageView
+        android:id="@+id/camera_button_personal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:padding="20dip"
+        android:src="@drawable/camera_button_personal" />
+
+
+    <ImageView
+        android:id="@+id/camera_button_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:padding="20dip"
+        android:src="@drawable/camera_button_photo" />
+
+
+    <ImageView
         android:id="@+id/camera_button_message"
-        android:onClick="messageClick"
-        android:padding="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/camera_message_frame"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"/>
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/camera_message_num9_more"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"/>
-    </RelativeLayout>
+        android:padding="20dip"
+        android:src="@drawable/camera_message_frame" />
 </RelativeLayout>

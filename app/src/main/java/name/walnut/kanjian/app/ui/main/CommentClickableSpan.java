@@ -35,14 +35,13 @@ public class CommentClickableSpan extends ClickableSpan {
         CharSequence text = ((TextView) widget).getText();
         Spannable spannable = (Spannable) text;
         Selection.removeSelection(spannable);
-
         startPersonalPageActivity(context, userId, userName);
     }
 
     @Override
     public void updateDrawState(@NonNull TextPaint ds) {
         super.updateDrawState(ds);
-        ds.setColor(context.getResources().getColor(R.color.text_purple_dark));
+        ds.setColor(context.getResources().getColor(R.color.white));
         ds.setUnderlineText(false);
     }
 

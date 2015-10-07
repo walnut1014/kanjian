@@ -86,15 +86,12 @@ public class SpanTextView extends TextView {
 				mEnd = buffer.getSpanEnd(link[0]);
 
 				if (mStart >= 0 && mEnd >= mStart) {
-					buffer.setSpan(new BackgroundColorSpan(spanColor), mStart, mEnd,
-							Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+					buffer.setSpan(new BackgroundColorSpan(spanColor), mStart, mEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 				}
 			} else if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
 
 				if (mStart >= 0 && mEnd >= mStart) {
-					buffer.setSpan(new BackgroundColorSpan(Color.TRANSPARENT), mStart, mEnd,
-							Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
+					buffer.setSpan(new BackgroundColorSpan(Color.TRANSPARENT), mStart, mEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 					mStart = -1;
 					mEnd = -1;
 				}

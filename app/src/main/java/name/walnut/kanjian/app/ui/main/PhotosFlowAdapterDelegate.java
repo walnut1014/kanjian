@@ -17,10 +17,10 @@ import java.util.List;
 
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.account.Account;
-import name.walnut.kanjian.app.support.KJAlertDialogFragment;
-import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.entity.Comment;
 import name.walnut.kanjian.app.entity.PhotosFlow;
+import name.walnut.kanjian.app.support.KJAlertDialogFragment;
+import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.common.RecyclerViewAdapterDelegate;
 import name.walnut.kanjian.app.utils.Logger;
 import name.walnut.kanjian.app.utils.TimeUtils;
@@ -29,8 +29,7 @@ import name.walnut.kanjian.app.views.KJAlertDialog;
 /**
  * 照片列表 adapter
  */
-public class PhotosFlowAdapterDelegate
-        implements RecyclerViewAdapterDelegate<PhotosFlowViewHolder, PhotosFlow> {
+public class PhotosFlowAdapterDelegate implements RecyclerViewAdapterDelegate<PhotosFlowViewHolder, PhotosFlow> {
 
     private LruCache<PhotosFlow, ViewGroup> commentsCache;
     private static final int COMMENT_CACHE_LENGTH = 30;
@@ -77,6 +76,7 @@ public class PhotosFlowAdapterDelegate
         /*
          * 没有评论，不显示评论区
          */
+
         if (photosFlow.getComments().size() == 0) {
             holder.commentsContainer.setVisibility(View.GONE);
         } else {
@@ -114,24 +114,15 @@ public class PhotosFlowAdapterDelegate
                 boolean allowDelete = (timeNow - photosFlow.getSendTime()) > 1000 * 60 * 60 * 24;
 
                 if (allowDelete) {
-
-                    new KJAlertDialogFragment()
-                            .setContent(context.getString(R.string.dialog_delete_confirm_title))
-                            .setPositiveClickListener(new KJAlertDialog.OnKJClickListener() {
-                                @Override
-                                public void onClick(KJAlertDialog dialog) {
-                                    // 确认删除
-                                    fragment.onDeleteClick(photosFlow);
-                                }
-                            })
-                            .show(fragment.getFragmentManager());
-
+                    new KJAlertDialogFragment().setContent(context.getString(R.string.dialog_delete_confirm_title)).setPositiveClickListener(new KJAlertDialog.OnKJClickListener() {
+                        @Override
+                        public void onClick(KJAlertDialog dialog) {
+                            // 确认删除
+                            fragment.onDeleteClick(photosFlow);
+                        }
+                    }).show(fragment.getFragmentManager());
                 } else {
-                    new KJAlertDialogFragment()
-                            .setContent(context.getString(R.string.dialog_delete_not_allowed_title))
-                            .showNegativeButton(false)
-                            .setPositiveText(context.getString(R.string.dialog_delete_not_allowed_button_positive))
-                            .show(fragment.getFragmentManager());
+                    new KJAlertDialogFragment().setContent(context.getString(R.string.dialog_delete_not_allowed_title)).showNegativeButton(false).setPositiveText(context.getString(R.string.dialog_delete_not_allowed_button_positive)).show(fragment.getFragmentManager());
                 }
 
             }
@@ -220,13 +211,10 @@ public class PhotosFlowAdapterDelegate
      * @param photosFlow
      * @return
      */
-    private ViewGroup onCreateCommentView(
-            final Context context,
-            final PhotosFlow photosFlow) {
+    private ViewGroup onCreateCommentView(final Context context, final PhotosFlow photosFlow) {
 
         LinearLayout container = new LinearLayout(context);
         container.setOrientation(LinearLayout.VERTICAL);
-
         container.setLayoutParams(
                 new ViewGroup.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
@@ -248,9 +236,7 @@ public class PhotosFlowAdapterDelegate
      * @param viewHolder
      * @param photosFlow
      */
-    private void onBindCommentView(ViewGroup commentView,
-                                   final PhotosFlowViewHolder viewHolder,
-                                   final PhotosFlow photosFlow) {
+    private void onBindCommentView(ViewGroup commentView, final PhotosFlowViewHolder viewHolder, final PhotosFlow photosFlow) {
 
         final List<Comment> commentList = photosFlow.getComments();
 
@@ -258,7 +244,7 @@ public class PhotosFlowAdapterDelegate
         for (int i = 0; i < childCount; i++) {
             View view = commentView.getChildAt(i);
 
-            final TextView textView = (TextView) view.findViewById(R.id.comment_text);
+            final TextView textView = (TextView) view.findViewById(R.id.comment_name);
             textView.setMovementMethod(LinkMovementMethod.getInstance());
 
             final Comment comment = commentList.get(i);

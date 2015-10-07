@@ -108,6 +108,7 @@ public class PhotosFlowFragment extends ActionBarFragment
 
         initRecyclerView();
 
+        //评论按钮
         commentArea.setSendClickListener(new CommentView.OnSendClickListener() {
             @Override
             public void onSend(final String message, CommentView view) {
@@ -224,9 +225,7 @@ public class PhotosFlowFragment extends ActionBarFragment
      * @param photosFlow
      * @param comment
      */
-    public void showCommentArea(final PhotosFlowViewHolder viewHolder,
-                                final PhotosFlow photosFlow,
-                                final Comment comment) {
+    public void showCommentArea(final PhotosFlowViewHolder viewHolder, final PhotosFlow photosFlow, final Comment comment) {
         if (targetCommentPhotosFlow != photosFlow || targetComment != comment) {
             commentArea.setVisibility(View.GONE);
         }
