@@ -116,7 +116,7 @@ public class NewFriendFragment extends ActionBarFragment {
     private void fetchContactsFriends() {
         isFetchingContacts = true;
         String params = getMobilePhones();
-        queryUserResource.addParam("mobilephones", params)
+        queryUserResource.addParam("phones", params)
                 .send();
     }
 

@@ -34,7 +34,7 @@ public class RelationListAction extends BaseResourceAction {
             JSONArray array = new JSONArray(response.getData());
             for (int i = 0; i < array.length(); i++) {
                 JSONObject jsonObject = array.getJSONObject(i);
-                String phone = jsonObject.getString("mobilephone");
+                String phone = jsonObject.getString("phone");
 
                 FriendRequest request = new FriendRequest();
                 request.setId(jsonObject.getLong("id"));
@@ -42,7 +42,7 @@ public class RelationListAction extends BaseResourceAction {
                 request.setMobilePhone(phone);
                 request.setNickName(jsonObject.optString("nickName"));
                 request.setAgree(jsonObject.getBoolean("agree"));
-                request.setInvited(jsonObject.getBoolean("invited"));
+                request.setInvited(jsonObject.getBoolean("asTarget"));
 
                 requestList.add(request);
                 phones.add(phone);

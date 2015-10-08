@@ -96,10 +96,8 @@ public class RegisterFragment extends ActionBarFragment implements Constants.Act
 
         } else {
             this.mobilephone = mobilephone;
-
             showMessage(R.string.dialog_message_register);
-
-            registerSendResource.addParam("mobilephone", mobilephone)
+            registerSendResource.addParam("phone", mobilephone)
                     .send();
 
         }

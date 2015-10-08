@@ -45,18 +45,18 @@ public class QueryUserAction extends BaseResourceAction {
                     if(!jsonObject.isNull("headPhotoPath"))
                         avatar = jsonObject.getString("headPhotoPath");
                     String nickName = jsonObject.optString("nickName");
-                    String mobilePhone = jsonObject.optString("mobilephone");
+                    String phone = jsonObject.optString("phone");
                     int relationStatus = jsonObject.getInt("relationStatus");
 
                     Friend friend = new Friend();
                     friend.setId(id);
-                    friend.setMobilePhone(mobilePhone);
+                    friend.setMobilePhone(phone);
                     friend.setAvatar(avatar);
                     friend.setNickName(nickName);
                     friend.setRelation(relationStatus);
 
                     friendList.add(friend);
-                    phones.add(mobilePhone);
+                    phones.add(phone);
                 }
 
             } catch (JSONException e) {
