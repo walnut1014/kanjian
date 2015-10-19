@@ -24,11 +24,6 @@ public abstract class DefaultCallback<T extends ResourceResult> implements Callb
                 failure(result.getMessage());
         }else {
             Log.e("Server Error", "服务器异常");
-            try {
-                Log.e("sdf", response.errorBody().source().readUtf8());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
             error();
         }
     }

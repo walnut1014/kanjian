@@ -32,7 +32,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
-        android:name=".support.KanJianApplication"
+        android:name=".support.AppContext"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:theme="@style/AppBaseTheme" >
