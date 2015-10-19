@@ -10,7 +10,7 @@ public class PhotosFlow {
 
     private long id;         // 消息id
     private String content;  // 内容
-    private String photoPath;    // 图片路径
+    private String photoPath;// 图片路径
     private boolean root;    // 主消息
     private long sendTime;   // 发送时间
     private String sender;   // 发送人昵称

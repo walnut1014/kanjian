@@ -14,7 +14,7 @@ import java.util.Map;
 
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.BaseResourceAction;
-import name.walnut.kanjian.app.support.KanJianApplication;
+import name.walnut.kanjian.app.support.AppContext;
 import name.walnut.kanjian.app.ui.my.relation.newfriends.pojo.Friend;
 import name.walnut.kanjian.app.ui.my.relation.newfriends.NewFriendFragment;
 import name.walnut.kanjian.app.ui.my.relation.newfriends.SearchResultFragment;
@@ -69,7 +69,7 @@ public class QueryUserAction extends BaseResourceAction {
             String[] phoneArray = new String[phones.size()];
             Map<String, String> nameMap =
                     ContactsUtils.getContactsByPhone(
-                            KanJianApplication.INSTANCE, phones.toArray(phoneArray));
+                            AppContext.INSTANCE, phones.toArray(phoneArray));
 
             for (Friend request : friendList) {
                 String name = nameMap.get(request.getMobilePhone());

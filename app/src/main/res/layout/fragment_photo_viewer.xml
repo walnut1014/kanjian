@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <View
+        android:layout_width="match_parent"
+        android:layout_height="2dip"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/tv_swap_photo"
+        android:background="@color/white"/>
+
+        <TextView
+            android:id="@+id/tv_swap_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dip"
+            android:layout_marginRight="20dip"
+            android:text="交换照片"
+            android:textColor="@color/white" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dip"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_swap_photo"
+            android:background="@color/white"/>
+
+    </RelativeLayout>
+
+
+    <name.walnut.kanjian.app.views.PortraitHorizontalScrollView
+        android:id="@+id/id_horizontalScrollView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="10dip"
+        android:background="@android:color/white"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:id="@+id/id_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal" >
+        </LinearLayout>
+    </name.walnut.kanjian.app.views.PortraitHorizontalScrollView>
+</LinearLayout>

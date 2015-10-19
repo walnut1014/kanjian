@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/upload_layout"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/black">
+    <ImageView
+        android:id="@+id/iv_upload_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@null"/>
+
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:paddingTop="20dip"
+        android:paddingBottom="20dip"
+        android:paddingLeft="20dip"
+        android:paddingRight="15dip"
+        android:src="@drawable/camera_message_frame" />
+
+    <ImageView
+        android:id="@+id/btn_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/btn_back"
+        android:paddingTop="20dip"
+        android:paddingBottom="20dip"
+        android:paddingLeft="15dip"
+        android:paddingRight="20dip"
+        android:visibility="gone"
+        android:src="@drawable/camera_message_frame" />
+
+    <ImageView
+        android:id="@+id/btn_upload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:padding="20dip"
+        android:src="@drawable/camera_message_frame" />
+
+    <EditText
+        android:id="@+id/et_upload_describe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textSize="24sp"
+        android:padding="5dip"
+        android:textColor="@color/white"
+        android:background="#3f000000"
+        android:maxLength="140"
+        android:maxLines="5"
+        android:textCursorDrawable="@color/button_purple_nor"/>
+    <View
+        android:layout_width="2dip"
+        android:layout_height="24sp"
+        android:background="#4a6ede"
+        android:layout_alignTop="@+id/et_upload_describe"
+        android:layout_marginTop="9dip"
+        android:layout_alignLeft="@+id/et_upload_describe"
+        android:layout_marginLeft="1dip"/>
+
+    <TextView
+        android:id="@+id/tv_select_time_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="2dip"
+        android:text="2007.09.12  17:55"
+        android:textSize="18sp"
+        android:textColor="@color/white"/>
+</RelativeLayout>

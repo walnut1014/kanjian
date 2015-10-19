@@ -1,5 +1,6 @@
 package name.walnut.kanjian.app.resource;
 
+@Deprecated
 public enum ResourceRegister {
 
     /*-----------------------passport模块-----------------------*/

@@ -6,7 +6,7 @@ import com.android.volley.VolleyError;
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.ActionBarFragment;
 import name.walnut.kanjian.app.support.BaseResourceAction;
-import name.walnut.kanjian.app.support.KanJianApplication;
+import name.walnut.kanjian.app.support.AppContext;
 import name.walnut.kanjian.app.ui.upload.UploadFragment;
 import name.walnut.kanjian.app.ui.upload.UploadImageCache;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
@@ -22,7 +22,7 @@ public class SetSelectTimeAction extends BaseResourceAction {
 
         dismissMessage();
 
-        UploadImageCache.INSTANCE.cacheImage(KanJianApplication.INSTANCE);
+        UploadImageCache.INSTANCE.cacheImage(AppContext.INSTANCE);
 
         UploadFragment fragment = (UploadFragment) getFragment();
         if (fragment != null) {

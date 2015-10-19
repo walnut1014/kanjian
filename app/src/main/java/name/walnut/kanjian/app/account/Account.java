@@ -8,8 +8,7 @@ import android.text.TextUtils;
  * 账号信息缓存类
  */
 public enum Account {
-    INSTANCE
-    ;
+    INSTANCE;
 
     Account() {
         accountBean = new AccountBean();

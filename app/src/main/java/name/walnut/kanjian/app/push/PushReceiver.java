@@ -7,7 +7,7 @@ import com.umeng.message.PushAgent;
 import com.umeng.message.UmengMessageHandler;
 import com.umeng.message.entity.UMessage;
 
-import name.walnut.kanjian.app.support.KanJianApplication;
+import name.walnut.kanjian.app.support.AppContext;
 import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.utils.Logger;
 
@@ -35,7 +35,7 @@ public enum PushReceiver {
                 Intent intent = new Intent();
                 intent.putExtra("message", msg.custom);
                 intent.setAction(Constants.Action.PUAH_ACTION);
-                KanJianApplication.INSTANCE.sendBroadcast(intent);
+                AppContext.INSTANCE.sendBroadcast(intent);
 
                 Logger.e(msg.custom);
                 Logger.e(msg.extra.toString());

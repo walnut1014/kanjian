@@ -1,19 +1,18 @@
 
-package name.walnut.kanjian.app.ui.upload;
+package name.walnut.kanjian.app.newui.camera;
 
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.RelativeLayout;
+import android.view.ViewGroup;
 
 import java.lang.ref.WeakReference;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import name.walnut.kanjian.app.R;
-import name.walnut.kanjian.app.ui.upload.RoundProgressBar;
 /**
  * Created by GongGaohong on 15-8-19.
  * E-main Sagittarius_Ggh@126.com
@@ -38,7 +37,7 @@ public class ButtonAnimation implements View.OnTouchListener{
     private static final int BUTTON_SCALE_ACTION_DOWN = 20000;
     private static final int BUTTON_SCALE_ACTION_UP = 20001;
 
-    public ButtonAnimation(Context context,RelativeLayout view){
+    public ButtonAnimation(Context context,ViewGroup view,OnClickActionUpListener onClickActionUpListener){
         handler = new UiHandler(context);
         viewHolder = new ViewHolder();
         viewHolder.layout = view;
@@ -46,11 +45,7 @@ public class ButtonAnimation implements View.OnTouchListener{
         viewHolder.redMasking = view.findViewById(R.id.redMasking);
         viewHolder.writeCircle = (RoundProgressBar)view.findViewById(R.id.writeCircle);
         viewHolder.writeMasking = view.findViewById(R.id.writeMasking);
-    }
-
-    public ButtonAnimation(Context context,ViewHolder viewHolder){
-        handler = new UiHandler(context);
-        this.viewHolder = viewHolder;
+        this.onClickActionUpListener = onClickActionUpListener;
     }
 
     public ButtonAnimation (Context context, View view, OnClickActionUpListener onClickActionUpListener){
@@ -70,6 +65,8 @@ public class ButtonAnimation implements View.OnTouchListener{
                 switch(motionEvent.getAction()){
                     case MotionEvent.ACTION_DOWN:
                         viewHolder.blackMasking.setVisibility(View.VISIBLE);
+                        viewHolder.redMasking.setScaleX(1);
+                        viewHolder.redMasking.setScaleY(1);
                         viewHolder.redMasking.setVisibility(View.VISIBLE);
                         handler.sendEmptyMessage(UI_SCALE_ACTION_DOWN);
                         progressTimer = new Timer();
@@ -88,11 +85,12 @@ public class ButtonAnimation implements View.OnTouchListener{
                     case MotionEvent.ACTION_UP:
                         progressTimer.cancel();
                         handler.sendEmptyMessage(UI_SCALE_ACTION_UP);
+                        onClickActionUpListener.onActionUp();
                         break;
                     default:
                         break;
                 }
-                return true;
+                break;
             case R.id.camera_button_personal:
             case R.id.camera_button_photo:
             case R.id.camera_button_message:
@@ -107,10 +105,12 @@ public class ButtonAnimation implements View.OnTouchListener{
                     default:
                         break;
                 }
-                return true;
+                break;
             default:
-                return true;
+                break;
+
         }
+        return true;
     }
 
     private class UiHandler extends Handler {
@@ -174,9 +174,6 @@ public class ButtonAnimation implements View.OnTouchListener{
      *
      */
     public class ViewHolder {
-        /**
-         *
-         */
         public View layout;
         public RoundProgressBar writeCircle;
         public View writeMasking;

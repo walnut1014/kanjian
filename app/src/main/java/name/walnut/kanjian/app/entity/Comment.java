@@ -5,15 +5,15 @@ package name.walnut.kanjian.app.entity;
  */
 public class Comment {
 
-    private long id; // 评论id
-    private String content;      // 评论内容
-    private long parentId;    // 父消息ID
-    private String receiver; // 被回复人的昵称，如果没有就意味着这条回复是针对主消息的
+    private long id;            // 评论id
+    private String content;     // 评论内容
+    private long parentId;      // 父消息ID
+    private String receiver;    // 被回复人的昵称，如果没有就意味着这条回复是针对主消息的
     private long receiverId;
-    private boolean root;    // 回复消息
-    private long senderTime;         // 评论时间
-    private String sender;    // 评论作者
-    private long senderId;               // 评论作者id
+    private boolean root;       // 回复消息
+    private long senderTime;    // 评论时间
+    private String sender;      // 评论作者
+    private long senderId;      // 评论作者id
 
     public long getId() {
         return id;

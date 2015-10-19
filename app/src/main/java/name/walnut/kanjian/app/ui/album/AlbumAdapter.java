@@ -170,7 +170,7 @@ public class AlbumAdapter extends HeaderRecyclerViewAdapter<RecyclerView.ViewHol
             }
         });
 
-        viewHolder.timeTv.setText(TimeUtils.getTime(photosFlow.getSendTime()));
+        viewHolder.timeTv.setText(TimeUtils.getTimeHms(photosFlow.getSendTime()));
 
         Date date = new Date(photosFlow.getSendTime());
         Calendar calendar = Calendar.getInstance();
@@ -306,7 +306,7 @@ public class AlbumAdapter extends HeaderRecyclerViewAdapter<RecyclerView.ViewHol
         for (int i = 0; i < childCount; i++) {
             View view = commentView.getChildAt(i);
 
-            final TextView textView = (TextView) view.findViewById(R.id.comment_text);
+            final TextView textView = (TextView) view.findViewById(R.id.comment_name);
             textView.setMovementMethod(LinkMovementMethod.getInstance());
 
             final Comment comment = commentList.get(i);
@@ -330,20 +330,14 @@ public class AlbumAdapter extends HeaderRecyclerViewAdapter<RecyclerView.ViewHol
              * 评论名 点击事件
              */
             SpannableStringBuilder builder = new SpannableStringBuilder(commentStr);
-            builder.setSpan(
-                    new CommentClickableSpan(
-                            context, comment.getSenderId(), comment.getSender()),
-                    0,
-                    comment.getSender().length(),
-                    Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+            builder.setSpan(new CommentClickableSpan(context, comment.getSenderId(), comment.getSender()), 0, comment.getSender().length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
 
             if (!TextUtils.isEmpty(comment.getReceiver())) {
                 // 回复主消息
 
                 int start = comment.getSender().length() + replyStr.length();
                 builder.setSpan(
-                        new CommentClickableSpan(
-                                context, comment.getReceiverId(), comment.getReceiver()),
+                        new CommentClickableSpan(context, comment.getReceiverId(), comment.getReceiver()),
                         start,
                         start + comment.getReceiver().length(),
                         Spanned.SPAN_EXCLUSIVE_INCLUSIVE);

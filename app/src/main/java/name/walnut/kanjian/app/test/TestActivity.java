@@ -13,6 +13,8 @@ import name.walnut.kanjian.app.resource.ResourceAction;
 import name.walnut.kanjian.app.resource.ResourceRegister;
 import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.resource.impl.ResourceFactory;
+import retrofit.Call;
+import retrofit.Retrofit;
 
 public class TestActivity extends Activity {
 
@@ -30,26 +32,11 @@ public class TestActivity extends Activity {
 
         final TextView textView = (TextView)this.findViewById(R.id.test_result);
 
-/*
-        Resource  resource = ResourceFactory.INSTANCE.getResource(ResourceRegister);
+        Retrofit retrofit = new Retrofit
+                                .Builder()
+                                .baseUrl("http://192.168.1.103:8080").build();
+        Call<User> list = retrofit.create(RetrofitService.class).list();
 
-        resource.setResourceAction(new TestResourceAction() {
-            @Override
-            public void onResponse(JSONObject object) {
-                textView.setText(object.toString());
-            }
-        });
-        resource.addParam("mobilephone", "13000000001").send();
 
-        resource = ResourceFactory.INSTANCE.getResource(ResourceRegister.registerResource);
-
-        resource.setResourceAction(new TestResourceAction() {
-            @Override
-            public void onResponse(JSONObject object) {
-                textView.setText(object.toString());
-            }
-        });
-        resource.addParam("nickName", "123456")
-                .addParam("password", "sdfsdf").send();*/
     }
 }
