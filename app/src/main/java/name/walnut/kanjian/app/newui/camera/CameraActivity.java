@@ -22,6 +22,7 @@ import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.newui.main.PhotoDetailsActivity;
 import name.walnut.kanjian.app.newui.upload.UploadActivity;
 import name.walnut.kanjian.app.resource.MessageResource;
+import name.walnut.kanjian.app.resource.dto.PhotoInfo;
 import name.walnut.kanjian.app.resource.support.DefaultCallback;
 import name.walnut.kanjian.app.resource.dto.LoginParam;
 import name.walnut.kanjian.app.resource.PassportResource;
@@ -129,7 +130,11 @@ public class CameraActivity extends Activity {
 
         MessageResource messageResource = ResourceFactory.createResource(MessageResource.class);
 
-        messageResource.updatePhoto(UploadUtils.getImageRequestBody(PhotoUtils.getImage()))
+        PhotoInfo photoInfo = new PhotoInfo();
+        photoInfo.setDateTimeOriginal(123232323232L);
+        photoInfo.setDescribe("sdfdf");
+
+        messageResource.updatePhoto(UploadUtils.getImageRequestBody(PhotoUtils.getImage()), photoInfo)
                 .enqueue(new DefaultCallback<ResourceResult>() {
             @Override
             public void success(ResourceResult resourceResult) {

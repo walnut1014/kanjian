@@ -4,6 +4,7 @@ import com.squareup.okhttp.RequestBody;
 
 import java.util.List;
 
+import name.walnut.kanjian.app.resource.dto.PhotoInfo;
 import name.walnut.kanjian.app.resource.dto.PhotoMessage;
 import name.walnut.kanjian.app.resource.dto.PhotoOrUser;
 import name.walnut.kanjian.app.resource.support.ResourceResult;
@@ -15,7 +16,9 @@ import retrofit.http.Part;
 import retrofit.http.Path;
 
 /**
- * Created by walnut on 15/10/13.
+ * 消息相关的rest接口.
+ *
+ * @author walnut
  */
 public interface MessageResource {
 
@@ -27,7 +30,9 @@ public interface MessageResource {
     @Multipart
     @POST("/photo")
     Call<ResourceResult> updatePhoto(@Part("photo\"; filename=\"aa\"")
-                                     RequestBody photo);
+                                     RequestBody photo,
+                                     @Part("photoInfo")
+                                     PhotoInfo photoInfo);
 
     /**
      * 获得首页列表

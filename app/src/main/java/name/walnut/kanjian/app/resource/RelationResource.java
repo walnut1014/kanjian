@@ -5,10 +5,14 @@ import retrofit.Call;
 import retrofit.http.GET;
 
 /**
- * Created by walnut on 15/10/12.
+ * 好友关系几口
  */
 public interface RelationResource {
 
+    /**
+     * 获得关系添加未读消息数以及好友数
+     * @return
+     */
     @GET("/relation/count")
     Call<RelationCount> getRelationCount();
 }

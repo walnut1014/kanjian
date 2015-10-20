@@ -15,12 +15,19 @@ import name.walnut.kanjian.app.resource.dto.LoginParam;
 import name.walnut.kanjian.app.resource.support.Constant;
 
 /**
- * Created by walnut on 15/10/11.
+ * 登陆与注册的rest接口
+ *
+ * @author walnut
  */
 public enum PassportResource {
 
     INSTANCE;
 
+    /**
+     * 登陆
+     *
+     * @param loginParam 登陆参数
+     */
     public void login(LoginParam loginParam) {
 
         RequestBody requestBody = RequestBody
