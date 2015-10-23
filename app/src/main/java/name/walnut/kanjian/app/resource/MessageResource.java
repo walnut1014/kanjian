@@ -4,8 +4,8 @@ import com.squareup.okhttp.RequestBody;
 
 import java.util.List;
 
+import name.walnut.kanjian.app.resource.dto.PhotoAccessories;
 import name.walnut.kanjian.app.resource.dto.PhotoInfo;
-import name.walnut.kanjian.app.resource.dto.PhotoMessage;
 import name.walnut.kanjian.app.resource.dto.PhotoOrUser;
 import name.walnut.kanjian.app.resource.support.ResourceResult;
 import retrofit.Call;
@@ -29,7 +29,7 @@ public interface MessageResource {
      */
     @Multipart
     @POST("/photo")
-    Call<ResourceResult> updatePhoto(@Part("photo\"; filename=\"aa\"")
+    Call<ResourceResult> uploadPhoto(@Part("photo\"; filename=\"aa\"")
                                      RequestBody photo,
                                      @Part("photoInfo")
                                      PhotoInfo photoInfo);
@@ -46,6 +46,6 @@ public interface MessageResource {
      * @param id 照片ID
      * @return
      */
-    @GET("/photo/message/{id}")
-    Call<PhotoMessage> getPhotoMessage(@Path("id")long id);
+    @GET("/photo/{id}/accessories")
+    Call<PhotoAccessories> getPhotoMessage(@Path("id")long id);
 }

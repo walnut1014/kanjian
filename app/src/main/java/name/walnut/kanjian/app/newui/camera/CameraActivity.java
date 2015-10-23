@@ -22,14 +22,10 @@ import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.newui.main.PhotoDetailsActivity;
 import name.walnut.kanjian.app.newui.upload.UploadActivity;
 import name.walnut.kanjian.app.resource.MessageResource;
-import name.walnut.kanjian.app.resource.dto.PhotoInfo;
-import name.walnut.kanjian.app.resource.support.DefaultCallback;
-import name.walnut.kanjian.app.resource.dto.LoginParam;
 import name.walnut.kanjian.app.resource.PassportResource;
 import name.walnut.kanjian.app.resource.ResourceFactory;
-import name.walnut.kanjian.app.resource.support.ResourceResult;
-import name.walnut.kanjian.app.resource.support.UploadUtils;
-import name.walnut.kanjian.app.support.PhotoUtils;
+import name.walnut.kanjian.app.resource.dto.LoginParam;
+import name.walnut.kanjian.app.resource.dto.PhotoInfo;
 
 import static name.walnut.kanjian.app.newui.camera.ButtonAnimation.OnClickActionUpListener;
 
@@ -134,23 +130,23 @@ public class CameraActivity extends Activity {
         photoInfo.setDateTimeOriginal(123232323232L);
         photoInfo.setDescribe("sdfdf");
 
-        messageResource.updatePhoto(UploadUtils.getImageRequestBody(PhotoUtils.getImage()), photoInfo)
-                .enqueue(new DefaultCallback<ResourceResult>() {
-            @Override
-            public void success(ResourceResult resourceResult) {
-
-            }
-
-            @Override
-            public void failure(String message) {
-
-            }
-
-            @Override
-            public void error() {
-
-            }
-        });
+//        messageResource.uploadPhoto(UploadUtils.getImageRequestBody(PhotoUtils.getImage()), photoInfo)
+//                .enqueue(new DefaultCallback<ResourceResult>() {
+//            @Override
+//            public void success(ResourceResult resourceResult) {
+//
+//            }
+//
+//            @Override
+//            public void failure(String message) {
+//
+//            }
+//
+//            @Override
+//            public void error() {
+//
+//            }
+//        });
 
         /*try {
             LoginParam loginParam = new LoginParam();

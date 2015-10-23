@@ -8,13 +8,16 @@ import java.util.List;
  * 包括评论,发送者以及回复列表
  * @author walnut
  */
-public class PhotoMessage {
+public class PhotoAccessories {
     /**  照片评论*/
     private String comment;
     /** 照片发送人*/
     private User sender;
     /** 照片拍摄时间*/
     private long dateTimeOriginal;
+
+    /** 回复列表*/
+    private List<ReplayMessage> replayMessages;
 
     public String getComment() {
         return comment;
@@ -47,9 +50,6 @@ public class PhotoMessage {
     public void setReplayMessages(List<ReplayMessage> replayMessages) {
         this.replayMessages = replayMessages;
     }
-
-    /** 回复列表*/
-    private List<ReplayMessage> replayMessages;
 
 
 }
