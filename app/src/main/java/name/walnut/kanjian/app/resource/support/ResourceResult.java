@@ -6,6 +6,7 @@ package name.walnut.kanjian.app.resource.support;
 public class ResourceResult {
     private boolean success;
     private String message;
+    private Object data;
 
     public boolean isSuccess() {
         return success;
@@ -21,5 +22,13 @@ public class ResourceResult {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
     }
 }

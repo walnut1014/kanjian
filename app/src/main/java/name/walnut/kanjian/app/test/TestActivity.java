@@ -2,17 +2,9 @@ package name.walnut.kanjian.app.test;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.TextView;
 
-import org.json.JSONObject;
-
 import name.walnut.kanjian.app.R;
-import name.walnut.kanjian.app.resource.ResourceAction;
-import name.walnut.kanjian.app.resource.ResourceRegister;
-import name.walnut.kanjian.app.resource.impl.Resource;
-import name.walnut.kanjian.app.resource.impl.ResourceFactory;
 import retrofit.Call;
 import retrofit.Retrofit;
 

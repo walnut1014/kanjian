@@ -2,7 +2,6 @@ package name.walnut.kanjian.app.ui;
 
 import android.net.Uri;
 
-import name.walnut.kanjian.app.resource.impl.Resource;
 
 public class Constants {
     public static interface Action {
@@ -51,7 +50,7 @@ public class Constants {
     }
 
    //TODO 获得头像
-    public static Uri getFileUri(String path) {
-        return Uri.parse(Resource.getUrl("file/"+path));
-    }
+//    //public static Uri getFileUri(String path) {
+//        return Uri.parse(Resource.getUrl("file/"+path));
+//    }
 }
