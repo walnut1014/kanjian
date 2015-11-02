@@ -16,7 +16,6 @@
     <color name="text_purple">@color/purple</color>
     <color name="text_purple_dark">#6e648c</color>
     <color name="text_gray">@color/gray</color>
-    <color name="text_hint">@color/gray_dark</color>
 
 
     <color name="activity_background">@color/creamy_white</color>
@@ -46,6 +45,15 @@
     <color name="divide_bg">@color/gray</color>
 
     <color name="background_comment">#f2f3f4</color>
+
+    <color name="colorBlack">#000000</color>
+    <color name="colorGray">#515151</color>
+
+    <color name="main_red">#e84155</color>
+    <color name="main_blue">#4bb3df</color>
+    <color name="dark_green">#7d7c5e</color>
+    <color name="light_yellow">#fcf631</color>
+    <color name="text_hint">#999999</color>
 
 
 </resources>

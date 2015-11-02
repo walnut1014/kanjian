@@ -38,6 +38,45 @@
         android:theme="@style/AppBaseTheme" >
 
 
+        <activity android:name=".newui.login.LoginOrRegisterActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".newui.login.RegisterNumberActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="kanjian.intent.action.REGISTER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+
+        <activity android:name=".newui.login.RegisterVerifyCodeActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".newui.login.RegisterPasswordActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".newui.login.RegisterNicknameActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".newui.login.SelectPortraitActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="kanjian.intent.action.SELECT_PORTRAIT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
         <!--摄像头activity-->
         <activity android:name=".newui.camera.CameraActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
@@ -46,10 +85,6 @@
             <intent-filter>
                 <action android:name="kanjian.intent.action.UPLOAD_PIC"/>
                 <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
@@ -89,7 +124,7 @@
             </intent-filter>
         </activity>
 
-        <!-- 注册Activity -->
+<!--        &lt;!&ndash; 注册Activity &ndash;&gt;
         <activity
             android:name=".ui.register.RegisterActivity"
             android:screenOrientation="portrait" >
@@ -98,7 +133,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity>
+        </activity>-->
 
         <!-- 登录Activity -->
         <activity
@@ -313,6 +348,9 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".newui.photopage.PhotoPageActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
     </application>
 
 </manifest>

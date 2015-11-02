@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.newui.main.PhotoDetailsActivity;
+import name.walnut.kanjian.app.newui.photopage.PhotoPageActivity;
 import name.walnut.kanjian.app.newui.upload.UploadActivity;
 import name.walnut.kanjian.app.resource.MessageResource;
 import name.walnut.kanjian.app.resource.PassportResource;
@@ -49,14 +50,17 @@ public class CameraActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_camera);
+
         WindowManager wm = getWindowManager();
         Display display = wm.getDefaultDisplay();
         DisplayMetrics metrics = new DisplayMetrics();
         display.getMetrics(metrics);
         screenWidth = metrics.widthPixels;
         screenHeight = metrics.heightPixels;
+
         sView = (SurfaceView) findViewById(R.id.surfaceView);
         surfaceHolder = sView.getHolder();
+
         surfaceHolder.addCallback(new SurfaceHolder.Callback() {
             public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
             }
@@ -80,9 +84,11 @@ public class CameraActivity extends Activity {
             }
         });
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.pb_take_photo_layout);
+
         ImageView BtnCameraPersonal = (ImageView) findViewById(R.id.camera_button_personal);
         ImageView BtnCameraPhoto = (ImageView) findViewById(R.id.camera_button_photo);
         ImageView BtnCameraMessage = (ImageView) findViewById(R.id.camera_button_message);
+
         BtnCameraPersonal.setOnTouchListener(new ButtonAnimation(this, BtnCameraPersonal, new OnClickActionUpListener() {
             @Override
             public void onActionUp() {
@@ -95,6 +101,7 @@ public class CameraActivity extends Activity {
             @Override
             public void onActionUp() {
                 Log.d("CameraActivity", "action up");
+                startActivity(new Intent(CameraActivity.this, PhotoPageActivity.class));
             }
         }));
         BtnCameraMessage.setOnTouchListener(new ButtonAnimation(this, BtnCameraMessage, new OnClickActionUpListener() {
@@ -103,6 +110,7 @@ public class CameraActivity extends Activity {
                 Log.d("CameraActivity", "action up");
             }
         }));
+
         layout.setOnTouchListener(new ButtonAnimation(this, layout, new OnClickActionUpListener() {
             @Override
             public void onActionUp() {
@@ -161,11 +169,11 @@ public class CameraActivity extends Activity {
 
     private void initCamera() {
         if (!isPreview) {
-            //if(Camera.getNumberOfCameras()==2){
-            // mCamera = Camera.open(1);
-            //}else {
+            if(Camera.getNumberOfCameras()==2){
+                mCamera = Camera.open(1);
+            }else {
             mCamera = Camera.open(0);
-            //}
+            }
             mCamera.setDisplayOrientation(90);
         }
         if (mCamera != null && !isPreview) {

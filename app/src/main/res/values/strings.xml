@@ -8,10 +8,11 @@
     <string name="main_friends">好友</string>
     <string name="text_login">登录</string>
     <string name="text_register">注册</string>
+    <string name="text_back">返回</string>
     <string name="text_launch_clause">使用Whocare，就表示您同意Whocare的\n<a href="clause_use">使用条款</a>和<a href="privacy">隐私策略</a></string>
     <string name="launch_account_tip">已有Whocare账号了？</string>
     <string name="text_forgot_pasword">找回密码</string>
-    <string name="login_mobilephone_hint">请输入手机号</string>
+    <string name="login_mobilephone_hint">请输入手机号码</string>
     <string name="login_password_hint">请输入密码</string>
     <string name="text_to_register">我要注册</string>
     <string name="title_forget_password">找回密码</string>
@@ -19,12 +20,12 @@
     <string name="verifycode_edit_hint">请输入验证码</string>
     <string name="verifycode_submit">提交</string>
     <string name="verifycode_tip">我们已发送<![CDATA[<font color="#694dd0">验证码</font>]]>短信到这个手机号码</string>
-    <string name="title_verifycode">输入验证码</string>
+    <string name="title_verifycode">请输入验证码</string>
     <string name="title_fill_password">设置密码</string>
     <string name="fill_password_tip">密码为6-20位数字或英文字母</string>
     <string name="fill_password_submit">提交</string>
     <string name="fill_password_hint">请设置密码</string>
-    <string name="title_fill_nickname">填写昵称</string>
+    <string name="title_fill_nickname">请输入昵称</string>
     <string name="fill_nickname_tip">请设定头像、昵称、方便朋友认出你</string>
     <string name="fill_nickname_edit_hint">请输入昵称</string>
     <string name="fill_nickname_edit_title">昵称</string>
@@ -143,5 +144,7 @@
     <string name="message_delete_loading">正在删除...</string>
     <string name="personal_album_empty">暂无照片</string>
     <string name="forget_password_success">用户未登录</string>
+
+    <string name="update_avatar">上传头像</string>
 
 </resources>

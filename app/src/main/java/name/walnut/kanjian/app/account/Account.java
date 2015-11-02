@@ -87,8 +87,7 @@ public enum Account {
     }
 
     private void saveAccount() {
-        SharedPreferences.Editor editor =
-                context.getSharedPreferences(ACCOUNT_FILE, Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = context.getSharedPreferences(ACCOUNT_FILE, Context.MODE_PRIVATE).edit();
         editor.putLong(KEY_USER_ID, accountBean.getId())
                 .putString(KEY_NICKNAME, accountBean.getNickname())
                 .putString(KEY_AVATAR_PATH, accountBean.getHeadPhotoPath())
