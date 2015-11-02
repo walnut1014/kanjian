@@ -2,21 +2,18 @@ package name.walnut.kanjian.app.newui.photopage;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import name.walnut.kanjian.app.R;
-import name.walnut.kanjian.app.newui.camera.CameraActivity;
-import name.walnut.kanjian.app.newui.photopage.utils.DealWithPicture;
-import name.walnut.kanjian.app.newui.photopage.utils.StoragePicture;
-import name.walnut.kanjian.app.newui.photopage.view.ItemPhoto;
-import name.walnut.kanjian.app.newui.photopage.view.PullLayout;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.newui.camera.CameraActivity;
+import name.walnut.kanjian.app.newui.photopage.view.ItemPhoto;
+import name.walnut.kanjian.app.newui.photopage.view.PullLayout;
 
 public class PhotoPageActivity extends Activity{
     List<Integer> photoList;
@@ -28,14 +25,16 @@ public class PhotoPageActivity extends Activity{
 
         photoList = new ArrayList<>();
         addList();
+
         PullLayout pullLayout = (PullLayout) findViewById(R.id.pull_layout);
+
         pullLayout.setPhotoOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ItemPhoto itemPhoto = (ItemPhoto) v;
                 Log.e("Activity","index"+itemPhoto.getIndexOfPhoto());
                 switch (itemPhoto.getIndexOfPhoto()) {
-                    case -1:
+                    case -1://左上角返回键
                         finish();
                         break;
                     case -2:
@@ -47,7 +46,7 @@ public class PhotoPageActivity extends Activity{
                 }
             }
         });
-        pullLayout.setOnPhotoAdapter(new PullLayout.OnPhotoAdapter() {
+        /*pullLayout.setOnPhotoAdapter(new PullLayout.OnPhotoAdapter() {
             @Override
             public int onLoadCount() {
                 return StoragePicture.getFileList(PhotoPageActivity.this).length;
@@ -82,7 +81,7 @@ public class PhotoPageActivity extends Activity{
                 addList();
                 return true;
             }
-        });
+        });*/
     }
 
     private void addList(){

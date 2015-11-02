@@ -1,10 +1,9 @@
 package name.walnut.kanjian.app.ui.register;
 
-import name.walnut.kanjian.app.R;
-import name.walnut.kanjian.app.account.Account;
-import name.walnut.kanjian.app.account.AccountBean;
-import name.walnut.kanjian.app.support.ActionBarActivity;
 import android.os.Bundle;
+
+import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.support.ActionBarActivity;
 
 public class RegisterActivity extends ActionBarActivity {
 

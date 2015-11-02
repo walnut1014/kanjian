@@ -1,7 +1,6 @@
 package name.walnut.kanjian.app.newui.photopage.view;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
@@ -89,14 +88,18 @@ public class ListLayout extends RelativeLayout implements View.OnTouchListener {
 
     private void initView(Context context) {
         this.context = context;
+
         handler = new UiHandler(context);
         setOnTouchListener(this);
+
         downHeader = View.inflate(context, R.layout.pull_header, null);
         addView(downHeader);
         upHeader = View.inflate(context, R.layout.pull_header, null);
         addView(upHeader);
+
         tempView = new ListItem(context);
         listGroup = new LinearLayout(context);
+
         listGroup.setOrientation(LinearLayout.VERTICAL);
         addView(listGroup);
         touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
@@ -171,10 +174,12 @@ public class ListLayout extends RelativeLayout implements View.OnTouchListener {
             numOfPages = 1;
             indexOfPage = 0;
         }
+
         for(int i = indexStartRow; i <= indexEndRow; i++){
             ListItem listItem = (ListItem) listGroup.getChildAt(indexEndRow - i);
             getItem(listItem);
         }
+
     }
 
     private void getItem(ListItem listItem){
@@ -236,7 +241,9 @@ public class ListLayout extends RelativeLayout implements View.OnTouchListener {
     public boolean onTouch(View v, MotionEvent event) {
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
-                yMove = yDown = event.getRawY();
+                Log.i(TAG, "ACTION_DOWN");
+                yDown = event.getRawY();
+                yMove = listLayout.topMargin+yDown;
                 indexStartRowPage = indexEndRow;
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -245,21 +252,25 @@ public class ListLayout extends RelativeLayout implements View.OnTouchListener {
                 yMove = rawY;
                 distance = yMove - yDown;
                 moveItem(offset, (int) distance);
+                Log.i(TAG, "ACTION_MOVE:"+"moveItem="+offset+",distance="+distance);
                 break;
             case MotionEvent.ACTION_UP:
                 if(state == PULL_DOWN_TO_REFRESH){
+                    Log.i(TAG, "PULL_DOWN_TO_REFRESH");
                     if(distance > headerHeight){
                         handler.sendMessage(handler.obtainMessage(PULL_DOWN_BACK_REFRESHING, 0, (int) distance));
                     }else{
                         handler.sendMessage(handler.obtainMessage(PULL_DOWN_BACK_REFRESHED, 0, (int) distance));
                     }
                 }else if(state == PULL_UP_TO_LOAD){
+                    Log.i(TAG, "PULL_UP_TO_LOAD");
                     if(distance < - headerHeight - 7 * photoHeight + layoutHeight){
                         handler.sendMessage(handler.obtainMessage(PULL_UP_BACK_LOADING, 0, (int) distance));
                     }else{
                         handler.sendMessage(handler.obtainMessage(PULL_UP_BACK_LOADED,0, (int) distance));
                     }
                 }else if(state == PULL_LIST_TO_CHANGE){
+                    Log.i(TAG, "PULL_LIST_TO_CHANGE");
                     if(distance > 2 * photoHeight){
                         indexStartRowPage = indexStartRowPage + 6;
                         handler.sendMessage(handler.obtainMessage(PULL_CHANGE_PAGE, 0, indexStartRowPage));
@@ -296,11 +307,13 @@ public class ListLayout extends RelativeLayout implements View.OnTouchListener {
 
     private void moveItem(int offset,int distance) {
         int childCount = listGroup.getChildCount();
+
         listLayout.topMargin = listLayout.topMargin + offset;
         if(distance < 0 && indexStartRow <= 0){
             moveToLoad(distance);
             state = PULL_UP_TO_LOAD;
-        }else if(offset < 0 && listLayout.topMargin < -photoHeight){
+
+        }else if(offset < 0 && listLayout.topMargin < - photoHeight){
             tempView = (ListItem) listGroup.getChildAt(0);
             listGroup.removeView(tempView);
             listLayout.topMargin = listLayout.topMargin + photoHeight;

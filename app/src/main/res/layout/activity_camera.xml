@@ -56,14 +56,24 @@
 
     </RelativeLayout>
 
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dip"
+        android:text="WhoCare"
+        android:textColor="@color/white"
+        android:textSize="45sp"
+        android:textStyle="bold"/>
+<!--
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dip"
-        android:src="@drawable/camera_logo" />
+        android:src="@drawable/camera_logo" />-->
 
     <ImageView
         android:id="@+id/camera_button_personal"

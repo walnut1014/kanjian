@@ -15,7 +15,7 @@ import name.walnut.kanjian.app.R;
 public class ListItem extends LinearLayout {
 
     private int indexOfRow;
-
+    private int numberOfWidth = 4;
     public ListItem(Context context) {
         super(context);
         initView(context);
@@ -28,9 +28,10 @@ public class ListItem extends LinearLayout {
 
     private void initView(Context context) {
         setOrientation(HORIZONTAL);
-        LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getWindowWidth() / 4);
+
+        LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getWindowWidth() / numberOfWidth);
         setLayoutParams(layoutParams);
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < numberOfWidth; i++){
             ItemPhoto image = new ItemPhoto(context);
             LayoutParams layout = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
             layout.weight = 1;
@@ -41,9 +42,9 @@ public class ListItem extends LinearLayout {
 
     public void setIndexOfRow(int indexOfRow){
         this.indexOfRow = indexOfRow;
-        for(int i = 0; i < 4 ; i ++){
-            ItemPhoto child = (ItemPhoto) getChildAt(3 - i);
-            child.setIndexOfPhoto(indexOfRow * 4 + i);
+        for(int i = 0; i < numberOfWidth ; i ++){
+            ItemPhoto child = (ItemPhoto) getChildAt(numberOfWidth -1 -i);
+            child.setIndexOfPhoto(indexOfRow * numberOfWidth + i);
             child.getPhoto().setImageDrawable(null);
             child.getNameView().setText("");
             if(indexOfRow % 2 == 0) {
@@ -63,13 +64,13 @@ public class ListItem extends LinearLayout {
     }
 
     public void setPhotoOnTouchListener(OnTouchListener onTouchListener){
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < numberOfWidth; i++){
             getItemPhoto(i).setPhotoOnTouchListener(onTouchListener);
         }
     }
 
     public void setPhotoOnClickListener(OnClickListener onClickListener){
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < numberOfWidth; i++){
             getItemPhoto(i).setPhotoOnClickListener(onClickListener);
         }
     }
@@ -79,7 +80,7 @@ public class ListItem extends LinearLayout {
     }
 
     public ItemPhoto getItemPhoto(int index){
-        if(index < 4 && index > -1){
+        if(index < numberOfWidth && index > -1){
             return (ItemPhoto) getChildAt(index);
         }else
             return null;

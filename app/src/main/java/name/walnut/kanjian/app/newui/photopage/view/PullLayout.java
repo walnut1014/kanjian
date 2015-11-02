@@ -34,8 +34,11 @@ public class PullLayout extends LinearLayout implements ListLayout.OnListAdapter
 
     private void initView(final Context context) {
         setOrientation(VERTICAL);
+
         titleItem = new ListItem(context);
         titleItem.setIndexOfRow(1);
+
+
         addView(titleItem);
         ItemPhoto back = titleItem.getItemPhoto(0);
         back.getPhoto().setBackgroundResource(R.mipmap.bt_back_home);
@@ -43,6 +46,7 @@ public class PullLayout extends LinearLayout implements ListLayout.OnListAdapter
         ItemPhoto msgNum = titleItem.getItemPhoto(1);
         msgNum.getPhoto().setBackgroundResource(R.mipmap.msg_num_more);
         msgNum.setIndexOfPhoto(-2);
+
         listLayout = new ListLayout(context);
         LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         listLayout.setLayoutParams(layoutParams);
