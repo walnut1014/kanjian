@@ -1,4 +1,4 @@
-package name.walnut.kanjian.app.newui.login;
+package name.walnut.kanjian.app.newui.passport;
 
 import android.app.Activity;
 import android.graphics.ImageFormat;

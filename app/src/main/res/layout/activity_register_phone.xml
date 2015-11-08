@@ -6,7 +6,7 @@
     android:background="@color/light_yellow"
     android:id="@+id/register_container">
     <EditText
-        android:id="@+id/et_phonenumber"
+        android:id="@+id/edt_register_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/login_mobilephone_hint"
@@ -29,7 +29,8 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         android:text="@string/fill_nickname_submit"
-        android:background="@color/main_blue" />
+        android:background="@color/main_blue"
+        android:onClick="onClickNext"/>
 
     <Button
         android:id="@+id/btn_back"
@@ -41,5 +42,7 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         android:text="@string/text_back"
-        android:background="@color/dark_green" />
+        android:background="@color/dark_green"
+        android:onClick="onClickBack"/>
 </LinearLayout>
+

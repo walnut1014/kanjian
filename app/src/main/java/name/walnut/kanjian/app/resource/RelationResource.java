@@ -9,7 +9,8 @@ import retrofit.http.POST;
 import retrofit.http.Path;
 
 /**
- * 好友关系几口
+ * 好友关系接口
+ * @author walnut
  */
 public interface RelationResource {
 

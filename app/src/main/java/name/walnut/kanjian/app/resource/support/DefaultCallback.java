@@ -38,6 +38,6 @@ public abstract class DefaultCallback<T extends ResourceResult> implements Callb
 
     public abstract void failure(String message);
 
-    public abstract void error();
+    public void error() {}
 
 }
