@@ -43,6 +43,7 @@ public class RegisterVerifyCodeActivity extends Activity{
 
     @Override
     public void onBackPressed() {
+        vm.stopTimer();
         this.startActivity(new Intent(this, RegisterPhoneActivity.class));
     }
 
@@ -64,6 +65,7 @@ public class RegisterVerifyCodeActivity extends Activity{
                 .enqueue(new DefaultCallback<ResourceResult>() {
                     @Override
                     public void success(ResourceResult resourceResult) {
+                        vm.stopTimer();
                         startActivity(new Intent(RegisterVerifyCodeActivity.this,
                                 RegisterPasswordActivity.class));
                     }
@@ -85,12 +87,6 @@ public class RegisterVerifyCodeActivity extends Activity{
             return;
 
         vm.startTimer();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        vm.stopTimer();
     }
 
     /**
