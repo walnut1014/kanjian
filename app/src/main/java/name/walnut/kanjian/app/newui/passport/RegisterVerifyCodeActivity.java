@@ -59,7 +59,15 @@ public class RegisterVerifyCodeActivity extends Activity{
      */
     public void btnSubmitClick(View view) {
 
-        ResourceFactory.createResource(VerificationResource.class)
+        if("".equals(codeText.getText().toString())) {
+            ActivityUtils.showError(this, "请填写验证码");
+            return;
+        }
+
+        vm.stopTimer();
+        startActivity(new Intent(RegisterVerifyCodeActivity.this,
+                RegisterPasswordActivity.class));
+       /* ResourceFactory.createResource(VerificationResource.class)
                 .smsCodeValidation(getIntent().getExtras().getString("phone"), "86",
                         codeText.getText().toString())
                 .enqueue(new DefaultCallback<ResourceResult>() {
@@ -74,7 +82,7 @@ public class RegisterVerifyCodeActivity extends Activity{
                     public void failure(String message) {
                         ActivityUtils.showError(RegisterVerifyCodeActivity.this, message);
                     }
-                });
+                });*/
     }
 
     /**

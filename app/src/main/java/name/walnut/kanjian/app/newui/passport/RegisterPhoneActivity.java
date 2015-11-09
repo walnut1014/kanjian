@@ -50,12 +50,11 @@ public class RegisterPhoneActivity extends Activity{
             return;
         }
 
-        SMSController.getChinaVerificationCode(phone);
+        //SMSController.getChinaVerificationCode(phone); //发送短信
+
         startActivity(new Intent(RegisterPhoneActivity.this,
                 RegisterVerifyCodeActivity.class).putExtra("phone", phone));
     }
-
-
 
     private EditText phoneText;
 

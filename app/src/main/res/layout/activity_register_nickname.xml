@@ -37,7 +37,6 @@
         android:hint="@string/title_fill_nickname"
         android:maxLength="11"
         android:padding="20dip"
-        android:password="true"
         android:textColor="@color/white"
         android:textColorHint="@color/text_hint"
         android:textSize="40sp"

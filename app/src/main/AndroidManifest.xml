@@ -51,7 +51,8 @@
         <activity
             android:name=".newui.passport.RegisterPhoneActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:launchMode="singleTask">
         </activity>
 
         <activity

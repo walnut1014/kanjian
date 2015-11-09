@@ -36,7 +36,8 @@ public class RegisterNicknameActivity  extends Activity implements View.OnClickL
         switch(view.getId())
         {
             case R.id.btn_sel_portrait:
-                Intent _intentSelectPortrait = new Intent(RegisterNicknameActivity.this,SelectPortraitActivity.class);
+                Intent _intentSelectPortrait = new Intent(RegisterNicknameActivity.this,
+                                    SelectPortraitActivity.class);
                 startActivity(_intentSelectPortrait);
                 break;
             case R.id.btn_submit:

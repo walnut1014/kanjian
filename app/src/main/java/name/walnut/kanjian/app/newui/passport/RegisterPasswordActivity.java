@@ -9,43 +9,40 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import name.walnut.kanjian.app.R;
+import name.walnut.kanjian.app.utils.ActivityUtils;
 
 /**
  * Created by linxunjian on 15/10/31.
  */
-public class RegisterPasswordActivity extends Activity implements View.OnClickListener{
+public class RegisterPasswordActivity extends Activity {
 
-    private Button mBtnSubmit;
     private EditText mEtPassword;
 
-    public void onCreate(final Bundle savedInstanceState)
-    {
+    public void onCreate(final Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_password);
 
-        mBtnSubmit = (Button)findViewById(R.id.btn_password_submit);
-        mBtnSubmit.setOnClickListener(this);
         mEtPassword = (EditText)findViewById(R.id.et_password);
+    }
 
+    /**
+     * 单击提交按钮方法
+     * @param view
+     */
+    public void btnSubmitClick(View view) {
+
+        final String password = mEtPassword.getText().toString();
+        if("".equals(password)) {
+            ActivityUtils.showError(this, "请输入密码");
+        }else {
+            startActivity(new Intent(this, RegisterNicknameActivity.class)
+                            .putExtra("password", password));
+        }
     }
 
     @Override
-    public void onClick(View view) {
-        switch(view.getId())
-        {
-            case R.id.btn_password_submit:
-                if("".equals(mEtPassword.getText().toString()))
-                {
-                    Toast.makeText(RegisterPasswordActivity.this, "请输入密码", Toast.LENGTH_SHORT).show();
-                }else
-                {
-                    Intent _intentRegisterNickName = new Intent(RegisterPasswordActivity.this,RegisterNicknameActivity.class);
-                    startActivity(_intentRegisterNickName);
-                }
-                break;
-            default:
-                break;
-        }
-
+    public void onBackPressed() {
+        startActivity(new Intent(this, RegisterPhoneActivity.class));
     }
 }
