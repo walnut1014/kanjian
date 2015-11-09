@@ -146,5 +146,6 @@
     <string name="forget_password_success">用户未登录</string>
 
     <string name="update_avatar">上传头像</string>
+    <string name="text_forget_password">忘记密码</string>
 
 </resources>

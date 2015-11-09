@@ -32,7 +32,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
-        android:name=".support.KanJianApplication"
+        android:name=".support.AppContext"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:theme="@style/AppBaseTheme" >
@@ -77,6 +77,10 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".newui.login.LoginActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait"/>
         <!--摄像头activity-->
         <activity android:name=".newui.camera.CameraActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
@@ -102,10 +106,10 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
 
-<!--            <intent-filter>
+            <intent-filter>
                 <action android:name="kanjian.intent.action.LAUNCH"/>
                 <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>-->
+            </intent-filter>
              <!--<intent-filter>-->
                  <!--<action android:name="android.intent.action.MAIN" />-->
                  <!--<category android:name="android.intent.category.LAUNCHER" />-->

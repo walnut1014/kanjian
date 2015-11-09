@@ -14,7 +14,7 @@ import java.util.Map;
 
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.BaseResourceAction;
-import name.walnut.kanjian.app.support.KanJianApplication;
+import name.walnut.kanjian.app.support.AppContext;
 import name.walnut.kanjian.app.ui.my.relation.request.FriendRequest;
 import name.walnut.kanjian.app.ui.my.relation.request.FriendRequestFragment;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
@@ -34,7 +34,7 @@ public class RelationListAction extends BaseResourceAction {
             JSONArray array = new JSONArray(response.getData());
             for (int i = 0; i < array.length(); i++) {
                 JSONObject jsonObject = array.getJSONObject(i);
-                String phone = jsonObject.getString("mobilephone");
+                String phone = jsonObject.getString("phone");
 
                 FriendRequest request = new FriendRequest();
                 request.setId(jsonObject.getLong("id"));
@@ -42,7 +42,7 @@ public class RelationListAction extends BaseResourceAction {
                 request.setMobilePhone(phone);
                 request.setNickName(jsonObject.optString("nickName"));
                 request.setAgree(jsonObject.getBoolean("agree"));
-                request.setInvited(jsonObject.getBoolean("invited"));
+                request.setInvited(jsonObject.getBoolean("asTarget"));
 
                 requestList.add(request);
                 phones.add(phone);
@@ -52,7 +52,7 @@ public class RelationListAction extends BaseResourceAction {
         }
         if (phones.size() > 0) {
             String[] phoneArray = new String[phones.size()];
-            Map<String, String> nameMap = ContactsUtils.getContactsByPhone(KanJianApplication.INSTANCE,
+            Map<String, String> nameMap = ContactsUtils.getContactsByPhone(AppContext.INSTANCE,
                     phones.toArray(phoneArray));
 
             for (FriendRequest request : requestList) {

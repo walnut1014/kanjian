@@ -4,7 +4,7 @@ import com.android.volley.VolleyError;
 
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.BaseResourceAction;
-import name.walnut.kanjian.app.support.KanJianApplication;
+import name.walnut.kanjian.app.support.AppContext;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
 import name.walnut.kanjian.app.utils.Logger;
 
@@ -17,7 +17,7 @@ public class AuthAvailableAction extends BaseResourceAction{
         Logger.e(response.getData());
         boolean available = Boolean.parseBoolean(response.getData());
         if (!available) {
-            KanJianApplication.restart();
+            AppContext.restart();
         }
     }
 

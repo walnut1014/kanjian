@@ -67,7 +67,7 @@ public class SearchResultFragment extends ActionBarFragment{
         String query = getArguments().getString(QUERY);
 
         // 搜索好友
-        queryUserResource.addParam("mobilephone", query)
+        queryUserResource.addParam("phone", query)
                 .send();
     }
 

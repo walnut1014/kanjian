@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -22,7 +21,7 @@ import name.walnut.kanjian.app.account.Account;
 import name.walnut.kanjian.app.resource.impl.Resource;
 import name.walnut.kanjian.app.resource.impl.ResourceWeave;
 import name.walnut.kanjian.app.support.ActionBarFragment;
-import name.walnut.kanjian.app.support.KanJianApplication;
+import name.walnut.kanjian.app.support.AppContext;
 import name.walnut.kanjian.app.ui.Constants;
 import name.walnut.kanjian.app.ui.common.SelectPicDialogFragment;
 import name.walnut.kanjian.app.ui.my.setting.action.LogoutAction;
@@ -114,7 +113,7 @@ public class SettingFragment extends ActionBarFragment {
             public void onLogout() {
                 exitResource.send();
 
-                KanJianApplication.restart();
+                AppContext.restart();
             }
         });
     }

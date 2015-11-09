@@ -116,7 +116,7 @@ public class LoginFragment extends ActionBarFragment implements Constants.Action
                 Logger.e("设备还未注册");
             }
             //发送登陆请求
-            loginResource.addParam("mobilephone", phone)
+            loginResource.addParam("phone", phone)
                     .addParam("password", password)
                     .addParam("deviceToken", deviceToken)
                     .send();

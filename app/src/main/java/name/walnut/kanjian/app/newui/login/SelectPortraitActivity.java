@@ -117,10 +117,6 @@ public class SelectPortraitActivity extends Activity {
         @Override
         public void onAutoFocus(boolean success, Camera camera) {
             if (success) {
-                // takePicture()方法需要传入3个监听器参数
-                // 第1个监听器：当用户按下快门时激发该监听器
-                // 第2个监听器：当相机获取原始照片时激发该监听器
-                // 第3个监听器：当相机获取JPG照片时激发该监听器
 
                 camera.takePicture(new Camera.ShutterCallback() {
                     public void onShutter() {

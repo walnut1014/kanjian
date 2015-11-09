@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/main_blue">
+    android:background="@color/light_yellow">
 
 
     <RelativeLayout
 
         android:id="@+id/rl_photo_portrait"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_take_photo"
+        android:layout_centerInParent="true">
 
         <SurfaceView
             android:id="@+id/sf_photo_portrait"
@@ -22,7 +24,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/portrait_frame"/>
+            android:src="@drawable/portrait_frame"
+            android:layout_centerInParent="true"/>
 
     </RelativeLayout>
 
@@ -31,6 +34,7 @@
         android:id="@+id/btn_take_photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_select_pic_local"
         android:background="@color/main_red"
         android:gravity="center"
         android:padding="20dip"
@@ -43,7 +47,8 @@
         android:id="@+id/btn_select_pic_local"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/light_yellow"
+        android:layout_above="@+id/btn_back"
+        android:background="@color/main_blue"
         android:gravity="center"
         android:padding="20dip"
         android:text="@string/select_pic_local"
@@ -54,11 +59,12 @@
         android:id="@+id/btn_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#61737a"
+        android:layout_alignParentBottom="true"
+        android:background="@color/light_yellow"
         android:gravity="center"
         android:padding="20dip"
         android:text="@string/text_back"
         android:textColor="@color/white"
         android:textSize="40sp"
         android:textStyle="bold" />
-</LinearLayout>
+</RelativeLayout>

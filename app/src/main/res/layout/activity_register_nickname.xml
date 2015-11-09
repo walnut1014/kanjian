@@ -6,6 +6,20 @@
     android:background="@color/light_yellow"
     android:orientation="vertical">
 
+    <EditText
+        android:id="@+id/et_nickname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_red"
+        android:gravity="center"
+        android:hint="@string/title_fill_nickname"
+        android:padding="20dip"
+        android:textColor="@color/white"
+        android:textColorHint="@color/text_hint"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -14,7 +28,7 @@
             android:id="@+id/btn_sel_portrait"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/main_blue"
+            android:background="@color/light_yellow"
             android:gravity="center"
             android:padding="20dip"
             android:text="@string/update_avatar"
@@ -28,20 +42,6 @@
             android:visibility="invisible" />
     </RelativeLayout>
 
-    <EditText
-        android:id="@+id/et_nickname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/main_red"
-        android:gravity="center"
-        android:hint="@string/title_fill_nickname"
-        android:maxLength="11"
-        android:padding="20dip"
-        android:password="true"
-        android:textColor="@color/white"
-        android:textColorHint="@color/text_hint"
-        android:textSize="40sp"
-        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btn_submit"
@@ -59,7 +59,7 @@
         android:id="@+id/btn_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#d3d2b6"
+        android:background="@color/dark_yellow"
         android:gravity="center"
         android:padding="20dip"
         android:text="@string/text_back"

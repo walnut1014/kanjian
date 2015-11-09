@@ -1,6 +1,7 @@
 package name.walnut.kanjian.app.support;
 
 import android.app.Application;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.Environment;
 
@@ -12,7 +13,7 @@ import name.walnut.kanjian.app.push.PushReceiver;
 import name.walnut.kanjian.app.support.rest.RequestQueueContext;
 import name.walnut.kanjian.app.ui.Constants;
 
-public class KanJianApplication extends Application {
+public class AppContext extends Application {
 
 	@Override
 	public void onCreate() {
@@ -40,6 +41,14 @@ public class KanJianApplication extends Application {
         // 图片加载
         FrescoContext.INSTANCE.init(this);
 
+    }
+
+    /**
+     * 调用application的getContentResolver
+     * @return
+     */
+    public static ContentResolver getAppContentResolver() {
+        return INSTANCE.getContentResolver();
     }
 
 	public static Application INSTANCE;

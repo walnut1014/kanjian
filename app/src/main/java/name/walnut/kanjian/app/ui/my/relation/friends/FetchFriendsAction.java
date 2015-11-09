@@ -14,7 +14,6 @@ import java.util.List;
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.support.BaseResourceAction;
 import name.walnut.kanjian.app.ui.util.ToastUtils;
-import name.walnut.kanjian.app.utils.Logger;
 
 /**
  * 获取好友列表action
@@ -32,7 +31,7 @@ public class FetchFriendsAction extends BaseResourceAction {
                 if(!jsonObject.isNull("headPhotoPath"))
                     friend.setAvatar(jsonObject.getString("headPhotoPath"));
                 friend.setPhotoCount(jsonObject.getInt("photoCount"));
-                friend.setMobilePhone(jsonObject.getString("mobilephone"));
+                friend.setPhone(jsonObject.getString("phone"));
                 friend.setNickName(jsonObject.optString("nickName"));
                 friend.setUserId(jsonObject.getLong("userId"));
 

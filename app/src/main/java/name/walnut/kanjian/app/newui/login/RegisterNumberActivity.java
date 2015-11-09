@@ -35,16 +35,13 @@ public class RegisterNumberActivity extends Activity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        switch (view.getId())
-        {
+        switch (view.getId()) {
             case R.id.btn_next_step:
-                if("".equals(mEtPhoneNumber.getText().toString()))
-                {
+                if("".equals(mEtPhoneNumber.getText().toString())) {
                     Toast.makeText(RegisterNumberActivity.this,"请输入手机号码",Toast.LENGTH_SHORT).show();
                 }else if(!isMobileNumber(mEtPhoneNumber.getText().toString())){
                     Toast.makeText(RegisterNumberActivity.this,"请输入正确的手机号码",Toast.LENGTH_SHORT).show();
-                }else if(false)
-                {
+                }else if(false) {
                     //和服务器通讯,如果号码已经注册,则跳到登录页面.
                 }
                 else{

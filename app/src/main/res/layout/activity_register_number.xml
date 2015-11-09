@@ -41,5 +41,5 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         android:text="@string/text_back"
-        android:background="@color/dark_green" />
+        android:background="@color/dark_yellow" />
 </LinearLayout>

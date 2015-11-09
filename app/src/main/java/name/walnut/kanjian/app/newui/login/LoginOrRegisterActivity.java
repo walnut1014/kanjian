@@ -36,6 +36,8 @@ public class LoginOrRegisterActivity extends Activity implements View.OnClickLis
                 startActivity(_intent_register);
                 break;
             case R.id.btn_login:
+                Intent _intent_login = new Intent(LoginOrRegisterActivity.this,LoginActivity.class);
+                startActivity(_intent_login);
                 break;
             default:
                 break;

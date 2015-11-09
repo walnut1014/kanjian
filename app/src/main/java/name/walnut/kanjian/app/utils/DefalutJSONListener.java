@@ -1,6 +1,6 @@
 package name.walnut.kanjian.app.utils;
 
-import name.walnut.kanjian.app.support.KanJianApplication;
+import name.walnut.kanjian.app.support.AppContext;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,7 +37,7 @@ public abstract class DefalutJSONListener implements Listener<JSONObject> {
     public abstract void onSuccess(JSONObject data);
 
     public void onFailed(String errorMsg) {
-        Toast toast = Toast.makeText(KanJianApplication.INSTANCE,
+        Toast toast = Toast.makeText(AppContext.INSTANCE,
                 errorMsg, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();

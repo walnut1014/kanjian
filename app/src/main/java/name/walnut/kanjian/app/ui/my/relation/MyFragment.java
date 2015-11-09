@@ -124,7 +124,7 @@ public class MyFragment extends ActionBarFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            case ACTIVITY_REQUEST_FRIENDS:
+            case ACTIVITY_REQUEST_FRIENDS_REQUEST:
                 fetchRelationCount();
                 break;
             case ACTIVITY_REQUEST_SETTING:
@@ -166,8 +166,10 @@ public class MyFragment extends ActionBarFragment {
     }
 
     private void showUnreadCount(int unreadCount) {
-        if(unreadCount!=0)
+        if(unreadCount != 0)
             friendRequestView.setExtra(unreadCount+"");
+        else
+            friendRequestView.setExtra("");
         friendRequestView.showDot(unreadCount > 0);
     }
 

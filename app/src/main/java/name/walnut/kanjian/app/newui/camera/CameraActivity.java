@@ -22,6 +22,11 @@ import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.newui.main.PhotoDetailsActivity;
 import name.walnut.kanjian.app.newui.photopage.PhotoPageActivity;
 import name.walnut.kanjian.app.newui.upload.UploadActivity;
+import name.walnut.kanjian.app.resource.MessageResource;
+import name.walnut.kanjian.app.resource.PassportResource;
+import name.walnut.kanjian.app.resource.ResourceFactory;
+import name.walnut.kanjian.app.resource.dto.LoginParam;
+import name.walnut.kanjian.app.resource.dto.PhotoInfo;
 
 import static name.walnut.kanjian.app.newui.camera.ButtonAnimation.OnClickActionUpListener;
 
@@ -114,6 +119,51 @@ public class CameraActivity extends Activity {
 
             }
         }));
+
+        //TODO 模拟登陆
+        mockLogin();
+    }
+
+    private void mockLogin() {
+        LoginParam loginParam = new LoginParam();
+        loginParam.setPhone("13000000001");
+        loginParam.setPassword("123456");
+        loginParam.setDeviceToken("sdfdsfdsf");
+
+        PassportResource.INSTANCE.login(loginParam);
+
+        MessageResource messageResource = ResourceFactory.createResource(MessageResource.class);
+
+        PhotoInfo photoInfo = new PhotoInfo();
+        photoInfo.setDateTimeOriginal(123232323232L);
+        photoInfo.setDescribe("sdfdf");
+
+//        messageResource.uploadPhoto(UploadUtils.getImageRequestBody(PhotoUtils.getImage()), photoInfo)
+//                .enqueue(new DefaultCallback<ResourceResult>() {
+//            @Override
+//            public void success(ResourceResult resourceResult) {
+//
+//            }
+//
+//            @Override
+//            public void failure(String message) {
+//
+//            }
+//
+//            @Override
+//            public void error() {
+//
+//            }
+//        });
+
+        /*try {
+            LoginParam loginParam = new LoginParam();
+            loginParam.setPhone("13000000001");
+            loginParam.setPassword("123456");
+           // resource.login(loginParam).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
     }
 
 

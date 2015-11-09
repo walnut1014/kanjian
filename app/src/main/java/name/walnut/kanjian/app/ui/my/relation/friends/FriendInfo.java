@@ -5,7 +5,7 @@ package name.walnut.kanjian.app.ui.my.relation.friends;
  */
 public class FriendInfo {
 
-    private String mobilePhone; // 注册手机号
+    private String phone; // 注册手机号
     private long userId;    // 用户id
     private int photoCount; // 图片数
     private String nickName;    // 昵称
@@ -13,12 +13,12 @@ public class FriendInfo {
 
     public FriendInfo() {}
 
-    public String getMobilePhone() {
-        return mobilePhone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setMobilePhone(String mobilePhone) {
-        this.mobilePhone = mobilePhone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public long getUserId() {

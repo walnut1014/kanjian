@@ -10,6 +10,7 @@ import name.walnut.kanjian.app.resource.impl.Resource;
  * Resource处理类接口
  * @author walnut
  */
+@Deprecated
 public interface ResourceAction {
 
     void onResponse(JSONObject object);

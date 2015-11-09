@@ -69,7 +69,7 @@ public class Friend {
 
     /**
      * 根据状态码设置好友关系
-     * @param relationCode NO_RELATION(0), WAIT_VERIFY(1), ACCEPT(2), AGREE(3), 其他值按 NO_RELATION 处理
+     * @param relationCode SELF(-1), NO_RELATION(0), WAIT_VERIFY(1), ACCEPT(2), AGREE(3)
      */
     public void setRelation(int relationCode) {
         RelationStatus[] relationShips = RelationStatus.values();

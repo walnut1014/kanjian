@@ -1,5 +1,6 @@
 package name.walnut.kanjian.app.resource;
 
+@Deprecated
 public enum ResourceRegister {
 
     /*-----------------------passport模块-----------------------*/
@@ -23,14 +24,14 @@ public enum ResourceRegister {
      */
     relationListResource("relation/list", RequestMethod.GET), //获得所有添加好友请求,包括已同意，未同意和待验证
     //邀请好友(long id)
-    invitFriendResource("relation/invit", RequestMethod.POST),
+    invitFriendResource("relation/invite", RequestMethod.POST),
     //同意他人的邀请(long id)
-    agreeInvitResource("relation/agreeInvit", RequestMethod.POST),
+    agreeInvitResource("relation/agreeInvite", RequestMethod.POST),
     friendsResource("relation/friends", RequestMethod.GET),//获得所有的好友
 
     /*-----------------------公共模块-----------------------*/
     //通过手机号查询用户（String mobilePhone）
-    //查询多手机号(String mobilephones：'13000000000,13000000001,13000000002')
+    //查询多手机号(String phones：'13000000000,13000000001,13000000002')
     queryUserResource("user", RequestMethod.GET),
     smsValidateResource("smsvalidate", RequestMethod.POST), //验证验证码
     isLoginResource("passport/isLogin", RequestMethod.GET), //是否登陆

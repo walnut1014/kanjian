@@ -42,7 +42,7 @@ public abstract class BaseResourceAction extends DefaultResourceAction {
     }
 
     private void onAuthUnAvailable() {
-        KanJianApplication.restart();
+        AppContext.restart();
     }
 
     public abstract void onSuccess(Response response);
