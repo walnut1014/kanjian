@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="vm"
+            type="name.walnut.kanjian.app.newui.passport.RegisterVerifyCodeActivity.VM"/>
+    </data>
+    <LinearLayout
+        android:id="@+id/register_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_yellow"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/et_verifycode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/main_red"
+            android:gravity="center"
+            android:hint="@string/title_verifycode"
+            android:padding="20dip"
+            android:textColor="@color/white"
+            android:textColorHint="@color/text_hint"
+            android:textSize="40sp"
+            android:textStyle="bold"
+           />
+
+        <Button
+            android:id="@+id/btn_verifycode_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/main_blue"
+            android:gravity="center"
+            android:padding="20dip"
+            android:text="@string/verifycode_submit"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:onClick="btnSubmitClick"/>
+
+        <Button
+            android:id="@+id/btn_countdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="20dip"
+            android:text='@{vm.time > 0 ? vm.time+"S" : "重新发送"}'
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:background="#7d7c60"
+            android:onClick="btnReSendClick"/>
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="20dip"
+            android:text="@string/text_back"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:background="#d3d2b6"
+            android:onClick="btnBackClick"/>
+    </LinearLayout>
+</layout>

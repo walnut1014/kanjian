@@ -1,24 +1,23 @@
 package name.walnut.kanjian.app.ui.util;
 
-import android.text.TextUtils;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * 验证码工具
+ *
+ * @author walnut
+ */
 public class RegexUtils {
 
     /**
      * 判断手机格式是否正确
-     * @param mobiles
+     * @param phone
      * @return
      */
-    public static boolean isMobilePhone(String mobiles) {
+    public static boolean isMobilePhone(String phone) {
 
-        Pattern p = Pattern
-                .compile("^((13[0-9])|(15[^4,\\D])|(18[0-9]))\\d{8}$");
-        Matcher m = p.matcher(mobiles);
-
-        return m.matches();
+        return phone.matches("^((13[0-9])|(15[^4,\\D])|(18[0-9]))\\d{8}$");
 
     }
 

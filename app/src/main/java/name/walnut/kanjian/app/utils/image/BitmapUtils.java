@@ -22,7 +22,8 @@ public class BitmapUtils {
      * @param options 压缩参数，损耗、分辨率、图片格式
      * @return 图片路径，可能为原图片路径
      */
-    public static String decodeFile(Context context, String path, String scaleName, final CompressOptions options) {
+    public static String decodeFile(Context context, String path, String scaleName,
+                                    final CompressOptions options) {
         String imagePath = null;
         Bitmap scaledBitmap = null;
 

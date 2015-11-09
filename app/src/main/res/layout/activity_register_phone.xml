@@ -6,21 +6,21 @@
     android:background="@color/light_yellow"
     android:id="@+id/register_container">
     <EditText
-        android:id="@+id/et_password"
+        android:id="@+id/edt_register_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/login_password_hint"
+        android:hint="@string/login_mobilephone_hint"
         android:padding="20dip"
         android:textSize="40sp"
         android:gravity="center"
         android:textColor="@color/white"
         android:maxLength="11"
-        android:password="true"
+        android:phoneNumber="true"
         android:textStyle="bold"
         android:textColorHint="@color/text_hint"
         android:background="@color/main_red"/>
     <Button
-        android:id="@+id/btn_password_submit"
+        android:id="@+id/btn_next_step"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dip"
@@ -28,8 +28,19 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:text="@string/verifycode_submit"
+        android:text="@string/fill_nickname_submit"
         android:background="@color/main_blue"
-        android:onClick="btnSubmitClick"/>
+        android:onClick="onClickNext"/>
 
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dip"
+        android:textSize="40sp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:text="@string/text_back" />
 </LinearLayout>
+

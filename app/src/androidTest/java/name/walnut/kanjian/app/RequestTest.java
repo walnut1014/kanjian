@@ -1,16 +1,6 @@
 package name.walnut.kanjian.app;
 
 import android.test.AndroidTestCase;
-import android.util.Log;
-
-import com.android.volley.VolleyError;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.CountDownLatch;
-
-import name.walnut.kanjian.app.utils.DefalutJSONListener;
-import name.walnut.kanjian.app.utils.RequestUtils;
 
 public class RequestTest extends AndroidTestCase{
 
