@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <name.walnut.kanjian.app.views.ScrollActionBar
+        android:id="@+id/scroll_bar"
+        android:layout_width="match_parent"
+        android:layout_height="60dip">
+
+        <RelativeLayout
+            android:id="@+id/actionbar_content"
+            android:layout_width="match_parent"
+            android:layout_height="60dip"
+            android:background="@color/main_blue">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="60dip"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:src="@drawable/arrow_gray"
+                android:onClick="onClickBack"/>
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_width="60dip"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/actionbar_content"
+            android:background="@color/main_red"
+            android:gravity="center"
+            android:text="@string/action_delete"
+            android:textColor="@color/white"
+            android:onClick="onClickDelete"/>
+    </name.walnut.kanjian.app.views.ScrollActionBar>
+
+</LinearLayout>

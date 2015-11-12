@@ -48,7 +48,7 @@
             android:textColor="@color/white"
             android:textSize="40sp"
             android:textStyle="bold"
-            android:background="#7d7c60"
+            android:background="@color/light_yellow"
             android:onClick="btnReSendClick"/>
 
         <Button
@@ -61,7 +61,7 @@
             android:textColor="@color/white"
             android:textSize="40sp"
             android:textStyle="bold"
-            android:background="#d3d2b6"
+            android:background="@color/dark_yellow"
             android:onClick="btnBackClick"/>
     </LinearLayout>
 </layout>

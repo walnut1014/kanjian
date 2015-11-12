@@ -1,7 +1,6 @@
 package name.walnut.kanjian.app.views;
 
 import android.content.Context;
-import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;

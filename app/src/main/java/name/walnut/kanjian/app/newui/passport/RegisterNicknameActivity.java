@@ -12,42 +12,49 @@ import name.walnut.kanjian.app.R;
 /**
  * Created by linxunjian on 15/10/31.
  */
-public class RegisterNicknameActivity  extends Activity implements View.OnClickListener{
+public class RegisterNicknameActivity extends Activity{
 
-    private Button mBtnSelPortrait,mBtnSubmit,mBtnBack;
+    private Button mBtnSelPortrait, mBtnSubmit, mBtnBack;
     private EditText mEtNickname;
 
-    public void onCreate(final Bundle savedInstanceState)
-    {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_nickname);
 
-        mBtnSelPortrait = (Button)findViewById(R.id.btn_sel_portrait);
-        mBtnSubmit = (Button)findViewById(R.id.btn_submit);
-        mEtNickname = (EditText)findViewById(R.id.et_nickname);
-        mBtnBack =(Button)findViewById(R.id.btn_back);
-
-        mBtnSelPortrait.setOnClickListener(this);
-        mBtnSubmit.setOnClickListener(this);
-        mBtnBack.setOnClickListener(this);
+        mBtnSelPortrait = (Button) findViewById(R.id.btn_sel_portrait);
+        mBtnSubmit = (Button) findViewById(R.id.btn_submit);
+        mEtNickname = (EditText) findViewById(R.id.et_nickname);
+        mBtnBack = (Button) findViewById(R.id.btn_back);
     }
-    @Override
-    public void onClick(View view) {
-        switch(view.getId())
-        {
-            case R.id.btn_sel_portrait:
-                Intent _intentSelectPortrait = new Intent(RegisterNicknameActivity.this,
-                                    SelectPortraitActivity.class);
-                startActivity(_intentSelectPortrait);
-                break;
-            case R.id.btn_submit:
 
-                break;
-            case R.id.btn_back:
-                break;
-            default:
-                break;
-        }
+    /**
+     * 单击返回按钮
+     *
+     * @param view
+     */
+    public void onClickSelectPortrait(View view) {
+        startActivity(new Intent(RegisterNicknameActivity.this, SelectPortraitActivity.class));
+
+    }
+
+
+    /**
+     * 单击返回按钮
+     *
+     * @param view
+     */
+    public void onClickBack(View view) {
+        onBackPressed();
+    }
+
+    /**
+     * 单击提交按钮
+     *
+     * @param view
+     */
+    public void onClickSubmit(View view) {
+
+
     }
 
 

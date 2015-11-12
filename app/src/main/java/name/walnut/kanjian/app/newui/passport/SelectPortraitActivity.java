@@ -33,10 +33,26 @@ public class SelectPortraitActivity extends Activity {
         setContentView(R.layout.activity_select_portrait);
 
         initUI();
+    }
+
+    private void initUI()
+    {
+        WindowManager wm = getWindowManager();
+        Display display = wm.getDefaultDisplay();
+        DisplayMetrics metrics = new DisplayMetrics();
+        display.getMetrics(metrics);
+        screenWidth = metrics.widthPixels;
+        PreviewSize = screenWidth/6*5;
+
+        sView = (SurfaceView) findViewById(R.id.sf_photo_portrait);
+        sView.getLayoutParams().width = PreviewSize;
+        sView.getLayoutParams().height = PreviewSize;
 
         surfaceHolder = sView.getHolder();
         surfaceHolder.addCallback(new SurfaceHolder.Callback() {
             public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+
+
             }
 
             @Override
@@ -57,22 +73,6 @@ public class SelectPortraitActivity extends Activity {
                 }
             }
         });
-
-    }
-
-    private void initUI()
-    {
-        WindowManager wm = getWindowManager();
-        Display display = wm.getDefaultDisplay();
-        DisplayMetrics metrics = new DisplayMetrics();
-        display.getMetrics(metrics);
-        screenWidth = metrics.widthPixels;
-        PreviewSize = screenWidth/6*5;
-
-        sView = (SurfaceView) findViewById(R.id.sf_photo_portrait);
-        sView.getLayoutParams().width = PreviewSize;
-        sView.getLayoutParams().height = PreviewSize;
-
 
     }
 

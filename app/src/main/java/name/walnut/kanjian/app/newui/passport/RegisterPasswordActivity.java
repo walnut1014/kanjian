@@ -4,9 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import name.walnut.kanjian.app.R;
 import name.walnut.kanjian.app.utils.ActivityUtils;
@@ -39,10 +37,5 @@ public class RegisterPasswordActivity extends Activity {
             startActivity(new Intent(this, RegisterNicknameActivity.class)
                             .putExtra("password", password));
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(this, RegisterPhoneActivity.class));
     }
 }

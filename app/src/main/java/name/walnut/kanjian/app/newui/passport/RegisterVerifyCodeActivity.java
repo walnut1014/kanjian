@@ -26,6 +26,10 @@ import name.walnut.kanjian.app.utils.ActivityUtils;
  */
 public class RegisterVerifyCodeActivity extends Activity{
 
+    private final static int TIMER_TIME = 60;
+    private VM vm;
+    private EditText codeText;
+
     public void onCreate(final Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -35,22 +39,15 @@ public class RegisterVerifyCodeActivity extends Activity{
 
         vm = new VM(this);
         binding.setVm(vm);
-
         vm.startTimer(); //启动短信发送倒计时
-    }
-
-
-    @Override
-    public void onBackPressed() {
-        vm.stopTimer();
-        this.startActivity(new Intent(this, RegisterPhoneActivity.class));
     }
 
     /**
      * 单击回退按钮
      */
     public void btnBackClick(View view) {
-        this.onBackPressed();
+        vm.stopTimer();
+        super.onBackPressed();
     }
 
     /**
@@ -58,30 +55,27 @@ public class RegisterVerifyCodeActivity extends Activity{
      */
     public void btnSubmitClick(View view) {
 
-        if("".equals(codeText.getText().toString())) {
-            ActivityUtils.showError(this, "请填写验证码");
-            return;
-        }
-
         vm.stopTimer();
-        startActivity(new Intent(RegisterVerifyCodeActivity.this,
-                RegisterPasswordActivity.class));
-       /* ResourceFactory.createResource(VerificationResource.class)
+        startActivity(new Intent(RegisterVerifyCodeActivity.this, RegisterPasswordActivity.class));
+        ResourceFactory.createResource(VerificationResource.class)
                 .smsCodeValidation(getIntent().getExtras().getString("phone"), "86",
                         codeText.getText().toString())
                 .enqueue(new DefaultCallback<ResourceResult>() {
                     @Override
                     public void success(ResourceResult resourceResult) {
                         vm.stopTimer();
-                        startActivity(new Intent(RegisterVerifyCodeActivity.this,
-                                RegisterPasswordActivity.class));
+                        startActivity(new Intent(RegisterVerifyCodeActivity.this, RegisterPasswordActivity.class));
                     }
 
                     @Override
                     public void failure(String message) {
                         ActivityUtils.showError(RegisterVerifyCodeActivity.this, message);
                     }
-                });*/
+                });
+        if ("".equals(codeText.getText().toString())) {
+            ActivityUtils.showError(this, "请填写验证码");
+            return;
+        }
     }
 
     /**
@@ -119,7 +113,7 @@ public class RegisterVerifyCodeActivity extends Activity{
             timer = new Timer();
         }
 
-        void startTimer() {
+        private void startTimer() {
             timer.schedule(new TimerTask() {
                 @Override
 
@@ -140,15 +134,11 @@ public class RegisterVerifyCodeActivity extends Activity{
             }, 0, 1000);
         }
 
-        void stopTimer() {
+        private void stopTimer() {
             timer.cancel();
             timer.purge();
         }
 
     }
 
-
-    private final static int TIMER_TIME = 60;
-    private VM vm;
-    private EditText codeText;
 }

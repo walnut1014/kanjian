@@ -41,6 +41,7 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:textStyle="bold"
+        android:background="@color/dark_yellow"
         android:text="@string/text_back" />
 </LinearLayout>
 
